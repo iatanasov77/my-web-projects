@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="sqlite_jdbc-158a1b31f0b-1f2cecfca2fd24a2" provider="generic" driver="sqlite_jdbc" name="SQLite - app.db" create-date="1480181699582" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="D:\MyProjects\app.db" url="jdbc:sqlite:D:\MyProjects\app.db" user="" type="dev">
+			<bootstrap/>
+		</connection>
+	</data-source>
+</data-sources>
