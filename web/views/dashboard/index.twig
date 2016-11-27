@@ -1,4 +1,6 @@
+{% extends "layout/index.twig" %}
 
+{% block content %}
 <div>
 	<table>
 		<thead>
@@ -27,10 +29,13 @@
 			</tr>
 		</thead>
 		<tbody>
+		{% for tool in tools %}
 			<tr>
-				<td></td>
+				<td>{{ tool.title }}</td>
 				<td></td>
 			</tr>
+		{% endfor %}
 		</tbody>
 	</table>
 <div>
+{% endblock %}
