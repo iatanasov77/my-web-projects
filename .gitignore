@@ -1,13 +1,13 @@
 /.vagrant/
 /composer.lock
 /vendor/
-/projects/
-/tools/
+/dir/projects/
+/dir/tools/
 /.dbeaver-data-sources
 
 # Localhost
-/localhost/
-!/localhost/.htaccess
-!/localhost/README.txt
-!/localhost/info.php
+/dir/localhost/
+!/dir/localhost/.htaccess
+!/dir/localhost/README.txt
+!/dir/localhost/info.php
 

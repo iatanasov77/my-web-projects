@@ -17,7 +17,7 @@ $app->register( new Silex\Provider\DoctrineServiceProvider(), array(
 ));
 
 $app->register( new Silex\Provider\TwigServiceProvider(), array(
-	'twig.path'	=> __DIR__ . '/View',
+	'twig.path'	=> __DIR__ . '/../src/View',
 ));
 
 $app->register( new Silex\Provider\AssetServiceProvider(), array(

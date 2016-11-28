@@ -11,7 +11,8 @@ class Dashboard implements ControllerProviderInterface
 
 	public function connect( Application $app )
 	{
-		$controllers = $app['controllers_factory'];
+		$this->app		= $app;
+		$controllers	= $this->app['controllers_factory'];
 		
 		$controllers->get('/', array( $this, 'indexAction' ) );
 		

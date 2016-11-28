@@ -11,7 +11,8 @@ class Projects implements ControllerProviderInterface
 	
 	public function connect(Application $app)
 	{
-		$controllers = $app ['controllers_factory'];
+		$this->app		= $app;
+		$controllers	= $this->app['controllers_factory'];
 		
 		$controllers->get( '/install', array( $this, 'installAction' ) );
 		
