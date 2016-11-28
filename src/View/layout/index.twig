@@ -3,7 +3,7 @@
     <head>
         <title>My Projects</title>
 
-		<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-theme.css" />
 		<link rel="stylesheet" href="assets/css/style.css" />
        
         {% block head_scripts %}
@@ -25,6 +25,7 @@
     </head>
     <body>
         <section id="container" class="">
+        
             <header class="header dark-bg">
                 <div class="toggle-nav">
                     <div data-placement="bottom" data-original-title="Toggle Navigation" class="icon-reorder tooltips"><i class="icon_menu"></i></div>
@@ -36,13 +37,14 @@
             
             <section id="main-content">
                 <section class="wrapper">
-                   
                     {% block content %}{% endblock %}
                 </section>
-            </section>  
+            </section>
+            
             <footer class="container-fluid">
-                {% block footer %}<p>Footer Text</p>{% endblock %}
+                {% block footer %}{% endblock %}
             </footer>
+            
         </section>
     </body>
 </html>
