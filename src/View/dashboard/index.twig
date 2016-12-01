@@ -18,7 +18,7 @@
         		{% for project in projects %}
         			<tr>
         				<td>{{ project.title }}</td>
-        				<td></td>
+        				<td>{%  if not vs_project_exists(project) %} InstallBtn {% endif %}</td>
         			</tr>
         		{% endfor %}
         		</tbody>

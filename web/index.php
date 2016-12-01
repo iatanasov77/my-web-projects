@@ -2,6 +2,8 @@
 error_reporting( E_ALL );
 ini_set( 'display_errors', 1);
 
+define( "APP_ROOT", realpath( __DIR__ . "/../" ) );
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Silex\Application();
@@ -28,6 +30,11 @@ $app->register( new Silex\Provider\AssetServiceProvider(), array(
 		'images' => array('base_urls' => array('https://img.example.com')),
 	),
 ));
+
+$app->extend('twig', function($twig, $app) {
+	$twig->addExtension(new \VankoSoft\MyProjects\Twig\ExtensionProject( $app ) );
+	return $twig;
+});
 
 /**
  * Controllers
