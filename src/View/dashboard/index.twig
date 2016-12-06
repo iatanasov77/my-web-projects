@@ -2,6 +2,14 @@
 
 {% block content %}
 <div class="row">&nbsp;</div>
+
+<div class="row">
+	<section class="panel" style="padding: 5px 30px 5px 30px;">
+		<a href="/localhost/info.php" target="__blank">Php Info</a> | 
+		<a href="/localhost" target="__blank">Localhost</a>
+	</section>
+</div>
+
 <div class="row">   
     <div class="col-lg-6">
         <section class="panel">
@@ -18,7 +26,13 @@
         		{% for project in projects %}
         			<tr>
         				<td>{{ project.title }}</td>
-        				<td>{%  if not vs_project_exists(project) %} InstallBtn {% endif %}</td>
+        				<td>
+        				    {%  if vs_project_exists( project ) %}
+        						<a href="{{ project.dev_url }}" target="__blank">Open</a>
+        				    {% else %}
+        						<a href="/project/{{ project.id }}/install">Install</a>
+        				    {% endif %}
+        				</td>
         			</tr>
         		{% endfor %}
         		</tbody>
@@ -33,14 +47,20 @@
         		<thead>
         			<tr>
         				<th>Tool</th>
-        				<th>Actions</th>
+        				<th>Open</th>
         			</tr>
         		</thead>
         		<tbody>
         		{% for tool in tools %}
         			<tr>
         				<td>{{ tool.title }}</td>
-        				<td></td>
+        				<td>
+        					{%  if vs_tool_exists( tool ) %}
+        						<a href="{{ tool.url }}" target="__blank">Open</a>
+        				    {% else %}
+        						<a href="/tool/{{ tool.id }}/install">Install</a>
+        				    {% endif %}
+        				</td>
         			</tr>
         		{% endfor %}
         		</tbody>

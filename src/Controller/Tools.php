@@ -21,7 +21,7 @@ class Tools implements ControllerProviderInterface
 	
 	public function installAction()
 	{
-		$id		= $this->app->get( 'request' )->getParam( 'id', null );
+		$id		= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
 		$tool	= $this->app['db']->fetchOne( sprintf( 'SELECT * FROM tools WHERE id=%d', $id ) );
 	
 		return $this->app['twig']->render( 'dashboard/index.twig', array(

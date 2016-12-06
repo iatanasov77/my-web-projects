@@ -31,17 +31,25 @@ $app->register( new Silex\Provider\AssetServiceProvider(), array(
 	),
 ));
 
-$app->extend('twig', function($twig, $app) {
+/**
+ * Twig Extensions
+ */
+$app->extend('twig', function( $twig, $app ) {
 	$twig->addExtension(new \VankoSoft\MyProjects\Twig\ExtensionProject( $app ) );
+	return $twig;
+});
+
+$app->extend('twig', function( $twig, $app ) {
+	$twig->addExtension(new \VankoSoft\MyProjects\Twig\ExtensionTool( $app ) );
 	return $twig;
 });
 
 /**
  * Controllers
  */
-$app->mount('/', 			new VankoSoft\MyProjects\Controller\Dashboard() );
-$app->mount('/tools', 		new VankoSoft\MyProjects\Controller\Tools() );
-$app->mount('/projects',	new VankoSoft\MyProjects\Controller\Projects() );
+$app->mount('/', 		new VankoSoft\MyProjects\Controller\Dashboard() );
+$app->mount('/tool', 	new VankoSoft\MyProjects\Controller\Tools() );
+$app->mount('/project',	new VankoSoft\MyProjects\Controller\Projects() );
 
 $app['debug'] = true;
 $app->run();
