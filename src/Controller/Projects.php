@@ -5,6 +5,8 @@ namespace VankoSoft\MyProjects\Controller;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
+use VankoSoft\MyProjects\Component\Shell;
+
 class Projects implements ControllerProviderInterface
 {
 	private $app;
@@ -21,14 +23,17 @@ class Projects implements ControllerProviderInterface
 	
 	public function installAction()
 	{
-		$id			= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
-		$project 	= $this->app ['db']->fetchAssoc( sprintf ( 'SELECT * FROM projects WHERE id=%d', $id ) );
+		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
+		$project 		= $this->app ['db']->fetchAssoc( sprintf ( 'SELECT * FROM projects WHERE id=%d', $id ) );
 		
-		$projectRoot	= PROJECTS_ROOT . $project['project_root'];
-		mkdir( $projectRoot );
-		exec( 'git clone ' . $project['git_url'] . ' ' . $projectRoot );
-		exec( 'mkvhost' );
+		$projectRoot	= APP_ROOT . '/dir/projects/' . $project['project_root'];
+		mkdir( $projectRoot, 2775, true );
+		
+		Shell::exec( 'git clone ' . $project['git_url'] . ' ' . $projectRoot );
+		Shell::exec( 'mkvhost' );
+		
 		die("EHO");
+		
 		return $this->app->redirect( '/' );
 	}
 }

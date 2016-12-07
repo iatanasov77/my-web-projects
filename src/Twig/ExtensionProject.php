@@ -14,6 +14,6 @@ class ExtensionProject extends \Twig_Extension
 	
 	public function exists( $project )
 	{
-		return is_dir( APP_ROOT . '/dir/projects' . $project['project_root'] );
+		return is_dir( APP_ROOT . '/dir/projects/' . $project['project_root'] );
 	}
 }
