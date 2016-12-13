@@ -18,7 +18,7 @@ class Shell
 			$live_output     = fread($proc, 4096);
 			$complete_output = $complete_output . $live_output;
 			echo "$live_output<br>";
-			@ flush();
+			@flush();
 		}
 		
 		pclose($proc);

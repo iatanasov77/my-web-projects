@@ -4,7 +4,7 @@
 # Config Variables
 ##################################################################################################
 
-VAGRANTFILE_API_VERSION = '2' 
+VAGRANTFILE_API_VERSION	= '2' 
 VAGRANT_BOX				= "Gigasavvy/centos7-LAMP"
 
 HOSTNAME				= "myprojects.dev"
