@@ -3,7 +3,7 @@
 /vendor/
 /dir/projects/
 /dir/tools/
-/.dbeaver-data-sources
+/.dbeaver-data-sources.xml
 
 # Localhost
 /dir/localhost/
