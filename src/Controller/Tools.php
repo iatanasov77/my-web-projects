@@ -5,6 +5,8 @@ namespace VankoSoft\MyProjects\Controller;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
+use VankoSoft\MyProjects\Component\Shell;
+
 class Tools implements ControllerProviderInterface
 {
 	private $app;
@@ -14,7 +16,7 @@ class Tools implements ControllerProviderInterface
 		$this->app		= $app;
 		$controllers	= $this->app['controllers_factory'];
 		
-		$controllers->get( '/install', array( $this, 'installAction' ) );
+		$controllers->get( '/{id}/install', array( $this, 'installAction' ) );
 		
 		return $controllers;
 	}
@@ -25,12 +27,13 @@ class Tools implements ControllerProviderInterface
 		$tool	= $this->app['db']->fetchAssoc( sprintf( 'SELECT * FROM tools WHERE id=%d', $id ) );
 	
 		$rootPath	= APP_ROOT . '/dir/tools/' . $tool['root_dir'];
-		mkdir( $projectRoot, 2775, true );
+		mkdir( $rootPath, 2775, true );
 		
 		$cmdGitClone	= sprintf(
-									"git clone https://%s %s",
-									$tool['git_url'],
-									$rootPath
+									"git clone --branch %s --single-branch https://%s %s",
+										$tool['git_tag'],
+										$tool['git_url'],
+										$rootPath
 								);
 		
 		Shell::exec( $cmdGitClone );
