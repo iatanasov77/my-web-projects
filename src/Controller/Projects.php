@@ -29,7 +29,27 @@ class Projects implements ControllerProviderInterface
 		$projectRoot	= APP_ROOT . '/dir/projects/' . $project['project_root'];
 		mkdir( $projectRoot, 2775, true );
 		
-		Shell::exec( 'git clone ' . $project['git_url'] . ' ' . $projectRoot );
+		if ( $project['git_username'] && $project['git_password'] )
+		{
+			$cmdGitClone	= sprintf(
+										"git clone https://%s:%s@%s %s",
+										$project['git_username'],
+										$project['git_password'],
+										$project['git_url'],
+										$projectRoot
+									);
+		}
+		else
+		{
+			$cmdGitClone	= sprintf(
+										"git clone https://%s %s",
+										$project['git_url'],
+										$projectRoot
+									);
+		}
+		
+		Shell::exec( $cmdGitClone );
+		
 		Shell::exec( 'mkvhost' );
 		
 		die("EHO");

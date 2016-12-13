@@ -4,8 +4,10 @@
         "doctrine/dbal": "~2.2",
         "twig/twig": "~2.0",
         "symfony/twig-bridge": "^3.1",
-        "symfony/asset": "^3.1"
-    },
+        "symfony/asset": "^3.1",
+        
+    	"m4tthumphrey/php-gitlab-api": "dev-master"
+   	},
     "minimum-stability": "dev",
     
     "autoload":
