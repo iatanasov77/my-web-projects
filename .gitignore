@@ -3,11 +3,10 @@
 /vendor/
 /dir/projects/
 /dir/tools/
-/.dbeaver-data-sources
+/.dbeaver-data-sources.xml
 
 # Localhost
 /dir/localhost/
 !/dir/localhost/.htaccess
 !/dir/localhost/README.txt
 !/dir/localhost/info.php
-

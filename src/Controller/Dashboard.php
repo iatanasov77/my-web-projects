@@ -21,12 +21,14 @@ class Dashboard implements ControllerProviderInterface
 	
 	public function indexAction()
 	{
-		$projects	= $this->app['db']->fetchAll( 'SELECT * FROM projects' );
-		$tools		= $this->app['db']->fetchAll( 'SELECT * FROM tools' );
+		$projectsCli	= $this->app['db']->fetchAll( 'SELECT * FROM projects_cli' );
+		$projects		= $this->app['db']->fetchAll( 'SELECT * FROM projects' );
+		$tools			= $this->app['db']->fetchAll( 'SELECT * FROM tools' );
 		
 		return $this->app['twig']->render( 'dashboard/index.twig', array(
-				'projects'	=> $projects,
-				'tools'		=> $tools
+			'projectsCli'	=> $projectsCli,
+			'projects'		=> $projects,
+			'tools'			=> $tools
 		));
 	}
 	
