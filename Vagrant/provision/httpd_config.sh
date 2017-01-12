@@ -4,4 +4,4 @@ echo "Provsioning guest with httpd config..."
 
 ## Create Apache Virtual hosts
 
-mkvhost -smyprojects.dev -d/vagrant/MyProjects -tsimple -f
+php /usr/local/bin/mkvhost -smyprojects.dev -d/vagrant/web -tsimple -f
