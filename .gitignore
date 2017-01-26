@@ -4,6 +4,7 @@
 /dir/projects/
 /dir/tools/
 /.dbeaver-data-sources.xml
+/hosts.yml
 
 # Localhost
 /dir/localhost/
