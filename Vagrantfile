@@ -47,7 +47,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		config.hostmanager.ignore_private_ip 	= false
 		config.hostmanager.include_offline 		= true
 		
-		config.vm.hostname 					= HOSTNAME
+		config.vm.hostname 						= HOSTNAME
 		config.vm.network :private_network, ip: PUBLIC_IP
 		config.hostmanager.aliases				= vsHosts + wwwAliases
 		#config.vm.network :forwarded_port, guest: 80, host: 8080

@@ -32,20 +32,20 @@ class Projects implements ControllerProviderInterface
 		if ( $project['git_username'] && $project['git_password'] )
 		{
 			$cmdGitClone	= sprintf(
-										"git clone https://%s:%s@%s %s",
-										$project['git_username'],
-										$project['git_password'],
-										$project['git_url'],
-										$projectRoot
-									);
+				"git clone https://%s:%s@%s %s",
+				$project['git_username'],
+				$project['git_password'],
+				$project['git_url'],
+				$projectRoot
+			);
 		}
 		else
 		{
 			$cmdGitClone	= sprintf(
-										"git clone https://%s %s",
-										$project['git_url'],
-										$projectRoot
-									);
+				"git clone https://%s %s",
+				$project['git_url'],
+				$projectRoot
+			);
 		}
 		
 		Shell::exec( $cmdGitClone );
