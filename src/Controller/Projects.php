@@ -27,9 +27,13 @@ class Projects implements ControllerProviderInterface
 		$project 		= $this->app ['db']->fetchAssoc( sprintf ( 'SELECT * FROM projects WHERE id=%d', $id ) );
 
 		$projectRoot	= APP_ROOT . '/dir/projects/' . $project['project_root'];
+		$documentRoot	= APP_ROOT . '/dir/projects/' . $project['document_root'];
+
+		// 1. Create project folder
 		mkdir( $projectRoot, 2775, true );
 
-		if ( isset( $project['git_username'] ) && isset( $project['git_password'] ) )
+		// 2. Download project source
+		if ( $project['git_username'] && $project['git_password'] )
 		{
 			$cmdGitClone	= sprintf(
 				"git clone https://%s:%s@%s %s",
@@ -47,13 +51,16 @@ class Projects implements ControllerProviderInterface
 				$projectRoot
 			);
 		}
-
 		Shell::exec( $cmdGitClone );
 
-		Shell::exec( 'mkvhost' );
+		// 3. Make virtual host for apache
+		$cmdMkVhost	= sprintf( "sudo php /usr/local/bin/mkvhost -t simple -s %s -d %s", $project['dev_url'], $documentRoot );
+		Shell::exec( $cmdMkVhost );
 
-		die("EHO");
+		// 4. Run composer
+		chdir( $projectRoot );
+		Shell::exec( "composer install" );
 
-		return $this->app->redirect( '/' );
+		//return $this->app->redirect( '/' );
 	}
 }
