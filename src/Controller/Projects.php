@@ -59,7 +59,7 @@ class Projects implements ControllerProviderInterface
 
 		// 4. Run composer
 		chdir( $projectRoot );
-		Shell::exec( "composer install" );
+		Shell::exec( "php -d memory_limit=-1 /usr/local/bin/composer install" );
 
 		//return $this->app->redirect( '/' );
 	}
