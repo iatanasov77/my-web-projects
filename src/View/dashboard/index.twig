@@ -30,7 +30,7 @@
         				    {%  if vs_project_exists( project ) %}
         						<a href="{{ project.dev_url }}" target="__blank">Open</a>
         				    {% else %}
-        						<a href="/project/{{ project.id }}/install">Install</a>
+        						<a class="btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);">Install</a>
         				    {% endif %}
         				</td>
         			</tr>

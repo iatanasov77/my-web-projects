@@ -1193,7 +1193,7 @@ div[data-role="editor-toolbar"] {
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.1);
   
 }
-}
+
 .panel.panel-default.panel-heading {
   background: #97d3c5;   
 }
@@ -3266,29 +3266,6 @@ ul.inbox-pagination li {
   left:-1px;
 }
 
-@-webkit-keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
-}
-
-@-ms-keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
-}
-
-@keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
-}
 
 /*profile*/
 
@@ -4326,7 +4303,7 @@ table.sliders tr td {
 .tagsinput .tag:hover .tagsinput-remove-link {
     color: #ffffff;
     opacity: 1;
-    display: block\9;
+    display: block;
 }
 .tagsinput input {
     background: transparent;
@@ -4355,7 +4332,7 @@ table.sliders tr td {
     top: 0;
     width: 100%;
     z-index: 2;
-    display: none\9;
+    display: none;
 }
 .tagsinput-remove-link:before {
     color: #ffffff;
@@ -4954,4 +4931,28 @@ header a.logo:visited {
     display: box;
     border: 1px solid black;
     padding: 5px;
+}
+
+@-webkit-keyframes square {
+  0% { background-position: 0 0; }
+  25% { background-position: 100% 0; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0 100%; }
+  100% { background-position: 0 0; }
+}
+
+@-ms-keyframes square {
+  0% { background-position: 0 0; }
+  25% { background-position: 100% 0; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0 100%; }
+  100% { background-position: 0 0; }
+}
+
+@keyframes square {
+  0% { background-position: 0 0; }
+  25% { background-position: 100% 0; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0 100%; }
+  100% { background-position: 0 0; }
 }

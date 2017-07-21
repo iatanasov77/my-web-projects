@@ -1,3 +1,9 @@
+# Eclipse project meta data
+/.settings/
+/.buildpath
+/.project
+/.dbeaver-data-sources.xml
+
 /.vagrant/
 /composer.lock
 /vendor/
