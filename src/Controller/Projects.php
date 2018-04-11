@@ -26,12 +26,12 @@ class Projects implements ControllerProviderInterface
 		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
 		$project 		= $this->app ['db']->fetchAssoc( sprintf ( 'SELECT * FROM projects WHERE id=%d', $id ) );
 
-		$projectRoot	= APP_ROOT . '/dir/projects/' . $project['project_root'];
-		$documentRoot	= APP_ROOT . '/dir/projects/' . $project['document_root'];
+		$projectRoot	= $this->app ['projects_path'] . $project['project_root'];
+		$documentRoot	= $this->app ['projects_path'] . $project['document_root'];
 
 		// 1. Create project folder
 		mkdir( $projectRoot, 2775, true );
-
+		var_dump($projectRoot); die;
 		// 2. Download project source
 		if ( $project['git_username'] && $project['git_password'] )
 		{

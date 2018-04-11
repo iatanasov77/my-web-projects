@@ -51,5 +51,6 @@ $app->mount('/', 		new VankoSoft\MyProjects\Controller\Dashboard() );
 $app->mount('/tool', 	new VankoSoft\MyProjects\Controller\Tools() );
 $app->mount('/project',	new VankoSoft\MyProjects\Controller\Projects() );
 
-$app['debug'] = true;
+include APP_ROOT . '/config/app.php';
+
 $app->run();

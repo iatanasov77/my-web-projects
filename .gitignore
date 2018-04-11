@@ -1,17 +1,19 @@
 # Eclipse project meta data
 /.settings/
 /.buildpath
+.buildpath
 /.project
 /.dbeaver-data-sources.xml
 
 /.vagrant/
 /composer.lock
 /vendor/
-/dir/projects/
-/dir/tools/
+
 /.dbeaver-data-sources.xml
 /hosts.yml
 
+/dir/projects/*
+/dir/tools/*
 # Localhost
 /dir/localhost/
 !/dir/localhost/.htaccess

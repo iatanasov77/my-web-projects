@@ -1,9 +1,15 @@
-<?php
+<?php namespace VankoSoft\MyProjects\Twig;
 
-namespace VankoSoft\MyProjects\Twig;
+use Silex\Application;
 
 class ExtensionProject extends \Twig_Extension
 {
+	private $app;
+	
+	public function __construct( Application $app )
+	{
+		$this->app		= $app;
+	}	
 	
 	public function getFunctions()
 	{
@@ -14,6 +20,6 @@ class ExtensionProject extends \Twig_Extension
 	
 	public function exists( $project )
 	{
-		return is_dir( APP_ROOT . '/dir/projects/' . $project['project_root'] );
+		return is_dir( $this->app ['projects_path'] . $project['project_root'] );
 	}
 }

@@ -23,18 +23,18 @@ class Tools implements ControllerProviderInterface
 	
 	public function installAction()
 	{
-		$id		= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
-		$tool	= $this->app['db']->fetchAssoc( sprintf( 'SELECT * FROM tools WHERE id=%d', $id ) );
+		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
+		$tool			= $this->app['db']->fetchAssoc( sprintf( 'SELECT * FROM tools WHERE id=%d', $id ) );
 	
-		$rootPath	= APP_ROOT . '/dir/tools/' . $tool['root_dir'];
+		$rootPath		= $app['tools_path'] . $tool['root_dir'];
 		mkdir( $rootPath, 2775, true );
 		
 		$cmdGitClone	= sprintf(
-									"git clone --branch %s --single-branch https://%s %s",
-										$tool['git_tag'],
-										$tool['git_url'],
-										$rootPath
-								);
+			"git clone --branch %s --single-branch https://%s %s",
+				$tool['git_tag'],
+				$tool['git_url'],
+				$rootPath
+		);
 		
 		Shell::exec( $cmdGitClone );
 		

@@ -10,7 +10,7 @@ VAGRANTFILE_API_VERSION	= '2'
 VAGRANT_BOX				= "Gigasavvy/centos7-LAMP"
 
 MASHINE_NAME			= "MyProjects"
-HOSTNAME				= "myprojects.dev"
+HOSTNAME				= "myprojects.lh"
 PUBLIC_IP				= '10.3.3.2'
 VBOX_MACHINE_MEMORY		= '1024'
 HOSTS_CONFIG			= 'hosts.yml'
