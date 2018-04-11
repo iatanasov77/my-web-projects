@@ -18,11 +18,16 @@ class HttpHost
 		$httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
 		curl_close( $ch );
 	
-		return ( $httpcode >= 200 && $httpcode < 300 ) ? true : false;
+		return $httpcode != 404 ? true : false;
 	}
 	
 	public function create( $url, $documentRoot )
 	{
-		Shell::exec( '/usr/bin/php /usr/local/bin/mkvhost -smyprojects.lh -d/vagrant/web -tsimple -f' );
+		$cmdMkVhost	= sprintf(
+			"sudo /usr/bin/php /usr/local/bin/mkvhost -t simple -s %s -d %s -f",
+			$this->project['dev_url'],
+			$documentRoot
+		);
+		Shell::exec( $cmdMkVhost );
 	}
 }

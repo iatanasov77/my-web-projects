@@ -30,4 +30,18 @@ class Shell
 				'output'       => str_replace("Exit status : " . $matches[0], '', $complete_output)
 		);
 	}
+	
+	public static function exec2( $cmd )
+	{
+		$process = new Process('ls -lsa');
+		$process->start();
+		
+		foreach ($process as $type => $data) {
+			if ($process::OUT === $type) {
+				echo "\nRead from stdout: ".$data;
+			} else { // $process::ERR === $type
+				echo "\nRead from stderr: ".$data;
+			}
+		}
+	}
 }

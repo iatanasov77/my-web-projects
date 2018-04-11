@@ -13,7 +13,7 @@ MASHINE_NAME			= "MyProjects"
 HOSTNAME				= "myprojects.lh"
 PUBLIC_IP				= '10.3.3.2'
 VBOX_MACHINE_MEMORY		= '1024'
-HOSTS_CONFIG			= 'hosts.yml'
+HOSTS_CONFIG			= 'installed_hosts.json'
 
 ##################################################################################################
 
@@ -24,19 +24,17 @@ end
 # Run Config
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	
-  	# Check dependencieshttp://marketplace.eclipse.org/marketplace-client-intro?mpc_install=507775
 	if ! File.exists?( HOSTS_CONFIG )
-		fail_with_message "'hosts.yml' file not exists"
+		fail_with_message "#{HOSTS_CONFIG} file not exists"
 	end
+	
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
 		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\nvagrant plugin install vagrant-hostmanager"
 	end
 	
-	# Parse hosts config
-	hostsConfig	= YAML.load_file( HOSTS_CONFIG )
-	vsHosts = hostsConfig ? hostsConfig['hosts'] : []
-	# puts vsHosts.inspect
-	# exit
+	vsHosts		= JSON.parse( File.read( HOSTS_CONFIG ) ).values
+ 	#puts vsHosts.inspect
+	#exit
 	wwwAliases = vsHosts.map { |host| "www.#{host}" }
 	
 	# Config vagrant machine
@@ -65,6 +63,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		config.vm.provision "shell", path: "Vagrant/provision/packages.sh"
 		config.vm.provision "shell", path: "Vagrant/provision/settings.sh"
 		config.vm.provision "shell", path: "Vagrant/provision/httpd_config.sh"
+		config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
 
 		# Running Chefs
 		config.vm.provision "chef_solo" do |chef|

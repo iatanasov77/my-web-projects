@@ -10,7 +10,7 @@
 /vendor/
 
 /.dbeaver-data-sources.xml
-/hosts.yml
+/installed_hosts.json
 
 /dir/projects/*
 /dir/tools/*

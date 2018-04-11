@@ -28,7 +28,7 @@
         				<td>{{ project.title }}</td>
         				<td>
         				    {%  if vs_project_exists( project ) %}
-        						<a href="http://{{ project.dev_url }}" target="__blank">Open</a>
+        						<a class="btnOpen" data-projectId="{{ project.id }}" href="javascript:void(0);">Open</a>
         				    {% else %}
         						<a class="btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);">Install</a>
         				    {% endif %}
