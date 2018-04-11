@@ -1,6 +1,4 @@
-<?php
-
-namespace VankoSoft\MyProjects\Component;
+<?php namespace VankoSoft\MyProjects\Component\Helper;
 
 class Shell
 {

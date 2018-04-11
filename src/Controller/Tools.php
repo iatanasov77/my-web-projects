@@ -5,7 +5,7 @@ namespace VankoSoft\MyProjects\Controller;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
-use VankoSoft\MyProjects\Component\Shell;
+use VankoSoft\MyProjects\Component\Helper\ProjectSetup;
 
 class Tools implements ControllerProviderInterface
 {
@@ -26,23 +26,10 @@ class Tools implements ControllerProviderInterface
 		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
 		$tool			= $this->app['db']->fetchAssoc( sprintf( 'SELECT * FROM tools WHERE id=%d', $id ) );
 	
-		$rootPath		= $app['tools_path'] . $tool['root_dir'];
-		mkdir( $rootPath, 2775, true );
+		$projectSetup	= new ProjectSetup( $tool, $this->app ['tools_path'] );
+		$projectSetup->setup();
 		
-		$cmdGitClone	= sprintf(
-			"git clone --branch %s --single-branch https://%s %s",
-				$tool['git_tag'],
-				$tool['git_url'],
-				$rootPath
-		);
-		
-		Shell::exec( $cmdGitClone );
-		
-		Shell::exec( 'mkvhost' );
-		
-		die("EHO");
-		
-		return $this->app->redirect( '/' );
+		//return $this->app->redirect( '/' );
 	}
 	
 }
