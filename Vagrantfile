@@ -24,7 +24,7 @@ end
 # Run Config
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	
-  	# Check dependencies
+  	# Check dependencieshttp://marketplace.eclipse.org/marketplace-client-intro?mpc_install=507775
 	if ! File.exists?( HOSTS_CONFIG )
 		fail_with_message "'hosts.yml' file not exists"
 	end
@@ -33,7 +33,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	end
 	
 	# Parse hosts config
-	vsHosts = YAML.load_file( HOSTS_CONFIG )['hosts']
+	hostsConfig	= YAML.load_file( HOSTS_CONFIG )
+	vsHosts = hostsConfig ? hostsConfig['hosts'] : []
 	# puts vsHosts.inspect
 	# exit
 	wwwAliases = vsHosts.map { |host| "www.#{host}" }
