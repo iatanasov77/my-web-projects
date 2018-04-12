@@ -1,6 +1,5 @@
 http://blog.servergrove.com/2013/01/11/creating-development-environments-with-vagrant-and-puppet/
 
-
 #This file is generated with Vankata VirtualHost Creator
 
 <VirtualHost *:80>
