@@ -3,11 +3,18 @@
 echo "Provsioning guest with custom packages..."
 
 # Upgrade YUM
-#sudo yum -y update
+sudo yum -y update
 #sudo yum -y upgrade
 
 # Install Packages
 sudo yum -y install mc gitflow redhat-lsb-core
+sudo yum -y install php70w-pecl-xdebug.x86_64
+
+##########################################################################
+# XDEBUG config
+##########################################################################
+sudo cat /vagrant/Vagrant/provision/etc/php.d/xdebug.ini >> /etc/php.d/xdebug.ini
+sudo service httpd restart
 
 ##########################################################################
 # VankoSoft Tools

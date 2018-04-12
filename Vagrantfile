@@ -63,6 +63,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		config.vm.provision "shell", path: "Vagrant/provision/packages.sh"
 		config.vm.provision "shell", path: "Vagrant/provision/settings.sh"
 		config.vm.provision "shell", path: "Vagrant/provision/httpd_config.sh"
+    config.vm.provision "shell", path: "Vagrant/provision/install_docker.sh"
+    config.vm.provision "shell", path: "Vagrant/provision/install_phpbrew.sh"
 		config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
 
 		# Running Chefs
