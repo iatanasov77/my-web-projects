@@ -70,5 +70,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			#chef.cookbooks_path = "Vagrant/cookbooks"
 			#chef.add_recipe "virtual_hosts"
 		end
+		
+		config.vm.synced_folder "../Projects", "/projects"
 	end
 end
