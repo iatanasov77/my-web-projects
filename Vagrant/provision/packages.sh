@@ -13,7 +13,7 @@ sudo yum -y install php70w-pecl-xdebug.x86_64
 ##########################################################################
 # XDEBUG config
 ##########################################################################
-sudo cat /vagrant/Vagrant/provision/etc/php.d/xdebug.ini >> /etc/php.d/xdebug.ini
+sudo cat /vagrant/Vagrant/etc/php.d/xdebug.ini >> /etc/php.d/xdebug.ini
 sudo service httpd restart
 
 ##########################################################################
