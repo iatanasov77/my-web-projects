@@ -12,10 +12,7 @@
 /.dbeaver-data-sources.xml
 /installed_hosts.json
 
-/dir/projects/*
-/dir/tools/*
-# Localhost
-/dir/localhost/
-!/dir/localhost/.htaccess
-!/dir/localhost/README.txt
-!/dir/localhost/info.php
+/ubuntu-artful-17.10-cloudimg-console
+/Vagrant/puppet/.librarian
+/Vagrant/puppet/.tmp
+/Vagrant/puppet/Puppetfile.lock

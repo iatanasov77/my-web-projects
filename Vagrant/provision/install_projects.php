@@ -1,6 +1,4 @@
-#!/usr/bin/env php
-
-echo "Create http hosts of the installed projects ..."
+<?php
 
 if ( ! file_exists( "../../installed_hosts.json" ) )
 {
@@ -14,3 +12,5 @@ foreach( $hosts as $h )
 {
 	shell_exec( "/usr/bin/php /usr/local/bin/mkvhost -smyprojects.lh -d/vagrant/web -tsimple -f" );
 }
+
+?>

@@ -1,13 +1,19 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require 'yaml'
+###########################################################
+# Plugins:
+# vagrant plugin install vagrant-hostmanager
+# vagrant plugin install vagrant-librarian-puppet
+###########################################################
 
 # Config Variables
 ##################################################################################################
 
 VAGRANTFILE_API_VERSION	= '2' 
-VAGRANT_BOX				= "Gigasavvy/centos7-LAMP"
+#VAGRANT_BOX				= "Gigasavvy/centos7-LAMP"
+VAGRANT_BOX       		= "ubuntu/artful64"
+#VAGRANT_BOX				= "icalvete/ubuntu-16.04-64-puppet"
 
 MASHINE_NAME			= "MyProjects"
 HOSTNAME				= "myprojects.lh"
@@ -24,55 +30,77 @@ end
 # Run Config
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	
-	if ! File.exists?( HOSTS_CONFIG )
-		fail_with_message "#{HOSTS_CONFIG} file not exists"
+  if ! File.exists?( HOSTS_CONFIG )
+    fail_with_message "#{HOSTS_CONFIG} file not exists"
 	end
 	
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
-		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\nvagrant plugin install vagrant-hostmanager"
+	  fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\nvagrant plugin install vagrant-hostmanager"
 	end
 	
+	vagrant_config.hostmanager.enabled           	= true
+    vagrant_config.hostmanager.manage_host       	= true
+	vagrant_config.hostmanager.manage_guest 		= false
+    vagrant_config.hostmanager.ignore_private_ip 	= false
+    vagrant_config.hostmanager.include_offline   	= true
+	vagrant_config.hostmanager.aliases				= []
+	
 	vsHosts		= JSON.parse( File.read( HOSTS_CONFIG ) ).values
- 	#puts vsHosts.inspect
-	#exit
-	wwwAliases = vsHosts.map { |host| "www.#{host}" }
+	vsHosts.each do |host|
+		vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
+    end
 	
 	# Config vagrant machine
 	vagrant_config.vm.define MASHINE_NAME do |config|
-		config.vm.box 							= VAGRANT_BOX
-	  	config.vm.box_check_update 				= true
-		config.hostmanager.enabled 				= true
-	 	config.hostmanager.manage_host 			= true
-		config.hostmanager.ignore_private_ip 	= false
-		config.hostmanager.include_offline 		= true
+	  
+	  config.vm.box                        = VAGRANT_BOX
+	  config.vm.box_check_update           = true
 		
-		config.vm.hostname 						= HOSTNAME
+		config.vm.hostname 						       = HOSTNAME
 		config.vm.network :private_network, ip: PUBLIC_IP
-		config.hostmanager.aliases				= vsHosts + wwwAliases
-		#config.vm.network :forwarded_port, guest: 80, host: 8080
-		#config.vm.network :forwarded_port, guest: 443, host: 8443
+    #config.vm.network :forwarded_port, guest: 80, host: 8080
+    #config.vm.network :forwarded_port, guest: 443, host: 8443
+		
+    
 		
 		# Virtual Box Configuration
 		#config.vm.provider :virtualbox do |vb, override|
 		#	vb.gui	= true
 		#	vb.name	= MASHINE_NAME
 		#	vb.customize ["modifyvm", :id, "--memory", VBOX_MACHINE_MEMORY]
-	  	#end
+	  #end
 	  	
-	  	# Run provision scripts
-		config.vm.provision "shell", path: "Vagrant/provision/packages.sh"
-		config.vm.provision "shell", path: "Vagrant/provision/settings.sh"
-		config.vm.provision "shell", path: "Vagrant/provision/httpd_config.sh"
-    config.vm.provision "shell", path: "Vagrant/provision/install_docker.sh"
-    config.vm.provision "shell", path: "Vagrant/provision/install_phpbrew.sh"
-		config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
+	  # Run provision scripts
+		#config.vm.provision "shell", path: "Vagrant/provision/packages.sh"
+		#config.vm.provision "shell", path: "Vagrant/provision/settings.sh"
+		#config.vm.provision "shell", path: "Vagrant/provision/httpd_config.sh"
+    #config.vm.provision "shell", path: "Vagrant/provision/install_docker.sh"
+    #config.vm.provision "shell", path: "Vagrant/provision/install_phpbrew.sh"
+		#config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
 
-		# Running Chefs
-		config.vm.provision "chef_solo" do |chef|
-			#chef.cookbooks_path = "Vagrant/cookbooks"
-			#chef.add_recipe "virtual_hosts"
-		end
-		
-		config.vm.synced_folder "../Projects", "/projects"
+		#config.vm.provision "shell", path: "Vagrant/provision/puppet.sh"
+    config.vm.provision "shell", path: "Vagrant/provision/puppet-ubuntu.sh"
+    config.vm.provision "shell", path: "Vagrant/provision/puppet-modules.sh"
+    
+		# With plugin: vagrant-librarian-puppet
+    #config.librarian_puppet.puppetfile_dir        = "Vagrant/puppet"
+    #config.librarian_puppet.placeholder_filename  = ".MYPLACEHOLDER"
+    #config.librarian_puppet.use_v1_api            = '1' # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
+    #config.librarian_puppet.destructive           = false # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
+    
+    # Run puppet
+    config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = 'Vagrant/puppet/manifests'
+      puppet.module_path    = 'Vagrant/puppet/modules'
+      puppet.options        = [
+								'--verbose',
+								'--debug',
+							]
+      
+      puppet.manifest_file  = "default.pp"
+    end
+        
+    # Shared Folders
+    config.vm.synced_folder "../Projects", "/projects"
 	end
 end
