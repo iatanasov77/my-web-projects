@@ -16,5 +16,7 @@ node default
 	include vsprojects::tools 
 	include vsprojects::lamp
 	#include vsprojects::webpack
+	
+	include vsprojects::vstools
 	include vsprojects::vsprojects
 }
