@@ -57,9 +57,10 @@ class vsprojects::lamp
 
 	# Setup default main virtual host
 	apache::vhost { 'myprojects.lh':
-		port    		=> '80',
-		docroot 		=> '/vagrant/web',
-		override		=> 'all',
+		port    	=> '80',
+		docroot 	=> '/vagrant/web',
+		override	=> 'all',
+		php_values 		=> ['memory_limit 1024M'],
 		
 		directories => [
 			{
@@ -68,7 +69,7 @@ class vsprojects::lamp
 			},
 		],
 		
-		aliases			=> [
+		aliases		=> [
 			{
 				alias => '/phpMyAdmin',
 				path  => '/usr/share/phpmyadmin'

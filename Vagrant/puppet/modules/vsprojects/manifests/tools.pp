@@ -5,6 +5,7 @@ class vsprojects::tools
 	$packages = [
 		"mc", 
 		"git",
+		"git-flow",
 		"curl",
 		"vim",
 		"htop",

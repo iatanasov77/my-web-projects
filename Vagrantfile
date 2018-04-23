@@ -18,7 +18,7 @@ VAGRANT_BOX       		= "ubuntu/artful64"
 MASHINE_NAME			= "MyProjects"
 HOSTNAME				= "myprojects.lh"
 PUBLIC_IP				= '10.3.3.2'
-VBOX_MACHINE_MEMORY		= '1024'
+VBOX_MACHINE_MEMORY		= '2048'
 HOSTS_CONFIG			= 'installed_hosts.json'
 
 ##################################################################################################
@@ -79,6 +79,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		#config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
 
 		#config.vm.provision "shell", path: "Vagrant/provision/puppet.sh"
+	config.vm.provision "shell", path: "Vagrant/provision/make_swap.sh"
     config.vm.provision "shell", path: "Vagrant/provision/puppet-ubuntu.sh"
     config.vm.provision "shell", path: "Vagrant/provision/puppet-modules.sh"
     
