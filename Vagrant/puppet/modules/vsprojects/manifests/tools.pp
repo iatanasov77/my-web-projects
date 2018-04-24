@@ -9,6 +9,7 @@ class vsprojects::tools
 		"curl",
 		"vim",
 		"htop",
+		"dos2unix",
 	]
 
 	# install packages
