@@ -78,10 +78,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     #config.vm.provision "shell", path: "Vagrant/provision/install_phpbrew.sh"
 		#config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
 
+		config.vm.provision "shell", path: "Vagrant/provision/make_swap.sh"
 		#config.vm.provision "shell", path: "Vagrant/provision/puppet.sh"
-	config.vm.provision "shell", path: "Vagrant/provision/make_swap.sh"
-    config.vm.provision "shell", path: "Vagrant/provision/puppet-ubuntu.sh"
-    config.vm.provision "shell", path: "Vagrant/provision/puppet-modules.sh"
+    #config.vm.provision "shell", path: "Vagrant/provision/puppet-ubuntu.sh"
+    #config.vm.provision "shell", path: "Vagrant/provision/puppet-modules.sh"
     
 		# With plugin: vagrant-librarian-puppet
     #config.librarian_puppet.puppetfile_dir        = "Vagrant/puppet"

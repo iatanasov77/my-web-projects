@@ -14,3 +14,6 @@ mod 'puppetlabs-sqlite',
 mod 'jlondon-phpmyadmin', '1.3.0'
 
 mod 'puppet-nodejs', '5.0.0'
+
+mod 'puppet-xdebug',
+	:git	=> "https://github.com/ridonkulous/puppet-xdebug.git"

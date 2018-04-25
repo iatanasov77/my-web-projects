@@ -1,4 +1,8 @@
-
+class php
+{
+	class { 'vsprojects::php': }
+}
+	
 class vsprojects::lamp
 {
 	# Install and setup an Apache server with mod_php
@@ -14,22 +18,10 @@ class vsprojects::lamp
 	class { 'apache::mod::rewrite': }
 	class { 'apache::mod::vhost_alias': }
 
-	# Install PHP
-	#apt::ppa { 'ppa:ondrej/php':
-	#	ensure	=> 'present'
-	#}
-	$packages = [
-		"php7.1", 
-		"php7.1-cli",
-		"composer",
-		"phpunit",
-		"libapache2-mod-php7.1",
-		"libapache2-mod-php",
-	]
-	package { $packages:
-		ensure => installed
-	}
-
+	class { 'php': }
+	
+	include xdebug
+	
 	class { 'apache::mod::php': 
 		php_version	=> '7.1',
 	}
