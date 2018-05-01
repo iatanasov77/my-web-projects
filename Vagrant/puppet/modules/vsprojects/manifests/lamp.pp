@@ -20,7 +20,11 @@ class vsprojects::lamp
 
 	class { 'php': }
 	
-	include xdebug
+	# include xdebug
+	class { 'xdebug':
+		remote_enable 		=> 1,
+		remote_connect_back => 1
+	}
 	
 	class { 'apache::mod::php': 
 		php_version	=> '7.1',
