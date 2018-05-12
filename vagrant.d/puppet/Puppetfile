@@ -1,0 +1,11 @@
+#
+# Run from this directory : librarian-puppet install --verbose
+# Config examples below
+###################################################################
+
+forge "http://forge.puppetlabs.com"
+
+#mod 'puppetlabs-apt', '4.5.1'
+
+#mod 'puppetlabs-apache',
+#	:git	=> "http://github.com/puppetlabs/puppetlabs-apache.git"

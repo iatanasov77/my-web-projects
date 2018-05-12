@@ -1,41 +1,21 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-###########################################################
-# Plugins:
-# vagrant plugin install vagrant-hostmanager
-# vagrant plugin install vagrant-librarian-puppet
-###########################################################
-
-# Config Variables
-##################################################################################################
-
 VAGRANTFILE_API_VERSION	= '2' 
-#VAGRANT_BOX				= "Gigasavvy/centos7-LAMP"
-VAGRANT_BOX       		= "ubuntu/artful64"
-#VAGRANT_BOX				= "icalvete/ubuntu-16.04-64-puppet"
 
-MASHINE_NAME			= "MyProjects"
-HOSTNAME				= "myprojects.lh"
-PUBLIC_IP				= '10.3.3.2'
-VBOX_MACHINE_MEMORY		= '2048'
-HOSTS_CONFIG			= 'installed_hosts.json'
-
-##################################################################################################
-
-def fail_with_message(msg)
-  fail Vagrant::Errors::VagrantError.new, msg
+def fail_with_message( msg )
+	fail Vagrant::Errors::VagrantError.new, msg
 end
 
-# Run Config
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
+	vagrant_config.env.enable
 	
-  if ! File.exists?( HOSTS_CONFIG )
-    fail_with_message "#{HOSTS_CONFIG} file not exists"
+	if ! File.exists?( ENV['HOSTS_CONFIG'] )
+		fail_with_message "#{ENV['HOSTS_CONFIG']} file not exists"
 	end
 	
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
-	  fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\nvagrant plugin install vagrant-hostmanager"
+		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\nvagrant plugin install vagrant-hostmanager"
 	end
 	
 	vagrant_config.hostmanager.enabled           	= true
@@ -45,63 +25,83 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     vagrant_config.hostmanager.include_offline   	= true
 	vagrant_config.hostmanager.aliases				= []
 	
-	vsHosts		= JSON.parse( File.read( HOSTS_CONFIG ) ).values
+	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) ).values
 	vsHosts.each do |host|
 		vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
     end
 	
 	# Config vagrant machine
-	vagrant_config.vm.define MASHINE_NAME do |config|
-	  
-	  config.vm.box                        = VAGRANT_BOX
-	  config.vm.box_check_update           = true
+	vagrant_config.vm.define ENV['MASHINE_NAME'] do |config|
+	
+	  	config.vm.box				= ENV['VAGRANT_BOX']
+		config.vm.box_check_update	= true
 		
-		config.vm.hostname 						       = HOSTNAME
-		config.vm.network :private_network, ip: PUBLIC_IP
-    #config.vm.network :forwarded_port, guest: 80, host: 8080
-    #config.vm.network :forwarded_port, guest: 443, host: 8443
-		
-    
-		
+		config.vm.hostname 			= ENV['HOSTNAME']
+		config.vm.network :private_network, ip: ENV['PUBLIC_IP']
+    	
 		# Virtual Box Configuration
-		#config.vm.provider :virtualbox do |vb, override|
-		#	vb.gui	= true
-		#	vb.name	= MASHINE_NAME
-		#	vb.customize ["modifyvm", :id, "--memory", VBOX_MACHINE_MEMORY]
-	  #end
+		config.vm.provider :virtualbox do |vb, override|
+			vb.gui		= false
+			vb.name		= ENV['MASHINE_NAME']
+			vb.memory	= ENV['VBOX_MACHINE_MEMORY']
+			vb.cpus		= 1
+		end
 	  	
-	  # Run provision scripts
-		#config.vm.provision "shell", path: "Vagrant/provision/packages.sh"
-		#config.vm.provision "shell", path: "Vagrant/provision/settings.sh"
-		#config.vm.provision "shell", path: "Vagrant/provision/httpd_config.sh"
-    #config.vm.provision "shell", path: "Vagrant/provision/install_docker.sh"
-    #config.vm.provision "shell", path: "Vagrant/provision/install_phpbrew.sh"
-		#config.vm.provision "shell", path: "Vagrant/provision/install_projects.php"
+	  	# Shared Folders
+    	config.vm.synced_folder ENV['PROJECTS_FOLDER'], "/projects"
+		
+		# Run provision bash scripts to setup puppet environement
+		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
+		
+		#config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
+    	
+	    # Run puppet provisioner
+	    config.vm.provision :puppet do |puppet|
+			puppet.manifests_path = 'vagrant.d/puppet/manifests'
+			puppet.module_path    = 'vagrant.d/puppet/modules'
+			puppet.options        = ['--verbose', '--debug']
+			
+			puppet.manifest_file  = "default.pp"
+			puppet.facter			= {
+				'devenv_modules'	=> ENV['DEVENV_MODULES'],
+				'hostname'			=> ENV['HOSTNAME'],
+				'documentroot'		=> '/vagrant/web',
+				'mysqlhost'			=> ENV['PUBLIC_IP']
+				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql'
+			}
+	    end
+		
+		#################################################################
+		# Workaround for a fucking bug: 
+		# Created from puppet virtual host has "AllowOverride None"
+		# and Laravel rewrite rules not working
+		# The next is a hard fix for this.
+		$workaround = <<-SCRIPT
+echo "Workaround for: Created from puppet virtual host has 'AllowOverride None'"
+sed "$(grep -n -m1 "AllowOverride None" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf |cut -f1 -d:)s/.*/AllowOverride All/" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf > /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
+cp -f /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf
+rm /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
+service apache2 restart 
+SCRIPT
+		config.vm.provision "shell", inline: $workaround
+		
+		$done = <<-SCRIPT
+echo ""
+echo ""
+echo "####################################################################"
+echo "# DONE!!!"
+echo "# -------"
+echo "# Now you can open http://#{ENV['HOSTNAME']} in your browser"
+echo "#"
+echo "# You have PHP Info at http://#{ENV['HOSTNAME']}/info.php"
+echo "# You have a PhpMyAdmin  at http://#{ENV['HOSTNAME']}/phpMyAdmin/"
+echo "#"
+echo "# Support at: https://github.com/iatanasov77/"
+echo "####################################################################"
+SCRIPT
+		config.vm.provision "shell", inline: $done
 
-		config.vm.provision "shell", path: "Vagrant/provision/make_swap.sh"
-		#config.vm.provision "shell", path: "Vagrant/provision/puppet.sh"
-    #config.vm.provision "shell", path: "Vagrant/provision/puppet-ubuntu.sh"
-    #config.vm.provision "shell", path: "Vagrant/provision/puppet-modules.sh"
-    
-		# With plugin: vagrant-librarian-puppet
-    #config.librarian_puppet.puppetfile_dir        = "Vagrant/puppet"
-    #config.librarian_puppet.placeholder_filename  = ".MYPLACEHOLDER"
-    #config.librarian_puppet.use_v1_api            = '1' # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
-    #config.librarian_puppet.destructive           = false # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
-    
-    # Run puppet
-    config.vm.provision :puppet do |puppet|
-      puppet.manifests_path = 'Vagrant/puppet/manifests'
-      puppet.module_path    = 'Vagrant/puppet/modules'
-      puppet.options        = [
-								'--verbose',
-								'--debug',
-							]
-      
-      puppet.manifest_file  = "default.pp"
-    end
-        
-    # Shared Folders
-    config.vm.synced_folder "../Projects", "/projects"
 	end
 end

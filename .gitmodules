@@ -4,3 +4,39 @@
 [submodule "Vagrant/puppet/modules/php"]
 	path = Vagrant/puppet/modules/php
 	url = https://github.com/voxpupuli/puppet-php.git
+[submodule "vagrant.d/puppet/modules/apache"]
+	path = vagrant.d/puppet/modules/apache
+	url = http://github.com/puppetlabs/puppetlabs-apache.git
+[submodule "vagrant.d/puppet/modules/apt"]
+	path = vagrant.d/puppet/modules/apt
+	url = https://github.com/puppetlabs/puppetlabs-apt.git
+[submodule "vagrant.d/puppet/modules/concat"]
+	path = vagrant.d/puppet/modules/concat
+	url = https://github.com/puppetlabs/puppetlabs-concat.git
+[submodule "vagrant.d/puppet/modules/devenv"]
+	path = vagrant.d/puppet/modules/devenv
+	url = https://github.com/iatanasov77/puppet-devenv.git
+[submodule "vagrant.d/puppet/modules/gcc"]
+	path = vagrant.d/puppet/modules/gcc
+	url = https://github.com/puppetlabs/puppetlabs-gcc.git
+[submodule "vagrant.d/puppet/modules/mysql"]
+	path = vagrant.d/puppet/modules/mysql
+	url = http://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "vagrant.d/puppet/modules/nodejs"]
+	path = vagrant.d/puppet/modules/nodejs
+	url = https://github.com/willdurand/puppet-nodejs.git
+[submodule "vagrant.d/puppet/modules/phpmyadmin"]
+	path = vagrant.d/puppet/modules/phpmyadmin
+	url = http://github.com/justicel/puppet-phpmyadmin.git
+[submodule "vagrant.d/puppet/modules/sqlite"]
+	path = vagrant.d/puppet/modules/sqlite
+	url = http://github.com/puppetlabs/puppetlabs-sqlite.git
+[submodule "vagrant.d/puppet/modules/staging"]
+	path = vagrant.d/puppet/modules/staging
+	url = https://github.com/voxpupuli/puppet-staging.git
+[submodule "vagrant.d/puppet/modules/stdlib"]
+	path = vagrant.d/puppet/modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+[submodule "vagrant.d/puppet/modules/translate"]
+	path = vagrant.d/puppet/modules/translate
+	url = https://github.com/puppetlabs/puppetlabs-translate.git

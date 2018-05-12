@@ -1,9 +1,0 @@
----
-:backends:
-  - yaml
-:hierarchy:
-  - "os/%{::osfamily}"
-  - testing
-  - common
-:yaml:
-  :datadir: 'data'
