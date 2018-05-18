@@ -16,6 +16,15 @@ node default
 	include devenv::tools
 	include devenv::lamp
 	
+	if ( 'intl' in $facts['devenv_modules'] )
+	{
+		package { 'php7.1-intl':
+			ensure 	=> installed,
+			require => Package['php7.1'],
+			notify  => Service['apache2'],
+		}
+	}
+	
 	if ( 'sqlite' in $facts['devenv_modules'] )
 	{
 		package { 'php7.1-sqlite3':
