@@ -9,3 +9,5 @@ forge "http://forge.puppetlabs.com"
 
 #mod 'puppetlabs-apache',
 #	:git	=> "http://github.com/puppetlabs/puppetlabs-apache.git"
+
+#mod 'ghoneycutt-ssh', '3.57.0' 

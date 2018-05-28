@@ -13,6 +13,7 @@ Exec {
 
 node default
 {
+	include devenv::system
 	include devenv::tools
 	include devenv::lamp
 	
@@ -61,8 +62,5 @@ node default
 	{
 		include devenv::bower
 	}
-	
-	
-	
 
 }

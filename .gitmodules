@@ -37,3 +37,6 @@
 [submodule "vagrant.d/puppet/modules/translate"]
 	path = vagrant.d/puppet/modules/translate
 	url = https://github.com/puppetlabs/puppetlabs-translate.git
+[submodule "vagrant.d/puppet/modules/ssh"]
+	path = vagrant.d/puppet/modules/ssh
+	url = https://github.com/ghoneycutt/puppet-module-ssh.git
