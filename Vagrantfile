@@ -73,6 +73,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			}
 	    end
 		
+		# @TODO: Should make a stable release of the VankoSoft tool - MkVhost 
+		config.vm.provision "shell", path: "vagrant.d/provision/install_mkvhost.sh"
+		
 		#################################################################
 		# Workaround for a fucking bug: 
 		# Created from puppet virtual host has "AllowOverride None"
@@ -83,16 +86,11 @@ echo "Workaround for: Created from puppet virtual host has 'AllowOverride None'"
 sed "$(grep -n -m1 "AllowOverride None" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf |cut -f1 -d:)s/.*/AllowOverride All/" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf > /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
 cp -f /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf
 rm /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
-service apache2 restart
-
- 
+service apache2 restart 
 SCRIPT
 		config.vm.provision "shell", inline: $workaround
 		
-# /etc/ssh/sshd_config	
-# PasswordAuthentication yes
-# service ssh reload
-# 		
+		
 		
 		$done = <<-SCRIPT
 echo ""
