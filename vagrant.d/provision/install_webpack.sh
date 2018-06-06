@@ -33,6 +33,10 @@ npm install -g babel-plugin-transform-object-rest-spread --save-dev
 npm install -g babel-plugin-transform-runtime --save-dev
 npm install -g babel-preset-env --save-dev
 
+#Webpack improve build time performance.
+npm install -g dll-webpack-plugin --save
+npm install -g hard-source-webpack-plugin --save
+
 # I dont know even this works but i create a symlink from vagrant home 
 # to the global node's directory bellow that definitely works
 export NODE_PATH=/usr/local/lib/node_modules
