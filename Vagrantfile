@@ -34,6 +34,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.vm.define ENV['MASHINE_NAME'] do |config|
 	
 	  	config.vm.box				= ENV['VAGRANT_BOX']
+	  	#config.vm.box_version
 		config.vm.box_check_update	= true
 		
 		config.vm.hostname 			= ENV['HOSTNAME']
