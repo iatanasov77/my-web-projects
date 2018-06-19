@@ -49,7 +49,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		end
 	  	
 	  	# Shared Folders
-    	config.vm.synced_folder ENV['PROJECTS_FOLDER'], "/projects"
+    	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects"
+    	config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
 		
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
