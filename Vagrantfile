@@ -77,6 +77,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		
 		# @TODO: Should make a stable release of the VankoSoft tool - MkVhost 
 		config.vm.provision "shell", path: "vagrant.d/provision/install_mkvhost.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
 		
 		#################################################################
 		# Workaround for a fucking bug: 
