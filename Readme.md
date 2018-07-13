@@ -5,7 +5,7 @@
 		# vagrant plugin install vagrant-env
 		# vagrant plugin install vagrant-hostmanager
 	```
-4. Fetch VsProjects sources into the current dirctory ( "c:/MyPlaces/VsProjects" ).
+4. Fetch VsProjects sources into the current dirctory ( "c:/MySpace/VsProjects" ).
 	```
 		# git clone https://gitlab.com/iatanasov77/my-projects.git .
 		# git submodule init
@@ -13,6 +13,6 @@
 	```
 5. Start the machine
 	```
-    	# cd C:/VsProjects/Dir
+    	# cd C:/MySpace/VsProjects
     	# Vagrant up
     ```
