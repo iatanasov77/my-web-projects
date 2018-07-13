@@ -1,9 +1,11 @@
+# Setup VsProjects Environement
+
 1. Install Oracle's Virtual Box - https://www.virtualbox.org/wiki/Downloads
 2. Install Vagrant - https://www.vagrantup.com/downloads.html
 3. Install needed Vagrant Plugins:
 	```
-		# vagrant plugin install vagrant-env
-		# vagrant plugin install vagrant-hostmanager
+		# Vagrant plugin install vagrant-env
+		# Vagrant plugin install vagrant-hostmanager
 	```
 4. Fetch VsProjects sources into the current dirctory ( "c:/MySpace/VsProjects" ).
 	```
@@ -13,6 +15,5 @@
 	```
 5. Start the machine
 	```
-    	# cd C:/MySpace/VsProjects
     	# Vagrant up
     ```
