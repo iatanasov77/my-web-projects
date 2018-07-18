@@ -8,7 +8,7 @@ class Project
     {
         global $app;
 
-        return is_dir( $app ['projects_path'] . $project['project_root'] );
+        return is_dir( $app['projects_path'] . $project['project_root'] );
     }
 
     public static function installed( $project )

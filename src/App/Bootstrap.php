@@ -1,6 +1,7 @@
 <?php namespace VankoSoft\MyProjects;
 
 use Davigs\Silex\YamlConfigServiceProvider;
+use Ivoba\Silex\EnvProvider;
 
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
@@ -25,9 +26,9 @@ class Bootstrap extends Application
         /**
          * Controllers
          */
-        $this->mount('/',           new VankoSoft\MyProjects\Controller\Dashboard() );
-        $this->mount('/tool',       new VankoSoft\MyProjects\Controller\Tools() );
-        $this->mount('/project',    new VankoSoft\MyProjects\Controller\Projects() );
+        $this->mount('/',           new Controller\Dashboard() );
+        $this->mount('/tool',       new Controller\Tools() );
+        $this->mount('/project',    new Controller\Projects() );
     }
 
     protected function registerServices()
@@ -65,6 +66,18 @@ class Bootstrap extends Application
                 'images' => array('base_urls' => array('https://img.example.com')),
             ),
         ));
+
+        /**
+         * .ENV
+         */
+        $envOptions = ['env.options' => ['var_config' => [
+            'hoo' => [EnvProvider::CONFIG_KEY_ALLOWED => 'this'],
+            'zack' => [EnvProvider::CONFIG_KEY_REQUIRED => true],
+            'dong' => [EnvProvider::CONFIG_KEY_CAST => EnvProvider::CAST_TYPE_BOOLEAN],
+            'zip' => [EnvProvider::CONFIG_KEY_DEFAULT => 'zippi']]
+        ]];
+        $this->register( new EnvProvider(), $envOptions );
+        //$app['env.load'];
     }
 
     protected function registerExtensions()
