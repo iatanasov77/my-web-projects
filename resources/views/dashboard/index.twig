@@ -1,0 +1,98 @@
+{% extends "layout/index.twig" %}
+
+{% block content %}
+<div class="row">&nbsp;</div>
+
+<div class="row">
+	<section class="panel" style="padding: 5px 30px 5px 30px;">
+		<a href="/info.php" target="__blank">Php Info</a> | 
+	</section>
+</div>
+
+<div class="row">   
+    <div class="col-lg-6">
+        <section class="panel">
+        	<header class="panel-heading">Projects</header>
+                          
+        	<table class="table table-striped table-advance table-hover">
+        		<thead>
+        			<tr>
+        				<th>Project</th>
+        				<th>Actions</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        		{% for project in projects %}
+        			<tr>
+        				<td>{{ project.title }}</td>
+        				<td>
+        				    {%  if vs_project_exists( project ) %}
+        						<a class="btnOpen" data-projectId="{{ project.id }}" href="javascript:void(0);">Open</a>
+        				    {% else %}
+        						<a class="btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);">Install</a>
+        				    {% endif %}
+        				</td>
+        			</tr>
+        		{% endfor %}
+        		</tbody>
+        	</table>
+        </section>
+        
+         <section class="panel">
+        	<header class="panel-heading">CLI Projects</header>
+                          
+        	<table class="table table-striped table-advance table-hover">
+        		<thead>
+        			<tr>
+        				<th>Project</th>
+        				<th>Actions</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        		{% for project in projectsCli %}
+        			<tr>
+        				<td>{{ project.title }}</td>
+        				<td>
+        				    {%  if vs_project_exists( project ) %}
+        						Installed
+        				    {% else %}
+        						<a class="btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);">Install</a>
+        				    {% endif %}
+        				</td>
+        			</tr>
+        		{% endfor %}
+        		</tbody>
+        	</table>
+        </section>
+	</div>
+	
+    <div class="col-lg-6">
+    	<section class="panel">
+        	<header class="panel-heading">Tools</header>
+        	<table class="table table-striped table-advance table-hover">
+        		<thead>
+        			<tr>
+        				<th>Tool</th>
+        				<th>Open</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        		{% for tool in tools %}
+        			<tr>
+        				<td>{{ tool.title }}</td>
+        				<td>
+        					{%  if vs_tool_exists( tool ) %}
+        						<a href="http://{{ tool.url }}" target="__blank">Open</a>
+        				    {% else %}
+        						<a href="/tool/{{ tool.id }}/install">Install</a>
+        				    {% endif %}
+        				</td>
+        			</tr>
+        		{% endfor %}
+        		</tbody>
+        	</table>
+        </section>
+    <div>
+    
+<div>
+{% endblock %}

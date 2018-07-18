@@ -75,7 +75,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			puppet.facter			= {
 				'devenv_modules'	=> ENV['DEVENV_MODULES'],
 				'hostname'			=> ENV['HOSTNAME'],
-				'documentroot'		=> '/vagrant/web',
+				'documentroot'		=> ENV['DOCUMENT_ROOT'],
 				'mysqlhost'			=> ENV['PUBLIC_IP']
 				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql'
 			}
