@@ -1,7 +1,6 @@
 <?php namespace VankoSoft\MyProjects;
 
 use Davigs\Silex\YamlConfigServiceProvider;
-use Ivoba\Silex\EnvProvider;
 
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
@@ -69,15 +68,15 @@ class Bootstrap extends Application
 
         /**
          * .ENV
+         * use Ivoba\Silex\EnvProvider;
          */
-        $envOptions = ['env.options' => ['var_config' => [
-            'hoo' => [EnvProvider::CONFIG_KEY_ALLOWED => 'this'],
-            'zack' => [EnvProvider::CONFIG_KEY_REQUIRED => true],
-            'dong' => [EnvProvider::CONFIG_KEY_CAST => EnvProvider::CAST_TYPE_BOOLEAN],
-            'zip' => [EnvProvider::CONFIG_KEY_DEFAULT => 'zippi']]
-        ]];
-        $this->register( new EnvProvider(), $envOptions );
-        //$app['env.load'];
+//         $envOptions = ['env.options' => ['var_config' => [
+//             'hoo' => [EnvProvider::CONFIG_KEY_ALLOWED => 'this'],
+//             'zack' => [EnvProvider::CONFIG_KEY_REQUIRED => true],
+//             'dong' => [EnvProvider::CONFIG_KEY_CAST => EnvProvider::CAST_TYPE_BOOLEAN],
+//             'zip' => [EnvProvider::CONFIG_KEY_DEFAULT => 'zippi']]
+//         ]];
+//         $this->register( new EnvProvider(), $envOptions );
     }
 
     protected function registerExtensions()
