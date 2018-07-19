@@ -1,3 +1,2 @@
 debug:          true
-projects_path:  ''
-tools_path:     ''
+projects_path:  '/projects'
