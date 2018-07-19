@@ -46,11 +46,11 @@
         			<tr>
         				<th>Project</th>
         				<th>Actions</th>
-        			</tr>http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=220368
+        			</tr>
         		</thead>
         		<tbody>
-        		{% for project in projectsCli %}http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=220368
-        			<tr>http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=220368
+        		{% for project in projectsCli %}
+        			<tr>
         				<td>{{ project.title }}</td>
         				<td>
         				    {%  if vs_project_exists( project ) %}
@@ -66,7 +66,7 @@
         </section>
 	</div>
 
-<!--
+{#
     <div class="col-lg-6">
     	<section class="panel">
         	<header class="panel-heading">Tools</header>
@@ -94,7 +94,65 @@
         	</table>
         </section>
     <div>
--->
+#}
 
 <div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+	$( function() {
+		var dialog;
+			
+		function installProject( projectId )
+		{
+			var url	= "project/" + projectId + "/install";
+			
+			$( ".dialog-loader" ).show();
+			$.get( url, function( data ) 
+			{
+				$( ".dialog-body" ).html( data );
+				$( ".dialog-loader" ).hide();
+			});
+		}
+
+		function openProject( projectId )
+		{
+			var url	= "project/" + projectId + "/repair";
+			
+			$.get( url, function( data ) 
+			{
+				 var projectWindow	= window.open( data.url, '_blank' );
+				 projectWindow.focus();
+			});
+		}
+
+		dialog = $( "#dialog-form" ).dialog( {
+			autoOpen: false,
+			height: 600,
+			width: 600,
+			modal: true,
+			buttons: {
+				Cancel: 	function() {
+					dialog.dialog( "close" );
+				}
+			},
+			close: function() {
+				$( ".dialog-body" ).html( "" );
+			}
+		} );
+
+		$( ".btnInstall" ).button().on( "click", function( event ) {
+			event.preventDefault();
+			dialog.dialog( "open" );
+			installProject( $( this ).attr( "data-projectId" ) );
+		} );
+
+		$( ".btnOpen" ).button().on( "click", function( event ) {
+			event.preventDefault();
+			
+			openProject( $( this ).attr( "data-projectId" ) );
+		} );
+	} );
+</script>
 {% endblock %}
