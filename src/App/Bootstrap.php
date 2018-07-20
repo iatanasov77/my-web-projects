@@ -43,7 +43,7 @@ class Bootstrap extends Application
         $this->register( new DoctrineServiceProvider(), array(
             'db.options'	=> array(
                 'driver'	=> 'pdo_sqlite',
-                'path'		=> APP_ROOT . '/storage/app.db',
+                'path'		=> APP_ROOT . $this['config']['database'],
             ),
         ));
 

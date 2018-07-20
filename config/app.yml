@@ -1,2 +1,3 @@
 debug:          true
 projects_path:  '/projects'
+database:       '/storage/app.db'
