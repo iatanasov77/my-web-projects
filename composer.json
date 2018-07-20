@@ -4,7 +4,6 @@
         "doctrine/dbal": "~2.2",
         "twig/twig": "~2.0",
         "symfony/twig-bridge": "^3.1",
-        "symfony/asset": "^3.1",
         "symfony/process": "^3.1",
 		"davigs/silex-yaml-config-service-provider": "^1.0",
 		

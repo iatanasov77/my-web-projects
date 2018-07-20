@@ -5,7 +5,6 @@ use Davigs\Silex\YamlConfigServiceProvider;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\AssetServiceProvider;
 
 class Bootstrap extends Application
 {
@@ -32,6 +31,11 @@ class Bootstrap extends Application
 
     protected function registerServices()
     {
+        if ( class_exists( '\WhoopsSilex\WhoopsServiceProvider' ) )
+        {
+            $this->register( new \WhoopsSilex\WhoopsServiceProvider );
+        }
+        
         /**
          * YamlConfig
          */
@@ -53,23 +57,6 @@ class Bootstrap extends Application
         $this->register( new TwigServiceProvider(), array(
             'twig.path'	=> APP_ROOT . '/resources/views',
         ));
-
-        /**
-         * Asset
-         */
-        $this->register( new AssetServiceProvider(), array(
-            'assets.version' => 'v1',
-            'assets.version_format' => '%s?version=%s',
-            'assets.named_packages' => array(
-                'css' => array('version' => 'css2', 'base_path' => '/whatever-makes-sense'),
-                'images' => array('base_urls' => array('https://img.example.com')),
-            ),
-        ));
-        
-        if ( class_exists( '\WhoopsSilex\WhoopsServiceProvider' ) )
-        {
-            $this->register( new \WhoopsSilex\WhoopsServiceProvider );
-        }
 
         /**
          * .ENV
