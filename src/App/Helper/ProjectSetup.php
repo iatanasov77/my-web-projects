@@ -30,6 +30,9 @@ class ProjectSetup
 	 * @brief	Checkout source code from repository
 	 *
 	 * @param	string $branch
+	 * 
+	 * @TODO Ще пробвам да разиграя чекаута с е това https://github.com/andywer/php-easygit
+	 *         да видим дали ще мога да реализирам един прогрес бар
 	 */
 	protected function checkout( $localDir, $branch = null )
 	{
