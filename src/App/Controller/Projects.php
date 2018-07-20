@@ -27,7 +27,7 @@ class Projects implements ControllerProviderInterface
 		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
 		$project 		= $this->getProject( $id );
 
-		$projectSetup	= new ProjectSetup( $project, $this->app['projects_path'] );
+		$projectSetup	= new ProjectSetup( $project, $this->app['config']['projects_path'] );
 		$projectSetup->setup();
 		
 		//return $this->app->redirect( '/' );

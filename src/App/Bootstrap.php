@@ -43,7 +43,7 @@ class Bootstrap extends Application
         $this->register( new DoctrineServiceProvider(), array(
             'db.options'	=> array(
                 'driver'	=> 'pdo_sqlite',
-                'path'		=> APP_ROOT . '/app.db',
+                'path'		=> APP_ROOT . '/storage/app.db',
             ),
         ));
 
@@ -65,6 +65,11 @@ class Bootstrap extends Application
                 'images' => array('base_urls' => array('https://img.example.com')),
             ),
         ));
+        
+        if ( class_exists( '\WhoopsSilex\WhoopsServiceProvider' ) )
+        {
+            $this->register( new \WhoopsSilex\WhoopsServiceProvider );
+        }
 
         /**
          * .ENV

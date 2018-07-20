@@ -14,9 +14,9 @@ class ProjectSetup
 	
 	public function setup()
 	{
-		$projectRoot	= $this->installPath . $this->project['project_root'];
-		$documentRoot	= $this->installPath . $this->project['document_root'];
-	
+		$projectRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['project_root'];
+		$documentRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['document_root'];
+
 		// Setup
 		$this->checkout( $projectRoot, 'develop' );
 		$this->createApacheVirtualHost( $documentRoot );
