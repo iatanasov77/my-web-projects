@@ -1,5 +1,9 @@
 <?php namespace VankoSoft\MyProjects\Helper;
 
+use GitWrapper\GitWrapper as Git;
+use Symfony\Component\Process\Process;
+use VankoSoft\MyProjects\Lib\Git\OutputListener;
+
 class ProjectSetup
 {
 	protected $project;
@@ -36,37 +40,51 @@ class ProjectSetup
 	 */
 	protected function checkout( $localDir, $branch = null )
 	{
+	    set_time_limit( 0 );
+	    
 		if( ! file_exists( $localDir ) )
 		{
 			mkdir( $localDir, 2775, true );
 		}
 		chdir( $localDir );
-	
+		
+		
+		
+		
 		// Empty directory
 		if( ! ( new \FilesystemIterator( $localDir ) )->valid() )
 		{
 			if ( $this->project['git_username'] && $this->project['git_password'] )
 			{
-				$cmdGitClone	= sprintf(
-					"git clone https://%s:%s@%s %s",
+				$gitUrl	= sprintf(
+					"https://%s:%s@%s",
 					$this->project['git_username'],
 					$this->project['git_password'],
-					$this->project['git_url'],
-					'.'
+					$this->project['git_url']
 				);
 			}
 			else
 			{
-				$cmdGitClone	= sprintf(
-					"git clone https://%s %s",
-					$this->project['git_url'],
-					'.'
+				$gitUrl	= sprintf(
+					"https://%s",
+					$this->project['git_url']
 				);
 			}
-				
-			Shell::exec( $cmdGitClone );
+			
+			$maxNestingLevel = ini_get( 'xdebug.max_nesting_level' );
+			ini_set( 'xdebug.max_nesting_level', 9999 );
+			   
+		    $git  = new Git();
+		    $git->addOutputListener( new OutputListener() );
+		    $repo = $git->cloneRepository( $gitUrl, $localDir);
+			
+		    ini_set( 'xdebug.max_nesting_level', $maxNestingLevel );
+
+			exit( 0 ); 
+
 		}
 	
+		
 		if ( $branch )
 		{
 			Shell::exec( "git checkout $branch" );
@@ -100,7 +118,7 @@ class ProjectSetup
 			$hosts 		= json_decode( $json, true );
 		}
 		
-		$hosts[]	= [
+		$hosts[$this->project['id']]	= [
 			'hostName'		=> $hostName,
 			'documentRoot'	=> $documentRoot
 		];

@@ -1,13 +1,12 @@
 {
+	"license": "MIT",
+	
     "require": {
         "silex/silex": "~2.0",
         "davigs/silex-yaml-config-service-provider": "^1.0",
         "doctrine/dbal": "~2.2",
-        "twig/twig": "~2.0",
         "symfony/twig-bridge": "^3.1",
-        "symfony/process": "^3.1",
-		
-    	"easygit/easygit" : "dev-master"
+    	"cpliakas/git-wrapper": "^1.7"
    	},
    	"require-dev": {
    		"texthtml/whoops-silex": "~1.0"
@@ -18,7 +17,8 @@
     {
     	"psr-4":
     	{
-    		"VankoSoft\\MyProjects\\": 		"src/App"
+    		"VankoSoft\\MyProjects\\": 		"src/App",
+    		"VankoSoft\\MyProjects\\Lib\\": "src/Lib"
     	}
     }
 }

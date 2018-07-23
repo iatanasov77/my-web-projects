@@ -6,19 +6,21 @@ class Project
 
     public static function exists( $project )
     {
-        global $app;
-
-        return is_dir( $app['projects_path'] . $project['project_root'] );
+        global $bootstrap;
+        
+        return is_dir( $bootstrap['config']['projects_path'] . $project['project_root'] );
     }
 
     public static function installed( $project )
     {
-        global $app;
+        global $bootstrap;
 
-        $hosts  = [];
-        if ( file_exists( $app['installed_hosts'] ) )
+        $hostsFile  = APP_ROOT . $bootstrap['config']['installed_hosts'];
+        $hosts      = [];
+        
+        if ( file_exists( $hostsFile ) )
         {
-            $json		= file_get_contents( $app['installed_hosts'] );
+            $json		= file_get_contents( $hostsFile );
             $hosts 		= json_decode( $json, true );
         }
 
