@@ -19,4 +19,5 @@
 /Vagrant/puppet/.tmp
 /ssh.EXE.stackdump
 /.env
+/changelog-linker.yml
 

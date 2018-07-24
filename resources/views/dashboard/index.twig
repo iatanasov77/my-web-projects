@@ -106,14 +106,9 @@
 			
 		function installProject( projectId )
 		{
-			var url	= "project/" + projectId + "/install";
-			
-			$( ".dialog-loader" ).show();
-			$.get( url, function( data ) 
-			{
-				$( ".dialog-body" ).html( data );
-				$( ".dialog-loader" ).hide();
-			});
+			var url	= "project/" + projectId + "/install-console";
+
+			$( '.dialog-body' ).load( url );
 		}
 
 		function openProject( projectId )

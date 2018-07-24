@@ -22,7 +22,7 @@ class ProjectSetup
 		$documentRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['document_root'];
 
 		// Setup
-		$this->checkout( $projectRoot, 'develop' );
+		$repo = $this->checkout( $projectRoot, 'develop' );
 		$this->createApacheVirtualHost( $documentRoot );
 		$this->runComposer();
 		$this->registerInstalled( $this->project['dev_url'], $documentRoot );
@@ -40,16 +40,11 @@ class ProjectSetup
 	 */
 	protected function checkout( $localDir, $branch = null )
 	{
-	    set_time_limit( 0 );
-	    
 		if( ! file_exists( $localDir ) )
 		{
 			mkdir( $localDir, 2775, true );
 		}
 		chdir( $localDir );
-		
-		
-		
 		
 		// Empty directory
 		if( ! ( new \FilesystemIterator( $localDir ) )->valid() )
@@ -72,16 +67,17 @@ class ProjectSetup
 			}
 			
 			$maxNestingLevel = ini_get( 'xdebug.max_nesting_level' );
-			ini_set( 'xdebug.max_nesting_level', 9999 );
+			if ( $maxNestingLevel )
+			    ini_set( 'xdebug.max_nesting_level', 9999 );
 			   
 		    $git  = new Git();
 		    $git->addOutputListener( new OutputListener() );
 		    $repo = $git->cloneRepository( $gitUrl, $localDir);
 			
-		    ini_set( 'xdebug.max_nesting_level', $maxNestingLevel );
+		    if ( $maxNestingLevel )
+		        ini_set( 'xdebug.max_nesting_level', $maxNestingLevel );
 
-			exit( 0 ); 
-
+			return $repo;
 		}
 	
 		

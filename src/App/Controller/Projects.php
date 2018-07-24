@@ -16,21 +16,31 @@ class Projects implements ControllerProviderInterface
 		$this->app		= $app;
 		$controllers	= $this->app['controllers_factory'];
 
+		$controllers->get( '/{id}/install-console', array( $this, 'installConsoleAction' ) );
 		$controllers->get( '/{id}/install', array( $this, 'installAction' ) );
 		$controllers->get( '/{id}/repair', array( $this, 'repairAction' ) );
 
 		return $controllers;
 	}
 
+	public function installConsoleAction()
+	{
+	    $id = $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
+
+	    return sprintf( '<iframe src="/project/%d/install" style="width:100%%; height: 460px;" ></iframe>', $id );
+	}
+	
 	public function installAction()
 	{
+	    set_time_limit( 0 );
+	    
 		$id				= $this->app['request_stack']->getCurrentRequest()->get( 'id', null );
 		$project 		= $this->getProject( $id );
 
 		$projectSetup	= new ProjectSetup( $project, $this->app['config']['projects_path'] );
 		$projectSetup->setup();
 		
-		//return $this->app->redirect( '/' );
+		return 'DONE!';
 	}
 	
 	public function repairAction()
