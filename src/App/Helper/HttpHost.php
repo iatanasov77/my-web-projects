@@ -1,33 +1,66 @@
 <?php namespace VankoSoft\MyProjects\Helper;
 
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\ConnectException as HttpConnectException;
+use GuzzleHttp\Exception\GuzzleException;
+
+use VankoSoft\MyProjects\Helper\HttpHostCreator\VsMkVhost;
+//use VankoSoft\MyProjects\Helper\HttpHostCreator\PuppetMkVhost;
+
+/**
+ * 
+ * @author ivan.atanasov
+ *
+ */
 class HttpHost
 {
-	public static function exists( $url ) 
+    /**
+     * @brief   Check if an apache virttual host exists
+     * 
+     * @TODO    Use 'sudo /usr/sbin/apache2 -S'  to check your virtual host configuration.
+     *          For RedHat derived distributions: 'sudo /usr/sbin/httpd -S'
+     *          
+     * @param   string $host
+     * 
+     * @return  boolean
+     */
+	public static function exists( $host )
 	{
-		$agent	= "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; pt-pt) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27";
+		$client   = new HttpClient();
 		
-		$ch		= curl_init();
-		curl_setopt( $ch, CURLOPT_URL, $url );
-		curl_setopt( $ch, CURLOPT_USERAGENT, $agent );		// sets the content of the User-Agent header
-		curl_setopt( $ch, CURLOPT_NOBODY, true );			// make sure you only check the header - taken from the answer above
-		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );	// follow "Location: " redirects
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );		// return the transfer as a string
-		curl_setopt( $ch, CURLOPT_VERBOSE, false );			// disable output verbose information
-		curl_setopt( $ch, CURLOPT_TIMEOUT, 5 );				// max number of seconds to allow cURL function to execute
-		curl_exec( $ch );
-		$httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-		curl_close( $ch );
-	
-		return $httpcode != 404 ? true : false;
+		try {
+            $res      = $client->request( 'GET', $host );
+		}
+		catch( HttpConnectException $e )
+		{
+		    //throw $e;
+		    return false;
+		}
+		catch( GuzzleException $e )
+		{
+		    //throw $e;
+		    return true;
+		}
+		
+		return $res->getStatusCode() != 404;
 	}
 	
-	public function create( $url, $documentRoot )
+	/**
+	 * @brief  Create an Apache Virtual Host
+	 * 
+	 * @TODO   Create symlink to my vagrant machine puppet modules
+	 *         # sudo ln -s /vagrant/vagrant.d/puppet/modules /usr/share/puppet/modules
+	 *         
+	 * @param  string $host
+	 * @param  string $documentRoot
+	 * 
+	 * @return boolean
+	 */
+	public static function create( $host, $documentRoot, $addr = '127.0.0.1' )
 	{
-		$cmdMkVhost	= sprintf(
-			"sudo /usr/bin/php /usr/local/bin/mkvhost -t simple -s %s -d %s -f",
-			$this->project['dev_url'],
-			$documentRoot
-		);
-		Shell::exec( $cmdMkVhost );
+	    //$VhostCreator  = new PuppetMkVhost( ['host' => $host, 'documentRoot' => $documentRoot] );
+	    $VhostCreator  = new VsMkVhost( ['addr' => $addr, 'host' => $host, 'documentRoot' => $documentRoot] );
+	    
+	    return $VhostCreator->run();
 	}
 }

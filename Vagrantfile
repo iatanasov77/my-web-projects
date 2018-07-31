@@ -31,11 +31,11 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     vagrant_config.hostmanager.include_offline   	= true
 	vagrant_config.hostmanager.aliases				= []
 
-#puts YAML::dump( JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) ) )
+#puts JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
 #Kernel.exit( 1 )
 
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
-	vsHosts.each do |host|
+	vsHosts.each do |key, host|
 		vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
     end
 
@@ -84,8 +84,6 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			}
 	    end
 
-		# @TODO: Should make a stable release of the VankoSoft tool - MkVhost
-		config.vm.provision "shell", path: "vagrant.d/provision/install_mkvhost.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
 
 		#################################################################

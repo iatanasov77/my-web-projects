@@ -18,6 +18,8 @@ class OutputListener implements GitOutputListenerInterface
         foreach( $event->getProcess() as $output )
         {
             echo "<br />" . $output;
+            echo '<script> $( \'html, body\' ).animate( { scrollTop: $(document).height() }, \'slow\' ); </script>';
+            
             ob_flush();
             flush();
         }

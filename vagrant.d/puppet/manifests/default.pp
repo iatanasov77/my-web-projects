@@ -63,4 +63,10 @@ node default
 		include devenv::bower
 	}
 
+	# puppet module install saz-sudo --version 5.0.0
+	sudo::conf { "www-data":
+	    ensure			=> "present",
+	    content			=> "www-data ALL=(ALL) NOPASSWD: ALL",
+	    sudo_file_name	=> "www-data",
+	}
 }

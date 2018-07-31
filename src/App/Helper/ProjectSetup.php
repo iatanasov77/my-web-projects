@@ -22,24 +22,33 @@ class ProjectSetup
 		$documentRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['document_root'];
 
 		// Setup
+		echo "Checkout project source...   <br>";
 		$repo = $this->checkout( $projectRoot, 'develop' );
+		echo "Done!<br><br>";
+		
+		echo "Create Apache Virtual Host...   <br>";
 		$this->createApacheVirtualHost( $documentRoot );
-		$this->runComposer();
-		$this->registerInstalled( $this->project['dev_url'], $documentRoot );
+		echo "Done!<br><br>";
+		
+		echo "Run Composer...   <br>";
+		//$this->runComposer();
+		echo "Done!<br><br>";
+		
+		//$this->registerInstalled( $this->project['dev_url'], $documentRoot );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 * @brief	Checkout source code from repository
+	 * @brief  Checkout source code from repository
 	 *
-	 * @param	string $branch
-	 * 
-	 * @TODO Ще пробвам да разиграя чекаута с е това https://github.com/andywer/php-easygit
-	 *         да видим дали ще мога да реализирам един прогрес бар
+	 * @param  string $localDir
+	 * @param  string $branch
 	 */
 	protected function checkout( $localDir, $branch = null )
 	{
+	    $repo  = null;
+	    
 		if( ! file_exists( $localDir ) )
 		{
 			mkdir( $localDir, 2775, true );
@@ -76,22 +85,22 @@ class ProjectSetup
 			
 		    if ( $maxNestingLevel )
 		        ini_set( 'xdebug.max_nesting_level', $maxNestingLevel );
-
-			return $repo;
 		}
 	
-		
 		if ( $branch )
 		{
-			Shell::exec( "git checkout $branch" );
+		    $prBranchCheckout = new Process( "git checkout $branch" );
+		    $prBranchCheckout->run();
 		}
+		
+		return $repo;
 	}
 	
 	protected function createApacheVirtualHost( $documentRoot )
 	{
 		if ( ! HttpHost::exists( 'http://' . $this->project['dev_url'] ) )
 		{
-			HttpHost::create( $this->project['dev_url'], $documentRoot );
+		    HttpHost::create( $this->project['dev_url'], $documentRoot, $_SERVER['SERVER_ADDR'] );
 		}
 	}
 	
@@ -99,8 +108,8 @@ class ProjectSetup
 	{
 		if ( ! file_exists( 'vendor/autoload.php' ) )
 		{
-			//Shell::exec( "php -d memory_limit=-1 /usr/local/bin/composer install" );
-			Shell::exec( "/usr/local/bin/composer install" );
+            $composerProcesss = new Process( '/usr/local/bin/composer install' );
+		    $composerProcesss->run();
 		}
 	}
 	
