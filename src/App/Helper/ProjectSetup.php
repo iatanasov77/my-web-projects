@@ -21,9 +21,8 @@ class ProjectSetup
 		$projectRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['project_root'];
 		$documentRoot	= $this->installPath . DIRECTORY_SEPARATOR . $this->project['document_root'];
 
-		// Setup
 		echo "Checkout project source...   <br>";
-		$repo = $this->checkout( $projectRoot, 'develop' );
+		$repo = $this->checkout( $projectRoot );
 		echo "Done!<br><br>";
 		
 		echo "Create Apache Virtual Host...   <br>";
@@ -31,10 +30,10 @@ class ProjectSetup
 		echo "Done!<br><br>";
 		
 		echo "Run Composer...   <br>";
-		//$this->runComposer();
+		$this->runComposer( $projectRoot );
 		echo "Done!<br><br>";
 		
-		//$this->registerInstalled( $this->project['dev_url'], $documentRoot );
+		$this->registerInstalled( $this->project['dev_url'], $documentRoot );
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,13 +103,28 @@ class ProjectSetup
 		}
 	}
 	
-	protected function runComposer()
+	protected function runComposer( $cwd )
 	{
-		if ( ! file_exists( 'vendor/autoload.php' ) )
-		{
-            $composerProcesss = new Process( '/usr/local/bin/composer install' );
-		    $composerProcesss->run();
-		}
+	    if ( file_exists( $cwd . '/vendor/autoload.php' ) )
+		    return;
+		
+	    $maxNestingLevel = ini_get( 'xdebug.max_nesting_level' );
+	    if ( $maxNestingLevel )
+	        ini_set( 'xdebug.max_nesting_level', 9999 );
+	      
+        $composerProcesss = new Process( '/usr/local/bin/composer install', $cwd, ['HOME' => '/home/vagrant'] );
+        $composerProcesss->run();
+        foreach( $composerProcesss as $output )
+        {
+            echo "<br />" . $output;
+            echo '<script> $( \'html, body\' ).animate( { scrollTop: $(document).height() }, \'slow\' ); </script>';
+            
+            ob_flush();
+            flush();
+        }
+        
+        if ( $maxNestingLevel )
+            ini_set( 'xdebug.max_nesting_level', $maxNestingLevel );
 	}
 	
 	protected function registerInstalled( $hostName, $documentRoot )

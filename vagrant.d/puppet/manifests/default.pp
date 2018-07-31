@@ -69,4 +69,10 @@ node default
 	    content			=> "www-data ALL=(ALL) NOPASSWD: ALL",
 	    sudo_file_name	=> "www-data",
 	}
+	
+	# create composer cache directory with write permissions to all users
+	file { '/home/vagrant/.composer':
+		ensure	=> 'directory',
+		mode	=> '0777'
+	}
 }
