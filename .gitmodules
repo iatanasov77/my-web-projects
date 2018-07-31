@@ -40,3 +40,6 @@
 [submodule "vagrant.d/puppet/modules/ssh"]
 	path = vagrant.d/puppet/modules/ssh
 	url = https://github.com/ghoneycutt/puppet-module-ssh.git
+[submodule "vagrant.d/puppet/modules/sudo"]
+	path = vagrant.d/puppet/modules/sudo
+	url = https://github.com/saz/puppet-sudo.git
