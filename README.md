@@ -13,7 +13,10 @@
 	```
 		# git clone https://gitlab.com/iatanasov77/my-projects.git .
 		# git submodule init
+		
 		# git submodule update
+		; OR
+		# git submodule update --remote # to fetch the HEAD of submodules
 	```
 5. Start the machine
 	```
