@@ -8,7 +8,6 @@
 /.vagrant/
 /composer.lock
 /vendor/
-/storage/*
 
 /.dbeaver-data-sources.xml
 /installed_hosts.json
