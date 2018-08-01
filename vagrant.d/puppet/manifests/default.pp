@@ -64,11 +64,17 @@ node default
 	}
 
 	# puppet module install saz-sudo --version 5.0.0
+	sudo::conf { "vagrant":
+	    ensure			=> "present",
+	    content			=> "vagrant ALL=(ALL) NOPASSWD: ALL",
+	    sudo_file_name	=> "vagrant",
+	}
 	sudo::conf { "www-data":
 	    ensure			=> "present",
 	    content			=> "www-data ALL=(ALL) NOPASSWD: ALL",
 	    sudo_file_name	=> "www-data",
 	}
+	
 	
 	# create composer cache directory with write permissions to all users
 	file { '/home/vagrant/.composer':
