@@ -16,7 +16,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.env.enable
 
 	if ! File.exists?( ENV['HOSTS_CONFIG'] )
-		fail_with_message "#{ENV['HOSTS_CONFIG']} file not exists"
+		File.open( ENV['HOSTS_CONFIG'], "w") do |f|
+			f.write( "{}" )
+		end
 	end
 
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
