@@ -1,13 +1,24 @@
+# Eclipse project meta data
+/.settings/
+/.buildpath
+.buildpath
+/.project
+/.dbeaver-data-sources.xml
+
 /.vagrant/
 /composer.lock
 /vendor/
-/dir/projects/
-/dir/tools/
-/.dbeaver-data-sources
+/storage/*
 
-# Localhost
-/dir/localhost/
-!/dir/localhost/.htaccess
-!/dir/localhost/README.txt
-!/dir/localhost/info.php
+/.dbeaver-data-sources.xml
+/installed_hosts.json
+
+/*.log
+/Vagrant/puppet/modules
+/Vagrant/puppet/Puppetfile.lock
+/Vagrant/puppet/.librarian
+/Vagrant/puppet/.tmp
+/ssh.EXE.stackdump
+/.env
+/changelog-linker.yml
 
