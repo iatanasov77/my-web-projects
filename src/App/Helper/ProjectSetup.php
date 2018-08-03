@@ -6,6 +6,9 @@ use VankoSoft\MyProjects\Lib\Git\OutputListener;
 
 class ProjectSetup
 {
+    const INSTALLED_HOSTS   = '/storage/installed_hosts.json';
+    const COMPOSER_BIN      = '/usr/bin/composer';
+    
 	protected $project;
 	
 	protected $installPath;
@@ -112,7 +115,7 @@ class ProjectSetup
 	    if ( $maxNestingLevel )
 	        ini_set( 'xdebug.max_nesting_level', 9999 );
 	      
-        $composerProcesss = new Process( '/usr/local/bin/composer install', $cwd, ['HOME' => '/home/vagrant'] );
+        $composerProcesss = new Process( self::COMPOSER_BIN + ' install', $cwd, ['HOME' => '/home/vagrant'] );
         $composerProcesss->run();
         foreach( $composerProcesss as $output )
         {
@@ -130,7 +133,7 @@ class ProjectSetup
 	protected function registerInstalled( $hostName, $documentRoot )
 	{
 		$hosts		= [];
-		$jsonFile	= APP_ROOT . "/installed_hosts.json";
+		$jsonFile	= APP_ROOT . self::INSTALLED_HOSTS;
 		if ( file_exists( $jsonFile ) )
 		{
 			$json		= file_get_contents( $jsonFile );

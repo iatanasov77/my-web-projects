@@ -6,7 +6,8 @@
         "davigs/silex-yaml-config-service-provider": "^1.0",
         "doctrine/dbal": "~2.2",
         "symfony/twig-bridge": "^3.1",
-    	"cpliakas/git-wrapper": "^1.7"
+    	"cpliakas/git-wrapper": "^1.7",
+    	"guzzlehttp/guzzle": "~5.3|~6.0"
    	},
    	"require-dev": {
    		"texthtml/whoops-silex": "~1.0"
