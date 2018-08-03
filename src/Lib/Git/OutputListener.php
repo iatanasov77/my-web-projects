@@ -15,7 +15,12 @@ class OutputListener implements GitOutputListenerInterface
      */
     public function handleOutput( GitOutputEvent $event )
     {
-        foreach( $event->getProcess() as $output )
+        $pr = $event->getProcess();
+        
+        $pr->setIdleTimeout( null );
+        $pr->setTimeout( null );
+        
+        foreach( $pr as $output )
         {
             echo "<br />" . $output;
             echo '<script> $( \'html, body\' ).animate( { scrollTop: $(document).height() }, \'slow\' ); </script>';
