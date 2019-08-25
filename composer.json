@@ -3,7 +3,7 @@
 	
     "require": {
         "silex/silex": "~2.0",
-        "davigs/silex-yaml-config-service-provider": "^1.0",
+        "rpodwika/yaml-config-service-provider": "^1.0",
         "doctrine/dbal": "~2.2",
         "symfony/twig-bridge": "^3.1",
     	"cpliakas/git-wrapper": "^1.7",

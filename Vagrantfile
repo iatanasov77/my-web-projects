@@ -8,7 +8,7 @@ def fail_with_message( msg )
 end
 
 if ! Vagrant.has_plugin? 'vagrant-env'
-	fail_with_message "vagrant-env missing, please install the plugin with this command:\n
+	fail_with_message "vagrant-env missing, please install the plugin with this command:
 			vagrant plugin install vagrant-env"
 end
 
@@ -22,7 +22,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	end
 
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
-		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\n
+		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:
 			vagrant plugin install vagrant-hostmanager"
 	end
 
@@ -61,12 +61,14 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 	  	# Shared Folders
     	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects"
-    	config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
+    	#config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
 
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/install_ruby.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
+
 
 		#config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
 

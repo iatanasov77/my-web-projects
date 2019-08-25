@@ -1,4 +1,4 @@
 debug:            true
 projects_path:    '/projects/'
-database:         '/storage/app.db'
-installed_hosts:  '/storage/installed_hosts.json'
+database:         '/app.db'
+installed_hosts:  '/installed_hosts.json'

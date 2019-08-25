@@ -1,6 +1,6 @@
 <?php namespace VankoSoft\MyProjects;
 
-use Davigs\Silex\YamlConfigServiceProvider;
+use Rpodwika\Silex\YamlConfigServiceProvider;
 
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;

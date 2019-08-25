@@ -12,6 +12,6 @@ sudo puppet resource service puppet ensure=running enable=true
 echo "ensure puppet service is running for standalone install"
 sudo puppet resource cron puppet-apply ensure=present user=root minute=30 command='/usr/bin/puppet apply $(puppet apply --configprint manifest)'
 
-sudo apt-get -y install ruby-dev
-sudo gem install librarian-puppet
-sudo gem install curl
+#sudo apt-get -y install ruby-dev
+sudo apt-get -y install librarian-puppet
+#sudo apt-get -y install curl
