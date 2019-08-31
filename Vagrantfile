@@ -70,9 +70,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
 
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
-		config.vm.provision "shell", path: "vagrant.d/provision/install_docker_ubuntu.sh"
-		#config.vm.provision "shell", path: "vagrant.d/provision/install_nodejs.sh"	# All needed frontend tools
-
+		
 	    # Run puppet provisioner
 	    config.vm.provision :puppet do |puppet|
 			puppet.manifests_path = 'vagrant.d/puppet/manifests'
