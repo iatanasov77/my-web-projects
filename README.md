@@ -9,6 +9,10 @@
 	; OR
 	# git submodule update --remote # to fetch the HEAD of submodules
 ```
+	NOTE: To add a new git submodule run:
+```
+	# git submodule add -f https://github.com/puppetlabs/puppetlabs-docker vagrant.d/puppet/modules/docker
+```
 
 ## II. Setup the vagrant machine
 
