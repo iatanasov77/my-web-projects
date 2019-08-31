@@ -19,6 +19,7 @@ node default
 	include devenv::tools
 	#include devenv::vstools
 	include devenv::lamp
+	include devenv::docker
 	include devenv::frontendtools
 	
 	if ( 'intl' in $facts['devenv_modules'] )

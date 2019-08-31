@@ -46,3 +46,6 @@
 [submodule "vagrant.d/puppet/modules/yarn"]
 	path = vagrant.d/puppet/modules/yarn
 	url = https://github.com/artberri/puppet-yarn.git
+[submodule "vagrant.d/puppet/modules/docker"]
+	path = vagrant.d/puppet/modules/docker
+	url = https://github.com/puppetlabs/puppetlabs-docker
