@@ -43,3 +43,6 @@
 [submodule "vagrant.d/puppet/modules/sudo"]
 	path = vagrant.d/puppet/modules/sudo
 	url = https://github.com/saz/puppet-sudo.git
+[submodule "vagrant.d/puppet/modules/yarn"]
+	path = vagrant.d/puppet/modules/yarn
+	url = https://github.com/artberri/puppet-yarn.git

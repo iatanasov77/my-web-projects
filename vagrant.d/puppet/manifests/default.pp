@@ -11,26 +11,30 @@ Exec {
     path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin', '/usr/local/sbin/' ]
 }
 
+$phpVersion = "7.2"
+
 node default
-{
+{ 	
 	include devenv::system
 	include devenv::tools
+	#include devenv::vstools
 	include devenv::lamp
+	include devenv::frontendtools
 	
 	if ( 'intl' in $facts['devenv_modules'] )
 	{
-		package { 'php7.1-intl':
+		package { "php${phpVersion}-intl":
 			ensure 	=> installed,
-			require => Package['php7.1'],
+			require => Package["php${phpVersion}"],
 			notify  => Service['apache2'],
 		}
 	}
 	
 	if ( 'sqlite' in $facts['devenv_modules'] )
 	{
-		package { 'php7.1-sqlite3':
+		package { "php${phpVersion}-sqlite3":
 			ensure 	=> installed,
-			require => Package['php7.1'],
+			require => Package["php${phpVersion}"],
 			notify  => Service['apache2'],
 		}
 	}

@@ -65,12 +65,13 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
-		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
+		#config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_ruby.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
 
-
-		#config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/install_docker_ubuntu.sh"
+		#config.vm.provision "shell", path: "vagrant.d/provision/install_nodejs.sh"	# All needed frontend tools
 
 	    # Run puppet provisioner
 	    config.vm.provision :puppet do |puppet|
@@ -88,7 +89,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			}
 	    end
 
-		config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
+		#config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
 
 		#################################################################
 		# Workaround for a fucking bug:
