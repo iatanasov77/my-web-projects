@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>My Projects</title>
+
+		<link rel="stylesheet" href="assets/js/jquery-ui-dialog/jquery-ui.min.css" />
+		<link rel="stylesheet" href="assets/js/jquery-ui-dialog/jquery-ui.theme.min.css" />
+
+		<link rel="stylesheet" href="assets/css/bootstrap-theme.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<link rel="stylesheet" href="assets/css/style-dialog.css" />
+
+		<script src="assets/js/jquery-3.2.1.min.js"></script>
+		<script src="assets/js/jquery-ui-dialog/jquery-ui.min.js"></script>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+		<script>
+			 WebFontConfig = {
+				google: {
+					families: ['Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic']
+				}
+			};
+			( function (d) {
+				var wf = d.createElement('script'), s = d.scripts[0];
+				wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js';
+				s.parentNode.insertBefore(wf, s);
+			} ) ( document );
+		</script>
+	</head>
+	<body>
+		<section id="container">
+            <header class="header dark-bg">
+                <div class="toggle-nav">
+                    <div data-placement="bottom" data-original-title="Toggle Navigation" class="icon-reorder tooltips"><i class="icon_menu"></i></div>
+                </div>
+                <a class="logo" href="/">
+                    <h1><span style="font-weight: bold;">My Projects</span></h1>
+                </a>
+            </header>
+            
+            <section id="main-content">
+                <section class="wrapper">
+                    {% block content %}{% endblock %}
+                </section>
+            </section>
+
+            <footer class="container-fluid">
+                {% block footer %}{% endblock %}
+            </footer>
+        </section>
+        
+		<div id="dialog-form" title="Install project">
+			<!-- <div class="dialog-loader"></div> -->
+  			<div class="dialog-body"></div>
+		</div>
+		
+		{% block js %}{% endblock %}
+	</body>
+</html>
