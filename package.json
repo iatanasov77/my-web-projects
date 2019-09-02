@@ -1,0 +1,46 @@
+{
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.7.2",
+        "@soda/friendly-errors-webpack-plugin": "^1.7.1",
+        "@symfony/webpack-encore": "^0.23.0",
+        "bootstrap": "^4.3.1",
+        "jquery": "^3.3.1",
+        "node-sass": "^4.11.0",
+        "popper": "^1.0.1",
+        "popper.js": "^1.14.7",
+        "sass-loader": "^7.1.0",
+        "webpack": "^4.29.6",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "./node_modules/@symfony/webpack-encore/bin/encore.js dev",
+        "watch": "./node_modules/@symfony/webpack-encore/bin/encore.js dev --watch",
+        "build": "./node_modules/@symfony/webpack-encore/bin/encore.js production --progress"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+        "@fortawesome/fontawesome-svg-core": "^1.2.15",
+        "@fortawesome/free-solid-svg-icons": "^5.7.2",
+        "bootstrap-datepicker": "^1.8.0",
+        "child_process": "^1.0.2",
+        "copy-webpack-plugin": "^5.0.0",
+        "datatables.net-bs4": "^1.10.19",
+        "fs": "^0.0.1-security",
+        "gijgo": "^1.9.12",
+        "jquery-form": "^4.2.2",
+        "jquery-ui": "^1.12.1",
+        "mini-css-extract-plugin": "^0.5.0",
+        "net": "^1.0.2",
+        "print-this": "https://github.com/jasonday/printThis",
+        "rijs": "^0.9.1",
+        "rijs.npm": "^2.0.0",
+        "startbootstrap-sb-admin-2": "^4.0.2",
+        "tls": "0.0.1",
+        "vue": "^2.6.7",
+        "webpack-icons-installer": "^2.0.0",
+        "webpack-jquery-ui": "^2.0.1"
+    }
+}
