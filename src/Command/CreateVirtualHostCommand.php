@@ -31,6 +31,7 @@ class CreateVirtualHostCommand extends Command
             ->addOption( 'template', 't', InputOption::VALUE_OPTIONAL, 'Select a template for the virtual host configuration', 'simple' )
             ->addOption( 'host', 's', InputOption::VALUE_OPTIONAL, 'Select a host address for the server', 'example.com' )
             ->addOption( 'documentroot', 'd', InputOption::VALUE_OPTIONAL, 'Select document root path for this virtual host', '/var/www/html' )
+            ->addOption( 'with-ssl', null, InputOption::VALUE_NONE )
         ;
     }
     
@@ -45,6 +46,7 @@ class CreateVirtualHostCommand extends Command
         $serverAdmin    = 'admin@' . $host;
         $vhostConfFile	= '/etc/apache2/sites-available/' . $host . '.conf';
         $apacheLogDir   = '/var/log/apache2/';
+        $withSsl        = $input->getOption( 'with-ssl' );
         
         $output->writeln([
             'VS Virtual Host Creator',
@@ -60,6 +62,15 @@ class CreateVirtualHostCommand extends Command
             'serverAdmin' => $serverAdmin,
             'apacheLogDir' =>$apacheLogDir
         ]);
+        if ( $withSsl )
+        {
+            $vhost  .= "\n\n" . $this->twig->render( 'templates/mkvhost/ssl.twig', [
+                'host' => $host,
+                'documentRoot' => $documentRoot,
+                'serverAdmin' => $serverAdmin,
+                'apacheLogDir' =>$apacheLogDir
+            ]);
+        }
         file_put_contents( $vhostConfFile, $vhost );
         exec( "a2ensite {$host}" );
         
