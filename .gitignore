@@ -13,7 +13,6 @@
 /installed_hosts.json
 
 /*.log
-/vagrant.d/puppet/modules/*
 /vagrant.d/puppet/Puppetfile.lock
 /vagrant.d/puppet/.librarian
 /vagrant.d/puppet/.tmp

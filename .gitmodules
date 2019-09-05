@@ -49,3 +49,6 @@
 [submodule "vagrant.d/puppet/modules/docker"]
 	path = vagrant.d/puppet/modules/docker
 	url = https://github.com/puppetlabs/puppetlabs-docker
+[submodule "vagrant.d\\puppet\\modules\\docker"]
+	path = vagrant.d\\puppet\\modules\\docker
+	url = https://github.com/puppetlabs/puppetlabs-docker
