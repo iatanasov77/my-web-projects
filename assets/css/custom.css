@@ -1,0 +1,47 @@
+li.divider {
+	height: 2px;
+}
+.fa-user-circle {
+    font-size: 30px;
+}
+.form-group {
+	float: left;
+	margin-right: 10px;
+}
+
+.ui-autocomplete-spinner {
+    position: relative;
+    left: -30px;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.form-block {
+	width: 100%;
+	text-align: center;
+}
+
+.form-block > input {
+	margin: 20px 10px 20px 10px;
+}
+
+.navbar-nav > hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.top-buffer { margin-top:15px; }
+
+.date > .input-group-addon {
+	position: relative;
+	left: -20px;
+	top: 7px;
+	cursor: pointer;
+}
+
+.hover-pointer:hover {
+    cursor: pointer;
+}

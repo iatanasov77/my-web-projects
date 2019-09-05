@@ -27,6 +27,7 @@
         "bootstrap-datepicker": "^1.8.0",
         "child_process": "^1.0.2",
         "copy-webpack-plugin": "^5.0.0",
+        "core-js": "3",
         "datatables.net-bs4": "^1.10.19",
         "fs": "^0.0.1-security",
         "gijgo": "^1.9.12",

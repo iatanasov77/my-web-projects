@@ -84,7 +84,7 @@ var path = require('path');
 config.resolve.alias	= {
     // Force all modules to use the same jquery version.
     'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery'),
-    'router': __dirname + '/assets/js/fos_js_routing.js'
+    //'router': __dirname + '/assets/js/fos_js_routing.js'
 };
 //var CopyWebpackPlugin = require('copy-webpack-plugin');
 //config.plugins.push(
