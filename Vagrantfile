@@ -65,7 +65,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
-		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
+		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh", env: {"SWAP_SIZE" => ENV['VBOX_MACHINE_SWAP_SIZE']}
 		config.vm.provision "shell", path: "vagrant.d/provision/install_ruby.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"

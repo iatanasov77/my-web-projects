@@ -62,11 +62,6 @@ node default
 			}
 		}
 	}
-	
-	if ( 'bower' in $facts['devenv_modules'] )
-	{
-		include devenv::bower
-	}
 
 	# puppet module install saz-sudo --version 5.0.0
 	sudo::conf { "vagrant":
