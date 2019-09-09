@@ -10,6 +10,8 @@
 /vendor/
 /node_modules/
 /public/build/
+/public/assets/
+/public/assets/build/
 /yarn.lock
 
 /.dbeaver-data-sources.xml
