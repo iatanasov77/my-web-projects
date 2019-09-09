@@ -11,8 +11,10 @@
 </div>
 
 <div class="row">
-    <div class="row" style="margin: 0 0 10px 10px;">
-        <div class="col-lg-12"><button id="btnCreateProject" data-url="/projects/create">Create Project</button></div>
+    <div class="row" style="margin: 0 0 15px 25px;">
+        <div class="btn-group" role="group" aria-label="Basic example">
+        	<button id="btnCreateProject" type="button" class="btn btn-primary">Create Project</button>
+        </div>
     </div>
     <div class="col-lg-12">
         
@@ -163,6 +165,11 @@
 			
 			
 		} );
+		
+		$("#btnCreateProject").button().on( "click", function( event ) {
+			event.preventDefault();
+			dialog.dialog( "open" );
+		});
 	} );
 </script>
 {% endblock %}

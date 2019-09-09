@@ -44,9 +44,7 @@
 	 ```
 	 
 	 Run the migrations:
-	 ```
-	   php bin/console doctrine:migrations:execute --up 20190909134550
-	   # or
+	 ``` 
 	   php bin/console doctrine:migrations:migrate
 	 ```
 	 

@@ -1,10 +1,10 @@
 var Encore = require('@symfony/webpack-encore');
 Encore
 // the project directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath('public/assets/build/')
 
     // the public path used by the web server to access the previous directory
-    .setPublicPath('/build/')
+    .setPublicPath('/assets/build/')
 
     // delete old files before creating them
     .cleanupOutputBeforeBuild()
