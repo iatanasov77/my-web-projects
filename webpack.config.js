@@ -30,18 +30,6 @@ Encore
 
     // for "legacy" applications that require $/jQuery as a global variable
     .autoProvidejQuery()
-    
-     .autoProvideVariables({
-        "Routing": "Router" 
-     })
-     
-     .addLoader({
-        test: /jsrouting-bundle\/Resources\/public\/js\/router.js$/,
-        loader: "exports-loader?router=window.Routing"
-    })
-    
-    
-     
 
     // see https://symfony.com/doc/current/frontend/encore/bootstrap.html
     .enableSassLoader(function(sassOptions) {}, {
@@ -57,20 +45,12 @@ Encore
     })
     
     .addEntry( 'js/app', './assets/js/app.js' )
-    .addEntry( 'sb-admin', './assets/js/sb-admin.js' )
     
-    //.addEntry('js/datepicker', './assets/js/datepicker.js')
-    
-    .addEntry( 'js/jquery.formautofill', './assets/js/jquery.formautofill.js' )
     
     .addStyleEntry('css/global', './assets/scss/app.scss')
     
     // Page Specific Scripts
-    .addEntry( 'js/page_scripts/users', './assets/js/page_scripts/users.js' )
-    .addEntry( 'js/page_scripts/models', './assets/js/page_scripts/models.js' )
-    .addEntry( 'js/page_scripts/models_operations', './assets/js/page_scripts/models_operations.js' )
-    .addEntry( 'js/page_scripts/model_operations_work', './assets/js/page_scripts/model_operations_work.js' )
-    .addEntry( 'js/page_scripts/model_operations_work_add', './assets/js/page_scripts/model_operations_work_add.js' )
+    .addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )
 ;
 
 const config = Encore.getWebpackConfig();
@@ -86,12 +66,5 @@ config.resolve.alias	= {
     'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery'),
     //'router': __dirname + '/assets/js/fos_js_routing.js'
 };
-//var CopyWebpackPlugin = require('copy-webpack-plugin');
-//config.plugins.push(
-//    new CopyWebpackPlugin([
-//    	{ from: 'node_modules/gijgo/fonts', to: 'fonts' } 
-//    ]) 
-//);
-
 
 module.exports = config;

@@ -19,6 +19,8 @@ doctrine:
         options:
             # PDO::MYSQL_ATTR_INIT_COMMAND
             1002: "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"
+        mapping_types:
+            enum: string
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
