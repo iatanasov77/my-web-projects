@@ -36,8 +36,24 @@
 
 1. SSH login to the vagrant machine
 2. Run `composer install` from the /vagrant directory
-3. Set a database. If you have one copy it to the right place - By default 'storage/app.db'.
-	if not use the distributed database found at project root 'app.db.dist' . 
+3. Set a database.
+    
+	Create database:
+	```
+	   php bin/console doctrine:database:create
+	 ```
+	 
+	 Run the migrations:
+	 ```
+	   php bin/console doctrine:migrations:execute --up 20190909134550
+	   # or
+	   php bin/console doctrine:migrations:migrate
+	 ```
+	 
+	 Make new migration
+	 ```
+	   php bin/console doctrine:migrations:diff
+	 ```
 4. Open the web interface in a browser: http://myprojects.lh
 
 ## IV. Configure a SSL Virtual Host (HTTPS)
