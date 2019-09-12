@@ -5,9 +5,13 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-require( '../vendor/jquery-ui-dialog/jquery-ui' );
-require( 'bootstrap' );
-require( 'jquery' );
+// jQuery
+const $ = require('jquery');
+window.$ = window.jQuery = $;
 
-const imagesContext = require.context('../images', true, /\.(png|jpg|jpeg|gif|ico|svg|webp)$/);
-imagesContext.keys().forEach( imagesContext );
+// Vendor scripts
+require( '../vendor/bootstrap/js/bootstrap.bundle.js' );
+require( '../vendor/jquery-easing/jquery.easing.js' );
+
+// Main script
+require( './sb-admin-2.js' );

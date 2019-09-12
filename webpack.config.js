@@ -28,9 +28,6 @@ Encore
     // empty the outputPath dir before each build
     .cleanupOutputBeforeBuild()
 
-    // for "legacy" applications that require $/jQuery as a global variable
-    .autoProvidejQuery()
-
     // see https://symfony.com/doc/current/frontend/encore/bootstrap.html
     .enableSassLoader(function(sassOptions) {}, {
         resolveUrlLoader: true
@@ -44,27 +41,15 @@ Encore
         fonts: 'fonts/[name].[ext]?[hash:8]'
     })
     
+     // for "legacy" applications that require $/jQuery as a global variable
+    .autoProvidejQuery()
+    
+    .addStyleEntry('css/app', './assets/scss/app.scss')
     .addEntry( 'js/app', './assets/js/app.js' )
-    
-    
-    .addStyleEntry('css/global', './assets/scss/app.scss')
-    
+      
     // Page Specific Scripts
-    .addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )
+    //.addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )
 ;
 
 const config = Encore.getWebpackConfig();
-
-config.watchOptions = {
-    poll: true,
-    ignored: /node_modules/
-};
-
-var path = require('path');
-config.resolve.alias	= {
-    // Force all modules to use the same jquery version.
-    'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery'),
-    //'router': __dirname + '/assets/js/fos_js_routing.js'
-};
-
 module.exports = config;
