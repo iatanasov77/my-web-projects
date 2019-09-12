@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Project;
+use App\Form\Type\ProjectType;
 
 class ProjectsController extends Controller
 {
@@ -16,8 +17,9 @@ class ProjectsController extends Controller
         $repository = $this->getDoctrine()->getRepository( Project::class );
         $projects   =  $repository->findAll();
         
-        return $this->render('pages/dashboard.html.twig', [
-            'projects' => $projects
+        return $this->render('pages/projects.html.twig', [
+            'projects'          => $projects,
+            'createProjectForm' => $this->createForm( ProjectType::class )->createView()
         ]);
     }
     
