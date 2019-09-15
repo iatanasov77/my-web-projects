@@ -15,7 +15,7 @@ class Project
     {
         global $bootstrap;
 
-        $hostsFile  = APP_ROOT . $bootstrap['config']['installed_hosts'];
+        $hostsFile  = $project->getProjectRoot() . $bootstrap['config']['installed_hosts'];
         $hosts      = [];
         
         if ( file_exists( $hostsFile ) )
@@ -24,6 +24,6 @@ class Project
             $hosts 		= json_decode( $json, true );
         }
 
-        return isset( $hosts[$project['id']] );
+        return isset( $hosts[$project->getId()] );
     }
 }

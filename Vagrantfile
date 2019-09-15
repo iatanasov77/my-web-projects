@@ -88,6 +88,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 		#config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
 
+		# FIX SESSION READ/WRITE FOR PHP ON UBUNTO
+		config.vm.provision "shell", inline: "chmod 777 /var/lib/php/sessions"
+
 		#################################################################
 		# Workaround for a fucking bug:
 		# Created from puppet virtual host has "AllowOverride None"
