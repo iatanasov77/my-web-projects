@@ -57,7 +57,7 @@ class Project
     protected $host;
     
     /**
-     * @ORM\Column(name="with_ssl", type="string", length=32)
+     * @ORM\Column(name="with_ssl", type="boolean")
      */
     protected $withSsl;
 
