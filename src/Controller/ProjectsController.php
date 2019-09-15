@@ -2,7 +2,11 @@
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
+use App\Component\Globals;
 use App\Entity\Project;
 use App\Form\Type\ProjectType;
 
@@ -19,8 +23,48 @@ class ProjectsController extends Controller
         
         return $this->render('pages/projects.html.twig', [
             'projects'          => $projects,
-            'createProjectForm' => $this->createForm( ProjectType::class )->createView()
+            'createProjectForm' => $this->_projectForm( new Project() )->createView()
         ]);
+    }
+    
+    /**
+     * @Route("/projects/create", name="projects_create")
+     */
+    public function create( Request $request )
+    {
+        $status     = Globals::STATUS_ERROR;
+        $project    = new Project();
+        $form       = $this->_projectForm( $project );
+        $em         = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository( Project::class );
+        
+        $form->handleRequest( $request );
+        if ( $form->isValid() ) {
+            $project    = $form->getData();
+            
+            $em->persist( $project );
+            $em->flush();
+            
+            $status     = Globals::STATUS_OK;
+            $errors     = [];
+        } else {
+            foreach ( $form->getErrors( true, false ) as $error ) {
+                // My personnal need was to get translatable messages
+                // $errors[] = $this->trans($error->current()->getMessage());
+                
+                $errors[$error->current()->getCause()->getPropertyPath()] = $error->current()->getMessage();
+            }
+        }
+        
+        
+        $html   = $this->renderView( 'pages/projects/table_projects.html.twig', ['projects' => $repository->findAll()] );
+        $response   = [
+            'status'    => $status,
+            'data'      => $html,
+            'errors'    => $errors
+        ];
+        
+        return new JsonResponse( $response );
     }
     
     /**
@@ -51,5 +95,15 @@ class ProjectsController extends Controller
         $project   =  $repository->find( $id );
         
         return $this->redirectToRoute( 'projects' );
+    }
+    
+    private function _projectForm( Project $project )
+    {
+        $form   = $this->createForm( ProjectType::class, null, [
+            'action' => $this->generateUrl( 'projects_create' ),
+            'method' => 'POST'
+        ]);
+        
+        return $form;
     }
 }

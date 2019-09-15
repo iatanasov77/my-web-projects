@@ -5,6 +5,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use App\Entity\Project;
 
 class ProjectType extends AbstractType
 {
@@ -26,5 +29,12 @@ class ProjectType extends AbstractType
             ->add( 'host', TextType::class )
             ->add( 'withSsl', CheckboxType::class )
         ;
+    }
+    
+    public function configureOptions( OptionsResolver $resolver )
+    {
+        $resolver->setDefaults([
+            'data_class' => Project::class,
+        ]);
     }
 }
