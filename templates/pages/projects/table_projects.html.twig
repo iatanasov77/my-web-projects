@@ -1,5 +1,4 @@
-<header class="panel-heading"><h3><strong>Projects</strong></h3></header>
-		
+
 <table class="table table-striped table-advance table-hover">
 	<thead>
 		<tr>
@@ -15,18 +14,18 @@
 			<td>{{ project.projectRoot }}</td>
 			<td width="150">
 				{%  if vs_project_installed( project ) %}
-					<a id="btnOpen" href="#" class="btn btn-success btn-circle btn-sm" title="Open">
+					<a href="#" class="btn btn-success btn-circle btn-sm btnOpen" title="Open">
                     	<i class="fas fa-bring-forward"></i>
                		</a>
 				{% else %}
-					<a id="btnInstall" class="btn btn-info btn-circle btn-sm" data-projectId="{{ project.id }}" href="javascript:void(0);" title="Install">
+					<a class="btn btn-info btn-circle btn-sm btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);" title="Install">
                     	<i class="fas fa-download"></i>
                 	</a>
 				{% endif %}
-				<a href="#" class="btn btn-info btn-circle btn-sm" title="Edit">
+				<a href="javascript:void(0);" class="btn btn-info btn-circle btn-sm btnEdit" title="Edit" data-projectId="{{ project.id }}" data-toggle="modal" data-target="#create-project-modal">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="#" class="btn btn-danger btn-circle btn-sm" title="Delete">
+                <a href="javascript:void(0);" class="btn btn-danger btn-circle btn-sm btnDelete" title="Delete" data-projectId="{{ project.id }}" data-toggle="modal" data-target="#delete-project-modal">
                     <i class="fas fa-trash"></i>
                 </a>
 			</td>

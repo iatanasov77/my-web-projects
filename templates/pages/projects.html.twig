@@ -5,7 +5,7 @@
 	<div class="container-fluid">
 		<!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Projects</h1>
+            <header class="panel-heading"><h3><strong>Projects</strong></h3></header>
           </div>
 
           <div class="row">
@@ -35,15 +35,71 @@
 	
   	<!-- Create Project Modal-->
 	{% include 'modals/project_create.html.twig' %}
+	{% include 'modals/project_delete.html.twig' %}
 {% endblock %}
 
 {% block scripts %}
 	{{ parent() }}
  <script type="text/javascript">
-$(function() {
-	$( '#btnSaveProject' ).on( 'click', function( e )
+$(function()
+{
+	// Init Delete Form
+	$( '#sectionProjects' ).on( 'click', '.btnDelete', function( e )
 	{
-		var form	= $( '#formCreateProject' );
+		$( '#project_delete_projectId' ).val( $( this ).attr( 'data-projectId' ) );
+	});
+
+	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
+	{
+		$.ajax({
+			type: "GET",
+		 	url: "/projects/edit/" + $( this ).attr( 'data-projectId' ),
+			success: function( response )
+			{
+				$( '#formProjectContainer' ).html( response );
+			},
+			error: function()
+			{
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
+	});
+
+	// Submit Delete Form
+	$( '#btnDeleteProject' ).on( 'click', function( e )
+	{
+		var form	= $( '#formDeleteProject' );
+		$.ajax({
+			type: "POST",
+		 	url: form.attr( 'action' ),
+		 	data: form.serialize(),
+		 	dataType: 'json',
+			success: function( response )
+			{
+				form[0].reset();
+				if ( response.status == 'error' ) {
+					alert( "FORM ERROR!!!" );
+
+				} else {
+					$( '#delete-project-modal' ).modal( 'toggle' );
+					
+					$( '#submitMessage > div.card-body' ).html( 'Successfuly deleting project.' );
+					$( '#submitMessage' ).show();
+					$( '#sectionProjects' ).html( response.data );
+				}
+			},
+			error: function()
+			{
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
+	});
+		
+	$( '#create-project-modal' ).on( 'click', '#btnSaveProject', function( e )
+	{
+		
+		var form	= $( '#formProject' );
+		alert( form.attr( 'action' ) );
 		$.ajax({
 			type: "POST",
 		 	url: form.attr( 'action' ),
@@ -72,7 +128,7 @@ $(function() {
 			},
 			error: function()
 			{
-				alert( "ERROR!!!" );
+				alert( "SYSTEM ERROR!!!" );
 			}
        });
 	});

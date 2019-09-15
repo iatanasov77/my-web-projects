@@ -1,11 +1,13 @@
 <?php namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 
 use App\Entity\Project;
 
@@ -29,6 +31,18 @@ class ProjectType extends AbstractType
             ->add( 'host', TextType::class )
             ->add( 'withSsl', CheckboxType::class )
         ;
+            
+        $builder->get( 'withSsl' )
+            ->addModelTransformer( new CallbackTransformer(
+                function ( $withSsl ) {
+                    // transform the array to a string
+                    return (boolean)$withSsl;
+                },
+                function (  $withSsl ) {
+                    // transform the string back to an array
+                    return (boolean)$withSsl;
+                }
+            ));
     }
     
     public function configureOptions( OptionsResolver $resolver )

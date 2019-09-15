@@ -1,6 +1,6 @@
 <?php namespace App\Twig;
 
-use App\Helper\Project;
+use App\Component\Project\Project;
 
 class ExtensionProject extends \Twig_Extension
 {

@@ -4,9 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    siteTitle: 'JUNONA(Димитровград) - Заплати на Персонала'
-    mailer_user: 'junona@example.com'
-    locale: 'bg'
+    siteTitle: 'VS My Projects 2'
+    mailer_user: 'admin@myprojects.lh'
+    lang: 'en'
+    locale: 'en_US'
     settings:
         minuteBonus: 20     # In Percents
         minutePrice: 0.065
