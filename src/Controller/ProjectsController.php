@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Component\Globals;
+use App\Component\Project\Source\SourceFactory;
 use App\Entity\Project;
 use App\Form\Type\ProjectType;
 use App\Form\Type\ProjectDeleteType;
@@ -91,14 +92,15 @@ class ProjectsController extends Controller
      */
     public function install( $id )
     {
-        $repository = $this->getDoctrine()->getRepository( Project::class );
-        $project    = new Project( $repository->find( $id ) );
-        $source     = $project->source();
+        $repository     = $this->getDoctrine()->getRepository( Project::class );
+        $project        = $repository->find( $id );
+        
+        $source         = SourceFactory::source( $project );
         if ( ! $source ) {
             throw new \Exception( 'Project source type cannot instantiated' );
         }
         
-        $source->fetch();
+        return new Response( $source->fetch() ); exit;
         
         // return new RedirectResponse( $this->generateUrl( 'homepage' ) );
         //return $this->redirectToRoute( 'homepage', [], 301 ); // does a permanent - 301 redirect

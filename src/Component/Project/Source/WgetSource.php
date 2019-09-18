@@ -1,19 +1,13 @@
 <?php namespace App\Component\Project\Source;
 
-class WgetSource implements ProjectSourceInterface
+class WgetSource extends Source
 {
-    
-    private $repository;
-    
-    private $branch;
-    
-    public function __construct( $repository, $branch )
+    public function __construct( $project )
     {
-        $this->repository   = $repository;
-        $this->branch       = $branch;
+        $this->project   = $project;
     }
     
-    public function fetch( $projectRoot )
+    public function fetch()
     {
         
     }
