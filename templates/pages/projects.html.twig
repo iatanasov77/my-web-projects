@@ -40,99 +40,116 @@
 
 {% block scripts %}
 	{{ parent() }}
- <script type="text/javascript">
-$(function()
-{
-	// Init Delete Form
-	$( '#sectionProjects' ).on( 'click', '.btnDelete', function( e )
-	{
-		$( '#project_delete_projectId' ).val( $( this ).attr( 'data-projectId' ) );
-	});
-
-	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
-	{
-		$.ajax({
-			type: "GET",
-		 	url: "/projects/edit/" + $( this ).attr( 'data-projectId' ),
-			success: function( response )
-			{
-				$( '#formProjectContainer' ).html( response );
-			},
-			error: function()
-			{
-				alert( "SYSTEM ERROR!!!" );
-			}
-		});
-	});
-
-	// Submit Delete Form
-	$( '#btnDeleteProject' ).on( 'click', function( e )
-	{
-		var form	= $( '#formDeleteProject' );
-		$.ajax({
-			type: "POST",
-		 	url: form.attr( 'action' ),
-		 	data: form.serialize(),
-		 	dataType: 'json',
-			success: function( response )
-			{
-				form[0].reset();
-				if ( response.status == 'error' ) {
-					alert( "FORM ERROR!!!" );
-
-				} else {
-					$( '#delete-project-modal' ).modal( 'toggle' );
-					
-					$( '#submitMessage > div.card-body' ).html( 'Successfuly deleting project.' );
-					$( '#submitMessage' ).show();
-					$( '#sectionProjects' ).html( response.data );
-				}
-			},
-			error: function()
-			{
-				alert( "SYSTEM ERROR!!!" );
-			}
-		});
-	});
-		
-	$( '#create-project-modal' ).on( 'click', '#btnSaveProject', function( e )
-	{
-		
-		var form	= $( '#formProject' );
-		alert( form.attr( 'action' ) );
-		$.ajax({
-			type: "POST",
-		 	url: form.attr( 'action' ),
-		 	data: form.serialize(),
-		 	dataType: 'json',
-			success: function( response )
-			{
-				form[0].reset();
-				if ( response.status == 'error' ) {
-					var ul = $( '<ul>' );
-					$.each( response.errors, function( key, value ) {
-						ul.append(
-    				        $( document.createElement( 'li' ) ).text( key + ': ' + value )
-    				    );
-					});
-					
-					$( '#errorMessage > div.card-body' ).html( ul );
-					$( '#errorMessage' ).show();
-				} else {
-					$( '#create-project-modal' ).modal( 'toggle' );
-					
-					$( '#submitMessage > div.card-body' ).html( 'Successfuly adding project.' );
-					$( '#submitMessage' ).show();
-					$( '#sectionProjects' ).html( response.data );
-				}
-			},
-			error: function()
-			{
-				alert( "SYSTEM ERROR!!!" );
-			}
-       });
-	});
-});
-</script>
+	
+    <script type="text/javascript">
+        $(function()
+        {
+        	// Init Delete Form
+        	$( '#sectionProjects' ).on( 'click', '.btnDelete', function( e )
+        	{
+        		$( '#project_delete_projectId' ).val( $( this ).attr( 'data-projectId' ) );
+        	});
+        
+        	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
+        	{
+        		$.ajax({
+        			type: "GET",
+        		 	url: "/projects/edit/" + $( this ).attr( 'data-projectId' ),
+        			success: function( response )
+        			{
+        				$( '#formProjectContainer' ).html( response );
+        			},
+        			error: function()
+        			{
+        				alert( "SYSTEM ERROR!!!" );
+        			}
+        		});
+        	});
+        
+        	$( '#sectionProjects' ).on( 'click', '.btnInstall', function( e )
+        	{
+        		$.ajax({
+        			type: "GET",
+        		 	url: "/projects/install/" + $( this ).attr( 'data-projectId' ),
+        			success: function( response )
+        			{
+        				$( '#formProjectContainer' ).html( response );
+        			},
+        			error: function()
+        			{
+        				alert( "SYSTEM ERROR!!!" );
+        			}
+        		});
+        	});
+        
+        	// Submit Delete Form
+        	$( '#btnDeleteProject' ).on( 'click', function( e )
+        	{
+        		var form	= $( '#formDeleteProject' );
+        		$.ajax({
+        			type: "POST",
+        		 	url: form.attr( 'action' ),
+        		 	data: form.serialize(),
+        		 	dataType: 'json',
+        			success: function( response )
+        			{
+        				form[0].reset();
+        				if ( response.status == 'error' ) {
+        					alert( "FORM ERROR!!!" );
+        
+        				} else {
+        					$( '#delete-project-modal' ).modal( 'toggle' );
+        					
+        					$( '#submitMessage > div.card-body' ).html( 'Successfuly deleting project.' );
+        					$( '#submitMessage' ).show();
+        					$( '#sectionProjects' ).html( response.data );
+        				}
+        			},
+        			error: function()
+        			{
+        				alert( "SYSTEM ERROR!!!" );
+        			}
+        		});
+        	});
+        		
+        	$( '#create-project-modal' ).on( 'click', '#btnSaveProject', function( e )
+        	{
+        		
+        		var form	= $( '#formProject' );
+        		alert( form.attr( 'action' ) );
+        		$.ajax({
+        			type: "POST",
+        		 	url: form.attr( 'action' ),
+        		 	data: form.serialize(),
+        		 	dataType: 'json',
+        			success: function( response )
+        			{
+        				form[0].reset();
+        				if ( response.status == 'error' ) {
+        					var ul = $( '<ul>' );
+        					$.each( response.errors, function( key, value ) {
+        						ul.append(
+            				        $( document.createElement( 'li' ) ).text( key + ': ' + value )
+            				    );
+        					});
+        					
+        					$( '#errorMessage > div.card-body' ).html( ul );
+        					$( '#errorMessage' ).show();
+        				} else {
+        					$( '#create-project-modal' ).modal( 'toggle' );
+        					
+        					$( '#submitMessage > div.card-body' ).html( 'Successfuly adding project.' );
+        					$( '#submitMessage' ).show();
+        					$( '#sectionProjects' ).html( response.data );
+        				}
+        			},
+        			error: function()
+        			{
+        				alert( "SYSTEM ERROR!!!" );
+        			}
+               });
+        	});
+        });
+    </script>
 {% endblock %}
 

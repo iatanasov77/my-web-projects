@@ -11,26 +11,25 @@
         "symfony/console": "^4.3",
         "symfony/debug": "^4.3",
         "symfony/dotenv": "^4.3",
+        "symfony/form": "^4.3",
         "symfony/framework-bundle": "^4.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-csrf": "^4.3",
         "symfony/templating": "^4.3",
         "symfony/translation": "^4.3",
         "symfony/twig-bundle": "^4.3",
         "symfony/validator": "^4.3",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "^4.3",
-        "symfony/form": "^4.3",
-        "symfony/security-csrf": "^4.3"
+        "symfony/process": "^4.3"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.13"
     },
-    
     "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true
+        "process-timeout":      600,
+        "preferred-install":    "dist",
+        "github-protocols":     ["https"]
     },
     "autoload": {
         "psr-4": {

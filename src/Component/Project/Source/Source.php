@@ -1,24 +1,14 @@
-<?php namespace App\Component\Project;
+<?php namespace App\Component\Project\Source;
 
-class Project
+use App\Component\Project\Source\GitSource;
+
+abstract class Source
 {
     private $project;
     
     public function __construct( $project )
     {
         $this->project  = $project;
-    }
-    
-    public function source()
-    {
-        $source;
-        switch ( $project->source_type ) {
-            case 'git':
-                $source = new GitSource( $project->repository, $project->branch );
-                break;
-        }
-        
-        return source;
     }
     
     public static function exists( $project )
@@ -43,4 +33,6 @@ class Project
         
         return isset( $hosts[$project->getId()] );
     }
+    
+    abstract public function fetch();
 }
