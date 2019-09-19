@@ -68,6 +68,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh", env: {"SWAP_SIZE" => ENV['VBOX_MACHINE_SWAP_SIZE']}
 		config.vm.provision "shell", path: "vagrant.d/provision/install_ruby.sh"
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
+		
+		########################################################################
+		# NOT USE LIBRARIAN, AT NOW USED GIT SUBMODULES TO ADD PUPPET MODULES
+		########################################################################
 		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
 		
 	    # Run puppet provisioner
