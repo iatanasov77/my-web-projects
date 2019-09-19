@@ -11,10 +11,17 @@ Exec {
     path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin', '/usr/local/sbin/' ]
 }
 
+if $::osfamily == 'Debian' {
+    $apachename     = 'apache2'
+} else {
+	$apachename     = 'httpd'
+}
+
 $phpVersion = "7.2"
 
 node default
 { 	
+	#include stdlib
 	include devenv::system
 	include devenv::tools
 	#include devenv::vstools
@@ -27,7 +34,7 @@ node default
 		package { "php${phpVersion}-intl":
 			ensure 	=> installed,
 			require => Package["php${phpVersion}"],
-			notify  => Service['apache2'],
+			notify  => Service["${apachename}"],
 		}
 	}
 	
@@ -36,7 +43,7 @@ node default
 		package { "php${phpVersion}-sqlite3":
 			ensure 	=> installed,
 			require => Package["php${phpVersion}"],
-			notify  => Service['apache2'],
+			notify  => Service["${apachename}"],
 		}
 	}
 	
