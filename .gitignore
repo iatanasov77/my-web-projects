@@ -8,16 +8,20 @@
 /.vagrant/
 /composer.lock
 /vendor/
+/node_modules/
+/public/build/
+/public/assets/
+/public/assets/build/
+/yarn.lock
 
 /.dbeaver-data-sources.xml
 /installed_hosts.json
 
 /*.log
-/Vagrant/puppet/modules
-/Vagrant/puppet/Puppetfile.lock
-/Vagrant/puppet/.librarian
-/Vagrant/puppet/.tmp
+/vagrant.d/puppet/Puppetfile.lock
+/vagrant.d/puppet/.librarian
+/vagrant.d/puppet/.tmp
 /ssh.EXE.stackdump
 /.env
 /changelog-linker.yml
-
+/var/
