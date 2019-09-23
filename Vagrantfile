@@ -8,7 +8,7 @@ def fail_with_message( msg )
 end
 
 if ! Vagrant.has_plugin? 'vagrant-env'
-	fail_with_message "vagrant-env missing, please install the plugin with this command:\n
+	fail_with_message "vagrant-env missing, please install the plugin with this command:
 			vagrant plugin install vagrant-env"
 end
 
@@ -22,7 +22,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	end
 
 	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
-		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:\n
+		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:
 			vagrant plugin install vagrant-hostmanager"
 	end
 
@@ -32,9 +32,6 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     vagrant_config.hostmanager.ignore_private_ip 	= false
     vagrant_config.hostmanager.include_offline   	= true
 	vagrant_config.hostmanager.aliases				= []
-
-#puts JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
-#Kernel.exit( 1 )
 
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
 	vsHosts.each do |key, host|
@@ -60,16 +57,15 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		end
 
 	  	# Shared Folders
-    	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects"
-    	config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
+    	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects" #owner: "root", group: "root"
+    	#config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
 
 		# Run provision bash scripts to setup puppet environement
-		config.vm.provision "shell", path: "vagrant.d/provision/init.sh"
-		config.vm.provision "shell", path: "vagrant.d/provision/make_swap.sh"
-		config.vm.provision "shell", path: "vagrant.d/provision/install_puppet.sh"
-
-		#config.vm.provision "shell", path: "vagrant.d/provision/install_puppet_modules.sh"
-
+		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
+		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE'],
+		  "PHP_VERSION"   => ENV['PHP_VERSION']
+		}
+		
 	    # Run puppet provisioner
 	    config.vm.provision :puppet do |puppet|
 			puppet.manifests_path = 'vagrant.d/puppet/manifests'
@@ -78,31 +74,18 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 			puppet.manifest_file  = "default.pp"
 			puppet.facter			= {
-				'devenv_modules'	=> ENV['DEVENV_MODULES'],
+			    'phpversion'        => ENV['PHP_VERSION'],
+			    'apache_modules'    => ENV['APACHE_MODULES'],
+				'devenv_modules'    => ENV['DEVENV_MODULES'],
 				'hostname'			=> ENV['HOSTNAME'],
 				'documentroot'		=> ENV['DOCUMENT_ROOT'],
-				'mysqlhost'			=> ENV['PUBLIC_IP']
-				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql'
+				'mysqlhost'			=> ENV['PUBLIC_IP'],
+				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql',
 			}
 	    end
 
-		config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
-
-		#################################################################
-		# Workaround for a fucking bug:
-		# Created from puppet virtual host has "AllowOverride None"
-		# and Laravel rewrite rules not working
-		# The next is a hard fix for this.
-		$workaround = <<-SCRIPT
-echo "Workaround for: Created from puppet virtual host has 'AllowOverride None'"
-sed "$(grep -n -m1 "AllowOverride None" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf |cut -f1 -d:)s/.*/AllowOverride All/" /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf > /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
-cp -f /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf
-rm /etc/apache2/sites-available/25-#{ENV['HOSTNAME']}.conf.FIXED
-service apache2 restart
-SCRIPT
-		config.vm.provision "shell", inline: $workaround
-
-
+		#config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
+		#config.vm.provision "shell", path: "vagrant.d/provision/workaround.sh", env: {"HOSTNAME" => ENV['HOSTNAME'] }
 
 		$done = <<-SCRIPT
 echo ""
