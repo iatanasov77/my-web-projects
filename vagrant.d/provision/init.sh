@@ -8,12 +8,18 @@ if [ $ID == "centos" ]; then
     
     rpm -ivh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
     yum -y install yum-utils
-    yum-config-manager --enable remi-php73
+    
+    #########################################################################
+    # USE PHP VERSION FROM .env
+    #########################################################################
+    # ENABLE_REPO = "yum-config-manager --enable remi-php${PHP_VERSION//.}"
+    # eval $ENABLE_REPO
+    yum-config-manager --enable remi-php72
     
     yum install -y php mod_php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql
     
-    if [ ! -f /etc/httpd/modules/libphp7.3.so ]; then
-        ln -s /usr/lib64/httpd/modules/libphp7.so /etc/httpd/modules/libphp7.3.so
+    if [ ! -f /etc/httpd/modules/libphp7.2.so ]; then
+        ln -s /usr/lib64/httpd/modules/libphp7.so /etc/httpd/modules/libphp7.2.so
     fi
 else
 	apt-get update -y
