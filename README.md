@@ -52,6 +52,15 @@
 	 ```
 	   php bin/console doctrine:migrations:diff
 	 ```
+	 
+	 Run Fixtures
+     ```
+       php bin/console doctrine:fixtures:load
+     ```
+     Generate Fixtures from Database
+     ```
+       php bin/console doctrine:generate:fixture --entity=Project --ids="1 2 3" --name="Test"
+     ```
 4. Open the web interface in a browser: http://myprojects.lh
 
 ## IV. Configure a SSL Virtual Host (HTTPS)

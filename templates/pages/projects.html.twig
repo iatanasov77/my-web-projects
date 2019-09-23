@@ -68,15 +68,19 @@
         
         	$( '#sectionProjects' ).on( 'click', '.btnInstall', function( e )
         	{
+        		var spinner   = '<div class="spinner-border" role="status"  id="projectSpinner"><span class="sr-only">Loading...</span></div>';
+        		$( this ).before( spinner );
         		$.ajax({
         			type: "GET",
         		 	url: "/projects/install/" + $( this ).attr( 'data-projectId' ),
         			success: function( response )
         			{
-        				$( '#formProjectContainer' ).html( response );
+        				$( "#projectSpinner" ).remove();
+        				
         			},
         			error: function()
         			{
+        				$( "#projectSpinner" ).remove();
         				alert( "SYSTEM ERROR!!!" );
         			}
         		});

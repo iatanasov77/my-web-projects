@@ -9,4 +9,7 @@ return [
     
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
+    
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
+    Webonaute\DoctrineFixturesGeneratorBundle\DoctrineFixturesGeneratorBundle::class => ['all' => true],
 ];
