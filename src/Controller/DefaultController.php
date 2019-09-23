@@ -16,4 +16,22 @@ class DefaultController extends Controller
         
         return new RedirectResponse( $redirectUrl, 307 );
     }
+    
+    /**
+     * @Route("/pr", name="pr")
+     */
+    public function projects()
+    {
+        $repository = $this->getDoctrine()->getRepository( Project::class );
+        $projects   =  $repository->findAll();
+        
+        return $this->render('pages/projects.html.twig', [
+            'projects'          => $projects,
+            'createProjectForm' => $this->_projectForm( new Project() )->createView(),
+            'deleteProjectForm' => $this->createForm( ProjectDeleteType::class, null, [
+                'action' => $this->generateUrl( 'projects_delete' ),
+                'method' => 'POST'
+            ])->createView()
+        ]);
+    }
 }
