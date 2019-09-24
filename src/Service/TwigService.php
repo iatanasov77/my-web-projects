@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class TwigService extends \Twig_Environment {
+class TwigService { // extends \Twig_Environment
 
     public function __construct( KernelInterface $kernel )
     {
