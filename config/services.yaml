@@ -12,7 +12,7 @@ parameters:
         minuteBonus: 20     # In Percents
         minutePrice: 0.065
 
-services:
+services:        
     app.menu_builder:
         class: App\Menu\MenuBuilder
         arguments: 

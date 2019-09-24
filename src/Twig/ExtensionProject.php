@@ -1,14 +1,17 @@
 <?php namespace App\Twig;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
 use App\Component\Project\Source\Source as Project;
 
-class ExtensionProject extends \Twig_Extension
+class ExtensionProject extends AbstractExtension
 {
 	public function getFunctions()
 	{
 		return [
-			new \Twig_SimpleFunction( 'vs_project_exists', [$this, 'exists'] ),
-		    new \Twig_SimpleFunction( 'vs_project_installed', [$this, 'installed'] ),
+		    new TwigFunction( 'vs_project_exists', [$this, 'exists'] ),
+		    new TwigFunction( 'vs_project_installed', [$this, 'installed'] ),
 		];
 	}
 
