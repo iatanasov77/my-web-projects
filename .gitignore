@@ -25,3 +25,5 @@
 /.env
 /changelog-linker.yml
 /var/
+
+/config/fixtures/projects.yaml
