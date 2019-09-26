@@ -32,31 +32,19 @@ class GenerateFixtureCommand extends Command
             ->setDescription( 'Genrate fixture yaml from records in database.' )
             ->setHelp( 'Genrate fixture yaml from records in database.' )
         ;
-        
-        $this
-            ->addOption( 'fixture', 'fx', InputOption::VALUE_OPTIONAL, 'Set the entity class with full namespace path', null )
-            ->addOption( 'entity', 'en', InputOption::VALUE_OPTIONAL, 'Set the entity class with full namespace path', null )
-        ;
     }
     
     protected function execute( InputInterface $input, OutputInterface $output )
     {
-        $fixture    = $input->getOption( 'fixture' );
-        $entity     = $input->getOption( 'entity' );
-        if ( $fixture && $entity )
-        {
-            $this->generateFixtures( $fixture, $entity );
-        } else {
-            $config   = Yaml::parseFile( $this->path . 'fixtures.yaml' );
-            foreach ( $config['fixtures'] as $fixture ) {
-                $this->generateFixtures( $fixture );
-            }
+        $config   = Yaml::parseFile( $this->path . 'fixtures.yaml' );
+        foreach ( $config['fixtures'] as $fixture ) {
+            $this->generateFixtures( $fixture );
         }
     }
     
     protected function generateFixtures( $fixture )
     {
-        $em         = $this->doctrine->getManager();
+        $em         =   
         $projects   = $this->doctrine->getRepository( $fixture['entity'] )->findAll();
         $slugify    = new Slugify();
         
