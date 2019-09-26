@@ -21,7 +21,9 @@
         "symfony/validator": "^4.3",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "^5.0@dev",
-        "symfony/process": "^4.3"
+        "symfony/process": "^4.3",
+        "cocur/slugify": "dev-master",
+        "symfony/property-access": "^5.0@dev"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.13",
