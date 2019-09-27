@@ -1,24 +1,13 @@
 <?php namespace App\Command;
 
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
-use App\Service\TwigService;
-
-class CreateVirtualHostCommand extends Command
+class CreateVirtualHostCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'vs:mkvhost';
-    
-    private $twig;
-    
-    public function __construct( TwigService $twig )
-    {
-        $this->twig = $twig;
-        
-        parent::__construct();
-    }
     
     protected function configure()
     {
@@ -39,13 +28,42 @@ class CreateVirtualHostCommand extends Command
     {
         posix_getuid() === 0 || die( "You must to be root.\n" );
         
-        $ip = '127.0.0.1';
-        $template   = 'templates/mkvhost/' . $input->getOption( 'template' ) . '.twig';
+        $ip     = '127.0.0.1';
         $host   = $input->getOption( 'host' );
+        
+        $os = \App\Component\Helper::OsId();
+        switch ( $os ) 
+        {
+            case 'centos':
+                $this->createOnCentOs( $input, $output );
+                break;
+                
+            default:
+                $this->createOnUbuntu( $input, $output );
+                break;
+            
+        }
+        
+        // Create a /etc/hosts record
+        $output->writeln( 'Creating a /etc/hosts record...' );
+        $hosts = file_get_contents('/etc/hosts');
+        if( stripos( $host, $hosts ) === FALSE )
+        {
+            file_put_contents( '/etc/hosts', sprintf( "%s\t%s www.%s\n", $ip, $host, $host ), FILE_APPEND );
+        }
+        
+        $output->writeln( 'Virtual host created successfully!' );
+    }
+    
+    protected function createOnCentos( InputInterface $input, OutputInterface $output )
+    {
+        $host   = $input->getOption( 'host' );
+        $vhostConfFile	= '/etc/httpd/conf.d/' . $host . '.conf';
+        $apacheLogDir   = '/var/log/httpd/';
+        
+        $template   = 'mkvhost/' . $input->getOption( 'template' ) . '.twig';
         $documentRoot   = $input->getOption( 'documentroot' );
         $serverAdmin    = 'admin@' . $host;
-        $vhostConfFile	= '/etc/apache2/sites-available/' . $host . '.conf';
-        $apacheLogDir   = '/var/log/apache2/';
         $withSsl        = $input->getOption( 'with-ssl' );
         
         $output->writeln([
@@ -56,12 +74,57 @@ class CreateVirtualHostCommand extends Command
         
         // Create Virtual Host
         $output->writeln( 'Creating virtual host...' );
-        $vhost  = $this->twig->render( $template, [
+        
+        $vhost  = $this->getContainer()->get('templating')->render( $template, [
             'host' => $host,
             'documentRoot' => $documentRoot,
             'serverAdmin' => $serverAdmin,
             'apacheLogDir' =>$apacheLogDir
         ]);
+        
+        if ( $withSsl )
+        {
+            $vhost  .= "\n\n" . $this->twig->render( 'templates/mkvhost/ssl.twig', [
+                'host' => $host,
+                'documentRoot' => $documentRoot,
+                'serverAdmin' => $serverAdmin,
+                'apacheLogDir' =>$apacheLogDir
+            ]);
+        }
+        file_put_contents( $vhostConfFile, $vhost );
+        
+        // Reload Apache
+        $output->writeln( 'Restarting apache service...' );
+        exec( "service httpd restart" );
+    }
+    
+    protected function createOnUbuntu( InputInterface $input, OutputInterface $output )
+    {
+        $host   = $input->getOption( 'host' );
+        $vhostConfFile	= '/etc/apache2/sites-available/' . $host . '.conf';
+        $apacheLogDir   = '/var/log/apache2/';
+        
+        $template   = 'mkvhost/' . $input->getOption( 'template' ) . '.twig';
+        $documentRoot   = $input->getOption( 'documentroot' );
+        $serverAdmin    = 'admin@' . $host;
+        $withSsl        = $input->getOption( 'with-ssl' );
+        
+        $output->writeln([
+            'VS Virtual Host Creator',
+            '=======================',
+            '',
+        ]);
+        
+        // Create Virtual Host
+        $output->writeln( 'Creating virtual host...' );
+        
+        $vhost  = $this->getContainer()->get('templating')->render( $template, [
+            'host' => $host,
+            'documentRoot' => $documentRoot,
+            'serverAdmin' => $serverAdmin,
+            'apacheLogDir' =>$apacheLogDir
+        ]);
+        
         if ( $withSsl )
         {
             $vhost  .= "\n\n" . $this->twig->render( 'templates/mkvhost/ssl.twig', [
@@ -77,15 +140,5 @@ class CreateVirtualHostCommand extends Command
         // Reload Apache
         $output->writeln( 'Restarting apache service...' );
         exec( "service apache2 restart" );
-        
-        // Create a /etc/hosts record
-        $output->writeln( 'Creating a /etc/hosts record...' );
-        $hosts = file_get_contents('/etc/hosts');
-        if( stripos( $host, $hosts ) === FALSE )
-        {
-            file_put_contents( '/etc/hosts', sprintf( "%s\t%s www.%s\n", $ip, $host, $host ), FILE_APPEND );
-        }
-        
-        $output->writeln( 'Virtual host created successfully!' );
     }
 }
