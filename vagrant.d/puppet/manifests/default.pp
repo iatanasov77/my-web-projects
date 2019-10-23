@@ -17,9 +17,9 @@ if $::osfamily == 'Debian' {
 	$apachename     = 'httpd'
 }
 
-$phpVersion = $facts['phpversion']
-notice( "INSTALL PHP VERSION: ${phpVersion}" )
+$phpVersion     = $facts['phpversion']
 
+notice( "INSTALL PHP VERSION: ${phpVersion}" )
 node default
 {
 

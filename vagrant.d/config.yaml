@@ -1,0 +1,16 @@
+
+phpVersion: '7.2'
+
+apacheModules:
+  - expires
+  - headers
+  - rewrite
+  - vhost_alias
+
+phpModules:
+  -xdebug
+  -intl
+  -apc
+  -sqlite
+  -soap
+  
