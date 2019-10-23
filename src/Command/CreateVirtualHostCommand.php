@@ -28,9 +28,6 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
     {
         posix_getuid() === 0 || die( "You must to be root.\n" );
         
-        $ip     = '127.0.0.1';
-        $host   = $input->getOption( 'host' );
-        
         $os = \App\Component\Helper::OsId();
         switch ( $os ) 
         {
@@ -43,8 +40,29 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
                 break;
             
         }
+        $this->setupHost( $input, $output );
         
-        // Create a /etc/hosts record
+        $output->writeln( 'Virtual host created successfully!' );
+    }
+    
+    protected function setupHost( InputInterface $input, OutputInterface $output )
+    {
+        $ip     = '127.0.0.1';
+        $host   = $input->getOption( 'host' );
+        
+        // Setup installed_hosts.json
+        $output->writeln( 'Add host to the "installed_hosts.json" ...' );
+        $jsonFile       = 'installed_hosts.json';
+        $json           = file_get_contents( $jsonFile );
+        $installedHosts = json_decode( $json, true );
+        if ( ! isset( $installedHosts[$host] ) ) {
+            $installedHosts[$host]  = [
+                "hostName" => $host
+            ];
+        }
+        file_put_contents( $jsonFile, json_encode( $installedHosts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
+        
+        // Setup hosts file
         $output->writeln( 'Creating a /etc/hosts record...' );
         $hosts = file_get_contents('/etc/hosts');
         if( stripos( $host, $hosts ) === FALSE )
@@ -52,9 +70,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
             file_put_contents( '/etc/hosts', sprintf( "%s\t%s www.%s\n", $ip, $host, $host ), FILE_APPEND );
         }
         
-        $output->writeln( 'Virtual host created successfully!' );
     }
-    
     protected function createOnCentos( InputInterface $input, OutputInterface $output )
     {
         $host   = $input->getOption( 'host' );
