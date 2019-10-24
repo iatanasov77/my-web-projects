@@ -1,5 +1,6 @@
 
 phpVersion: '7.2'
+mysqlService: 'mysqld'
 
 apacheModules:
   - expires
@@ -8,9 +9,9 @@ apacheModules:
   - vhost_alias
 
 phpModules:
-  -xdebug
-  -intl
-  -apc
-  -sqlite
-  -soap
+  - xdebug
+  - intl
+  - apc
+  - sqlite
+  - soap
   

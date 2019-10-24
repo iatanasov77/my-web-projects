@@ -18,6 +18,7 @@ if $::osfamily == 'Debian' {
 }
 
 $phpVersion     = $facts['phpversion']
+$mysqlService   = $facts['mysqlService']
 
 notice( "INSTALL PHP VERSION: ${phpVersion}" )
 node default
