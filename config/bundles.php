@@ -12,4 +12,6 @@ return [
     
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     Webonaute\DoctrineFixturesGeneratorBundle\DoctrineFixturesGeneratorBundle::class => ['all' => true],
+    
+    App\VS\FixtureGenerateBundle\VsFixtureGenerateBundle::class => ['all' => true],
 ];
