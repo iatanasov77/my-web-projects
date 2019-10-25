@@ -17,10 +17,8 @@ if $::osfamily == 'Debian' {
 	$apachename     = 'httpd'
 }
 
-$phpVersion     = $facts['phpversion']
-$mysqlService   = $facts['mysqlService']
+$vsConfig		= parseyaml( $facts['vs_config'] )
 
-notice( "INSTALL PHP VERSION: ${phpVersion}" )
 node default
 {
 

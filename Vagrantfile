@@ -69,8 +69,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	    # Run puppet provisioner
 	    require 'yaml'
 	    provisionConfig  = YAML.load_file( 'vagrant.d/config.yaml' )
-	    puts provisionConfig['apacheModules'].inspect
-        puts provisionConfig['apacheModules'].to_yaml
+	    #puts provisionConfig.inspect
 	    
 	    config.vm.provision :puppet do |puppet|
 			puppet.manifests_path = 'vagrant.d/puppet/manifests'
@@ -79,11 +78,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 			puppet.manifest_file  = "default.pp"
 			puppet.facter			= {
-			    'vsConfig'          => provisionConfig,
-			    'mysqlService'      => provisionConfig['mysqlService'],
-			    'phpversion'        => provisionConfig['phpVersion'],
-			    'apache_modules'    => provisionConfig['apacheModules'].to_yaml,
-				'php_modules'       => provisionConfig['phpModules'].to_yaml,
+				'vs_config'			=> provisionConfig.to_yaml,
 				'hostname'			=> ENV['HOSTNAME'],
 				'documentroot'		=> ENV['DOCUMENT_ROOT'],
 				'mysqlhost'			=> ENV['PUBLIC_IP'],
