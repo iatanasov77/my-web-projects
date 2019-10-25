@@ -14,7 +14,7 @@ end
 
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.env.enable
-
+	
 	if ! File.exists?( ENV['HOSTS_CONFIG'] )
 		File.open( ENV['HOSTS_CONFIG'], "w") do |f|
 			f.write( "{}" )
@@ -66,6 +66,14 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		  "PHP_VERSION"   => ENV['PHP_VERSION']
 		}
 		
+		# INIT LIBRAIAN
+		config.librarian_puppet.enabled = false
+        #config.librarian_puppet.puppetfile_dir          = "vagrant.d/puppet"
+        # placeholder_filename defaults to .PLACEHOLDER
+        #config.librarian_puppet.placeholder_filename    = ".MYPLACEHOLDER"
+        #config.librarian_puppet.use_v1_api              = '1' # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
+        #config.librarian_puppet.destructive             = false # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
+    
 	    # Run puppet provisioner
 	    require 'yaml'
 	    provisionConfig  = YAML.load_file( 'vagrant.d/config.yaml' )

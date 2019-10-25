@@ -3,4 +3,79 @@
 # Config examples below
 ###################################################################
 
-forge "http://forge.puppetlabs.com"
+# forge "http://forge.puppetlabs.com"
+
+###################################################################
+# Dependencies
+###################################################################
+mod "concat",
+    :git => 'https://github.com/puppetlabs/puppetlabs-concat.git'
+
+mod "staging",
+    :git => "https://github.com/voxpupuli/puppet-staging.git"
+
+mod "stdlib",
+    :git => "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    
+mod "translate",
+    :git => "https://github.com/puppetlabs/puppetlabs-translate.git"  
+    
+mod "archive",
+    :git => "https://github.com/voxpupuli/puppet-archive.git"
+    
+mod "inifile",
+    :git => "https://github.com/puppetlabs/puppetlabs-inifile.git"
+    
+######################################################################
+# System Tools
+######################################################################
+mod "wget",
+    :git => "https://github.com/voxpupuli/puppet-wget.git"
+
+mod "apt",
+    :git => "https://github.com/puppetlabs/puppetlabs-apt.git"
+
+mod "ssh",
+    :git => "https://github.com/ghoneycutt/puppet-module-ssh.git"
+    
+mod "sudo",
+    :git => "https://github.com/saz/puppet-sudo.git"
+      
+mod "gcc",
+    :git => "https://github.com/puppetlabs/puppetlabs-gcc.git"    
+ 
+###################################################################
+# Backend Developement
+###################################################################
+mod "apache",
+    :git => "https://github.com/puppetlabs/puppetlabs-apache.git"
+    
+mod "mysql",
+    :git => "https://github.com/puppetlabs/puppetlabs-mysql.git"   
+
+mod "sqlite",
+    :git => "https://github.com/puppetlabs/puppetlabs-sqlite.git"
+    
+mod "php",
+    :git => "https://github.com/voxpupuli/puppet-php.git"
+
+mod "phpmyadmin",
+    :git => "https://github.com/justicel/puppet-phpmyadmin.git"
+
+mod "composer",
+    :git => "https://github.com/willdurand/puppet-composer.git"
+        
+mod "docker",
+    :git => "https://github.com/puppetlabs/puppetlabs-docker.git"
+   
+mod "devenv",
+    :git => "https://github.com/iatanasov77/puppet-devenv.git"
+    
+########################################################################
+# Frontend Developement
+########################################################################
+mod "nodejs",
+    :git => "https://github.com/willdurand/puppet-nodejs.git" 
+
+mod "yarn",
+    :git => "https://github.com/artberri/puppet-yarn.git"
