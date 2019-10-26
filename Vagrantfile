@@ -67,7 +67,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		}
 		
 		# INIT LIBRAIAN
-		config.librarian_puppet.enabled = false
+		#config.librarian_puppet.enabled = false
         #config.librarian_puppet.puppetfile_dir          = "vagrant.d/puppet"
         # placeholder_filename defaults to .PLACEHOLDER
         #config.librarian_puppet.placeholder_filename    = ".MYPLACEHOLDER"
