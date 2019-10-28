@@ -22,8 +22,8 @@ $vsConfig		= parseyaml( $facts['vs_config'] )
 node default
 {
 
-	#include stdlib
-	include devenv::system
+	include stdlib
+	#include devenv::system
 	include devenv::tools
 	#include devenv::vstools
 	include devenv::lamp

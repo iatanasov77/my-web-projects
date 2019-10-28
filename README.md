@@ -9,6 +9,16 @@
     ; OR
     # git submodule update --remote # to fetch the HEAD of submodules
 ```
+    The big problem when submodule update that says: 
+            fatal: unable to connect to github.com:
+            github.com[0: 140.82.118.3]: errno=Connection timed out
+            Unable to fetch in submodule path 'vagrant.d/puppet/modules/composer'
+            
+    I solve the problem with this command:
+```
+    git config --global url."https://".insteadOf git://
+```
+
     NOTE: To add a new git submodule run:
 ```
     # git submodule add -f https://github.com/puppetlabs/puppetlabs-docker vagrant.d/puppet/modules/docker
