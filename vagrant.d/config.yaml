@@ -11,7 +11,7 @@ apacheModules:
 phpModules:
   - xdebug
   - intl
-  - apc
+  - opcache
   - sqlite
   - soap
   
