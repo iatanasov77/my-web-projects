@@ -53,10 +53,12 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			vb.gui		= false
 			vb.name		= ENV['MASHINE_NAME']
 			vb.memory	= ENV['VBOX_MACHINE_MEMORY']
-			vb.cpus		= 1
+			#vb.cpus		= 1
+			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 		end
 
 	  	# Shared Folders
+	  	config.vm.synced_folder "../VsMyProjects", "/vagrant" #owner: "root", group: "root"
     	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects" #owner: "root", group: "root"
     	#config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
 
