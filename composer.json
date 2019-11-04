@@ -20,15 +20,15 @@
         "symfony/twig-bundle": "^4.3",
         "symfony/validator": "^4.3",
         "symfony/webpack-encore-bundle": "^1.6",
-        "symfony/yaml": "^5.0@dev",
+        "symfony/yaml": "^5.0",
         "symfony/process": "^4.3",
-        "cocur/slugify": "dev-master",
-        "symfony/property-access": "^5.0@dev"
+        "cocur/slugify": "^3.0",
+        "symfony/property-access": "^5.0"
     },
     "require-dev": {
         "symfony/maker-bundle": "^1.13",
-        "doctrine/doctrine-fixtures-bundle": "^3.3@dev",
-        "webonaute/doctrine-fixtures-generator-bundle": "^2.0@dev"
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "webonaute/doctrine-fixtures-generator-bundle": "^2.0"
     },
     "config": {
         "process-timeout":      600,
