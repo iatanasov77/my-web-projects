@@ -63,6 +63,10 @@
 
 1. SSH login to the vagrant machine
 2. Run `composer install` from the /vagrant directory
+    if the composer install exit with error to install ocramius/package-versions use option `... --prefer-source` i don't know why:
+    ```
+        composer install --prefer-source
+    ```
 3. Set a database.
     
     Create database:
