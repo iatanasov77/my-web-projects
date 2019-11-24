@@ -7,6 +7,9 @@ apacheModules:
   - headers
   - rewrite
   - vhost_alias
+  - version
+  - env
+  - access_compat
 
 phpModules:
   - xdebug

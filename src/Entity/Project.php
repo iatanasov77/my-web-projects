@@ -17,13 +17,18 @@ class Project
     protected $id;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
+     */
+    protected $category;
+    
+    /**
      * @ORM\Column(type="string", length=128)
      * @Assert\NotBlank
      */
     protected $name;
     
     /**
-     * @ORM\Column(name="source_type", type="string", columnDefinition="enum('wget', 'git', 'svn')")
+     * @ORM\Column(name="source_type", type="string", columnDefinition="enum('wget', 'git', 'svn', 'install_manual')")
      */
     protected $sourceType;
     
@@ -60,12 +65,29 @@ class Project
      * @ORM\Column(name="with_ssl", type="boolean")
      */
     protected $withSsl;
+    
+    /**
+     * @ORM\Column(name="install_manual", type="string")
+     */
+    protected $installManual;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+    
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+        
+        return $this;
+    }
+    
     public function getName(): ?string
     {
         return $this->name;
@@ -159,6 +181,18 @@ class Project
     {
         $this->withSsl = $withSsl;
 
+        return $this;
+    }
+    
+    public function getInstallManual(): ?string
+    {
+        return $this->installManual;
+    }
+    
+    public function setInstallManual(string $installManual): self
+    {
+        $this->installManual = $installManual;
+        
         return $this;
     }
 }

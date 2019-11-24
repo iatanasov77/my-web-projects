@@ -20,18 +20,20 @@ abstract class Source
     
     public static function installed( $project )
     {
-        global $bootstrap;
+        //global $bootstrap;
         
-        $hostsFile  = $project->getProjectRoot() . $bootstrap['config']['installed_hosts'];
-        $hosts      = [];
+        return is_dir( $project->getProjectRoot() );
         
-        if ( file_exists( $hostsFile ) )
-        {
-            $json		= file_get_contents( $hostsFile );
-            $hosts 		= json_decode( $json, true );
-        }
+//         $hostsFile  = $project->getProjectRoot() . $bootstrap['config']['installed_hosts'];
+//         $hosts      = [];
         
-        return isset( $hosts[$project->getId()] );
+//         if ( file_exists( $hostsFile ) )
+//         {
+//             $json		= file_get_contents( $hostsFile );
+//             $hosts 		= json_decode( $json, true );
+//         }
+        
+//         return isset( $hosts[$project->getId()] );
     }
     
     abstract public function fetch();

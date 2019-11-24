@@ -1,0 +1,16 @@
+SULU
+===========
+1. Create Project	
+	# composer create-project sulu/skeleton SULU -n
+
+	IF ERROR:
+	Run from project dir: composer update --no-plugins
+
+2. Setup Database in .env.local
+	DATABASE_URL=mysql://root:vagrant@127.0.0.1:3306/SULU
+
+3. Install
+	# bin/adminconsole sulu:build dev
+	! This command adds a user “admin” with password “admin” to your installation! If you don’t want to add that user, pass the argument prod instead: bin/adminconsole sulu:build prod
+
+	

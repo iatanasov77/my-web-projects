@@ -33,6 +33,16 @@ Encore
         resolveUrlLoader: true
     })
 
+    .copyFiles([
+		
+		// CkEditor
+		{from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+	])
+	
     // add hash after file name
     .configureFilenames({
         js: '[name].js?[contenthash]',
@@ -43,13 +53,16 @@ Encore
     
      // for "legacy" applications that require $/jQuery as a global variable
     .autoProvidejQuery()
+
     
     .addStyleEntry('css/app', './assets/scss/app.scss')
+    .addStyleEntry('css/custom', './assets/css/custom.css')
+    
     .addEntry( 'js/app', './assets/js/app.js' )
+    .addEntry( 'js/pages/projects', './assets/js/pages/projects.js' )
       
     // Page Specific Scripts
     //.addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )
 ;
 
-const config = Encore.getWebpackConfig();
-module.exports = config;
+module.exports = Encore.getWebpackConfig();

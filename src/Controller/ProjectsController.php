@@ -8,9 +8,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Component\Globals;
 use App\Component\Project\Source\SourceFactory;
+use App\Entity\Category;
 use App\Entity\Project;
 use App\Form\Type\ProjectType;
+use App\Form\Type\ProjectInstallManualType;
 use App\Form\Type\ProjectDeleteType;
+use App\Form\Type\CategoryType;
 
 class ProjectsController extends Controller
 {
@@ -20,15 +23,15 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $repository = $this->getDoctrine()->getRepository( Project::class );
-        $projects   =  $repository->findAll();
+        $repository = $this->getDoctrine()->getRepository( Category::class );
         
         return $this->render('pages/projects.html.twig', [
-            'projects'          => $projects,
-            'createProjectForm' => $this->_projectForm( new Project() )->createView(),
-            'deleteProjectForm' => $this->createForm( ProjectDeleteType::class, null, [
-                'action' => $this->generateUrl( 'projects_delete' ),
-                'method' => 'POST'
+            'categories'            => $repository->findAll(),
+            'createCategoryForm'    => $this->_categoryForm( new Category() )->createView(),
+            'createProjectForm'     => $this->_projectForm( new Project() )->createView(),
+            'deleteProjectForm'     => $this->createForm( ProjectDeleteType::class, null, [
+                'action'            => $this->generateUrl( 'projects_delete' ),
+                'method'            => 'POST'
             ])->createView()
         ]);
     }
@@ -100,11 +103,35 @@ class ProjectsController extends Controller
             throw new \Exception( 'Project source type cannot instantiated' );
         }
         
-        return new Response( $source->fetch() ); exit;
+        return new Response( $source->fetch() );
+    }
+    
+    /**
+     * @Route("/projects/edit_install_manual/{id}", name="edit_install_manual")
+     */
+    public function editInstallManual( $id, Request $request )
+    {
+        $repository     = $this->getDoctrine()->getRepository( Project::class );
+        $project        = $repository->find( $id );
         
-        // return new RedirectResponse( $this->generateUrl( 'homepage' ) );
-        //return $this->redirectToRoute( 'homepage', [], 301 ); // does a permanent - 301 redirect
-        return $this->redirectToRoute( 'projects' );
+        $form           = $this->createForm( ProjectInstallManualType::class, $project, [
+            'action' => $this->generateUrl( 'edit_install_manual', ['id' => (int)$project->getId()] ),
+            'method' => 'POST'
+        ]);
+        
+        $form->handleRequest( $request );
+        if ( $form->isSubmitted() ) { // && $form->isValid()
+            //$project->setInstallManual(  );
+            $em = $this->getDoctrine()->getManager();
+            $em->persist( $form->getData() );
+            $em->flush();
+            
+            return $this->redirectToRoute( 'projects' );
+        }
+        
+        return $this->render( 'pages/projects/project_install_manual.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
     
     /**
@@ -164,11 +191,62 @@ class ProjectsController extends Controller
         return new JsonResponse( $response );
     }
     
+    /**
+     * @Route("/categories/create/{id}", name="category_create")
+     */
+    public function editCategory( $id, Request $request )
+    {
+        $status     = Globals::STATUS_ERROR;
+        
+        $em         = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository( Category::class );
+        $category   = $id ? $repository->find( $id ) : new Category();
+        $form       = $this->_categoryForm( $category );
+        
+        $form->handleRequest( $request );
+        if ( $form->isValid() ) {
+            $project    = $form->getData();
+            
+            $em->persist( $project );
+            $em->flush();
+            
+            $status     = Globals::STATUS_OK;
+            $errors     = [];
+        } else {
+            foreach ( $form->getErrors( true, false ) as  $error) {
+                // My personnal need was to get translatable messages
+                // $errors[] = $this->trans($error->current()->getMessage());
+                
+                $errors[$error->current()->getCause()->getPropertyPath()] = $error->current()->getMessage();
+            }
+        }
+        
+        $html   = $this->renderView( 'pages/projects/table_projects.html.twig', ['projects' => $repository->findAll()] );
+        $response   = [
+            'status'    => $status,
+            'data'      => $html,
+            'errors'    => $errors
+        ];
+        
+        return new JsonResponse( $response );
+    }
+    
     private function _projectForm( Project $project )
     {
         
         $form   = $this->createForm( ProjectType::class, $project, [
             'action' => $this->generateUrl( 'projects_create', ['id' => (int)$project->getId()] ),
+            'method' => 'POST'
+        ]);
+        
+        return $form;
+    }
+    
+    private function _categoryForm( Category $category )
+    {
+        
+        $form   = $this->createForm( CategoryType::class, $category, [
+            'action' => $this->generateUrl( 'category_create', ['id' => (int)$category->getId()] ),
             'method' => 'POST'
         ]);
         
