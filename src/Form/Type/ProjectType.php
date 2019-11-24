@@ -8,8 +8,10 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use App\Entity\Project;
+use App\Entity\Category;
 
 class ProjectType extends AbstractType
 {
@@ -17,11 +19,18 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add( 'name', TextType::class )
+            ->add( 'category', EntityType::class, [
+                'class'         => Category::class,
+                'placeholder'   => '-- Choose a category --',
+                'choice_label'  => 'name',
+            ])
             ->add( 'sourceType', ChoiceType::class, [
-                'choices'  => [
-                    'wget' => 1,
-                    'git' => 2,
-                    'svn' => 3,
+                'placeholder'   => '-- Select Source Type --',
+                'choices'       => [
+                    'Download with `wget`'              => 'wget',
+                    'Checkout with `git`'               => 'git',
+                    'Checkout with `svn`'               => 'svn',
+                    'Read Install Manual'    => 'install_manual',
                 ],
             ])
             ->add( 'repository', TextType::class )

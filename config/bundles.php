@@ -9,8 +9,10 @@ return [
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
     
-    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
-    Webonaute\DoctrineFixturesGeneratorBundle\DoctrineFixturesGeneratorBundle::class => ['all' => true],
+    //Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
+    //Webonaute\DoctrineFixturesGeneratorBundle\DoctrineFixturesGeneratorBundle::class => ['all' => true],
+    //App\VS\FixtureGenerateBundle\VsFixtureGenerateBundle::class => ['all' => true],
     
-    App\VS\FixtureGenerateBundle\VsFixtureGenerateBundle::class => ['all' => true],
+    IA\CmsBundle\IACmsBundle::class => ['all' => true],
+    FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
 ];
