@@ -2,6 +2,7 @@
 phpVersion: '7.2'
 mysqlService: 'mysqld'
 
+#- access_compat
 apacheModules:
   - expires
   - headers
@@ -9,7 +10,6 @@ apacheModules:
   - vhost_alias
   - version
   - env
-  - access_compat
 
 phpModules:
   - xdebug
