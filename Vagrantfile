@@ -97,7 +97,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			}
 	    end
 
-		#config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
+        config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
 		#config.vm.provision "shell", path: "vagrant.d/provision/workaround.sh", env: {"HOSTNAME" => ENV['HOSTNAME'] }
 
 		$done = <<-SCRIPT

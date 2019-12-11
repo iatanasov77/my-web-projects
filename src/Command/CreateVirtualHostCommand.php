@@ -49,6 +49,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
     {
         $ip     = '127.0.0.1';
         $host   = $input->getOption( 'host' );
+        $documentRoot   = $input->getOption( 'documentroot' );
         
         // Setup installed_hosts.json
         $output->writeln( 'Add host to the "installed_hosts.json" ...' );
@@ -57,7 +58,8 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         $installedHosts = json_decode( $json, true );
         if ( ! isset( $installedHosts[$host] ) ) {
             $installedHosts[$host]  = [
-                "hostName" => $host
+                "hostName"      => $host,
+                "docymentRoot"  => $documentRoot
             ];
         }
         file_put_contents( $jsonFile, json_encode( $installedHosts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
