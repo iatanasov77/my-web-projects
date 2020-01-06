@@ -11,10 +11,16 @@ Exec {
     path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin', '/usr/local/sbin/' ]
 }
 
-if $::osfamily == 'Debian' {
-    $apachename     = 'apache2'
-} else {
-	$apachename     = 'httpd'
+case $operatingsystem 
+{
+    'RedHat', 'CentOS', 'Fedora': 
+    {
+        $apachename     = 'httpd'
+    }
+    'Debian', 'Ubuntu':
+    {
+        $apachename     = 'apache2'
+    }
 }
 
 $vsConfig		= parseyaml( $facts['vs_config'] )
