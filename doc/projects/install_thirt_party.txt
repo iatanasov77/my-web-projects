@@ -13,4 +13,7 @@ SULU
 	# bin/adminconsole sulu:build dev
 	! This command adds a user “admin” with password “admin” to your installation! If you don’t want to add that user, pass the argument prod instead: bin/adminconsole sulu:build prod
 
+4. PhpBrew
+	https://github.com/phpbrew/phpbrew/wiki/Cookbook
+	https://github.com/phpbrew/phpbrew/wiki/Cookbook#install-phpbrew-into-system-wide-environment
 	
