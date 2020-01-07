@@ -30,9 +30,10 @@ node default
 
 	include stdlib
 	include devenv::system
+	include devenv::lamp
 	include devenv::tools
 	#include devenv::vstools
-	include devenv::lamp
+	
 	include devenv::docker
 	include devenv::frontendtools
 

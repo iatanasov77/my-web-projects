@@ -1,20 +1,17 @@
-
 phpVersion: '7.2'
-phpbrewPhpVersion: '7.4.1'
+#phpbrewPhpVersion: '7.4.1'
 mysqlService: 'mysqld'
 
-#- access_compat
-
 packages:
-  - mc
-  - git
-  - gitflow
-  - curl
-  - vim
-  - htop
-  - dos2unix
-  - unzip
-  - phpbrew
+   - mc
+   - git
+   - curl
+   - vim
+   - htop
+   - dos2unix
+   - unzip
+   - gitflow
+   - phpbrew
 
 apacheModules:
   - expires
