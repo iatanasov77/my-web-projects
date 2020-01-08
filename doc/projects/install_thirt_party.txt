@@ -11,9 +11,22 @@ SULU
 
 3. Install
 	# bin/adminconsole sulu:build dev
-	! This command adds a user “admin” with password “admin” to your installation! If you don’t want to add that user, pass the argument prod instead: bin/adminconsole sulu:build prod
+	! This command adds a user ï¿½adminï¿½ with password ï¿½adminï¿½ to your installation! If you donï¿½t want to add that user, pass the argument prod instead: bin/adminconsole sulu:build prod
 
 4. PhpBrew
 	https://github.com/phpbrew/phpbrew/wiki/Cookbook
 	https://github.com/phpbrew/phpbrew/wiki/Cookbook#install-phpbrew-into-system-wide-environment
 	
+	puppet module use this command to install php version:
+	 sudo PHPBREW_ROOT=/opt/phpbrew /usr/bin/phpbrew install --jobs=$(nproc) --old php-7.4.1 +default +intl +mysql +pdo +apxs2
+	 
+	 requirements:
+	   sudo yum install httpd-devel libcurl-devel oniguruma-devel libsodium-devel libzip-devel
+	   
+	to load builded php version with apache mod_php change the existing symlink:
+	   sudo ln -sf /usr/lib64/httpd/modules/libphp7.4.1.so /usr/lib64/httpd/modules/libphp7.2.so
+	   sudo serevice httpd restart
+	 
+    This explain how to use multiple php versions with apache
+        http://www.sivaschenko.com/multiple-php-versions-simultaneously-apache/
+        
