@@ -16,6 +16,7 @@ SULU
 4. PhpBrew
 	https://github.com/phpbrew/phpbrew/wiki/Cookbook
 	https://github.com/phpbrew/phpbrew/wiki/Cookbook#install-phpbrew-into-system-wide-environment
+	https://github.com/phpbrew/phpbrew/wiki/Installing-PHPBrew-into-System-wide-Environment
 	
 	puppet module use this command to install php version:
 	 sudo PHPBREW_ROOT=/opt/phpbrew /usr/bin/phpbrew install --jobs=$(nproc) --old php-7.4.1 +default +intl +mysql +pdo +apxs2
