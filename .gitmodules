@@ -66,4 +66,4 @@
 	url = https://github.com/willdurand/puppet-composer.git
 [submodule "vagrant.d/puppet/modules/phpbrew"]
 	path = vagrant.d/puppet/modules/phpbrew
-	url = https://github.com/phpbrew/puppet-phpbrew.git
+	url = https://github.com/iatanasov77/puppet-phpbrew.git
