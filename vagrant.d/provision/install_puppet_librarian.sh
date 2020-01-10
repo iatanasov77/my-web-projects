@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "installing Puppet-Librarian"
-
 if [ $ID == "centos" ]; then
    
     # Workaround: Puppet cannot find installed modules
@@ -12,6 +10,7 @@ if [ $ID == "centos" ]; then
     ########################################################################
     # NOT USE LIBRARIAN, AT NOW USED GIT SUBMODULES TO ADD PUPPET MODULES
     ########################################################################
+    #echo "installing Puppet-Librarian"
     #sudo yum install gem -y
     #sudo gem install librarian-puppet
 else
@@ -21,6 +20,7 @@ else
     sudo rm -rf /usr/share/puppet/modules
     sudo ln -sf /vagrant/vagrant.d/puppet/modules /usr/share/puppet/modules
     
+    #echo "installing Puppet-Librarian"
     #sudo apt-get -y install librarian-puppet
     #sudo apt-get -y install curl
 fi
