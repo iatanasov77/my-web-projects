@@ -1,6 +1,7 @@
 phpVersion: '7.2'
 phpbrewInstall: []   #['7.4.1', '5.6']
 mysqlService: 'mysqld'
+vhostsJson: '/vagrant/installed_hosts.json'
 
 packages:
    - mc
@@ -28,4 +29,45 @@ phpModules:
   - opcache
   - sqlite
   - soap
-  
+
+
+git:
+   userName: 'Ivan I. Atanasov'
+   userEmail: 'i.atanasov77@gmail.com'
+   
+dependencies:
+   CentOS:
+      epel-release:
+         type: 'yumrepo'
+      
+      mysql57-community:
+         type: 'yumrepo'
+         url: 'https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm'
+      remi-php72:
+         type: 'yumrepo'
+         url: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
+      remove-old-libzip:
+         type: 'command'
+         command: 'yum remove -y libzip'
+      libzip-0.11:
+         type: 'rpm'
+         source: 'http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm'
+         require: Exec['remove-old-libzip']
+      libzip-devel-0.11:
+         type: 'rpm'
+         source: 'http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm'
+         require: Exec['remove-old-libzip']
+      packages:
+         type: 'packages'
+         packages:
+            - mysql-community-server
+            - php
+            - mod_php
+            - php-common
+            - php-opcache
+            - php-mcrypt
+            - php-cli
+            - php-gd
+            - php-curl
+            - php-mysql
+            
