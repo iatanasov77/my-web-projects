@@ -6,10 +6,6 @@ if [ $ID == "centos" ]; then
     rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
     yum -y install epel-release
     
-    # MySql 5.6
-    #rpm -Uvh http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-    #yum install -y mysql mysql-server
-    
     # MySql 5.7
     rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
     sed -i 's/enabled=1/enabled=0/' /etc/yum.repos.d/mysql-community.repo

@@ -59,6 +59,6 @@
 {% block scripts %}
 	{{ parent() }}
 	
-    <script src="assets/build/js/pages/projects.js"></script>
+    {{ encore_entry_script_tags( 'js/pages/projects' ) }}
 {% endblock %}
 

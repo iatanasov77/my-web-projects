@@ -56,8 +56,8 @@ node default
 {
 	include stdlib
 	
-	include devenv::dependencies
-	#include dependencies
+	#include devenv::dependencies
+	include dependencies
 	
 	include devenv::system
 	include devenv::lamp
