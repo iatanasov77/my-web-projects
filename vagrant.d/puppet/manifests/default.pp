@@ -25,15 +25,44 @@ case $operatingsystem
 
 $vsConfig		= parseyaml( $facts['vs_config'] )
 
+class dependencies
+{
+	if ( $operatingsystem == 'CentOS' )
+    {
+    	###########################################
+		# PhpBrew build php require libzip >= 0.11
+		###########################################
+		exec { 'remove older libzip':
+			command     => 'yum remove -y libzip'
+		}
+		
+		package { 'libzip':
+		    provider    => 'rpm',
+		    ensure      => installed,
+		    source		=> "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm",
+		    require => Exec['remove older libzip'],
+		}
+	
+		package { 'libzip-devel':
+		    provider    => 'rpm',
+		    ensure      => installed,
+		    source		=> "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm",
+		    require => Exec['remove older libzip'],
+		}
+	}
+}
+
 node default
 {
-
 	include stdlib
+	
+	include devenv::dependencies
+	#include dependencies
+	
 	include devenv::system
 	include devenv::lamp
 	include devenv::tools
 	#include devenv::vstools
-	
 	include devenv::docker
 	include devenv::frontendtools
 

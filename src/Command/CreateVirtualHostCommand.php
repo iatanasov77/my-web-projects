@@ -59,7 +59,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         if ( ! isset( $installedHosts[$host] ) ) {
             $installedHosts[$host]  = [
                 "hostName"      => $host,
-                "docymentRoot"  => $documentRoot
+                "documentRoot"  => $documentRoot
             ];
         }
         file_put_contents( $jsonFile, json_encode( $installedHosts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );

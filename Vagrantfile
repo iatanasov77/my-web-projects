@@ -33,6 +33,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     vagrant_config.hostmanager.include_offline   	= true
 	vagrant_config.hostmanager.aliases				= []
 
+	vagrant_config.hostmanager.aliases.push( "#{ENV['HOST_NAME']} www.#{ENV['HOST_NAME']}" )
+	
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
 	vsHosts.each do |key, host|
 		vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
@@ -45,7 +47,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	  	#config.vm.box_version
 		config.vm.box_check_update	= true
 
-		config.vm.hostname 			= ENV['HOSTNAME']
+		config.vm.hostname 			= ENV['HOST_NAME']
 		config.vm.network :private_network, ip: ENV['PUBLIC_IP']
 
 		# Virtual Box Configuration
@@ -65,11 +67,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
-		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE'],
-		  "PHP_VERSION"   => ENV['PHP_VERSION']
+		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE']
 		}
 		
-		# INIT LIBRAIAN
+		# INIT LIBRARIAN
 		#config.librarian_puppet.enabled = false
         #config.librarian_puppet.puppetfile_dir          = "vagrant.d/puppet"
         # placeholder_filename defaults to .PLACEHOLDER
@@ -79,7 +80,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     
 	    # Run puppet provisioner
 	    require 'yaml'
-	    provisionConfig  = YAML.load_file( 'vagrant.d/config.yaml' )
+	    provisionConfig  = YAML.load_file( ENV['PROVISION_CONFIG'] )
 	    #puts provisionConfig.inspect
 	    
 	    config.vm.provision :puppet do |puppet|
@@ -90,15 +91,14 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			puppet.manifest_file  = "default.pp"
 			puppet.facter			= {
 				'vs_config'			=> provisionConfig.to_yaml,
-				'hostname'			=> ENV['HOSTNAME'],
-				'documentroot'		=> ENV['DOCUMENT_ROOT'],
+				'hostname'			=> ENV['HOST_NAME'],
 				'mysqlhost'			=> ENV['PUBLIC_IP'],
 				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql',
 			}
 	    end
 
-        config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
-		#config.vm.provision "shell", path: "vagrant.d/provision/workaround.sh", env: {"HOSTNAME" => ENV['HOSTNAME'] }
+        #config.vm.provision "shell", path: "vagrant.d/provision/install_projects.php"
+		#config.vm.provision "shell", path: "vagrant.d/provision/workaround.sh", env: {"HOST_NAME" => ENV['HOST_NAME'] }
 
 		$done = <<-SCRIPT
 echo ""
@@ -106,10 +106,10 @@ echo ""
 echo "####################################################################"
 echo "# DONE!!!"
 echo "# -------"
-echo "# Now you can open http://#{ENV['HOSTNAME']} in your browser"
+echo "# Now you can open http://#{ENV['HOST_NAME']} in your browser"
 echo "#"
-echo "# You have PHP Info at http://#{ENV['HOSTNAME']}/info.php"
-echo "# You have a PhpMyAdmin  at http://#{ENV['HOSTNAME']}/phpMyAdmin/"
+echo "# You have PHP Info at http://#{ENV['HOST_NAME']}/info.php"
+echo "# You have a PhpMyAdmin  at http://#{ENV['HOST_NAME']}/phpMyAdmin/"
 echo "#"
 echo "# Support at: https://github.com/iatanasov77/"
 echo "####################################################################"

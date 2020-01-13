@@ -25,12 +25,12 @@ class Kernel extends BaseKernel
 
     public function getCacheDir()
     {
-        return '/var/www/myprojects/cache';
+        return '/var/www/myprojects.lh/cache';
     }
     
     public function getLogDir()
     {
-        return '/var/www/myprojects/log';
+        return '/var/www/myprojects.lh/log';
     }
     
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
