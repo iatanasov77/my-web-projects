@@ -37,9 +37,6 @@ git:
    
 dependencies:
    CentOS:
-      epel-release:
-         type: 'yumrepo'
-      
       mysql57-community:
          type: 'yumrepo'
          url: 'https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm'
@@ -57,17 +54,9 @@ dependencies:
          type: 'rpm'
          source: 'http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm'
          require: Exec['remove-old-libzip']
-      packages:
-         type: 'packages'
-         packages:
-            - mysql-community-server
-            - php
-            - mod_php
-            - php-common
-            - php-opcache
-            - php-mcrypt
-            - php-cli
-            - php-gd
-            - php-curl
-            - php-mysql
-            
+      install-packages:
+         type: 'command'
+         command: 'yum install -y mysql-community-server php mod_php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql'
+      php72-symlink:
+         type: 'command'
+         command: 'ln -s /usr/lib64/httpd/modules/libphp7.so /usr/lib64/httpd/modules/libphp7.2.so'

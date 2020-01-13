@@ -11,8 +11,10 @@
 
   <title>{{ siteTitle }}</title>
 
-  <link href="assets/build/css/app.css" rel="stylesheet">
-  <link href="assets/build/css/custom.css" rel="stylesheet">
+    {% block styles %}
+        {{ encore_entry_link_tags( 'css/app' ) }}
+        {{ encore_entry_link_tags( 'css/custom' ) }}
+    {% endblock %}
   
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 </head>
@@ -81,11 +83,8 @@
 	{% endblock %}
 </div>
 
-{% block scripts %}
-  <!-- Scripts-->
-  <script src="assets/build/runtime.js"></script>
-  <script src="assets/build/js/app.js"></script>
-  
+{% block scripts %}  
+    {{ encore_entry_script_tags( 'js/app' ) }}
 {% endblock %}
 </body>
 
