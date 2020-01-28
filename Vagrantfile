@@ -65,9 +65,13 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects" #owner: "root", group: "root"
     	#config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
 
+        require 'yaml'
+        provisionConfig  = YAML.load_file( ENV['PROVISION_CONFIG'] )
+        
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
-		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE']
+		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE'],
+		  "PHP_VERSION"   => provisionConfig['phpVersion']
 		}
 		
 		# INIT LIBRARIAN
@@ -79,8 +83,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
         #config.librarian_puppet.destructive             = false # Check https://github.com/voxpupuli/librarian-puppet#how-to-use
     
 	    # Run puppet provisioner
-	    require 'yaml'
-	    provisionConfig  = YAML.load_file( ENV['PROVISION_CONFIG'] )
+	    
 	    #puts provisionConfig.inspect
 	    
 	    config.vm.provision :puppet do |puppet|
