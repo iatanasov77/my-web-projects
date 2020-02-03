@@ -25,7 +25,7 @@ apacheModules:
 
 phpModules:
 #  - apc
-#  - xdebug
+  - xdebug
   - intl
   - opcache
   - sqlite

@@ -66,6 +66,11 @@ node default
 	include devenv::docker
 	include devenv::frontendtools
 
+    # Now this is added in devenv::phpextensions
+    #if ( 'xdebug' in $vsConfig['phpModules'] ) {
+    #   include devenv::xdebug
+    #}
+    
 	# puppet module install saz-sudo --version 5.0.0
 	sudo::conf { "vagrant":
 	    ensure			=> "present",

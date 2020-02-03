@@ -114,7 +114,7 @@ echo "#"
 echo "# You have PHP Info at http://#{ENV['HOST_NAME']}/info.php"
 echo "# You have a PhpMyAdmin  at http://#{ENV['HOST_NAME']}/phpMyAdmin/"
 echo "#"
-echo "# Support at: https://github.com/iatanasov77/"
+echo "# Support at: https://github.com/iatanasov77/my-projects"
 echo "####################################################################"
 SCRIPT
 		config.vm.provision "shell", inline: $done
