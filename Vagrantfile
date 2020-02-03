@@ -12,6 +12,14 @@ if ! Vagrant.has_plugin? 'vagrant-env'
 			vagrant plugin install vagrant-env"
 end
 
+if ! Vagrant.has_plugin? 'vagrant-hostmanager'
+	fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:
+		vagrant plugin install vagrant-hostmanager"
+end
+
+###################################################################################
+# RUN VAGRANT
+###################################################################################
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.env.enable
 	
@@ -21,18 +29,13 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		end
 	end
 
-	if ! Vagrant.has_plugin? 'vagrant-hostmanager'
-		fail_with_message "vagrant-hostmanager missing, please install the plugin with this command:
-			vagrant plugin install vagrant-hostmanager"
-	end
-
 	vagrant_config.hostmanager.enabled           	= true
     vagrant_config.hostmanager.manage_host       	= true
 	vagrant_config.hostmanager.manage_guest 		= false
     vagrant_config.hostmanager.ignore_private_ip 	= false
     vagrant_config.hostmanager.include_offline   	= true
 	vagrant_config.hostmanager.aliases				= []
-
+	
 	vagrant_config.hostmanager.aliases.push( "#{ENV['HOST_NAME']} www.#{ENV['HOST_NAME']}" )
 	
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
