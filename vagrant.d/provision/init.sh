@@ -15,7 +15,7 @@ if [ $ID == "centos" ]; then
     rpm -ivh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
     #yum-config-manager --enable remi-php72
     yum-config-manager --enable remi-php${PHP_VERSION//.}
-    yum install -y php mod_php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql
+    yum install -y php mod_php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql php-intl
     
     if [ ! -f /etc/httpd/modules/libphp${PHP_VERSION}.so ]; then
         ln -s /usr/lib64/httpd/modules/libphp7.so /usr/lib64/httpd/modules/libphp${PHP_VERSION}.so
