@@ -67,7 +67,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	  	config.vm.synced_folder "./", "/vagrant" #owner: "root", group: "root"
     	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects" #owner: "root", group: "root"
     	#config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
-
+    	if ENV['FOLDER_TABLATURES']
+    	   config.vm.synced_folder ENV['FOLDER_TABLATURES'], "/var/www/wgp.lh/tablatures" #owner: "vagrant", group: "root"
+        end
+    
         require 'yaml'
         provisionConfig  = YAML.load_file( ENV['PROVISION_CONFIG'] )
         
