@@ -23,6 +23,7 @@ apacheModules:
   - version
   - env
 
+# https://puppet-php.readthedocs.io/en/latest/extensions.html
 phpModules:
 #  - apc
   - xdebug
@@ -31,7 +32,7 @@ phpModules:
   - sqlite
   - soap
   - zip
-
+  - mongodb
 
 git:
    userName: 'Ivan I. Atanasov'
