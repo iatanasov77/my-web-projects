@@ -22,6 +22,10 @@ apacheModules:
   - vhost_alias
   - version
   - env
+  - proxy
+  - proxy_fcgi
+  - proxy_http
+  - proxy_html
 
 # https://puppet-php.readthedocs.io/en/latest/extensions.html
 phpModules:
