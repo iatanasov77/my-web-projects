@@ -1,0 +1,58 @@
+https://www.lance.bio/2016/06/29/changing-php-version-on-vagrant/
+--------------------------------------------------------------------
+
+PHPBREW INSTALL PHP VERSION
+-----------------------------------
+chmod 0777 -R /opt/phpbrew 
+phpbrew init
+phpbrew install 7.0.33 +default +mysql +fpm +openssl=/usr -- --with-libdir=lib64
+
+
+https://tecadmin.net/install-apache-php-fpm-centos-8/
+---------------------------------------------------------
+
+sudo systemctl enable php-fpm
+sudo systemctl start php-fpm
+
+
+Edit Config: sudo vim /etc/php-fpm.d/www.conf
+----------------------------------------------
+; listen = 127.0.0.1:9000
+;listen = /run/php-fpm/www.sock
+listen = /opt/phpbrew/php/php-7.0.33/var/run/php-fpm.sock
+ 
+user = apache
+group = apache
+ 
+listen.allowed_clients = 127.0.0.1
+listen.owner = apache
+listen.group = apache
+listen.mode = 0660
+
+pm = dynamic
+-----------------------------------------------
+
+
+
+From BabyMarket Cpanel
+-------------------------------
+Системните файлове php70-fcgi.ini и php.fcgi са копирани успешно в директория /home/babynfcj/projects/PhpFcgiTest
+Редактирайте .htaccess файла.
+-------------------------------
+<IfModule mod_fcgid.c>
+AddHandler fcgid-script .php
+FcgidWrapper /home/babynfcj/projects/PhpFcgiTest/php.fcgi .php
+</IfModule>
+
+
+
+
+
+
+
+
+
+
+
+
+
