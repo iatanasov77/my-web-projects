@@ -12,4 +12,16 @@
     d: for mod-php module add: +apxs2
     
     e: To switch to the system installed version use:  phpbrew off
+    
+    f: To install php extensions: 
+        phpbrew ext install xdebug 2.4.1
+        phpbrew ext install mcrypt
+        phpbrew ext install intl
+        
+    g: To restart php-fpm:
+        # sevice httpd stop
+        # phpbrew fpm stop
+        # rm -f /opt/phpbrew/php/php-7.0.33/var/run/php-fpm.sock
+        # phpbrew fpm start
+        # sevice httpd start
         

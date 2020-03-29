@@ -13,13 +13,14 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
     {
         $this
             ->setDescription( 'Creates a virtual host.' )
-            ->setHelp( '"Usage: php bin/console vs:mkvhost -t vhost_template -s your_domain.com -d /path/to/document_root";' )
+            ->setHelp( '"Usage: php bin/console vs:mkvhost -t vhost_template -s your_domain.com -d /path/to/document_root --fpm-socket /path/to/fpm.sock";' )
         ;
         
         $this
             ->addOption( 'template', 't', InputOption::VALUE_OPTIONAL, 'Select a template for the virtual host configuration', 'simple' )
             ->addOption( 'host', 's', InputOption::VALUE_OPTIONAL, 'Select a host address for the server', 'example.com' )
             ->addOption( 'documentroot', 'd', InputOption::VALUE_OPTIONAL, 'Select document root path for this virtual host', '/var/www/html' )
+            ->addOption( 'fpm-socket', 'p', InputOption::VALUE_OPTIONAL, 'Add FPM Proxy', null )
             ->addOption( 'with-ssl', null, InputOption::VALUE_NONE )
         ;
     }
@@ -51,6 +52,9 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         $host   = $input->getOption( 'host' );
         $documentRoot   = $input->getOption( 'documentroot' );
         
+        $fpmSocket      = $input->getOption( 'fpm-socket' );
+        $withSsl        = $input->getOption( 'with-ssl' );
+        
         // Setup installed_hosts.json
         $output->writeln( 'Add host to the "installed_hosts.json" ...' );
         $jsonFile       = 'installed_hosts.json';
@@ -59,7 +63,9 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         if ( ! isset( $installedHosts[$host] ) ) {
             $installedHosts[$host]  = [
                 "hostName"      => $host,
-                "documentRoot"  => $documentRoot
+                "documentRoot"  => $documentRoot,
+                "withSsl"       => $withSsl,
+                "fpmSocket"     => $fpmSocket
             ];
         }
         file_put_contents( $jsonFile, json_encode( $installedHosts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
@@ -79,9 +85,12 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         $vhostConfFile	= '/etc/httpd/conf.d/' . $host . '.conf';
         $apacheLogDir   = '/var/log/httpd/';
         
-        $template   = 'mkvhost/' . $input->getOption( 'template' ) . '.twig';
+        $fpmSocket      = $input->getOption( 'fpm-socket' );
+        $template       = 'mkvhost/' . $input->getOption( 'template' ) . ( $fpmSocket ? '-fpm' : '' ) . '.twig';
+        
         $documentRoot   = $input->getOption( 'documentroot' );
         $serverAdmin    = 'admin@' . $host;
+        
         $withSsl        = $input->getOption( 'with-ssl' );
         
         $output->writeln([
@@ -95,18 +104,19 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         
         $vhost  = $this->getContainer()->get('templating')->render( $template, [
             'host' => $host,
-            'documentRoot' => $documentRoot,
-            'serverAdmin' => $serverAdmin,
-            'apacheLogDir' =>$apacheLogDir
+            'documentRoot'  => $documentRoot,
+            'serverAdmin'   => $serverAdmin,
+            'apacheLogDir'  => $apacheLogDir,
+            'fpmSocket'     => $fpmSocket
         ]);
         
         if ( $withSsl )
         {
             $vhost  .= "\n\n" . $this->twig->render( 'templates/mkvhost/ssl.twig', [
                 'host' => $host,
-                'documentRoot' => $documentRoot,
-                'serverAdmin' => $serverAdmin,
-                'apacheLogDir' =>$apacheLogDir
+                'documentRoot'  => $documentRoot,
+                'serverAdmin'   => $serverAdmin,
+                'apacheLogDir'  =>$apacheLogDir
             ]);
         }
         file_put_contents( $vhostConfFile, $vhost );

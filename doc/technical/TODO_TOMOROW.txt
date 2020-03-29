@@ -1,0 +1,11 @@
+1. to try puppet-phpbrew from default repository
+2. to create script that change php version of a virtual host
+    a) phpbrew init
+    b) phpbrew install 7.0.33 +default +fpm +mysql +pdo +openssl=/usr -- --with-libdir=lib64
+    c) edit /opt/phpbrew/php/php-7.0.33/etc/php-fpm.d/www.conf
+    d) run /opt/phpbrew/php/php-7.0.33/sbin/php-fpm
+    e) edit virtual host to use proxy /opt/phpbrew/php/php-7.0.33/var/run/php-fpm.sock 
+    f) restart httpd service
+    
+3. Move commands to VS Application Core Bundle to be shared between all projects
+ 
