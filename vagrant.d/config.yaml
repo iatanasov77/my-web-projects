@@ -9,6 +9,7 @@ packages:
    - gitflow
    - curl
    - vim
+   - nano
    - htop
    - dos2unix
    - unzip
