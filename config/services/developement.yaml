@@ -1,0 +1,18 @@
+parameters:
+    app.config_file: "%kernel.root_dir%/../config/packages/vs_application.yaml"
+
+services:
+    app.developement:
+        class: App\Component\Developement
+        arguments: ["%app.config_file%", "@security.authorization_checker", "@router"]
+        calls:
+          - [ setContainer ]
+
+    app.developement.menu:
+        autowire: false
+        class: Knp\Menu\MenuItem
+        factory: ["@app.developement", devMenu]
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu, alias: dev }
+            

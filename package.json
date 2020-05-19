@@ -8,17 +8,27 @@
         "build": "./node_modules/@symfony/webpack-encore/bin/encore.js production --progress"
     },
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.23.0",
+        "@symfony/webpack-encore": "^0.28.0",
         "copy-webpack-plugin": "^5.0.0",
-        "jquery": "^3.4.1",
-        "jquery-form": "^4.2.2",
-        "node-sass": "^4.11.0",
+        "node-sass": "^4.12.0",
         "sass-loader": "^7.1.0",
         "webpack": "^4.29.6",
         "webpack-notifier": "^1.6.0"
     },
     "dependencies": {
+        "core-js": "3",
+        "jquery": "^3.4.1",
+        "jquery-form": "^4.2.2",
         "ckeditor": "^4.0.0",
-        "core-js": "3"
+        "@fortawesome/fontawesome-free": "^5.8.2",
+        "bootstrap": "^4.3.1",
+        "bootstrap-gtreetable": "gilek/bootstrap-gtreetable",
+        "bootstrap-sass": "^3.4.1",
+        "jquery-duplicate-fields": "https://github.com/iatanasov77/jquery-duplicate-fields.git",
+        "jquery-easyui": "^1.5.21",
+        "jquery-ui-dist": "^1.12.1",
+        "jquery.nicescroll": "^3.7.6",
+        "popper": "^1.0.1",
+        "popper.js": "^1.15.0"
     }
 }

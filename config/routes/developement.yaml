@@ -1,0 +1,12 @@
+app_settings:
+    resource: "@VSApplicationBundle/Resources/config/routing/settings.yaml"
+    prefix:   /developement/
+
+app_taxonomy:
+    resource: "@VSApplicationBundle/Resources/config/routing/taxonomy.yaml"
+    prefix:   /developement/
+
+vs_cms_pages:
+    resource: "@VSCmsBundle/Resources/config/routing/pages.yml"
+    prefix:   /developement/
+

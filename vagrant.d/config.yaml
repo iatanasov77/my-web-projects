@@ -1,7 +1,16 @@
 phpVersion: '7.2'
-phpbrewInstall: []   #['7.4.1', '5.6']
 mysqlService: 'mysqld'
 vhostsJson: '/vagrant/installed_hosts.json'
+
+phpbrew:
+    system_wide: true
+    additional_dependencies: [
+        'httpd-devel', 
+        'libcurl-devel',
+        'oniguruma-devel',
+        'libsodium-devel'
+    ]
+    install: []   #['7.4.1', '5.6']
 
 packages:
    - mc

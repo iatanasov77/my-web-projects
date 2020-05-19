@@ -6,12 +6,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 class BumpVersionCommand extends Command
-{
-    protected static $defaultName = 'vs:bumpversion';
-    
+{    
     protected function configure()
     {
         $this
+            ->setName( 'vs:bumpversion' )
             ->setDescription( 'Bump the release version.' )
             ->setHelp( 'Bump the version and add CHANGES info from commit messages.' )
         ;
@@ -20,8 +19,8 @@ class BumpVersionCommand extends Command
     protected function execute( InputInterface $input, OutputInterface $output )
     {
         $versionFile		= 'VERSION';
-        $changesFile		= 'CHANGES';
-        $tempChangesFile	= 'TMP_CHANGES';
+        $changesFile		= 'CHANGELOG.md';
+        $tempChangesFile	= 'TMP_CHANGELOG';
         $editor				= '/usr/bin/vim';
         $changesPrefix		= '* ';
         $initialVersion		= '0.0.0';
@@ -42,7 +41,7 @@ class BumpVersionCommand extends Command
         if( ! empty( $input ) )
             $suggestedVersion	= $input;
         
-        // Fetch CHANGES , edit its and append to CHAGES file
+        // Fetch NEW CHANGES and edit its if needed
         $gitLogCommand		= ( $lastVersion === $initialVersion )
                                 ? sprintf( 'git log --pretty=format:" %s%%s"', $changesPrefix )
                                 : sprintf( 'git log --pretty=format:" %s%%s"  %s...HEAD', $changesPrefix, $lastVersion );
@@ -60,16 +59,18 @@ class BumpVersionCommand extends Command
             ['file', '/dev/tty', 'w']
         ];
         $process        = proc_open( "$editor $tempChangesFile", $descriptors, $pipes );
-        while(true){
-            if (proc_get_status($process)['running']==FALSE){
+        while ( true ) {
+            if ( proc_get_status( $process )['running']==FALSE ) {
                 break;
             }
         }
         
+        // Fetch OLD CHANGES if exists and append its to new ones
         $oldChanges			= file_exists( $changesFile ) ? file_get_contents( $changesFile ) : '';
         file_put_contents( $tempChangesFile, $oldChanges, FILE_APPEND );
         exec( "mv $tempChangesFile $changesFile" );
         file_put_contents( $versionFile, $suggestedVersion );
+        
         // Commit VERSION and CHANGES files
         exec( sprintf( 'git add %s %s', basename( $versionFile ), basename( $changesFile ) ) );
         exec( sprintf( 'git commit -m "Version bump to %s"', $suggestedVersion ) );

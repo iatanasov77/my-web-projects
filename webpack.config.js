@@ -1,10 +1,11 @@
 var Encore = require('@symfony/webpack-encore');
+
 Encore
 // the project directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath('public/assets/default/build/')
 
     // the public path used by the web server to access the previous directory
-    .setPublicPath('/build/')
+    .setPublicPath('/assets/default/build/')
 
     // delete old files before creating them
     .cleanupOutputBeforeBuild()
@@ -55,14 +56,59 @@ Encore
     .autoProvidejQuery()
 
     
-    .addStyleEntry('css/app', './assets/scss/app.scss')
-    .addStyleEntry('css/custom', './assets/css/custom.css')
+    .addStyleEntry('css/app', './assets/default/scss/app.scss')
+    .addStyleEntry('css/custom', './assets/default/css/custom.css')
     
-    .addEntry( 'js/app', './assets/js/app.js' )
-    .addEntry( 'js/pages/projects', './assets/js/pages/projects.js' )
+    .addEntry( 'js/app', './assets/default/js/app.js' )
+    .addEntry( 'js/pages/projects', './assets/default/js/pages/projects.js' )
       
     // Page Specific Scripts
     //.addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )
 ;
+const defaultConfig = Encore.getWebpackConfig();
+defaultConfig.name = 'default';
 
-module.exports = Encore.getWebpackConfig();
+//=================================================================================================
+
+Encore.reset();
+Encore
+	.setOutputPath( 'public/assets/developement/build/' )
+	.setPublicPath( '/assets/developement/build' )
+	.cleanupOutputBeforeBuild()
+	
+	.copyFiles({
+	     from: './assets/developement/images',
+	     to: 'images/[path][name].[ext]',
+	 })
+	 .copyFiles({
+	     from: './node_modules/bootstrap-sass/assets/fonts/bootstrap',
+	     to: 'fonts/bootstrap/[name].[ext]',
+	 })
+	
+	.addEntry( 'js/app', './assets/developement/js/app.js' )
+	
+	.addEntry('js/settings', './assets/developement/js/pages/settings.js')
+	.addEntry('js/profile', './assets/developement/js/pages/profile.js')
+	.addEntry('js/taxonomy', './assets/developement/js/pages/taxonomy.js')
+	.addEntry('js/pages-edit', './assets/developement/js/pages/pages-edit.js')
+	
+	.autoProvidejQuery()
+	.enableSassLoader(function(sassOptions) {}, {
+	    resolveUrlLoader: true
+	})
+	.configureFilenames({
+	    js: '[name].js?[contenthash]',
+	    css: '[name].css?[contenthash]',
+	    images: 'images/[name].[ext]?[hash:8]',
+	    fonts: 'fonts/[name].[ext]?[hash:8]'
+	})
+	.enableSingleRuntimeChunk()
+	.enableVersioning(Encore.isProduction())
+	.enableSourceMaps( !Encore.isProduction() )
+;
+const developementConfig = Encore.getWebpackConfig();
+developementConfig.name = 'developement';
+
+//=================================================================================================
+
+module.exports = [defaultConfig, developementConfig];
