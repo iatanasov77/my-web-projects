@@ -73,3 +73,6 @@
 [submodule "vagrant.d/puppet/modules/git"]
 	path = vagrant.d/puppet/modules/git
 	url = https://github.com/puppetlabs/puppetlabs-git
+[submodule "lib/VS/ApplicationBundle"]
+	path = lib/VS/ApplicationBundle
+	url = https://github.com/iatanasov77/vs-application-bundle.git

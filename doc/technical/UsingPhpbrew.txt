@@ -19,9 +19,9 @@
         phpbrew ext install intl
         
     g: To restart php-fpm:
-        # sevice httpd stop
+        # service httpd stop
         # phpbrew fpm stop
         # rm -f /opt/phpbrew/php/php-7.0.33/var/run/php-fpm.sock
         # phpbrew fpm start
-        # sevice httpd start
+        # service httpd start
         
