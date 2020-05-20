@@ -1,0 +1,15 @@
+Composer Install Require Php 7.3 or 7.4
+
+Execute Commands:
+-------------------
+phpbrew install 7.4.0 +default +fpm +mysql +pdo +openssl=/usr -- --with-libdir=lib64
+
+Required Extensions:
+--------------------
+phpbrew ext install exif
+
+yum install libjpeg-...-devel
+yum install libpng-devel
+phpbrew ext install gd
+
+
