@@ -27,6 +27,7 @@ packages:
    - unzip
    - lynx
    - phpbrew
+   - docker
 
 apacheModules:
   - expires
