@@ -8,7 +8,10 @@ phpbrew:
         'httpd-devel', 
         'libcurl-devel',
         'oniguruma-devel',
-        'libsodium-devel'
+        'libsodium-devel',
+        
+        'libjpeg-turbo-devel',
+        'libpng-devel'
     ]
     install: []   #['7.4.1', '5.6']
 
