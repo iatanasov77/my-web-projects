@@ -1,0 +1,13 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    {% for parentItem in item.children %}
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ parentItem.uri }}">
+                <i class="{{ parentItem.attributes.iconClass }}"></i>
+                <span>{{ parentItem.name | truncate( 18 ) }}</span>
+            </a>
+        </li>
+    {% endfor %}
+{% endblock %}

@@ -19,7 +19,7 @@ database:
     dump: '/vagrant/doc/sql/VsMyProjects-20200521.sql'
 
 subsystems:
-    - docker
+    #- docker
     - phpbrew
 
 phpbrew:

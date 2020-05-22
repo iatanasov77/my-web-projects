@@ -58,20 +58,31 @@ vs_application:
                         route: vs_cms_page_categories_index
                         
         mainMenu:
-            application:
-                name: Application Core
-                uri: "javascript:;"
+            dashboard:
+                name: Dashboard
+                uri: "/"
                 attributes:
-                    iconClass: icon_document_alt
-                childs:
-                    settings:
-                        name: General Settings
-                        route: vs_application_settings_index
-                    taxonomy:
-                        name: Taxonomy
-                        route: vs_application_taxonomy_index
+                    id: menu-dashboard
+                    iconClass: "fas fa-fw fa-tachometer-alt"
+            projects:
+                name: Projects
+                uri: "/projects"
+                attributes:
+                    id: menu-projects
+                    iconClass: "fas fa-project-diagram"
+            php_versions:
+                name: Php Versions
+                uri: "/php-versions"
+                attributes:
+                    id: menu-php-versions
+                    iconClass: "fas fa-project-diagram"
+            virtual_hosts:
+                name: Hosts
+                uri: "/hosts"
+                attributes:
+                    id: menu-virtual-hosts
+                    iconClass: "fas fa-project-diagram"
 
-                        
         profileMenu:
             profile:
                 name: "My Profile"
