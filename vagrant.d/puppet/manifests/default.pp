@@ -37,17 +37,17 @@ class dependencies
 		}
 		
 		package { 'libzip':
-		    provider    => 'rpm',
-		    ensure      => installed,
-		    source		=> "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm",
-		    require => Exec['remove older libzip'],
+		    provider  => 'rpm',
+		    ensure    => installed,
+		    source    => "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm",
+		    require   => Exec['remove older libzip'],
 		}
 	
 		package { 'libzip-devel':
-		    provider    => 'rpm',
-		    ensure      => installed,
-		    source		=> "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm",
-		    require => Exec['remove older libzip'],
+		    provider  => 'rpm',
+		    ensure    => installed,
+		    source    => "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm",
+		    require   => Exec['remove older libzip'],
 		}
 	}
 }
@@ -56,17 +56,34 @@ node default
 {
 	include stdlib
 	
+	######################################################
+    # Setup
+    ######################################################
+    
 	#include devenv::dependencies
 	include dependencies
 	
 	include devenv::system
 	include devenv::lamp
-	include devenv::tools
+	include devenv::subsystems
+	include devenv::packages
 	#include devenv::vstools
 	include devenv::docker
 	include devenv::frontendtools
     
-	# puppet module install saz-sudo --version 5.0.0
+    # Create MyProjects Database
+    mysql::db { $vsConfig['database']['name']:
+        user     => 'root',
+        password => 'vagrant',
+        host     => 'myprojects.lh',
+        sql      => $vsConfig['database']['dump'],
+    }
+  
+    ######################################################
+    # Config
+    ######################################################
+    
+	# Config sudo users
 	sudo::conf { "vagrant":
 	    ensure			=> "present",
 	    content			=> "vagrant ALL=(ALL) NOPASSWD: ALL",
