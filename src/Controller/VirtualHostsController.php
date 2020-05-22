@@ -21,21 +21,55 @@ class VirtualHostsController extends Controller
     
     protected function virtualHosts()
     {
-        $versions   = [];
+        $hosts   = [];
         $dir        = $this->container->getParameter( 'virtual_hosts_dir' );
         
         $handle = is_dir( $dir ) ? opendir( $dir ) : null;
         if ( $handle ) {
             
-            while (false !== ($entry = readdir($handle))) {
+            while ( false !== ( $entry = readdir( $handle ) ) ) {
                 if ( $entry != "." && $entry != ".." ) {
-                    $versions[] = $entry;
+                    $hosts[] = $this->parseVhost( $dir . '/' . $entry );
                 }
             }
             
             closedir( $handle );
         }
         
-        return $versions;
+        return $hosts;
+    }
+    
+    protected function parseVhost( $confFile )
+    {
+        $handle = fopen( $confFile, 'r' )or die( 'No open ups..' );
+        
+        $vhost  = [];
+        while( ! feof( $handle ) ) {
+            $line = fgets( $handle );
+            $line = trim( $line );
+            
+            // CHECK IF STRING BEGINS WITH ServerAlias
+            $tokens = explode( ' ',$line );
+            
+            if( ! empty( $tokens ) ) {
+                if( strtolower( $tokens[0] ) == 'servername' ) {
+                    $vhost['ServerName'] = $tokens[1];
+                    $vhost['PhpVersion'] = 'default';
+                }
+                if( $tokens[0] == '<Proxy' ) {
+                    if ( isset( $tokens[1] ) ) {
+                        $proxyParts = explode( '/', $tokens[1] );
+                        $vhost['PhpVersion'] = substr( $proxyParts[4], 4 );
+                    }
+                }
+                
+            } else {
+                echo "Puked...";
+            }
+        }
+        
+        fclose( $handle );
+        
+        return $vhost;
     }
 }
