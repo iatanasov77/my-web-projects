@@ -1,15 +1,23 @@
 Composer Install Require Php 7.3 or 7.4
 
-Execute Commands:
+Execute Commands as root:
 -------------------
-phpbrew install 7.4.0 +default +fpm +mysql +pdo +openssl=/usr -- --with-libdir=lib64
+sudo -i
+yum install libjpeg-turbo-devel
+yum install libpng-devel
+phpbrew install 7.4.0 +default +fpm +mysql +pdo +mcrypt +intl +exif +gd +openssl=/usr -- --with-libdir=lib64 --with-gd=shared --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png-dir=/usr
+phpbrew use 7.4.0
 
 Required Extensions:
 --------------------
-phpbrew ext install exif
-
-yum install libjpeg-...-devel
-yum install libpng-devel
-phpbrew ext install gd
 
 
+Instalation:
+---------------
+php -d memory_limit=-1  /usr/local/bin/composer install --prefer-source
+
+yarn --no-bin-links
+yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D --no-bin-links
+yarn add bootstrap bootstrap.native glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons --no-bin-links
+
+yarn run dev
