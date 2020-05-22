@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-   echo "You must to be root." 
-   exit 1
-fi
-
 PHPBREW_PREFIX="/opt/phpbrew"
 PHP_VERSION=$1
 COMMAND=$2
@@ -56,9 +51,14 @@ setStatus()
 
 usage()
 {
-    echo "usage: phpfpm [php_version] [command]"
+    echo "Usage: phpfpm [php_version] [command]"
     exit 1
 }
+
+if [[ $EUID -ne 0 ]]; then
+   echo "You must to be root." 
+   exit 1
+fi
 
 [ -z $1 ] && usage
 
