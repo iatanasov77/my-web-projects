@@ -61,6 +61,7 @@ Encore
     
     .addEntry( 'js/app', './assets/default/js/app.js' )
     .addEntry( 'js/pages/projects', './assets/default/js/pages/projects.js' )
+    .addEntry( 'js/pages/virtual_hosts', './assets/default/js/pages/virtual_hosts.js' )
       
     // Page Specific Scripts
     //.addEntry( 'js/page_scripts/projects', './assets/js/page_scripts/projects.js' )

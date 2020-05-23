@@ -58,6 +58,23 @@ vs_application:
                         route: vs_cms_page_categories_index
                         
         mainMenu:
+            external_tools:
+                name: External Tools
+                uri: "javascript:;"
+                attributes:
+                    id: menu-virtual-hosts
+                    iconClass: "fas fa-project-diagram"
+                childs:
+                    php_info:
+                        name: Php Info
+                        uri: "/info.php"
+                        attributes:
+                            target: '_blank'
+                    categories:
+                        name: PhpMyAdmin
+                        uri: "/phpmyadmin"
+                        attributes:
+                            target: '_blank'
             dashboard:
                 name: Dashboard
                 uri: "/"
