@@ -45,3 +45,15 @@
     </div>
     <!-- /.container-fluid -->
 {% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+    
+    {% include 'modals/host_change_version.html.twig' %}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/pages/virtual_hosts' ) }}
+{% endblock %}
