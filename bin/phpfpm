@@ -4,24 +4,27 @@ PHPBREW_PREFIX="/opt/phpbrew"
 PHP_VERSION=$1
 COMMAND=$2
 
+# This works
 start()
 {
     
-    local configFile="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php-fpm.d/www.conf"
+    local fpmConfig="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php-fpm.d/www.conf"
     local fpmCommand="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/sbin/php-fpm"
     
-    if [ ! -f "$configFile" ]; then
-        echo "$configFile does not exist"
-        # MAY BE YOU SHOULD INSTALL VERSION
+    if [ ! -f "$fpmConfig" ]; then
+        echo "$fpmConfig does not exist"
+        echo "MAY BE YOU SHOULD INSTALL THE VERSION"
+        exit 1
     fi
     
-    prepairConfig ${configFile}
+    prepairConfig ${fpmConfig}
     
     eval $fpmCommand
     
     echo "SUCCESS !!!" 
 }
 
+# Not works
 restartFpm()
 {
     service httpd stop
@@ -33,15 +36,23 @@ restartFpm()
 
 prepairConfig()
 {
-    local configFile=$1
+    local fpmConfig=$1
     
-    sed -i 's/nobody/apache/g' ${configFile}
+    sed -i 's/nobody/apache/g' ${fpmConfig}
     
     # Uncomment lines
-    sed -i "s/^;\{0,1\}listen\.owner *= *[^ ]*/listen.owner = apache/" ${configFile}
-    sed -i "s/^;\{0,1\}listen\.group *= *[^ ]*/listen.group = apache/" ${configFile}
-    sed -i "s/^;\{0,1\}listen\.mode *= *[^ ]*/listen.mode = 0660/" ${configFile}
-    sed -i "s/^;\{0,1\}listen\.allowed_clients *= *[^ ]*/listen.allowed_clients = 127.0.0.1/" ${configFile}
+    sed -i "s/^;\{0,1\}listen\.owner *= *[^ ]*/listen.owner = apache/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.group *= *[^ ]*/listen.group = apache/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.mode *= *[^ ]*/listen.mode = 0660/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.allowed_clients *= *[^ ]*/listen.allowed_clients = 127.0.0.1/" ${fpmConfig}
+    # sed -i '/^;listen.owner /s/^;//' ${fpmConfig}
+    # sed -i '/^;listen.group /s/^;//' ${fpmConfig}
+    # sed -i '/^;listen.mode /s/^;//' ${fpmConfig}
+    # sed -i '/^;listen.allowed_clients /s/^;//' ${fpmConfig}
+    
+    # Allow The all of server memory
+    local iniConfig="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php.ini"
+    sed -i "s/^;\{0,1\}memory_limit *= *[^ ]*/memory_limit = -1/" ${iniConfig}
 }
 
 setStatus()

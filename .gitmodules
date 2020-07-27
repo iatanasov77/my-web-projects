@@ -76,3 +76,6 @@
 [submodule "lib/VS/ApplicationBundle"]
 	path = lib/VS/ApplicationBundle
 	url = https://github.com/iatanasov77/vs-application-bundle.git
+[submodule "lib/VS/CmsBundle"]
+	path = lib/VS/CmsBundle
+	url = https://github.com/iatanasov77/vs-cms-bundle.git

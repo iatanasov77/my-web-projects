@@ -13,63 +13,29 @@ class VirtualHostsController extends Controller
      */
     public function index( Request $request )
     {
+        $virtualHosts   = $this->container->get( 'vs_app.apache_virtual_hosts' );
+        $phpBrew        = $this->container->get( 'vs_app.php_brew' );
         
         return $this->render('pages/virtual_hosts.html.twig', [
-            'hosts'  => $this->virtualHosts()
+            'hosts'                 => $virtualHosts->virtualHosts(),
+            'installedPhpVersions'  => $phpBrew->getInstalledVersions()
         ]);
     }
     
-    protected function virtualHosts()
+    /**
+     * @Route("/hosts/{host}/php-version", name="virtual-hosts-set-php-version")
+     */
+    public function setPhpVersion( Request $request )
     {
-        $hosts   = [];
-        $dir        = $this->container->getParameter( 'virtual_hosts_dir' );
-        
-        $handle = is_dir( $dir ) ? opendir( $dir ) : null;
-        if ( $handle ) {
+        if ( $request->isMethod( 'post' ) ) {
+            $vhosts     = $this->container->get( 'vs_app.apache_virtual_hosts' );
+     
+            $host       = $request->attributes->get( 'host' );
+            $phpVersion = ltrim( $request->request->get( 'php_version' ), 'php-' );
             
-            while ( false !== ( $entry = readdir( $handle ) ) ) {
-                if ( $entry != "." && $entry != ".." ) {
-                    $hosts[] = $this->parseVhost( $dir . '/' . $entry );
-                }
-            }
-            
-            closedir( $handle );
+            $vhosts->setVirtualhost( $host, $phpVersion );
+
+            return $this->redirectToRoute( 'virtual-hosts' );
         }
-        
-        return $hosts;
-    }
-    
-    protected function parseVhost( $confFile )
-    {
-        $handle = fopen( $confFile, 'r' )or die( 'No open ups..' );
-        
-        $vhost  = [];
-        while( ! feof( $handle ) ) {
-            $line = fgets( $handle );
-            $line = trim( $line );
-            
-            // CHECK IF STRING BEGINS WITH ServerAlias
-            $tokens = explode( ' ',$line );
-            
-            if( ! empty( $tokens ) ) {
-                if( strtolower( $tokens[0] ) == 'servername' ) {
-                    $vhost['ServerName'] = $tokens[1];
-                    $vhost['PhpVersion'] = 'default';
-                }
-                if( $tokens[0] == '<Proxy' ) {
-                    if ( isset( $tokens[1] ) ) {
-                        $proxyParts = explode( '/', $tokens[1] );
-                        $vhost['PhpVersion'] = substr( $proxyParts[4], 4 );
-                    }
-                }
-                
-            } else {
-                echo "Puked...";
-            }
-        }
-        
-        fclose( $handle );
-        
-        return $vhost;
     }
 }

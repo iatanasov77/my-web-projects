@@ -4,9 +4,9 @@
     ServerAdmin {{serverAdmin}}
     ServerName {{host}}
     ServerAlias www.{{host}}
-    DocumentRoot {{documentRoot}}
+    DocumentRoot "{{documentRoot}}"
     
-    <Directory {{documentRoot}}>
+    <Directory "{{documentRoot}}">
        AllowOverride All
        Require all granted
     </Directory>

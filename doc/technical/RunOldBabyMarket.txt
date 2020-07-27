@@ -12,10 +12,10 @@ Edit Config:
 user = nobody
 group = nobody
 
-listen.owner = nobody
-listen.group = nobody
-
-    Uncomment these:
-    -----------------
+    Uncomment these lines:
+    -----------------------
+    listen.owner = nobody
+    listen.group = nobody
     listen.mode = 0660
     listen.allowed_clients = 127.0.0.1
+
