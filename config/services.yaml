@@ -1,6 +1,7 @@
 imports:
     - { resource: services/developement.yaml }
     - { resource: services/twig_extensions.yaml }
+    - { resource: services/phpbrew.yaml }
     
 parameters:
     siteTitle: 'VS My Projects 2'
@@ -46,4 +47,25 @@ services:
 
     vasek_purchart.tracy_blue_screen.tracy.blue_screen: '@my_blue_screen'
     
+    ##################################
+    # Command Helper services
+    ##################################
+    vs_app.php_brew:
+        public: true
+        class: App\Component\Command\PhpBrew
+        calls:
+          - [ setContainer ]
+    
+    vs_app.apache_virtual_hosts:
+        public: true
+        class: App\Component\Apache\VirtualHostRepository
+        arguments: ["@service_container"]
+
+    vs_app.apache_service:
+        public: true
+        class: App\Component\Command\Apache
+        calls:
+          - [ setContainer ]
+          
     #############################################################################  
+    

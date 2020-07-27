@@ -6,6 +6,7 @@ packages:
     - mc
     - git
     - gitflow
+    - gitftp
     - curl
     - vim
     - nano
@@ -19,7 +20,7 @@ database:
     dump: '/vagrant/doc/sql/VsMyProjects-20200521.sql'
 
 subsystems:
-    #- docker
+    - docker
     - phpbrew
 
 phpbrew:

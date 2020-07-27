@@ -94,6 +94,11 @@ node default
 	    content			=> "www-data ALL=(ALL) NOPASSWD: ALL",
 	    sudo_file_name	=> "www-data",
 	}
+	sudo::conf { "apache":
+        ensure          => "present",
+        content         => "apache ALL=(ALL) NOPASSWD: ALL",
+        sudo_file_name  => "apache",
+    }
 	
 	
 	# create composer cache directory with write permissions to all users
