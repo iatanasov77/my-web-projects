@@ -29,3 +29,8 @@ sudo dotnet run --urls "http://*:5000;https://*:5001" >/dev/null 2>&1 &
 
 Working :)
 
+
+THIS IS THE PROCESS
+======================
+31509 pts/0    SLl    0:02 dotnet exec /projects/HelloDotnet/bin/Debug/netcoreapp2.0/HelloDotnet.dll --urls http://*:5000;https://*:5001
+

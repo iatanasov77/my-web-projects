@@ -114,16 +114,25 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 		$done = <<-SCRIPT
 echo ""
 echo ""
-echo "####################################################################"
+echo "##############################################################################"
 echo "# DONE!!!"
 echo "# -------"
+echo "#"
 echo "# Now you can open http://#{ENV['HOST_NAME']} in your browser"
 echo "#"
 echo "# You have PHP Info at http://#{ENV['HOST_NAME']}/info.php"
 echo "# You have a PhpMyAdmin  at http://#{ENV['HOST_NAME']}/phpMyAdmin/"
 echo "#"
 echo "# Support at: https://github.com/iatanasov77/my-projects"
-echo "####################################################################"
+echo "#"
+echo "##############################################################################"
+echo "# DotNet Examples"
+echo "# ---------------"
+echo "#"
+echo "# May be you should run:"
+sudo "#     dotnet run --urls "http://*:5000;https://*:5001" >/dev/null 2>&1 &"
+echo "#"
+echo "##############################################################################"
 SCRIPT
 		config.vm.provision "shell", inline: $done
 
