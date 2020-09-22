@@ -2,6 +2,13 @@ phpVersion: '7.2'
 mysqlService: 'mysqld'
 vhostsJson: '/vagrant/installed_hosts.json'
 
+subsystems:
+    #- docker
+    - phpbrew
+    - dotnet
+    - dotnet_core
+    #- mono
+
 packages:
     - mc
     - git
@@ -18,11 +25,7 @@ packages:
 database:
     name: 'VsMyProjects'
     dump: '/vagrant/doc/sql/VsMyProjects-20200521.sql'
-
-subsystems:
-    - docker
-    - phpbrew
-
+    
 phpbrew:
     system_wide: true
     additional_dependencies: [

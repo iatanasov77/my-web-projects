@@ -1,0 +1,16 @@
+<VirtualHost *:80>
+    ServerName dotnet.lh
+    ServerAdmin webmaster@dotnet.lh
+
+    #ProxyPreserveHost On
+    #ProxyPass / http://127.0.0.1:5000/
+    #ProxyPassReverse / http://127.0.0.1:5000/
+    ErrorLog /var/log/httpd/dotnet.lh-error.log
+    CustomLog /var/log/httpd/dotnet.lh-access.log common
+
+    SetHandler mono
+    AddMonoApplications default "/:/projects/HelloDotnet/wwwroot"
+</VirtualHost>
+
+#AddMonoApplications "/:/projects/HelloDotnet/wwwroot"
+
