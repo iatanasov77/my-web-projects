@@ -30,3 +30,9 @@
 /vagrant.d/puppet/.tmp
 /installed_hosts.json
 /*.log
+
+##############################
+# Examples meta data
+##############################
+/examples/*/.project
+
