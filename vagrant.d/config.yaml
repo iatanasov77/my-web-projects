@@ -1,4 +1,6 @@
 phpVersion: '7.2'
+phpunit: false
+
 mysqlService: 'mysqld'
 vhostsJson: '/vagrant/installed_hosts.json'
 
