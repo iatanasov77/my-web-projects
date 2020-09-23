@@ -3,7 +3,9 @@
 echo "installing Puppet"
 
 if [ $ID == "centos" ]; then
-    sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+    sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
+    #sudo rpm -ivh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
+    #sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
     sudo yum -y install puppet
     
     sudo ln -s /opt/puppetlabs/bin/puppet /usr/local/bin/puppet
