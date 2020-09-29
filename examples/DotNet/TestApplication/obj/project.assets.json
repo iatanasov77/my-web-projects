@@ -12541,11 +12541,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/vagrant/TestApplication/TestApplication.csproj",
+      "projectUniqueName": "/vagrant/examples/DotNet/TestApplication/TestApplication.csproj",
       "projectName": "TestApplication",
-      "projectPath": "/vagrant/TestApplication/TestApplication.csproj",
+      "projectPath": "/vagrant/examples/DotNet/TestApplication/TestApplication.csproj",
       "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/vagrant/TestApplication/obj/",
+      "outputPath": "/vagrant/examples/DotNet/TestApplication/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"

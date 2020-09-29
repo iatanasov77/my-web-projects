@@ -1,17 +1,35 @@
-Composer Install Require Php 7.3 or 7.4
+Be Sure for config /opt/phpbrew/php/php-7.4.1/etc/php-fpm.d/www.conf
+----------------------------------------------------------------------------
+user = apache
+group = apache
+ 
+listen.owner = apache
+listen.group = apache
+listen.mode = 0660
 
-Execute Commands as root:
--------------------
+
+
+Start FPM and Display Error Log
+----------------------------------------------------------------------------
+/opt/phpbrew/php/php-7.4.1/sbin/php-fpm
+
+sudo tail -f /var/log/httpd/babymarket2.lh_error.log
+
+
+
+
+
+Before Installation Execute Commands as root:   (   Composer Install Require Php 7.3 or 7.4   )
+----------------------------------------------------------------------------
 sudo -i
-phpbrew install 7.4.0 +default +fpm +mysql +pdo +mcrypt +iconv +intl +exif +gd +openssl=/usr -- --with-libdir=lib64 --with-gd=shared --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png-dir=/usr
-phpbrew use 7.4.0
+phpbrew install 7.4.1 +default +fpm +mysql +pdo +mcrypt +iconv +intl +exif +gd +openssl=/usr -- --with-libdir=lib64 --with-gd=shared --enable-gd-native-ttf --with-jpeg-dir=/usr --with-png-dir=/usr
+phpbrew use 7.4.1
 
-Required Extensions:
---------------------
+
 
 
 Instalation:
----------------
+----------------------------------------------------------------------------
 php -d memory_limit=-1  /usr/local/bin/composer install --prefer-source
 
 yarn --no-bin-links
