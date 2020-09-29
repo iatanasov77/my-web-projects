@@ -1,0 +1,59 @@
+==========================================================================================================================
+= USING THIS TUTORIAL: https://developer.okta.com/blog/2018/10/23/php-laravel-angular-crud-app
+= ONLY REPLACE USING OF npm WITH yarn
+=
+= SOURCE CODE: https://github.com/oktadeveloper/okta-php-trivia-angular
+==========================================================================================================================
+
+
+yarn global add @angular/cli@^6.1
+
+cd /vagrant/project/angular
+
+ng new trivia-web-client-angular --skip-install
+cd trivia-web-client-angular
+ng config -g cli.packageManager yarn
+yarn install --no-bin-links
+
+ng serve
+
+==========================================================================================================================
+= THE SAME TUTORIAL USING SYMFONY AS BACKEND: https://developer.okta.com/blog/2018/08/14/php-crud-app-symfony-angular
+= ONLY REPLACE USING OF npm WITH yarn
+=
+= SOURCE CODE: https://github.com/oktadeveloper/okta-php-trivia-angular
+==========================================================================================================================
+
+
+
+==========================================================================================================================
+= Apache VirtualHosts of the App: https://stackoverflow.com/questions/41348210/how-to-configure-apache-for-angular-2
+=
+==========================================================================================================================
+
+ng build --prod
+# This will create a folder called dist, you want to place all the files and folders from within dist to your Apache root directory on your server. 
+
+<VirtualHost *:80>
+    ServerName my-app
+
+    DocumentRoot /vagrant/project/angular/trivia-web-client-angular/dist
+
+    <Directory /vagrant/project/angular/trivia-web-client-angular>/dist
+        RewriteEngine on
+
+        # Don't rewrite files or directories
+        RewriteCond %{REQUEST_FILENAME} -f [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^ - [L]
+
+        # Rewrite everything else to index.html
+        # to allow html5 state links
+        RewriteRule ^ index.html [L]
+    </Directory>
+</VirtualHost>
+
+
+
+
+

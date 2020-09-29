@@ -9,6 +9,7 @@ subsystems:
     - phpbrew
     - dotnet
     - dotnet_core
+    - angular-cli
     #- mono
 
 packages:
