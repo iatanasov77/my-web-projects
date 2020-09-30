@@ -3,6 +3,7 @@
 = ONLY REPLACE USING OF npm WITH yarn
 =
 = SOURCE CODE: https://github.com/oktadeveloper/okta-php-trivia-angular
+= OKTA APP CONFIGURATION ERROR: https://devforum.okta.com/t/oautherror-the-response-type-is-not-supported-by-the-authorization-server-configured-response-types-id-token-token/7074/4 
 ==========================================================================================================================
 
 
@@ -37,21 +38,18 @@ ng build --prod
 <VirtualHost *:80>
     ServerName my-app
 
-    DocumentRoot /vagrant/project/angular/trivia-web-client-angular/dist
+    DocumentRoot /vagrant/project/angular/trivia-web-client-angular/dist/trivia-web-client-angular
 
-    <Directory /vagrant/project/angular/trivia-web-client-angular>/dist
-        RewriteEngine on
-
-        # Don't rewrite files or directories
-        RewriteCond %{REQUEST_FILENAME} -f [OR]
-        RewriteCond %{REQUEST_FILENAME} -d
-        RewriteRule ^ - [L]
-
-        # Rewrite everything else to index.html
-        # to allow html5 state links
-        RewriteRule ^ index.html [L]
+    <Directory /vagrant/project/angular/trivia-web-client-angular/dist/trivia-web-client-angular
+        RewriteEngine On
+        RewriteBase /
+        RewriteRule ^index\.html$ - [L]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule . /index.html [L]
     </Directory>
 </VirtualHost>
+
 
 
 
