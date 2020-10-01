@@ -1,0 +1,32 @@
+==========================================================================================================================
+= USING THIS TUTORIAL: https://developer.okta.com/blog/2018/08/23/symfony-react-php-crud-app
+= ONLY REPLACE USING OF npm WITH yarn
+=
+= SOURCE CODE: https://github.com/oktadeveloper/okta-php-symfony-react-crud-example
+= OKTA APP CONFIGURATION ERROR: https://devforum.okta.com/t/oautherror-the-response-type-is-not-supported-by-the-authorization-server-configured-response-types-id-token-token/7074/4 
+==========================================================================================================================
+
+React App
+-----------
+cd bad-puns-tracker-client-react
+
+yarn global add create-react-app --no-bin-links
+yarn install --no-bin-links
+
+
+Symfony App
+--------------
+cd bad-puns-tracker-server
+
+cp .env.dist .env
+
+Edit .env file
+
+composer install --prefer-source
+bin/console doctrine:database:create
+bin/console doctrine:migrations:migrate
+
+
+Setup Virtual hosts
+---------------------
+

@@ -50,7 +50,7 @@ class Project
     protected $projectRoot;
     
     /**
-     * @ORM\Column(name="document_root", type="string", length=32)
+     * @ORM\Column(name="document_root", type="string", length=128)
      * @Assert\NotBlank
      */
     protected $documentRoot;
@@ -70,6 +70,16 @@ class Project
      * @ORM\Column(name="install_manual", type="string")
      */
     protected $installManual;
+    
+    /**
+     * @ORM\Column(name="phpFpmSocket", type="string", length=128)
+     */
+    protected $phpFpmSocket;
+    
+    /**
+     * @ORM\Column(name="reverseProxy", type="string", length=128)
+     */
+    protected $reverseProxy;
 
     public function getId(): ?int
     {
@@ -192,6 +202,30 @@ class Project
     public function setInstallManual(string $installManual): self
     {
         $this->installManual = $installManual;
+        
+        return $this;
+    }
+    
+    public function getPhpFpmSocket(): ?string
+    {
+        return $this->phpFpmSocket;
+    }
+    
+    public function setPhpFpmSocket(string $phpFpmSocket): self
+    {
+        $this->phpFpmSocket = $phpFpmSocket;
+        
+        return $this;
+    }
+    
+    public function getReverseProxy(): ?string
+    {
+        return $this->reverseProxy;
+    }
+    
+    public function setReverseProxy(string $reverseProxy): self
+    {
+        $this->reverseProxy = $reverseProxy;
         
         return $this;
     }

@@ -27,7 +27,7 @@ packages:
 
 database:
     name: 'VsMyProjects'
-    dump: '/vagrant/doc/sql/VsMyProjects-20200521.sql'
+    dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
     
 phpbrew:
     system_wide: true
