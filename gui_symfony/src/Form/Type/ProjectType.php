@@ -39,6 +39,9 @@ class ProjectType extends AbstractType
             ->add( 'documentRoot', TextType::class )
             ->add( 'host', TextType::class )
             ->add( 'withSsl', CheckboxType::class )
+            
+            ->add( 'phpFpmSocket', TextType::class )
+            ->add( 'reverseProxy', TextType::class )
         ;
             
         $builder->get( 'withSsl' )

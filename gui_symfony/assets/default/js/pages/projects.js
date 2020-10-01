@@ -1,3 +1,5 @@
+var spinner = '<div style="text-align:center;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>';
+
 $(function()
 {
 	// Init Delete Form
@@ -6,8 +8,33 @@ $(function()
 		$( '#project_delete_projectId' ).val( $( this ).attr( 'data-projectId' ) );
 	});
 
+    $( '#create-project-modal' ).on( 'hidden.bs.modal', function ()
+    {
+        $( '#formProjectContainer' ).html( '' );
+    });
+
+    $( '#btnCreateProject' ).on( 'click', function( e )
+    {
+        $( '#formProjectContainer' ).html( spinner );
+        
+        $.ajax({
+            type: "GET",
+            url: "/projects/edit/0",
+            success: function( response )
+            {
+                $( '#formProjectContainer' ).html( response );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+
 	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
 	{
+        $( '#formProjectContainer' ).html( spinner );
+        
 		$.ajax({
 			type: "GET",
 		 	url: "/projects/edit/" + $( this ).attr( 'data-projectId' ),
