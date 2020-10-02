@@ -64,10 +64,11 @@ node default
 	include dependencies
 	
 	include devenv::system
+	include devenv::packages
+	include devenv::vstools
+	
 	include devenv::lamp
 	include devenv::subsystems
-	include devenv::packages
-	#include devenv::vstools
 	include devenv::docker
 	include devenv::frontendtools
     
