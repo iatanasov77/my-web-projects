@@ -100,6 +100,7 @@ node default
         xdebugProfilerOutputName    => "${vsConfig['xdebug']['profiler_output_name']}",
         xdebugProfilerOutputDir     => "${vsConfig['xdebug']['profiler_output_dir']}",
         
+        frontendtools               => $vsConfig['frontendtools'],
         vstools                     => $vsConfig['vstools'],
     }
     
