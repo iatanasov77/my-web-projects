@@ -11,14 +11,23 @@ vstools:
     mkphar: 'v0.2.0'
     bumpversion: 'v0.1.0'
     ftpdeploy: 'v3.0.1'
-    
+
+###############################################################
+# Subsystems refactored from Array to Hashes 
+# but this format is used properly only for 'dotnet' for now 
 subsystems:
-    #- docker
-    - phpbrew
-    - dotnet
-    - dotnet_core
-    - angular-cli
-    #- mono
+    #docker
+    phpbrew:
+        version: 'latest'
+    angular-cli:
+        version: 'latest'
+    dotnet:
+        # In the begining this was the version by: 2.1.4
+        # But the package MySql.Data require version: 2.2
+        dotnet_core: '3.1'
+        sdks: ['2.2']
+        sdkUser: 'vagrant'  # Cannot be root
+        #mono: 'latest'
 
 packages:
     - mc

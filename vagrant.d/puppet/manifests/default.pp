@@ -56,21 +56,52 @@ node default
 {
 	include stdlib
 	
-	######################################################
-    # Setup
-    ######################################################
+	# In Puppetfile:
+    # mod 'ghoneycutt-ssh', '3.57.0' 
+    class { 'ssh':
+        sshd_password_authentication    => 'yes'
+    }
     
-	#include devenv::dependencies
+	######################################################
+    # Setup DevEnv
+    ######################################################
 	include dependencies
 	
-	include devenv::system
-	include devenv::packages
-	include devenv::vstools
-	
-	include devenv::lamp
-	include devenv::subsystems
-	include devenv::docker
-	include devenv::frontendtools
+	class { '::vs_devenv':
+        defaultHost                 => "${hostname}",
+        defaultDocumentRoot         => '/vagrant/gui_symfony/public',
+        vhosts                      => parsejson( file( $vsConfig['vhostsJson'] ) ),
+        
+        subsystems                  => $vsConfig['subsystems'],
+        phpbrewConfig               => $vsConfig['phpbrew'],
+    
+        
+        packages                    => $vsConfig['packages'],
+        gitUserName                 => $vsConfig['git']['userName'],
+        gitUserEmail                => $vsConfig['git']['userEmail'],
+        
+        phpVersion                  => "${vsConfig['phpVersion']}",
+        apacheModules               => $vsConfig['apacheModules'],
+        
+        phpModules                  => $vsConfig['phpModules'],
+        phpunit                     => $vsConfig['phpunit'],
+        
+        phpSettings                 => {
+            'PHP/memory_limit'        => '-1',
+            'Date/date.timezone'      => 'Europe/Sofia',
+            'PHP/post_max_size'       => '64M',
+            'PHP/upload_max_filesize' => '64M',
+            'PHAR/phar.readonly'      => 'Off',
+        },
+        
+        xdebugTraceOutputName       => "${vsConfig['xdebug']['trace_output_name']}",
+        xdebugTraceOutputDir        => "${vsConfig['xdebug']['trace_output_dir']}",
+        xdebugProfilerEnable        => "${vsConfig['xdebug']['profiler_enable']}",
+        xdebugProfilerOutputName    => "${vsConfig['xdebug']['profiler_output_name']}",
+        xdebugProfilerOutputDir     => "${vsConfig['xdebug']['profiler_output_dir']}",
+        
+        vstools                     => $vsConfig['vstools'],
+    }
     
     # Create MyProjects Database
     mysql::db { $vsConfig['database']['name']:

@@ -51,7 +51,7 @@ class PhpFpmCommand extends ContainerAwareCommand
     
     protected function setup()
     {
-        switch(true)
+        switch ( true )
         {
             case file_exists( $this->installationPath . '/etc/php-fpm.d/www.conf' ):
                 $confFile   = $this->installationPath . '/etc/php-fpm.d/www.conf';

@@ -58,9 +58,6 @@
 [submodule "vagrant.d/puppet/modules/inifile"]
 	path = vagrant.d/puppet/modules/inifile
 	url = https://github.com/puppetlabs/puppetlabs-inifile
-[submodule "vagrant.d/puppet/modules/devenv"]
-	path = vagrant.d/puppet/modules/devenv
-	url = https://github.com/iatanasov77/puppet-devenv.git
 [submodule "vagrant.d/puppet/modules/composer"]
 	path = vagrant.d/puppet/modules/composer
 	url = https://github.com/willdurand/puppet-composer.git
@@ -79,3 +76,14 @@
 [submodule "gui_symfony/lib/VS/CmsBundle"]
 	path = gui_symfony/lib/VS/CmsBundle
 	url = https://github.com/iatanasov77/vs-cms-bundle.git
+[submodule "vagrant.d/puppet/modules/vs_dotnet"]
+	path = vagrant.d/puppet/modules/vs_dotnet
+	url = https://github.com/iatanasov77/puppet-dotnet.git
+	branch = main
+[submodule "vagrant.d/puppet/modules/vs_lamp"]
+	path = vagrant.d/puppet/modules/vs_lamp
+	url = https://github.com/iatanasov77/puppet-lamp.git
+        branch = main
+[submodule "vagrant.d/puppet/modules/vs_devenv"]
+	path = vagrant.d/puppet/modules/vs_devenv
+	url = https://github.com/iatanasov77/puppet-devenv.git
