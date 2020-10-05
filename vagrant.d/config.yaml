@@ -19,8 +19,6 @@ subsystems:
     #docker
     phpbrew:
         version: 'latest'
-    angular-cli:
-        version: 'latest'
     dotnet:
         # In the begining this was the version by: 2.1.4
         # But the package MySql.Data require version: 2.2
@@ -29,6 +27,12 @@ subsystems:
         sdkUser: 'vagrant'  # Cannot be root
         #mono: 'latest'
 
+frontendtools:
+    gulp:
+        version: 'latest'
+    angular-cli:
+        version: 'latest'
+        
 packages:
     - mc
     - git
