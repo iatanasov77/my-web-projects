@@ -28,8 +28,9 @@
 /vagrant.d/puppet/Puppetfile.lock
 /vagrant.d/puppet/.librarian
 /vagrant.d/puppet/.tmp
-/installed_hosts.json
 /*.log
+/installed_hosts.json
+/installed_projects.json
 
 ##############################
 # Examples meta data

@@ -1,0 +1,16 @@
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/libhostpolicy.so
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/libhostfxr.so
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication.deps.json
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication.runtimeconfig.json
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication.runtimeconfig.dev.json
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication.dll
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/TestApplication.pdb
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.csprojAssemblyReference.cache
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.AssemblyInfoInputs.cache
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.AssemblyInfo.cs
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.csproj.CoreCompileInputs.cache
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.dll
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.pdb
+/vagrant/examples/DotNet/TestApplication/obj/Release/netcoreapp2.0/linux-x64/TestApplication.genruntimeconfig.cache
+/vagrant/examples/DotNet/TestApplication/bin/Release/netcoreapp2.0/linux-x64/launchSettings.json

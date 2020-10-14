@@ -23,8 +23,6 @@ case $operatingsystem
     }
 }
 
-$vsConfig		= parseyaml( $facts['vs_config'] )
-
 class dependencies
 {
 	if ( $operatingsystem == 'CentOS' )
@@ -66,16 +64,16 @@ node default
     # Setup DevEnv
     ######################################################
 	include dependencies
+	$vsConfig  = parseyaml( $facts['vs_config'] )
 	
 	class { '::vs_devenv':
         defaultHost                 => "${hostname}",
         defaultDocumentRoot         => '/vagrant/gui_symfony/public',
-        vhosts                      => parsejson( file( $vsConfig['vhostsJson'] ) ),
+        installedProjects           => parsejson( file( '/vagrant/installed_projects.json' ) ),
         
         subsystems                  => $vsConfig['subsystems'],
         phpbrewConfig               => $vsConfig['phpbrew'],
     
-        
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],

@@ -72,14 +72,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
     	if ENV['FOLDER_TABLATURES']
     	   config.vm.synced_folder ENV['FOLDER_TABLATURES'], "/var/www/wgp.lh/tablatures" #owner: "vagrant", group: "root"
         end
-    
-        require 'yaml'
-        provisionConfig  = YAML.load_file( ENV['PROVISION_CONFIG'] )
         
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
-		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE'],
-		  "PHP_VERSION"   => provisionConfig['phpVersion']
+		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE']
 		}
 		
 		# INIT LIBRARIAN
@@ -94,6 +90,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	    
 	    #puts provisionConfig.inspect
 	    
+	    require 'yaml'
+        devenvConfig    = YAML.load_file( ENV['PROVISION_CONFIG'] )
+        
 	    config.vm.provision :puppet do |puppet|
 			puppet.manifests_path = 'vagrant.d/puppet/manifests'
 			puppet.module_path    = 'vagrant.d/puppet/modules'
@@ -101,7 +100,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 			puppet.manifest_file  = "default.pp"
 			puppet.facter			= {
-				'vs_config'			=> provisionConfig.to_yaml,
+				'vs_config'			=> devenvConfig.to_yaml,
 				'hostname'			=> ENV['HOST_NAME'],
 				'mysqlhost'			=> ENV['PUBLIC_IP'],
 				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql',

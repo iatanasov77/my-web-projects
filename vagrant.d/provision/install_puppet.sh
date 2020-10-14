@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "installing Puppet"
+mkdir -p /etc/puppetlabs/facter/facts.d
 
 if [ $ID == "centos" ]; then
     sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm

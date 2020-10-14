@@ -3,13 +3,12 @@
 phpVersion: '7.2'
 phpunit: false
 
-mysqlService: 'mysqld'
 vhostsJson: '/vagrant/installed_hosts.json'
 
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
-    bumpversion: 'v0.1.0'
+    bumpversion: 'v0.2.0'
     ftpdeploy: 'v3.0.1'
 
 ###############################################################
