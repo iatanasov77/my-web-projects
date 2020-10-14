@@ -27,10 +27,21 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
     
     protected function execute( InputInterface $input, OutputInterface $output )
     {
+        $this->executeHere( $input, $output );
+        //$this->executeWithVsMkVhost( $input, $output );
+    }
+    
+    protected function executeWithVsMkVhost( InputInterface $input, OutputInterface $output )
+    {    
+        $output = shell_exec( 'php /usr/local/bin/mkvhost' );
+    }
+    
+    protected function executeHere( InputInterface $input, OutputInterface $output )
+    {
         posix_getuid() === 0 || die( "You must to be root.\n" );
         
         $os = \App\Component\Helper::OsId();
-        switch ( $os ) 
+        switch ( $os )
         {
             case 'centos':
                 $this->createOnCentOs( $input, $output );
@@ -39,7 +50,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
             default:
                 $this->createOnUbuntu( $input, $output );
                 break;
-            
+                
         }
         $this->setupHost( $input, $output );
         

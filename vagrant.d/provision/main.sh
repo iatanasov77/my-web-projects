@@ -1,8 +1,11 @@
 #!/bin/bash
 
 source /vagrant/vagrant.d/provision/detect_linux.sh
-source /vagrant/vagrant.d/provision/init.sh
 source /vagrant/vagrant.d/provision/make_swap.sh
+
+# PHP 7 and MySql 5.7
+#source /vagrant/vagrant.d/provision/install_dependencies.sh
+
 source /vagrant/vagrant.d/provision/install_puppet.sh
 
 ########################################################################
