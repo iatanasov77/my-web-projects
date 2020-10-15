@@ -36,4 +36,5 @@
 # Examples meta data
 ##############################
 /examples/*/.project
-
+/examples/DotNet/*/bin/
+/examples/DotNet/*/obj/
