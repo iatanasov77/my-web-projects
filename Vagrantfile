@@ -39,8 +39,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.hostmanager.aliases.push( "#{ENV['HOST_NAME']} www.#{ENV['HOST_NAME']}" )
 	
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
-	vsHosts.each do |key, host|
-		vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
+	vsHosts.each do |key, project|
+		project['hosts'].each do |host|
+			vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
+		end
     end
 
 	# Config vagrant machine
