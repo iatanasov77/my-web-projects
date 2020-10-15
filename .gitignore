@@ -25,6 +25,7 @@
 # Vagrant meta data
 ##############################
 /.vagrant/
+/.env
 /vagrant.d/puppet/Puppetfile.lock
 /vagrant.d/puppet/.librarian
 /vagrant.d/puppet/.tmp

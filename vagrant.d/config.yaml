@@ -3,8 +3,6 @@
 phpVersion: '7.2'
 phpunit: false
 
-vhostsJson: '/vagrant/installed_hosts.json'
-
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
