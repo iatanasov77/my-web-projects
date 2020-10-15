@@ -1,5 +1,0 @@
-/vagrant/examples/DotNet/TestApplication
---output-path=obj/Release/netcoreapp2.0/
---application-name=TestApplication
---content-root=/vagrant/examples/DotNet/TestApplication
---file=
