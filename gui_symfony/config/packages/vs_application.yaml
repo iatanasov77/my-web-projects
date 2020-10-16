@@ -21,42 +21,7 @@ vs_application:
                 classes:
                     model: App\Entity\Developement\VsApp\TaxonTranslation
                 
-    menu:
-        devMenu:
-            devTests:
-                name: Developement Tests
-                uri: "javascript:;"
-                attributes:
-                    id: devTests
-                childs:
-                    #taxonomy_test_products:
-                    #    name: Test Taxonomy with Product Categorization
-                    #    route: app_test_taxonomy
-            appBundle:
-                name: Symfony Application Bundle
-                uri: "javascript:;"
-                attributes:
-                    id: appBundle
-                childs:
-                    settings:
-                        name: General Settings
-                        route: vs_app_settings_edit
-                    taxonomy:
-                        name: Taxonomy
-                        route: vs_application_taxonomy_index
-            cmsBundle:
-                name: Symfony Cms Bundle
-                uri: "javascript:;"
-                attributes:
-                    id: cmsBundle
-                childs:
-                    pages:
-                        name: Pages
-                        route: vs_cms_pages_index
-                    categories:
-                        name: Categories
-                        route: vs_cms_page_categories_index
-                        
+    menu:              
         mainMenu:
             external_tools:
                 name: External Tools
@@ -116,5 +81,41 @@ vs_application:
                 uri: "javascript:;"
                 attributes:
                     iconClass: "fas fa-cog mr-2"
+                    
+        # Developement Menu loaded in 'templates/layout/menu/developement.html.twig'          
+        devMenu:
+            devTests:
+                name: Developement Tests
+                uri: "javascript:;"
+                attributes:
+                    id: devTests
+                childs:
+                    #taxonomy_test_products:
+                    #    name: Test Taxonomy with Product Categorization
+                    #    route: app_test_taxonomy
+            appBundle:
+                name: Symfony Application Bundle
+                uri: "javascript:;"
+                attributes:
+                    id: appBundle
+                childs:
+                    settings:
+                        name: General Settings
+                        route: vs_app_settings_edit
+                    taxonomy:
+                        name: Taxonomy
+                        route: vs_application_taxonomy_index
+            cmsBundle:
+                name: Symfony Cms Bundle
+                uri: "javascript:;"
+                attributes:
+                    id: cmsBundle
+                childs:
+                    pages:
+                        name: Pages
+                        route: vs_cms_pages_index
+                    categories:
+                        name: Categories
+                        route: vs_cms_page_categories_index
                 
      
