@@ -10,6 +10,7 @@ use App\Component\Globals;
 use App\Component\Project\Source\SourceFactory;
 use App\Entity\Category;
 use App\Entity\Project;
+use App\Form\Type\PredefinedProjectType;
 use App\Form\Type\ProjectType;
 use App\Form\Type\ProjectInstallManualType;
 use App\Form\Type\ProjectDeleteType;
@@ -46,6 +47,16 @@ class ProjectsController extends Controller
         
         return $this->render( 'pages/projects/project_form.html.twig', [
             'form' => $this->_projectForm( $project )->createView(),
+        ]);
+    }
+    
+    /**
+     * @Route("/projects/predefined/install", name="projects_predefined_edit_form")
+     */
+    public function predefinedProjectForm( Request $request )
+    {
+        return $this->render( 'pages/projects/predefined_project_form.html.twig', [
+            'form' => $this->_predefinedProjectForm()->createView(),
         ]);
     }
     
@@ -104,6 +115,20 @@ class ProjectsController extends Controller
         }
         
         return new Response( $source->fetch() );
+    }
+    
+    /**
+     * @Route("/projects/install_predefined", name="projects_install_predefined")
+     */
+    public function installPredefined( Request $request )
+    {
+        $response   = [
+            'status'    => Globals::STATUS_ERROR,
+            'errType'   => Globals::STATUS_ERROR_TYPE_ALERT,
+            'data'      => 'Installation of Predefined project types is not implemented.',
+        ];
+        
+        return new JsonResponse( $response );
     }
     
     /**
@@ -247,6 +272,16 @@ class ProjectsController extends Controller
         
         $form   = $this->createForm( CategoryType::class, $category, [
             'action' => $this->generateUrl( 'category_create', ['id' => (int)$category->getId()] ),
+            'method' => 'POST'
+        ]);
+        
+        return $form;
+    }
+    
+    private function _predefinedProjectForm( )
+    {
+        $form   = $this->createForm( PredefinedProjectType::class, null, [
+            'action' => $this->generateUrl( 'projects_install_predefined' ),
             'method' => 'POST'
         ]);
         

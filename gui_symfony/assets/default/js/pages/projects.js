@@ -31,6 +31,24 @@ $(function()
         });
     });
 
+    $( '#btnCreatePredefinedProject' ).on( 'click', function( e )
+    {
+        $( '#formProjectContainer' ).html( spinner );
+        
+        $.ajax({
+            type: "GET",
+            url: "/projects/predefined/install",
+            success: function( response )
+            {
+                $( '#formProjectContainer' ).html( response );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
 	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
 	{
         $( '#formProjectContainer' ).html( spinner );
@@ -142,6 +160,12 @@ $(function()
 			{
 				form[0].reset();
 				if ( response.status == 'error' ) {
+					
+					if ( response.errType == 'alert' ) {
+						alert( response.data );
+						return;
+					}
+					
 					var ul = $( '<ul>' );
 					$.each( response.errors, function( key, value ) {
 						ul.append(
@@ -159,7 +183,7 @@ $(function()
 					$( '#sectionProjects' ).html( response.data );
 				}
 			},
-			error: function()
+			error: function(  )
 			{
 				alert( "SYSTEM ERROR!!!" );
 			}
