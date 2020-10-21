@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Project;
 use App\Entity\Category;
 
+use App\Component\Installer\PredefinedProject;
+
 class PredefinedProjectType extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options )
@@ -26,12 +28,7 @@ class PredefinedProjectType extends AbstractType
             ])
             ->add( 'predefinedType', ChoiceType::class, [
                 'placeholder'   => '-- Select Predefined Project --',
-                'choices'       => [
-                    'Symfony'   => 'symfony',
-                    'Laravel'   => 'laravel',
-                    'Sylius'    => 'sylius',
-                    'Magento'   => 'magento',
-                ],
+                'choices'       => PredefinedProject::choices(),
             ])
             
             ->add( 'projectRoot', TextType::class )

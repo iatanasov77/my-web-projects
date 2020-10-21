@@ -37,7 +37,7 @@ $(function()
         
         $.ajax({
             type: "GET",
-            url: "/projects/predefined/install",
+            url: "/projects/predefined/form",
             success: function( response )
             {
                 $( '#formProjectContainer' ).html( response );

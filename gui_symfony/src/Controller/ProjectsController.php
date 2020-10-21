@@ -51,7 +51,7 @@ class ProjectsController extends Controller
     }
     
     /**
-     * @Route("/projects/predefined/install", name="projects_predefined_edit_form")
+     * @Route("/projects/predefined/form", name="projects_predefined_edit_form")
      */
     public function predefinedProjectForm( Request $request )
     {
