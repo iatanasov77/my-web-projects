@@ -38,6 +38,17 @@ subsystems:
     phpbrew:
         enabled: true
         version: 'latest'
+        
+        system_wide: true
+        additional_dependencies:
+           - httpd-devel
+           - libcurl-devel
+           - oniguruma-devel
+           - libsodium-devel
+           - libjpeg-turbo-devel
+           - libpng-devel
+           - libzip-devel
+        install: []   #['7.4.1', '5.6'
 
 frontendtools:
     gulp:
@@ -61,19 +72,6 @@ packages:
 database:
     name: 'VsMyProjects'
     dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
-    
-phpbrew:
-    system_wide: true
-    additional_dependencies: [
-        'httpd-devel', 
-        'libcurl-devel',
-        'oniguruma-devel',
-        'libsodium-devel',
-        
-        'libjpeg-turbo-devel',
-        'libpng-devel'
-    ]
-    install: []   #['7.4.1', '5.6']
 
 xdebug:
     profiler_enable: '1'
@@ -110,29 +108,3 @@ phpModules:
 git:
     userName: 'Ivan I. Atanasov'
     userEmail: 'i.atanasov77@gmail.com'
-
-dependencies:
-    CentOS:
-      mysql57-community:
-         type: 'yumrepo'
-         url: 'https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm'
-      remi-php72:
-         type: 'yumrepo'
-         url: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
-      remove-old-libzip:
-         type: 'command'
-         command: 'yum remove -y libzip'
-      libzip-0.11:
-         type: 'rpm'
-         source: 'http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm'
-         require: Exec['remove-old-libzip']
-      libzip-devel-0.11:
-         type: 'rpm'
-         source: 'http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm'
-         require: Exec['remove-old-libzip']
-      install-packages:
-         type: 'command'
-         command: 'yum install -y mysql-community-server php mod_php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql'
-      php72-symlink:
-         type: 'command'
-         command: 'ln -s /usr/lib64/httpd/modules/libphp7.so /usr/lib64/httpd/modules/libphp7.2.so'

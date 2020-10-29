@@ -11,45 +11,6 @@ Exec {
     path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin', '/usr/local/sbin/' ]
 }
 
-case $operatingsystem 
-{
-    'RedHat', 'CentOS', 'Fedora': 
-    {
-        $apachename     = 'httpd'
-    }
-    'Debian', 'Ubuntu':
-    {
-        $apachename     = 'apache2'
-    }
-}
-
-class dependencies
-{
-	if ( $operatingsystem == 'CentOS' )
-    {
-    	###########################################
-		# PhpBrew build php require libzip >= 0.11
-		###########################################
-		exec { 'remove older libzip':
-			command     => 'yum remove -y libzip'
-		}
-		
-		package { 'libzip':
-		    provider  => 'rpm',
-		    ensure    => installed,
-		    source    => "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-0.11.2-6.el7.psychotic.x86_64.rpm",
-		    require   => Exec['remove older libzip'],
-		}
-	
-		package { 'libzip-devel':
-		    provider  => 'rpm',
-		    ensure    => installed,
-		    source    => "http://packages.psychotic.ninja/7/plus/x86_64/RPMS//libzip-devel-0.11.2-6.el7.psychotic.x86_64.rpm",
-		    require   => Exec['remove older libzip'],
-		}
-	}
-}
-
 node default
 {
 	include stdlib
@@ -63,7 +24,6 @@ node default
 	######################################################
     # Setup DevEnv
     ######################################################
-	include dependencies
 	$vsConfig  = parseyaml( $facts['vs_config'] )
 	
 	class { '::vs_devenv':
@@ -72,7 +32,6 @@ node default
         installedProjects           => parsejson( file( '/vagrant/installed_projects.json' ) ),
         
         subsystems                  => $vsConfig['subsystems'],
-        phpbrewConfig               => $vsConfig['phpbrew'],
     
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
