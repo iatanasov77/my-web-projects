@@ -87,3 +87,9 @@
 [submodule "vagrant.d/puppet/modules/vs_devenv"]
 	path = vagrant.d/puppet/modules/vs_devenv
 	url = https://github.com/iatanasov77/puppet-devenv.git
+[submodule "vagrant.d/puppet/modules/tomcat"]
+	path = vagrant.d/puppet/modules/tomcat
+	url = https://github.com/puppetlabs/puppetlabs-tomcat.git
+[submodule "vagrant.d/puppet/modules/java"]
+	path = vagrant.d/puppet/modules/java
+	url = https://github.com/puppetlabs/puppetlabs-java.git

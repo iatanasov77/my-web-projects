@@ -13,18 +13,31 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
-    #docker
-    phpbrew:
-        version: 'latest'
-    
-    dotnet_not_install:
-    #dotnet:
+    docker:
+      enabled: false
+
+    dotnet:
+        enabled: false
         # In the begining this was the version by: 2.1.4
         # But the package MySql.Data require version: 2.2
         dotnet_core: '3.1'
         sdks: ['2.2']
         sdkUser: 'vagrant'  # Cannot be root
         #mono: 'latest'
+        
+    tomcat:
+        enabled: false
+        catalinaHome: '/opt/tomcat_7'
+        sourceUrl: 'https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.106/bin/apache-tomcat-7.0.106.tar.gz'
+        jdkPackage: 'java-1.8.0-openjdk-devel'
+        instances:
+            tomcat_9:
+                catalinaHome: '/opt/tomcat_9'
+                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz'
+        
+    phpbrew:
+        enabled: true
+        version: 'latest'
 
 frontendtools:
     gulp:
@@ -80,6 +93,9 @@ apacheModules:
     - proxy_fcgi
     - proxy_http
     - proxy_html
+    
+    # For JSP Pages
+    - proxy_ajp
 
 phpModules:
 #  - apc
