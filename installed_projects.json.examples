@@ -1,0 +1,131 @@
+{
+    "DotNet_HelloWorld": {
+        "type": "AspNetCore",
+        
+        "hosts": [
+            {
+                "hostType": "DotNet",
+                "publish": true,
+                "application": "HelloDotnet",
+                "description": "DotNet_HelloWorld",
+                "hostName": "dotnet-core-hello.lh",
+                "documentRoot": "/vagrant/examples/DotNet/HelloWorld/wwwroot",
+                "withSsl": false,
+                "reverseProxyPort": 5000,
+                "dotnetCoreAppPath": "/vagrant/examples/DotNet/HelloWorld"
+            }
+        ]
+    },
+    
+    "DotNet_TestApplication": {
+        "type": "AspNetCore",
+        
+        "hosts": [
+            {
+                "hostType": "DotNet",
+                "publish": true,
+                "application": "TestApplication",
+                "description": "DotNet_TestApplication",
+                "hostName": "dotnet-core-application.lh",
+                "documentRoot": "/vagrant/examples/DotNet/TestApplication/wwwroot",
+                "withSsl": false,
+                "reverseProxyPort": 5002,
+                "dotnetCoreAppPath": "/vagrant/examples/DotNet/TestApplication"
+            }
+        ]
+    },
+    
+    "Okta_AspNetCoreMysql": {
+        "type": "AspNetCore",
+        
+        "hosts": [
+            {
+                "hostType": "DotNet",
+                "publish": false,
+                "application": "TestApplication",
+                "description": "DotNet_TestApplication",
+                "hostName": "dotnet-core-mvc.lh",
+                "documentRoot": "/projects/Okta_AspNetCoreMysql/TextTasks/wwwroot",
+                "withSsl": false,
+                "reverseProxyPort": 5004,
+                "dotnetCoreAppPath": "/projects/Okta_AspNetCoreMysql/TextTasks"
+            }
+        ]
+    },
+    
+    "Tomcat_Default": {
+        "type": "Java",
+        
+        "tomcatInstances": {
+            
+        },
+                
+        "hosts": [
+            {
+                "hostType": "JspRewrite",
+                "description": "DotNet_HelloWorld",
+        
+                "hostName": "tomcat.lh",
+                "documentRoot": "/opt/tomcat/webapps/ROOT",
+                "withSsl": false,
+                
+                "tomcatUrl": "http://127.0.0.1:8080",
+                "tomcatService": "tomcat"
+            }
+        ]
+    },
+    
+    "Java_HelloWorld": {
+        "type": "Java",
+        
+        "tomcatInstances": {
+            
+        },
+                
+        "hosts": [
+            {
+                "hostType": "JspRewrite",
+                "description": "DotNet_HelloWorld",
+        
+                "hostName": "java-hello.lh",
+                "documentRoot": "/opt/tomcat/webapps/hello",
+                "withSsl": false,
+                
+                "publish": true,
+                "publishSrc": "/vagrant/examples/Java/HelloWorld",
+                
+                "tomcatUrl": "http://127.0.0.1:8080/hello",
+                "tomcatService": "tomcat"
+            }
+        ]
+    },
+    
+    "Java_TomcatInstances_Example": {
+        "type": "Java",
+        
+        "tomcatInstances": {
+            "tomcat_9": {
+                "sourceUrl": "https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz",
+                "catalinaHome": "/opt/tomcat_9",
+                "catalinaBase": "/opt/tomcat_9",
+                "serverPort": 8006,
+                "connectorPort": 8081
+            }
+        },
+                
+        "hosts": [
+            {
+                "hostType": "Jsp",
+                "description": "Tomcat 9.0",
+        
+                "hostName": "tomcat9.lh",
+                "documentRoot": "/opt/tomcat_9/webapps/ROOT",
+                "withSsl": false,
+                
+                "reverseProxyProtocol": "http",
+                "reverseProxyPort": 8081,
+                "tomcatService": "tomcat_9"
+            }
+        ]
+    },
+}
