@@ -58,6 +58,7 @@
 [submodule "vagrant.d/puppet/modules/phpbrew"]
 	path = vagrant.d/puppet/modules/phpbrew
 	url = https://github.com/iatanasov77/puppet-phpbrew.git
+		branch = support_centos8
 [submodule "vagrant.d/puppet/modules/puppetlabs-transition"]
 	path = vagrant.d/puppet/modules/puppetlabs-transition
 	url = https://github.com/puppetlabs/puppetlabs-transition.git
