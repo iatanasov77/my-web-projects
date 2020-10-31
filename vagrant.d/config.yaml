@@ -4,7 +4,7 @@ phpVersion: '7.2'
 phpunit: false
 forcePhp7Repo: true
 forceMySqlComunityRepo: false
-mysqlPackageName: false  # Avaiable options: 'mysql-community-server', 'mysql-server', 'mariadb-server'
+mysqlPackageName: 'mysql-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -78,10 +78,6 @@ packages:
     - dos2unix
     - unzip
     - lynx
-
-database:
-    name: 'VsMyProjects'
-    dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
     
 apacheModules:
     - expires
@@ -167,3 +163,9 @@ phpModules:
 phpMyAdmin:
     source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
     targetDirName: 'phpMyAdmin-5.0.4-all-languages'
+
+databases:
+    default:
+        name: 'VsMyProjects'
+        dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
+        
