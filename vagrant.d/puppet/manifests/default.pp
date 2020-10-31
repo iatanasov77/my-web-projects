@@ -60,14 +60,7 @@ node default
     	forceMySqlComunityRepo     	=> $vsConfig['forceMySqlComunityRepo'],
     	
     	mysqlPackageName			=> $vsConfig['mysqlPackageName'],
-    }
-    
-    # Create MyProjects Database
-    mysql::db { $vsConfig['database']['name']:
-        user     => 'root',
-        password => 'vagrant',
-        host     => 'myprojects.lh',
-        sql      => $vsConfig['database']['dump'],
+    	databases					=> $vsConfig['databases'],
     }
   
     ######################################################
@@ -90,7 +83,6 @@ node default
         content         => "apache ALL=(ALL) NOPASSWD: ALL",
         sudo_file_name  => "apache",
     }
-	
 	
 	# create composer cache directory with write permissions to all users
 	file { '/home/vagrant/.composer':

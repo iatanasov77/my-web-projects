@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+###################################################################################
+# VAGRANTFILE FOR TESTING PURPOSES
+###################################################################################
+Vagrant.configure( '2' ) do |vagrant_config|
+	
+	vagrant_config.vm.define "TestMySql" do |config|
+
+	  	config.vm.box				= "bento/centos-8"
+		config.vm.box_check_update	= true
+
+		config.vm.network :private_network, ip: '10.3.3.100'
+
+		# Virtual Box Configuration
+		config.vm.provider :virtualbox do |vb, override|
+			vb.gui		= false
+			vb.name		= "TestMySql"
+			vb.memory	= '512'
+		end
+
+		$done = <<-SCRIPT
+echo ""
+echo ""
+echo "################################################################################"
+echo "# DONE!!!"
+echo "################################################################################"
+SCRIPT
+		config.vm.provision "shell", inline: $done
+
+	end
+end
