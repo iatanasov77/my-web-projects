@@ -19,9 +19,6 @@
 [submodule "vagrant.d/puppet/modules/nodejs"]
 	path = vagrant.d/puppet/modules/nodejs
 	url = https://github.com/willdurand/puppet-nodejs.git
-[submodule "vagrant.d/puppet/modules/phpmyadmin"]
-	path = vagrant.d/puppet/modules/phpmyadmin
-	url = https://github.com/justicel/puppet-phpmyadmin.git
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite
 	url = https://github.com/puppetlabs/puppetlabs-sqlite.git
@@ -52,9 +49,6 @@
 [submodule "vagrant.d/puppet/modules/archive"]
 	path = vagrant.d/puppet/modules/archive
 	url = https://github.com/voxpupuli/puppet-archive
-[submodule "vagrant.d/puppet/modules/puppet-archive"]
-	path = vagrant.d/puppet/modules/puppet-archive
-	url = https://github.com/voxpupuli/puppet-archive
 [submodule "vagrant.d/puppet/modules/inifile"]
 	path = vagrant.d/puppet/modules/inifile
 	url = https://github.com/puppetlabs/puppetlabs-inifile
@@ -70,12 +64,6 @@
 [submodule "vagrant.d/puppet/modules/git"]
 	path = vagrant.d/puppet/modules/git
 	url = https://github.com/puppetlabs/puppetlabs-git
-[submodule "gui_symfony/lib/VS/ApplicationBundle"]
-	path = gui_symfony/lib/VS/ApplicationBundle
-	url = https://github.com/iatanasov77/vs-application-bundle.git
-[submodule "gui_symfony/lib/VS/CmsBundle"]
-	path = gui_symfony/lib/VS/CmsBundle
-	url = https://github.com/iatanasov77/vs-cms-bundle.git
 [submodule "vagrant.d/puppet/modules/vs_dotnet"]
 	path = vagrant.d/puppet/modules/vs_dotnet
 	url = https://github.com/iatanasov77/puppet-dotnet.git

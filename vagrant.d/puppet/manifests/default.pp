@@ -51,14 +51,15 @@ node default
             'PHAR/phar.readonly'      => 'Off',
         },
         
-        xdebugTraceOutputName       => "${vsConfig['xdebug']['trace_output_name']}",
-        xdebugTraceOutputDir        => "${vsConfig['xdebug']['trace_output_dir']}",
-        xdebugProfilerEnable        => "${vsConfig['xdebug']['profiler_enable']}",
-        xdebugProfilerOutputName    => "${vsConfig['xdebug']['profiler_output_name']}",
-        xdebugProfilerOutputDir     => "${vsConfig['xdebug']['profiler_output_dir']}",
+        phpMyAdmin					=> $vsConfig['phpMyAdmin'],
         
         frontendtools               => $vsConfig['frontendtools'],
         vstools                     => $vsConfig['vstools'],
+        
+        forcePhp7Repo              	=> $vsConfig['forcePhp7Repo'],
+    	forceMySqlComunityRepo     	=> $vsConfig['forceMySqlComunityRepo'],
+    	
+    	mysqlPackageName			=> $vsConfig['mysqlPackageName'],
     }
     
     # Create MyProjects Database
