@@ -1,0 +1,51 @@
+2017-07-11 - Version 1.3.0
+- Addition of test suite for unit testing of module (Markus Opolka)
+2016-01-07 - Version 1.2.1
+- Bugfix to resolve issues with CentOS apache data-directory (Chris Edester)
+
+2016-01-06 - Version 1.2.0
+- Moved Blowfish secret to separate config file to prevent secret leaking (Joe
+Ray)
+- SSL CA can be defined in vhost (Joe Ray)
+- Small bugfix to force template file link (Simon Tremblay)
+- Added option to disable mod_security for phpMyAdmin in Hiera
+
+2014-11-03 - Version 1.0.1
+
+Summary: Added ability to specify using a local SSL file instead of puppet
+master content and added SSL redirect ability.
+
+Bugfixes:
+- Removed string validation of aliases, can be array.
+- Added bool to allow user to install/not install apache.
+
+Contributions/Thanks:
+Joe Ray (Thanks!)
+
+2014-09-19 - Version 0.2.2
+
+Summary: Small bug-fixes and greater support for hiera integration with
+module.
+
+Bugfixes:
+- Added string/bool checks for all variables
+- A couple small lint fixes
+- Moved several variables from inner class to parameters to allow for greater
+hiera support.
+
+2014-09-15 - Version 0.2.0
+
+Summary: Re-engaging support for this module. Please submit any bug reports or
+pull requests directly to the github project!
+
+Bugfixes:
+- Properly support direct installation of module without needing to define
+apache or php configuration on node.
+- Lots of lint fixes and param-level cleanup
+- Re-factorization of codebase to resolve issues with missing variables and
+similar made over many conflicting pull requests. Will be more careful with
+what is accepted as a pull in the future.
+
+Summary:
+
+Lots of things fixed, but no new features
