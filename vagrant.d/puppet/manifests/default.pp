@@ -61,6 +61,8 @@ node default
     	
     	mysqlPackageName			=> $vsConfig['mysqlPackageName'],
     	databases					=> $vsConfig['databases'],
+    	
+    	ansibleConfig               => $vsConfig['ansible'],
     }
   
     ######################################################

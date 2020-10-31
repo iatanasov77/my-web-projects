@@ -169,3 +169,12 @@ databases:
         name: 'VsMyProjects'
         dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
         
+ansible:
+    pathRoles: '/vagrant/ansible.d/playbook/roles/'
+    logPath: '/vagrant/ansible.d/log'
+    galaxyRoles: []
+    # Example
+    ##################################
+    #galaxyRoles:
+    #    - geerlingguy.java
+    #    - geerlingguy.jenkins

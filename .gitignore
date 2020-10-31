@@ -34,6 +34,14 @@
 /installed_projects.json
 
 ##############################
+# Ansible meta data
+##############################
+/ansible.d/playbook/roles/*/
+!/ansible.d/playbook/roles/index
+/ansible.d/log/
+/ansible.d/playbook.retry
+
+##############################
 # Examples meta data
 ##############################
 /examples/*/.project
