@@ -82,3 +82,6 @@
 [submodule "vagrant.d/puppet/modules/java"]
 	path = vagrant.d/puppet/modules/java
 	url = https://github.com/puppetlabs/puppetlabs-java.git
+[submodule "vagrant.d/puppet/modules/ansible"]
+	path = vagrant.d/puppet/modules/ansible
+	url = https://github.com/otherskins/puppet-ansible.git

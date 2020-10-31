@@ -1,0 +1,42 @@
+dof-kc.lh ansible_host=192.168.250.100
+dof-kw-1.lh ansible_host=192.168.250.101
+dof-jenkins.lh ansible_host=192.168.250.102
+dof-elastic.lh ansible_host=192.168.250.103
+
+[need_java]
+dof-jenkins.lh
+dof-elastic.lh
+dof-kc.lh
+dof-kw-1.lh
+
+[kube_masters]
+dof-kc.lh
+
+[kube_workers]
+dof-kw-1.lh
+
+[elk_servers]
+dof-elastic.lh
+
+[elk_clients]
+dof-kc.lh
+dof-kw-1.lh
+
+[jenkins_masters]
+dof-jenkins.lh
+
+[jenkins_slaves]
+dof-kc.lh
+
+[servers:children]
+kube_masters
+kube_workers
+elk_servers
+elk_clients
+need_java
+
+[servers:vars]
+ansible_user=vagrant
+ansible_ssh_pass=vagrant
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+host_key_checking=false

@@ -1,0 +1,37 @@
+---
+# Install and Configure JDK on hosts that need it
+- hosts: need_java
+  become: true
+  tasks:
+    - name: installing repo for Java 8 in Ubuntu
+      apt_repository: repo='ppa:openjdk-r/ppa'
+      when: "ansible_os_family == 'Debian'"
+  roles:
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'RedHat'"
+      java_packages:
+        - java-1.8.0-openjdk
+        
+    - role: geerlingguy.java
+      when: "ansible_os_family == 'Debian'"
+      java_packages:
+        - openjdk-8-jdk
+
+# Install and Configure Main ElasticStack Components
+- hosts: elk_servers
+  become: true
+  vars_files:
+    - playbook/vars/elastic_stack.yaml
+  vars:
+    elk_stack: ['elasticsearch', 'logstash', 'kibana']
+  roles:
+    - role: softuni.elk_stack
+
+# Install and Configure ElasticStack Beats
+- import_playbook: playbook/elk_metricbeat.yml
+- import_playbook: playbook/elk_filebeat.yml
+- import_playbook: playbook/elk_journalbeat.yml
+- import_playbook: playbook/elk_heartbeat.yml
+
+# Install and Configure Jenkins Master and Slaves
+- import_playbook: playbook/jenkins_setup.yml
