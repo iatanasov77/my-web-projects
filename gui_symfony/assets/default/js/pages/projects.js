@@ -30,24 +30,6 @@ $(function()
             }
         });
     });
-
-    $( '#btnCreatePredefinedProject' ).on( 'click', function( e )
-    {
-        $( '#formProjectContainer' ).html( spinner );
-        
-        $.ajax({
-            type: "GET",
-            url: "/projects/predefined/form",
-            success: function( response )
-            {
-                $( '#formProjectContainer' ).html( response );
-            },
-            error: function()
-            {
-                alert( "SYSTEM ERROR!!!" );
-            }
-        });
-    });
     
 	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
 	{

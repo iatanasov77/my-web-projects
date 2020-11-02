@@ -13,17 +13,26 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Project;
 use App\Entity\Category;
 
+use App\Component\Project\PredefinedProject;
+
 class ProjectType extends AbstractType
 {
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
             ->add( 'name', TextType::class )
+            
+            ->add( 'predefinedType', ChoiceType::class, [
+                'placeholder'   => '-- Select Predefined Project --',
+                'choices'       => PredefinedProject::choices(),
+                'mapped'        => false,
+            ])
             ->add( 'category', EntityType::class, [
                 'class'         => Category::class,
                 'placeholder'   => '-- Choose a category --',
                 'choice_label'  => 'name',
             ])
+            
             ->add( 'sourceType', ChoiceType::class, [
                 'placeholder'   => '-- Select Source Type --',
                 'choices'       => [
