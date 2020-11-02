@@ -37,11 +37,11 @@ node default
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],
         
-        phpVersion                  => "${vsConfig['phpVersion']}",
-        apacheModules               => $vsConfig['apacheModules'],
+        phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
+        apacheModules               => $vsConfig['lamp']['apacheModules'],
         
-        phpModules                  => $vsConfig['phpModules'],
-        phpunit                     => $vsConfig['phpunit'],
+        phpModules                  => $vsConfig['lamp']['phpModules'],
+        phpunit                     => $vsConfig['lamp']['phpunit'],
         
         phpSettings                 => {
             'PHP/memory_limit'        => '-1',
@@ -51,16 +51,15 @@ node default
             'PHAR/phar.readonly'      => 'Off',
         },
         
-        phpMyAdmin					=> $vsConfig['phpMyAdmin'],
+        phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
         
         frontendtools               => $vsConfig['frontendtools'],
         vstools                     => $vsConfig['vstools'],
         
-        forcePhp7Repo              	=> $vsConfig['forcePhp7Repo'],
-    	forceMySqlComunityRepo     	=> $vsConfig['forceMySqlComunityRepo'],
+        forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
     	
-    	mysqlPackageName			=> $vsConfig['mysqlPackageName'],
-    	databases					=> $vsConfig['databases'],
+    	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
+    	databases					=> $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
     }

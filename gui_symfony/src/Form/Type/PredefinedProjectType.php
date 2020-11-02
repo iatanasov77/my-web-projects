@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Project;
 use App\Entity\Category;
 
-use App\Component\Installer\PredefinedProject;
+use App\Component\Project\PredefinedProject;
 
 class PredefinedProjectType extends AbstractType
 {
@@ -29,6 +29,7 @@ class PredefinedProjectType extends AbstractType
             ->add( 'predefinedType', ChoiceType::class, [
                 'placeholder'   => '-- Select Predefined Project --',
                 'choices'       => PredefinedProject::choices(),
+                'mapped'        => false,
             ])
             
             ->add( 'projectRoot', TextType::class )
