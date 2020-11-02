@@ -55,16 +55,6 @@ class ProjectsController extends Controller
     }
     
     /**
-     * @Route("/projects/predefined/form", name="projects_predefined_edit_form")
-     */
-    public function predefinedProjectForm( Request $request )
-    {
-        return $this->render( 'pages/projects/predefined_project_form.html.twig', [
-            'form' => $this->_predefinedProjectForm()->createView(),
-        ]);
-    }
-    
-    /**
      * @Route("/projects/create/{id}", name="projects_create")
      */
     public function create( $id, Request $request )
@@ -78,6 +68,9 @@ class ProjectsController extends Controller
         
         $form->handleRequest( $request );
         if ( $form->isValid() ) {
+            $predefinedType = $form->get('predefinedType')->getData();
+            PredefinedProject::populate( $project, $predefinedType );
+            
             $project    = $form->getData();
             
             $em->persist( $project );
@@ -119,35 +112,8 @@ class ProjectsController extends Controller
         }
         
         return new Response( $source->fetch() );
-    }
-    
-    /**
-     * @Route("/projects/install_predefined", name="projects_install_predefined")
-     */
-    public function installPredefined( Request $request )
-    {
-        $project    = new Project();
-        $form       = $this->_predefinedProjectForm( $project );
         
-        $form->handleRequest( $request );
-        //if ( $form->isValid() ) {
-        if ( $request->isMethod( 'post' ) ) {
-            $em             = $this->getDoctrine()->getManager();
-            
-            $project        = $form->getData();
-            $predefinedType = $form->get('predefinedType')->getData();
-            
-            PredefinedProject::populate( $project, $predefinedType );
-            //$installer      = InstallerFactory::installer( $predefinedType );
-            //var_dump( $project ); die;
-            
-            $em->persist( $project );
-            $em->flush();
-            
-            return new JsonResponse( [] );
-        }
         
-        die( 'NeTrqbvaDaSiTuk' );
         
         if ( $request->isMethod( 'post' ) ) {
             
@@ -317,16 +283,6 @@ class ProjectsController extends Controller
         
         $form   = $this->createForm( CategoryType::class, $category, [
             'action' => $this->generateUrl( 'category_create', ['id' => (int)$category->getId()] ),
-            'method' => 'POST'
-        ]);
-        
-        return $form;
-    }
-    
-    private function _predefinedProjectForm( )
-    {
-        $form   = $this->createForm( PredefinedProjectType::class, null, [
-            'action' => $this->generateUrl( 'projects_install_predefined' ),
             'method' => 'POST'
         ]);
         
