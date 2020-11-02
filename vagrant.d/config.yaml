@@ -1,10 +1,8 @@
 # All 'vagrant up' finished for less than 10 minutes on centos7 box
 #####################################################################
-phpVersion: '7.2'
-phpunit: false
-forcePhp7Repo: true
-forceMySqlComunityRepo: false
-mysqlPackageName: 'mysql-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
+
+forceMySqlComunityRepo: true
+mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -61,11 +59,13 @@ frontendtools:
     #nodejs: latest
     nodejs: 13.12.0
     tools:
+       yarn:
+          version: 'latest' 
        gulp:
            version: 'latest'
        angular-cli:
            version: 'latest'
-        
+
 packages:
     - mc
     - git
@@ -78,97 +78,95 @@ packages:
     - dos2unix
     - unzip
     - lynx
-    
-apacheModules:
-    - expires
-    - headers
-    - rewrite
-    - vhost_alias
-    - version
-    - env
-    - proxy
-    - proxy_fcgi
-    - proxy_http
-    - proxy_html
-    
-    # For JSP Pages
-    - proxy_ajp
-    
-phpModules:
-    apcu:
-        ini_prefix: '20-'
-        provider: 'pecl'
-    # ERROR: pecl/zendopcache requires PHP (version >= 5.2.0, version <= 5.5.0), installed version is 7.2.24
-    #zendopcache:
-    #    ini_prefix: '20-'
-    #    provider: 'pecl'
-    intl:
-        ini_prefix: '20-'
-    mbstring:
-        ini_prefix: '20-'
-    mongodb:
-        ini_prefix: '20-'
-        provider: 'pecl'
-    xdebug:
-        ini_prefix: '20-'
-        provider: 'pecl'
-        zend: true
-        # see http://xdebug.org/docs/all_settings
-        settings:
-            'xdebug.default_enable': '1'
-            'xdebug.remote_enable': '1'
-            'xdebug.remote_handler': 'dbgp'
-            'xdebug.remote_host': 'localhost'
-            'xdebug.remote_port': '9000'
-            'xdebug.remote_autostart': '0'
-            'xdebug.remote_connect_back': '1'
-            'xdebug.idekey': ''
-            #remote_log: ''
-         
-            # Tracer settings
-            'xdebug.trace_format': '1'
-            'xdebug.trace_enable_trigger': '1'
-            'xdebug.trace_output_name': 'trace.out'
-            'xdebug.trace_output_dir': '/vagrant/gui_symfony/var/Xdebug'
-         
-            # Profiler settings
-            'xdebug.profiler_enable': '1'
-            'xdebug.profiler_enable_trigger': '1'
-            'xdebug.profiler_output_name': 'cachegrind.out'
-            'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
-    zip:
-        ini_prefix: '20-'
-    json:
-        ini_prefix: '20-'
-    mysqlnd:
-        ini_prefix: '20-'
-        multifile_settings: true
-        settings:
-            mysqlnd: {}
-            mysql: {}
-            mysqli: {}
-            pdo_mysql: {}
-            sysvshm: {}
-    xml:
-        ini_prefix: '20-'
-        multifile_settings: true
-        settings:
-            dom: {}
-            simplexml: {}
-            xmlwriter: {}
-            xsl: {}
-            wddx: {}
-            xmlreader: {}
 
-phpMyAdmin:
-    source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
-    targetDirName: 'phpMyAdmin-5.0.4-all-languages'
+lamp:
+    phpVersion: '7.4'
+    phpunit: false
+    forcePhp7Repo: true
+   
+    mysql:
+        # provider = false mean use default
+        provider: 'mysql' # Avaiable options: false, 'mysql', 'mariadb'
+        databases:
+            default:
+                name: 'VsMyProjects'
+                dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
 
-databases:
-    default:
-        name: 'VsMyProjects'
-        dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
-        
+    # For JSP Pages require apache module 'proxy_ajp'e
+    apacheModules: ['expires', 'headers', 'rewrite', 'vhost_alias', 'version', 'env', 'proxy', 'proxy_fcgi', 'proxy_http', 'proxy_html', 'proxy_ajp']
+
+    phpModules:
+        apcu:
+            ini_prefix: '20-'
+            provider: 'pecl'
+        # ERROR: pecl/zendopcache requires PHP (version >= 5.2.0, version <= 5.5.0), installed version is 7.2.24
+        #zendopcache:
+        #    ini_prefix: '20-'
+        #    provider: 'pecl'
+        intl:
+            ini_prefix: '20-'
+        mbstring:
+            ini_prefix: '20-'
+        mongodb:
+            ini_prefix: '20-'
+            provider: 'pecl'
+        xdebug:
+            ini_prefix: '20-'
+            provider: 'pecl'
+            zend: true
+            # see http://xdebug.org/docs/all_settings
+            settings:
+                'xdebug.default_enable': '1'
+                'xdebug.remote_enable': '1'
+                'xdebug.remote_handler': 'dbgp'
+                'xdebug.remote_host': 'localhost'
+                'xdebug.remote_port': '9000'
+                'xdebug.remote_autostart': '0'
+                'xdebug.remote_connect_back': '1'
+                'xdebug.idekey': ''
+                #remote_log: ''
+            
+                # Tracer settings
+                'xdebug.trace_format': '1'
+                'xdebug.trace_enable_trigger': '1'
+                'xdebug.trace_output_name': 'trace.out'
+                'xdebug.trace_output_dir': '/vagrant/gui_symfony/var/Xdebug'
+            
+                # Profiler settings
+                'xdebug.profiler_enable': '1'
+                'xdebug.profiler_enable_trigger': '1'
+                'xdebug.profiler_output_name': 'cachegrind.out'
+                'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
+        zip:
+            ini_prefix: '20-'
+        json:
+            ini_prefix: '20-'
+        mysqlnd:
+            ini_prefix: '20-'
+            multifile_settings: true
+            settings:
+                mysqlnd: {}
+                mysql: {}
+                mysqli: {}
+                pdo_mysql: {}
+                sysvshm: {}
+        xml:
+            ini_prefix: '20-'
+            multifile_settings: true
+            settings:
+                dom: {}
+                simplexml: {}
+                xmlwriter: {}
+                xsl: {}
+                wddx: {}
+                xmlreader: {}
+        gd:
+            ini_prefix: '20-'
+
+    phpMyAdmin:
+        source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
+        targetDirName: 'phpMyAdmin-5.0.4-all-languages'
+
 ansible:
     pathRoles: '/vagrant/ansible.d/playbook/roles/'
     logPath: '/vagrant/ansible.d/log'

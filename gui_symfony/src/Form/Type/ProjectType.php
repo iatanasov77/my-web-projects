@@ -27,10 +27,10 @@ class ProjectType extends AbstractType
             ->add( 'sourceType', ChoiceType::class, [
                 'placeholder'   => '-- Select Source Type --',
                 'choices'       => [
-                    'Download with `wget`'              => 'wget',
-                    'Checkout with `git`'               => 'git',
-                    'Checkout with `svn`'               => 'svn',
-                    'Read Install Manual'    => 'install_manual',
+                    'Download with `wget`'  => 'wget',
+                    'Checkout with `git`'   => 'git',
+                    'Checkout with `svn`'   => 'svn',
+                    'Read Install Manual'   => 'install_manual',
                 ],
             ])
             ->add( 'repository', TextType::class )

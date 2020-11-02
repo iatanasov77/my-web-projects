@@ -5,9 +5,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Process\Process;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 use App\Component\Globals;
 use App\Component\Project\Source\SourceFactory;
+use App\Component\Installer\InstallerFactory;
+use App\Component\Project\PredefinedProject;
 use App\Entity\Category;
 use App\Entity\Project;
 use App\Form\Type\PredefinedProjectType;
@@ -122,13 +126,54 @@ class ProjectsController extends Controller
      */
     public function installPredefined( Request $request )
     {
-        $response   = [
-            'status'    => Globals::STATUS_ERROR,
-            'errType'   => Globals::STATUS_ERROR_TYPE_ALERT,
-            'data'      => 'Installation of Predefined project types is not implemented.',
-        ];
+        $project    = new Project();
+        $form       = $this->_predefinedProjectForm( $project );
         
-        return new JsonResponse( $response );
+        $form->handleRequest( $request );
+        //if ( $form->isValid() ) {
+        if ( $request->isMethod( 'post' ) ) {
+            $em             = $this->getDoctrine()->getManager();
+            
+            $project        = $form->getData();
+            $predefinedType = $form->get('predefinedType')->getData();
+            
+            PredefinedProject::populate( $project, $predefinedType );
+            //$installer      = InstallerFactory::installer( $predefinedType );
+            //var_dump( $project ); die;
+            
+            $em->persist( $project );
+            $em->flush();
+            
+            return new JsonResponse( [] );
+        }
+        
+        die( 'NeTrqbvaDaSiTuk' );
+        
+        if ( $request->isMethod( 'post' ) ) {
+            
+            $version            = $request->request->get( 'version' );
+            $phpBrewVariants    = $request->request->get( 'phpBrewVariants' ) ?? [];
+            $phpBrewCustomName  = $request->request->get( 'phpBrewCustomName' );
+            $displayBuildOutput = $request->request->get( 'displayBuildOutput' ) ? true : false;
+            
+            $this->phpBrew  = $this->container->get( 'vs_app.php_brew' );
+            
+            
+            $process        = $this->phpBrew->install( $version, $phpBrewVariants, $displayBuildOutput, $phpBrewCustomName );
+            
+            return new StreamedResponse( function() use ( $process ) {
+                echo '<span style="font-weight: bold;">Running command:</span> ' . $this->phpBrew->getCurrentCommand();
+                
+                foreach ( $process as $type => $data ) {
+                    if ( Process::ERR === $type ) {
+                        echo '[ ERR ] '. nl2br( $data ) . '<br />';
+                    } else {
+                        echo nl2br( $data );
+                    }
+                }
+            });
+                
+        }
     }
     
     /**
