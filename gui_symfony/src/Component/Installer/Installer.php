@@ -1,18 +1,22 @@
 <?php namespace App\Component\Installer;
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+
+use App\Entity\Project;
+
 class Installer
 {
+    const INSTALL_SCRIPT    = 'vs_install_project.sh';
+    
     const INSTALLED_HOSTS   = '/storage/installed_hosts.json';
     const COMPOSER_BIN      = '/usr/bin/composer';
     
     protected $project;
     
-    protected $installPath;
-    
-    public function __construct( $project, $installPath )
+    public function __construct( Project $project )
     {
-        $this->project		= $project;
-        $this->installPath	= $installPath;
+        $this->project  = $project;
     }
     
     public function install()
@@ -41,6 +45,26 @@ class Installer
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    protected function prepareDirectory()
+    {
+        $filesystem     = new Filesystem();
+        $projectRoot    = $this->project->getProjectRoot();
+        
+        try {
+            if ( $filesystem->exists( $projectRoot ) ) {
+                $filesystem->remove( $projectRoot );
+            }
+            
+            $filesystem->mkdir( $projectRoot, 0777 );
+            // changes the owner of the video directory recursively
+            $filesystem->chown( $projectRoot, 'vagrant', true );
+            // changes the group of the video directory recursively
+            $filesystem->chgrp( $projectRoot, 'vagrant', true );
+        } catch ( IOExceptionInterface $exception ) {
+            echo "An error occurred while creating your directory at " . $exception->getPath();
+        }
+    }
     
     /**
      * @brief  Checkout source code from repository

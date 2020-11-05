@@ -45,9 +45,10 @@ node default
         
         phpSettings                 => {
             'PHP/memory_limit'        => '-1',
-            'Date/date.timezone'      => 'Europe/Sofia',
+            'PHP/max_execution_time'  => '300',
             'PHP/post_max_size'       => '64M',
             'PHP/upload_max_filesize' => '64M',
+            'Date/date.timezone'      => 'Europe/Sofia',
             'PHAR/phar.readonly'      => 'Off',
         },
         

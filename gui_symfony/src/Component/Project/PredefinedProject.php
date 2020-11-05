@@ -9,6 +9,13 @@ class PredefinedProject
     const SYLIUS    = 'sylius';
     const MAGENTO   = 'magento';
     
+    public static function json()
+    {
+        return \json_encode([
+            self::SYLIUS    => Sylius::data(),
+        ], JSON_FORCE_OBJECT);    
+    }
+    
     public static function choices()
     {
         return [

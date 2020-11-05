@@ -66,6 +66,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
         $fpmSocket      = $input->getOption( 'fpm-socket' );
         $withSsl        = $input->getOption( 'with-ssl' );
         
+        /*
         // Setup installed_hosts.json
         $output->writeln( 'Add host to the "installed_hosts.json" ...' );
         $jsonFile       = 'installed_hosts.json';
@@ -80,6 +81,7 @@ class CreateVirtualHostCommand extends ContainerAwareCommand
             ];
         }
         file_put_contents( $jsonFile, json_encode( $installedHosts, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
+        */
         
         // Setup hosts file
         $output->writeln( 'Creating a /etc/hosts record...' );

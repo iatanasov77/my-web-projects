@@ -18,14 +18,16 @@
 	                    	<i class="fas fa-home"></i>
 	               		</a>
 					{% else %}
-						{% if project.sourceType == 'install_manual' %}
-							<a class="btn btn-info btn-circle btn-sm btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);" title="Install" >
-								<i class="fas fa-info-circle"></i>
-							</a>
-						{% else %}
-							<a class="btn btn-info btn-circle btn-sm btnInstall" data-projectId="{{ project.id }}" href="javascript:void(0);" title="Install" >
+						{% if project.sourceType %}
+							<a class="btn btn-info btn-circle btn-sm btnInstall" data-projectId="{{ project.id }}" data-projectName="{{ project.name }}" href="javascript:void(0);" title="Install" >
 		                    	<i class="fas fa-download"></i>
 		                	</a>
+						{% endif %}
+						
+						{% if project.installManual %}
+							<a class="btn btn-info btn-circle btn-sm btnInstallManual" data-projectId="{{ project.id }}" data-projectName="{{ project.name }}" href="javascript:void(0);" title="Install" >
+								<i class="fas fa-info-circle"></i>
+							</a>							
 		                {% endif %}
 					{% endif %}
 					

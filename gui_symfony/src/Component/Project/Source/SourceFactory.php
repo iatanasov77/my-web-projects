@@ -1,6 +1,10 @@
 <?php namespace App\Component\Project\Source;
 
-class SourceFactory {
+class SourceFactory
+{
+    const SOURCE_WGET   = 'wget';
+    const SOURCE_GIT    = 'git';
+    const SOURCE_SVN    = 'svn';
     
     public static function source( $project )
     {
@@ -16,5 +20,14 @@ class SourceFactory {
         }
         
         return $source;
+    }
+    
+    public static function choices()
+    {
+        return [
+            'Download with `wget`'  => self::SOURCE_WGET,
+            'Checkout with `git`'   => self::SOURCE_GIT,
+            'Checkout with `svn`'   => self::SOURCE_SVN,
+        ];
     }
 }

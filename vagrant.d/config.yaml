@@ -49,7 +49,7 @@ subsystems:
         
         system_wide: true
         additional_dependencies:
-           - httpd-devel
+           #- httpd-devel
            - libcurl-devel
            - oniguruma-devel
            - libsodium-devel
@@ -81,6 +81,8 @@ packages:
     - dos2unix
     - unzip
     - lynx
+    # On CentOs8 Python2 is not installed by default but it is required from Sylius Setup
+    - python2
 
 lamp:
     phpVersion: '7.4'
@@ -93,7 +95,7 @@ lamp:
         databases:
             default:
                 name: 'VsMyProjects'
-                dump: '/vagrant/doc/sql/VsMyProjects-20201001.sql'
+                dump: '/vagrant/doc/sql/VsMyProjects-20201102.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'e
     apacheModules: ['expires', 'headers', 'rewrite', 'vhost_alias', 'version', 'env', 'proxy', 'proxy_fcgi', 'proxy_http', 'proxy_html', 'proxy_ajp']
@@ -141,7 +143,7 @@ lamp:
                 'xdebug.profiler_output_name': 'cachegrind.out'
                 'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
         zip:
-            ini_prefix: '20-'
+            ini_prefix: '40-'
         json:
             ini_prefix: '20-'
         mysqlnd:
@@ -149,10 +151,10 @@ lamp:
             multifile_settings: true
             settings:
                 mysqlnd: {}
-                mysql: {}
-                mysqli: {}
-                pdo_mysql: {}
-                sysvshm: {}
+                #mysql: {}
+                #mysqli: {}
+                #pdo_mysql: {}
+                #sysvshm: {}
         xml:
             ini_prefix: '20-'
             multifile_settings: true
@@ -161,8 +163,8 @@ lamp:
                 simplexml: {}
                 xmlwriter: {}
                 xsl: {}
-                wddx: {}
-                xmlreader: {}
+                #wddx: {}
+                #xmlreader: {}
         gd:
             ini_prefix: '20-'
 

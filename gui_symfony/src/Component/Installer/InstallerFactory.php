@@ -1,14 +1,15 @@
 <?php namespace App\Component\Installer;
 
 use App\Component\Project\PredefinedProject;
+use App\Entity\Project;
 
 class InstallerFactory {
     
-    public static function installer( $predefinedType )
+    public static function installer( $predefinedType, Project $project )
     {
         switch ( $predefinedType ) {
             case PredefinedProject::SYLIUS:
-                $installer = new SyliusInstaller();
+                $installer = new SyliusInstaller( $project );
                 break;
             default:
                 throw new \Exception( 'Not Implemented' );
