@@ -67,17 +67,17 @@ $( function()
 			data: data,
 			xhrFields: {
 	            // Getting on progress streaming response
-	            onprogress: function(e)
+	            onprogress: function( e )
 	            {
 	                var progressResponse;
 	                var response	= e.currentTarget.response;
-	                if( lastResponseLength === false) {
+	                if( lastResponseLength === false ) {
 	                	$( "#commandPhpVersion" ).html( response );
 	                	
 	                    progressResponse	= response;
 	                    lastResponseLength	= response.length;
 	                } else {
-	                    progressResponse	= response.substring(lastResponseLength);
+	                    progressResponse	= response.substring( lastResponseLength );
 	                    lastResponseLength	= response.length;
 	                }
 	                

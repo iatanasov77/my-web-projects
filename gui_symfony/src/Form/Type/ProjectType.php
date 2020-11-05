@@ -3,6 +3,7 @@
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +15,7 @@ use App\Entity\Project;
 use App\Entity\Category;
 
 use App\Component\Project\PredefinedProject;
+use App\Component\Project\Source\SourceFactory;
 
 class ProjectType extends AbstractType
 {
@@ -21,26 +23,20 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add( 'name', TextType::class )
-            
-            ->add( 'predefinedType', ChoiceType::class, [
-                'placeholder'   => '-- Select Predefined Project --',
-                'choices'       => PredefinedProject::choices(),
-                'mapped'        => false,
-            ])
             ->add( 'category', EntityType::class, [
                 'class'         => Category::class,
                 'placeholder'   => '-- Choose a category --',
                 'choice_label'  => 'name',
             ])
+            ->add( 'description', TextareaType::class )
             
+            ->add( 'predefinedType', ChoiceType::class, [
+                'placeholder'   => '-- Select Predefined Project --',
+                'choices'       => PredefinedProject::choices(),
+            ])
             ->add( 'sourceType', ChoiceType::class, [
                 'placeholder'   => '-- Select Source Type --',
-                'choices'       => [
-                    'Download with `wget`'  => 'wget',
-                    'Checkout with `git`'   => 'git',
-                    'Checkout with `svn`'   => 'svn',
-                    'Read Install Manual'   => 'install_manual',
-                ],
+                'choices'       => SourceFactory::choices(),
             ])
             ->add( 'repository', TextType::class )
             ->add( 'branch', TextType::class )

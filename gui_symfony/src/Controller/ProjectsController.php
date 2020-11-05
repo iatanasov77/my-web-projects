@@ -68,10 +68,10 @@ class ProjectsController extends Controller
         
         $form->handleRequest( $request );
         if ( $form->isValid() ) {
+            $project        = $form->getData();
+            
             $predefinedType = $form->get('predefinedType')->getData();
             PredefinedProject::populate( $project, $predefinedType );
-            
-            $project    = $form->getData();
             
             $em->persist( $project );
             $em->flush();
@@ -101,7 +101,33 @@ class ProjectsController extends Controller
     /**
      * @Route("/projects/install/{id}", name="projects_install")
      */
-    public function install( $id )
+    public function install( Request $request, $id )
+    {
+        if ( $request->isMethod( 'post' ) ) {
+            $repository     = $this->getDoctrine()->getRepository( Project::class );
+            $project        = $repository->find( $id );
+            $form           = $this->_projectForm( $project );
+            
+            $predefinedType = $project->getPredefinedType();
+            $installer      = InstallerFactory::installer( $predefinedType, $project );
+            $process        = $installer->install();
+            
+            return new StreamedResponse( function() use ( $process ) {
+                foreach ( $process as $type => $data ) {
+                    if ( Process::ERR === $type ) {
+                        echo '[ ERR ] '. nl2br( $data ) . '<br />';
+                    } else {
+                        echo nl2br( $data );
+                    }
+                }
+            });
+        }
+    }
+    
+    /**
+     * @Route("/projects/install_manual/{id}", name="projects_install_manual")
+     */
+    public function installManual( $id )
     {
         $repository     = $this->getDoctrine()->getRepository( Project::class );
         $project        = $repository->find( $id );
@@ -112,34 +138,6 @@ class ProjectsController extends Controller
         }
         
         return new Response( $source->fetch() );
-        
-        
-        
-        if ( $request->isMethod( 'post' ) ) {
-            
-            $version            = $request->request->get( 'version' );
-            $phpBrewVariants    = $request->request->get( 'phpBrewVariants' ) ?? [];
-            $phpBrewCustomName  = $request->request->get( 'phpBrewCustomName' );
-            $displayBuildOutput = $request->request->get( 'displayBuildOutput' ) ? true : false;
-            
-            $this->phpBrew  = $this->container->get( 'vs_app.php_brew' );
-            
-            
-            $process        = $this->phpBrew->install( $version, $phpBrewVariants, $displayBuildOutput, $phpBrewCustomName );
-            
-            return new StreamedResponse( function() use ( $process ) {
-                echo '<span style="font-weight: bold;">Running command:</span> ' . $this->phpBrew->getCurrentCommand();
-                
-                foreach ( $process as $type => $data ) {
-                    if ( Process::ERR === $type ) {
-                        echo '[ ERR ] '. nl2br( $data ) . '<br />';
-                    } else {
-                        echo nl2br( $data );
-                    }
-                }
-            });
-                
-        }
     }
     
     /**

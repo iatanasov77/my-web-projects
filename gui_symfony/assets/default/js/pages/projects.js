@@ -1,7 +1,32 @@
-var spinner = '<div style="text-align:center;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>';
+var spinner = '<div id="project-spinner" style="text-align:center;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>';
+
+/**
+ * onTopOf: ID of the element on top of display the spinner
+ */
+function showSpinner( onTopOf ) {
+	$( onTopOf ).before( spinner );
+	$( '#project-spinner' ).css( {'opacity': '0.8', 'position':'absolute', 'text-align':'center', 'top':'170px', 'left':'210px', 'z-index':'9'} );
+	$( onTopOf ).css( {'pointer-events': 'none', 'position':'relative', 'width': '100%', 'height': '100%', 'opacity': '0.8'} );
+}
+function hideSpinner( onTopOf ) {
+	$( onTopOf ).removeAttr( 'style' );
+	$( '#project-spinner' ).remove();
+}
 
 $(function()
 {
+	$( '#formProjectContainer' ).on( 'change', '#project_predefinedType', function( e )
+	{
+		var type	= $( this ).val();
+		if ( predefinedProjects[type] == undefined ) {
+			alert( "Project type '" + type + "' is undefined!" );
+		}
+		
+		$( '#project_sourceType' ).val( predefinedProjects[type].sourceType );
+		$( '#project_repository' ).val( predefinedProjects[type].sourceUrl );
+		$( '#project_branch' ).val( predefinedProjects[type].branch );
+	});
+	
 	// Init Delete Form
 	$( '#sectionProjects' ).on( 'click', '.btnDelete', function( e )
 	{
@@ -10,7 +35,14 @@ $(function()
 
     $( '#create-project-modal' ).on( 'hidden.bs.modal', function ()
     {
+    	$( '#errorMessage .card-body' ).html( '' );
+    	$( '#errorMessage' ).hide();
         $( '#formProjectContainer' ).html( '' );
+    });
+    
+    $( '#project-install-modal' ).on( 'hidden.bs.modal', function ()
+    {
+        $( '#phpInstallContainer' ).html( '' );
     });
 
     $( '#btnCreateProject' ).on( 'click', function( e )
@@ -51,6 +83,50 @@ $(function()
 
 	$( '#sectionProjects' ).on( 'click', '.btnInstall', function( e )
 	{
+		var url	= "/projects/install/" + $( this ).attr( 'data-projectId' );
+		
+		$( '#projectName' ).text( $( this ).attr( 'data-projectName' ) );
+		$( '#project-install-modal' ).modal( 'toggle' );
+		
+		var lastResponseLength	= false;
+		$.ajax({
+			method: 'POST',
+			url: url,
+			//data: data,
+			xhrFields: {
+	            // Getting on progress streaming response
+	            onprogress: function( e )
+	            {
+	                var progressResponse;
+	                var response	= e.currentTarget.response;
+	                
+	                if( lastResponseLength === false ) {
+	                    progressResponse	= response;
+	                } else {
+	                    progressResponse	= response.substring( lastResponseLength );
+	                }
+	                
+	                lastResponseLength	= response.length;
+	                
+	                // In My Case
+	                $( "#phpInstallContainer" ).append( progressResponse ).animate( {scrollTop: $( '#phpInstallContainer' ).prop( "scrollHeight" ) }, 0 );
+	                
+	                if ( progressResponse == '' ) {
+	                	
+	                }
+	            }
+	        }
+		})
+		.done( function( html ) {
+			//alert( "DONE !!!" );
+		})
+		.fail( function() {
+			alert( "AJAX return an ERROR !!!" );
+		});
+	});
+	
+	$( '#sectionProjects' ).on( 'click', '.btnInstallManual', function( e )
+	{
 		var spinner   = '<div class="spinner-border" role="status"  id="projectSpinner"><span class="sr-only">Loading...</span></div>';
 		$( this ).before( spinner );
 		
@@ -58,7 +134,7 @@ $(function()
 		
 		$.ajax({
 			type: "GET",
-		 	url: "/projects/install/" + $( this ).attr( 'data-projectId' ),
+		 	url: "/projects/install_manual/" + $( this ).attr( 'data-projectId' ),
 			success: function( response )
 			{
 				$( "#projectSpinner" ).remove();
@@ -128,9 +204,11 @@ $(function()
 			}
 		});
 	});
-		
+
 	$( '#create-project-modal' ).on( 'click', '#btnSaveProject', function( e )
 	{
+		showSpinner( '#formProjectContainer' );
+		
 		var form	= $( '#formProject' );
 		
 		$.ajax({
@@ -140,6 +218,8 @@ $(function()
 		 	dataType: 'json',
 			success: function( response )
 			{
+				hideSpinner( '#formProjectContainer' );
+				
 				form[0].reset();
 				if ( response.status == 'error' ) {
 					
@@ -167,6 +247,7 @@ $(function()
 			},
 			error: function(  )
 			{
+				hideSpinner( '#formProjectContainer' );
 				alert( "SYSTEM ERROR!!!" );
 			}
        });

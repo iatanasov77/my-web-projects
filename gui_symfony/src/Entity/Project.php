@@ -28,6 +28,11 @@ class Project
     protected $name;
     
     /**
+     * @ORM\Column(type="text")
+     */
+    protected $description;
+    
+    /**
      * @ORM\Column(name="source_type", type="string", columnDefinition="enum('wget', 'git', 'svn', 'install_manual')")
      */
     protected $sourceType;
@@ -80,6 +85,11 @@ class Project
      * @ORM\Column(name="reverseProxy", type="string", length=128)
      */
     protected $reverseProxy;
+    
+    /**
+     * @ORM\Column(name="predefinedType", type="string", length=64)
+     */
+    protected $predefinedType;
 
     public function getId(): ?int
     {
@@ -107,6 +117,18 @@ class Project
     {
         $this->name = $name;
 
+        return $this;
+    }
+    
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+    
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+        
         return $this;
     }
 
@@ -226,6 +248,18 @@ class Project
     public function setReverseProxy(string $reverseProxy): self
     {
         $this->reverseProxy = $reverseProxy;
+        
+        return $this;
+    }
+    
+    public function getPredefinedType(): ?string
+    {
+        return $this->predefinedType;
+    }
+    
+    public function setPredefinedType(string $predefinedType): self
+    {
+        $this->predefinedType = $predefinedType;
         
         return $this;
     }
