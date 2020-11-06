@@ -1,6 +1,8 @@
 <?php namespace App\Component\Project;
 
+use App\Component\Project\PredefinedProject\PredefinedProjectInterface;
 use App\Component\Project\PredefinedProject\Sylius;
+use App\Component\Project\PredefinedProject\Magento;
 
 class PredefinedProject
 {
@@ -13,6 +15,7 @@ class PredefinedProject
     {
         return \json_encode([
             self::SYLIUS    => Sylius::data(),
+            self::MAGENTO   => Magento::data(),
         ], JSON_FORCE_OBJECT);    
     }
     
@@ -28,9 +31,14 @@ class PredefinedProject
     
     public static function populate( &$project, $predefinedType )
     {
+        self::instance( $predefinedType )->populate( $project );
+    }
+    
+    public static function instance( $predefinedType ): PredefinedProjectInterface
+    {
         switch ( $predefinedType ) {
             case PredefinedProject::SYLIUS:
-                Sylius::populate( $project );
+                return new Sylius();
                 break;
             default:
                 throw new \Exception( 'Not Implemented' );

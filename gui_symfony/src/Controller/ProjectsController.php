@@ -66,12 +66,13 @@ class ProjectsController extends Controller
         $project    = $id ? $repository->find( $id ) : new Project();
         $form       = $this->_projectForm( $project );
         
-        $form->handleRequest( $request );
-        if ( $form->isValid() ) {
-            $project        = $form->getData();
+        $form->handleRequest( $request ); 
+        if ( $form->isSubmitted() ) {
+            $project                = $form->getData();
             
-            $predefinedType = $form->get('predefinedType')->getData();
-            PredefinedProject::populate( $project, $predefinedType );
+            $predefinedTypeParams   = $request->request->get( 'predefinedTypeParams' );
+            $project->setPredefinedTypeParams( $predefinedTypeParams );
+            //PredefinedProject::populate( $project, $predefinedType );
             
             $em->persist( $project );
             $em->flush();
@@ -87,7 +88,6 @@ class ProjectsController extends Controller
             }
         }
         
-        
         $html   = $this->renderView( 'pages/projects/table_projects.html.twig', ['projects' => $repository->findAll()] );
         $response   = [
             'status'    => $status,
@@ -96,32 +96,6 @@ class ProjectsController extends Controller
         ];
         
         return new JsonResponse( $response );
-    }
-    
-    /**
-     * @Route("/projects/install/{id}", name="projects_install")
-     */
-    public function install( Request $request, $id )
-    {
-        if ( $request->isMethod( 'post' ) ) {
-            $repository     = $this->getDoctrine()->getRepository( Project::class );
-            $project        = $repository->find( $id );
-            $form           = $this->_projectForm( $project );
-            
-            $predefinedType = $project->getPredefinedType();
-            $installer      = InstallerFactory::installer( $predefinedType, $project );
-            $process        = $installer->install();
-            
-            return new StreamedResponse( function() use ( $process ) {
-                foreach ( $process as $type => $data ) {
-                    if ( Process::ERR === $type ) {
-                        echo '[ ERR ] '. nl2br( $data ) . '<br />';
-                    } else {
-                        echo nl2br( $data );
-                    }
-                }
-            });
-        }
     }
     
     /**
@@ -166,17 +140,6 @@ class ProjectsController extends Controller
         return $this->render( 'pages/projects/project_install_manual.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-    
-    /**
-     * @Route("/projects/uninstall/{id}", name="projects_uninstall")
-     */
-    public function uninstall( $id )
-    {
-        $repository = $this->getDoctrine()->getRepository( Project::class );
-        $project   =  $repository->find( $id );
-        
-        return $this->redirectToRoute( 'projects' );
     }
     
     /**
@@ -263,6 +226,15 @@ class ProjectsController extends Controller
         ];
         
         return new JsonResponse( $response );
+    }
+    
+    /**
+     * @Route("/predefined_project_form/{predefinedType}", name="predefined_project_form")
+     */
+    public function predefinedProjectForm( $predefinedType )
+    {
+        $html   = $this->renderView( \App\Component\Project\PredefinedProject::instance( $predefinedType )->form() );
+        return new Response( $html );
     }
     
     private function _projectForm( Project $project )

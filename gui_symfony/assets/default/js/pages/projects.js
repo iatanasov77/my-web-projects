@@ -43,6 +43,7 @@ $(function()
     $( '#project-install-modal' ).on( 'hidden.bs.modal', function ()
     {
         $( '#phpInstallContainer' ).html( '' );
+        window.location.reload();
     });
 
     $( '#btnCreateProject' ).on( 'click', function( e )
@@ -289,6 +290,24 @@ $(function()
 				alert( "SYSTEM ERROR!!!" );
 			}
        });
+	});
+	
+	$( '#create-project-modal' ).on( 'change', '#project_predefinedType', function( e )
+	{
+		var url	= '/predefined_project_form/' + $( this ).val();
+		
+		$.ajax({
+			type: "GET",
+		 	url: url,
+			success: function( response )
+			{
+				$( '#predefinedProjectForm' ).html( response );
+			},
+			error: function()
+			{
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
 	});
 });
 

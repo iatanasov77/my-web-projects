@@ -2,5 +2,6 @@
 
 interface PredefinedProjectInterface
 {
-    public static function populate( &$project );
+    public function form();
+    public function populate( &$project );
 }

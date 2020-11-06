@@ -4,6 +4,7 @@
     <ul class="nav nav-tabs">
         <li><a class="active" href="#project-general" data-toggle="tab">General</a></li>
         <li><a href="#project-source" data-toggle="tab">Source</a></li>
+        <li><a href="#project-predefined" data-toggle="tab">Setup Predefined</a></li>
         <li><a href="#project-vhost" data-toggle="tab">Apache VirtualHost</a></li>
     </ul>
     
@@ -14,13 +15,19 @@
             {{ form_row(form.description) }}
         </div>
         <div class="tab-pane" id="project-source">
-        	<frameset>
-                {{ form_row(form.predefinedType) }}
-            </frameset>
             {{ form_row(form.sourceType) }}
             {{ form_row(form.repository) }}
             {{ form_row(form.branch) }}
             {{ form_row(form.projectRoot) }}
+        </div>
+        <div class="tab-pane" id="project-predefined">
+        	<frameset>
+                {{ form_row(form.predefinedType) }}
+            </frameset>
+            <fieldset class="predefinedProjectFormContainer">
+            	<legend>Predefined type Properties</legend>
+            	<div id="predefinedProjectForm"></div>
+            </fieldset>
         </div>
         <div class="tab-pane fade" id="project-vhost">
             {{ form_row(form.withSsl) }}
