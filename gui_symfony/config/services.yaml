@@ -1,5 +1,4 @@
 imports:
-    - { resource: services/developement.yaml }
     - { resource: services/twig_extensions.yaml }
     - { resource: services/phpbrew.yaml }
     

@@ -4,18 +4,22 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-class SyliusInstaller extends Installer
+class MagentoInstaller extends Installer
 {
-    
-    
+   
     /**
+     * 
+     * Add support for Composer 2 | Milestone 2.5
+     * https://github.com/magento/magento2/releases
+     * 
      * Steps for Instalation
-     * =======================
-     * # composer create-project sylius/sylius-standard MyFirstShop
-     * # bin/console sylius:install
-     * # yarn install
-     * # yarn build
-     * =======================
+     * ==============================================================
+     * # wget https://github.com/magento/magento2/archive/2.4.1.zip
+     * # unzip 2.4.1.zip
+     * # cd magento2-2.4.1
+     * # composer install --prefer-source
+     * # bin/magento setup::install
+     * ==============================================================
      * Enjoy :)
      * 
      */

@@ -45,10 +45,6 @@ prepairConfig()
     sed -i "s/^;\{0,1\}listen\.group *= *[^ ]*/listen.group = apache/" ${fpmConfig}
     sed -i "s/^;\{0,1\}listen\.mode *= *[^ ]*/listen.mode = 0660/" ${fpmConfig}
     sed -i "s/^;\{0,1\}listen\.allowed_clients *= *[^ ]*/listen.allowed_clients = 127.0.0.1/" ${fpmConfig}
-    # sed -i '/^;listen.owner /s/^;//' ${fpmConfig}
-    # sed -i '/^;listen.group /s/^;//' ${fpmConfig}
-    # sed -i '/^;listen.mode /s/^;//' ${fpmConfig}
-    # sed -i '/^;listen.allowed_clients /s/^;//' ${fpmConfig}
     
     # Allow The all of server memory
     local iniConfig="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php.ini"

@@ -98,7 +98,7 @@ class PhpVersionsController extends Controller
          */
         $command    = [
             '/bin/sudo',
-            '/vagrant/bin/console',
+            '/vagrant/gui_symfony/bin/console',
             'vs:phpfpm',
             'start',
             '-p',

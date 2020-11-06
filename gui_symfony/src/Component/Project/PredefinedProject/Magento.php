@@ -1,19 +1,19 @@
 <?php namespace App\Component\Project\PredefinedProject;
 
-class Sylius implements PredefinedProjectInterface
+class Magento implements PredefinedProjectInterface
 {
-    const SOURCE_TYPE   = 'git';
-    const SOURCE_URL    = 'https://github.com/Sylius/Sylius-Standard.git';
-    const BRANCH        = '1.7';
+    const SOURCE_TYPE   = 'wget';
+    const SOURCE_URL    = 'https://github.com/magento/magento2/archive/2.4.1.zip';
+    const BRANCH        = '';
     
     
     
     public static function data()
     {
         return [
-            'sourceType' => self::SOURCE_TYPE,
-            'sourceUrl'  => self::SOURCE_URL,
-            'branch'    => self::BRANCH,
+            'sourceType'    => self::SOURCE_TYPE,
+            'sourceUrl'     => self::SOURCE_URL,
+            'branch'        => self::BRANCH,
         ];
     }
     

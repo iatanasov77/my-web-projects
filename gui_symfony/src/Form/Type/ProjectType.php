@@ -30,10 +30,27 @@ class ProjectType extends AbstractType
             ])
             ->add( 'description', TextareaType::class )
             
+            
             ->add( 'predefinedType', ChoiceType::class, [
                 'placeholder'   => '-- Select Predefined Project --',
                 'choices'       => PredefinedProject::choices(),
             ])
+            ->add(
+                $builder
+                    ->create( 'predefinedTypeParams', TextType::class )
+                    ->addModelTransformer( new CallbackTransformer(
+                        function ( $paramsAsArray ) {
+                            // transform the array to a string
+                            return is_array( $paramsAsArray ) ? implode( ', ', $paramsAsArray ) : $paramsAsArray;
+                        },
+                        function ( $paramsAsString ) {
+                            // transform the string back to an array
+                            return explode( ', ', $paramsAsString );
+                        }
+                    ))
+             )
+            
+            
             ->add( 'sourceType', ChoiceType::class, [
                 'placeholder'   => '-- Select Source Type --',
                 'choices'       => SourceFactory::choices(),

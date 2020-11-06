@@ -90,6 +90,11 @@ class Project
      * @ORM\Column(name="predefinedType", type="string", length=64)
      */
     protected $predefinedType;
+    
+    /**
+     * @ORM\Column(name="predefinedTypeParams", type="json")
+     */
+    protected $predefinedTypeParams;
 
     public function getId(): ?int
     {
@@ -260,6 +265,18 @@ class Project
     public function setPredefinedType(string $predefinedType): self
     {
         $this->predefinedType = $predefinedType;
+        
+        return $this;
+    }
+    
+    public function getPredefinedTypeParams(): ?array
+    {
+        return $this->predefinedTypeParams;
+    }
+    
+    public function setPredefinedTypeParams(?array $predefinedTypeParams): self
+    {
+        $this->predefinedTypeParams = $predefinedTypeParams;
         
         return $this;
     }

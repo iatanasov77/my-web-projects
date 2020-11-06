@@ -11,6 +11,9 @@ class InstallerFactory {
             case PredefinedProject::SYLIUS:
                 $installer = new SyliusInstaller( $project );
                 break;
+            case PredefinedProject::MAGENTO:
+                $installer = new MagentoInstaller( $project );
+                break;
             default:
                 throw new \Exception( 'Not Implemented' );
         }

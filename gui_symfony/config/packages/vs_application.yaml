@@ -4,22 +4,22 @@ vs_application:
         sites: 5
         page_categories: 3
         
-    resources:
-        settings:
-            classes:
-                model: App\Entity\Developement\VsApp\Settings
-        site_settings:
-            classes:
-                model: App\Entity\Developement\VsApp\SiteSettings
-        taxonomy:
-            classes:
-                model: App\Entity\Developement\VsApp\Taxonomy
-        taxon:
-            classes:
-                model: App\Entity\Developement\VsApp\Taxon
-            translation:
-                classes:
-                    model: App\Entity\Developement\VsApp\TaxonTranslation
+#    resources:
+#        settings:
+#            classes:
+#                model: App\Entity\Developement\VsApp\Settings
+#        site_settings:
+#            classes:
+#                model: App\Entity\Developement\VsApp\SiteSettings
+#        taxonomy:
+#            classes:
+#                model: App\Entity\Developement\VsApp\Taxonomy
+#        taxon:
+#            classes:
+#                model: App\Entity\Developement\VsApp\Taxon
+#            translation:
+#                classes:
+#                    model: App\Entity\Developement\VsApp\TaxonTranslation
                 
     menu:              
         mainMenu:
