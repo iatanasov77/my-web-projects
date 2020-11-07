@@ -1,27 +1,10 @@
 $(function()
 {
-	$( '#change-version-modal' ).on( 'click', '#btnChangeVersion', function( e )
-	{
-		var spinner   = '<div class="spinner-border" role="status"  id="projectSpinner"><span class="sr-only">Loading...</span></div>';
-		$( this ).before( spinner );
+	$( '.btnCreateVirtualHost' ).on( 'click', function () {
+		alert('Not Implemented Yet!!!');
 		
-		$.ajax({
-			type: "GET",
-		 	url: "/projects/edit_install_manual/" + $( this ).attr( 'data-projectId' ),
-			success: function( response )
-			{
-				$( "#projectSpinner" ).remove();
-				$( '#btnEditInstallManual').hide();
-				
-				$( '#installManual > div.card-body' ).html( response );
-				//$( '#install-manual-modal' ).modal( 'toggle' );
-			},
-			error: function()
-			{
-				$( "#projectSpinner" ).remove();
-				alert( "SYSTEM ERROR!!!" );
-			}
-		});
+		
+		$( "#host-create-modal" ).modal( 'show' );
 	});
 	
 	$( '#host-change-php-version-modal' ).on( 'shown.bs.modal', function ( event ) {

@@ -72,7 +72,7 @@ class VirtualHostRepository
         
         if ( $withSsl )
         {
-            $vhostConfig  .= "\n\n" . $twig->render( 'templates/mkvhost/ssl.twig', [
+            $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/ssl.twig', [
                 'host'          => $vhost->getHost(),
                 'documentRoot'  => $vhost->getDocumentRoot(),
                 'serverAdmin'   => $vhost->getServerAdmin(),

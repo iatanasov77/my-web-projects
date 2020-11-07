@@ -118,6 +118,39 @@ class PhpVersionsController extends Controller
         return $this->redirect( $referer );
     }
     
+    /**
+     * @Route("/php-versions/{version}/stop-fpm", name="php-versions-stop-fpm")
+     */
+    public function stopPhpFpm( Request $request ): Response
+    {
+        $requestedVersion   = $request->attributes->get( 'version' );
+        $parts              = explode( '-', $requestedVersion );
+        
+        /*
+         * Good bundle: https://github.com/cocur/background-process
+         */
+        $command    = [
+            '/bin/sudo',
+            '/vagrant/gui_symfony/bin/console',
+            'vs:phpfpm',
+            'stop',
+            '-p',
+            $parts[0]
+        ];
+        
+        if ( isset( $parts[1] ) ) {
+            $command[]  = '-c';
+            $command[]  = $parts[1];
+        }
+        
+        $process    = new Process( $command );
+        $process->start();
+        
+        $referer    = $request->headers->get( 'referer' ); // get the referer, it can be empty!
+        
+        return $this->redirect( $referer );
+    }
+    
     protected function buildGtreeTableData( $availableVersions, $level )
     {
         $installedVersions  = $this->phpBrew->getInstalledVersions();
