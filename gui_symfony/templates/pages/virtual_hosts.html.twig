@@ -8,6 +8,10 @@
             <header class="panel-heading"><h3><strong>Virtual Hosts</strong></h3></header>
           </div>
 
+		  <div class="btn-group mb-3 ml-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary btnCreateVirtualHost">Create Virtual Host</button>
+          </div>
+        
           <div class="row">
             <div class="col-lg-12">
                 <div id="submitMessage" class="card bg-success text-white shadow mb-2" style="display:none;">
@@ -31,7 +35,6 @@
                                     <td>{{ h.PhpStatusLabel }}</td>
                                     <td width="370">
                                         <a href="javascript:void(0);" 
-                                            id="btnChangeVersion"
                                             class="btn btn-primary" 
                                             title="Change Version" 
                                             data-toggle="modal" 
@@ -51,13 +54,9 @@
                                             Start PhpFpm
                                         </a>
                                     {% elseif h.PhpVersion != 'default' and h.PhpStatus == 1 %}
-                                        <a href="javascript:void(0);" 
-                                            id="btnStopFpm"
+                                        <a href="{{ path( 'php-versions-stop-fpm', {version: h.PhpVersion}) }}" 
                                             class="btn btn-primary" 
                                             title="Stop PhpFpm" 
-                                            data-toggle="modal" 
-                                            data-target="#host-change-php-version-modal"
-                                            data-url="{{ path( 'virtual-hosts-set-php-version', {host: h.host}) }}"
                                         >
                                             <i class="fas fa-edit"></i>
                                             Stop PhpFpm
@@ -79,6 +78,7 @@
 {% block modals %}
     {{ parent() }}
     
+    {% include 'modals/host_create.html.twig' %}
     {% include 'modals/host_change_version.html.twig' %}
 {% endblock %}
 

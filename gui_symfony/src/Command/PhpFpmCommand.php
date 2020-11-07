@@ -29,6 +29,8 @@ class PhpFpmCommand extends ContainerAwareCommand
     {
         posix_getuid() === 0 || die( "You must to be root.\n" );
         
+        $runCommand = $input->getArgument( 'run-command' );
+        
         $version    = $input->getOption( 'php-version' );
         $customName = $input->getOption( 'custom-name' );
         
@@ -43,8 +45,15 @@ class PhpFpmCommand extends ContainerAwareCommand
             file_put_contents( $this->installationPath . '/CONFIGURED', date( 'Y-m-d H:i:s' ) );
         }
         
-        // @TODO Check if is not started already (Check the socket file)
-        exec( $this->installationPath . '/sbin/php-fpm' );
+        if ( $runCommand == 'start' ) {
+            // @TODO Check if is not started already (Check the socket file)
+            exec( $this->installationPath . '/sbin/php-fpm' );
+        } elseif ( $runCommand == 'stop' ) {
+            // @TODO Check if is not started already (Check the socket file)
+            exec( 'rm -f ' . $this->installationPath . '/var/run/php-fpm.sock' );
+        } else {
+            throw  new \Exception( 'Unsupported command !!!' );
+        }
         
         $output->writeln( 'PhpFpm Service has started!' );
     }
