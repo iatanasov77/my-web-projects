@@ -151,6 +151,38 @@ class PhpVersionsController extends Controller
         return $this->redirect( $referer );
     }
     
+    /**
+     * @Route("/php-versions/{version}/restart-fpm", name="php-versions-restart-fpm")
+     */
+    public function restartPhpFpm( Request $request ): Response
+    {
+        $requestedVersion   = $request->attributes->get( 'version' );
+        $parts              = explode( '-', $requestedVersion );
+        
+        /*
+         * Good bundle: https://github.com/cocur/background-process
+         */
+        $command    = [
+            '/bin/sudo',
+            '/vagrant/gui_symfony/bin/console',
+            'vs:phpfpm',
+            'restart',
+            '-p',
+            $parts[0]
+        ];
+        
+        if ( isset( $parts[1] ) ) {
+            $command[]  = '-c';
+            $command[]  = $parts[1];
+        }
+        
+        $process    = new Process( $command );
+        $process->start();
+        
+        $referer    = $request->headers->get( 'referer' ); // get the referer, it can be empty!
+        
+        return $this->redirect( $referer );
+    }
     protected function buildGtreeTableData( $availableVersions, $level )
     {
         $installedVersions  = $this->phpBrew->getInstalledVersions();

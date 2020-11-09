@@ -51,17 +51,44 @@ class VirtualHostRepository
         return null;
     }
     
+    public function generateVirtualHost( $vhost, $template = 'simple' )
+    {
+        if ( $this->getVirtualHostByHost( $vhost->getHost() ) ) {
+            throw new \Exception( 'Host exists !!!' );
+        }
+        
+        $apache         = $this->container->get( 'vs_app.apache_service' );
+        $tpl            = 'mkvhost/' . $template . '.twig';
+        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $tpl );
+        file_put_contents( '/tmp/vhost.conf', htmlspecialchars_decode( $vhostConfig ) );
+        
+        $vhostConfFile	= '/etc/httpd/conf.d/' . $vhost->getHost() . '.conf';
+        exec( 'sudo mv -f /tmp/vhost.conf ' . $vhostConfFile ); // Write VHost file
+        $apache->reload(); // Reload Apache
+    }
+    
     public function setVirtualHost( $host, $phpVersion = 'default' )
     {
-        $apache         = $this->container->get( 'vs_app.apache_service' );
-        $phpBrew        = $this->container->get( 'vs_app.php_brew' );
-        $twig           = $this->container->get( 'templating' );
+        $apache = $this->container->get( 'vs_app.apache_service' );
+        $vhost  = $this->getVirtualHostByHost( $host );
+        $tpl    = $phpVersion == 'default' ? 'mkvhost/simple.twig' : 'mkvhost/simple-fpm.twig';
         
-        $vhost          = $this->getVirtualHostByHost( $host );
-        $fpmSocket      = $phpBrew->fpmSocket( $phpVersion );
+        $vhost->setPhpVersion( $phpVersion );
+        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $tpl );
+        
+        file_put_contents( '/tmp/vhost.conf', htmlspecialchars_decode( $vhostConfig ) );
+        
+        exec( 'sudo mv -f /tmp/vhost.conf ' . $this->vhostConfigs[$host] ); // Write VHost file
+        $apache->reload(); // Reload Apache
+    }
+    
+    public function createVirtualHostConfig( $vhost, $tpl )
+    {
+        $twig           = $this->container->get( 'templating' );
+        $phpBrew        = $this->container->get( 'vs_app.php_brew' );
+        $fpmSocket      = $phpBrew->fpmSocket( $vhost->getPhpVersion() );
         $withSsl        = false;
-        //var_dump(htmlspecialchars_decode( $vhost->getDocumentRoot() )); die;
-        $tpl            = $phpVersion == 'default' ? 'mkvhost/simple.twig' : 'mkvhost/simple-fpm.twig';
+        
         $vhostConfig    = $twig->render( $tpl, [
             'host'          => $vhost->getHost(),
             'documentRoot'  => $vhost->getDocumentRoot(),
@@ -80,10 +107,7 @@ class VirtualHostRepository
             ]);
         }
         
-        file_put_contents( '/tmp/vhost.conf', htmlspecialchars_decode( $vhostConfig ) );
-        
-        exec( 'sudo mv -f /tmp/vhost.conf ' . $this->vhostConfigs[$host] ); // Write VHost file 
-        $apache->reload(); // Reload Apache
+        return $vhostConfig;
     }
     
     protected function _initVhosts()
