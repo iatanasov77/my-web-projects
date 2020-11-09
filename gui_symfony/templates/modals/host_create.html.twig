@@ -1,7 +1,7 @@
-<div id="host-create-modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-actionUrl="{{ url( 'php-versions-install' ) }}">
+<div id="host-create-modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-actionUrl="{{ url( 'virtual-hosts-create' ) }}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="host-create-form" method="POST" action="">
+            <form id="host-create-form" method="POST" action="{{ url( 'virtual-hosts-create' ) }}">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Virtual Host</h5>
                 </div>
@@ -9,17 +9,39 @@
                     <div id="errorMessage" class="card alert alert-danger shadow mb-2" style="display:none;">
                         <div class="card-body"></div>
                     </div>
-                    <p>
-                        
-                        <label>PHP Version:</label>
-                        <select name="php_version">
-                            <option value="">-- Select Version--</option>
-                        {% for version,php in installedPhpVersions %}
-                            <option value="{{ version }}">{{ version }}</option>
+                    
+                    <div class="form-group">
+                    	<label for="hostName" class="required">Host Name</label>
+                    	<input type="text" id="hostName" name="hostName" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                    	<label for="documentRoot" class="required">Document Root</label>
+                    	<input type="text" id="documentRoot" name="documentRoot" required="required" class="form-control">
+                    </div>
+                    <div class="form-group">
+                    	<label for="serverAdmin" class="required">Server Admin</label>
+                    	<input type="text" id="serverAdmin" name="serverAdmin" required="required" class="form-control">
+                    </div>
+                    {#
+                    <div class="form-group">
+                    	<label for="apacheLogDir" class="required">Apache Log Dir</label>
+                    	<input type="text" id="apacheLogDir" name="apacheLogDir" required="required" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                    	<label for="fpmSocket" class="required">Fpm Socket</label>
+                    	<input type="text" id="fpmSocket" name="fpmSocket" class="form-control">
+                    </div>
+                    #}
+                    <div class="form-group">
+                    	<label>Php Version: </label>
+                        <select class="form-control select-button phpVersionFormInput" name="phpVersion">
+                            <option value="default">default</option>
+                        {% for v, info in installedPhpVersions %}
+                            <option value="{{ v }}">{{ v }}</option>
                         {% endfor %}
                         </select>
-                        
-                    </p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Save" />

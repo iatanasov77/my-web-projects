@@ -53,13 +53,13 @@
                                             <i class="fas fa-edit"></i>
                                             Start PhpFpm
                                         </a>
-                                    {% elseif h.PhpVersion != 'default' and h.PhpStatus == 1 %}
-                                        <a href="{{ path( 'php-versions-stop-fpm', {version: h.PhpVersion}) }}" 
+                                    {% elseif h.PhpVersion != 'default' and h.PhpStatus < 3 %}
+                                        <a href="{{ path( 'php-versions-restart-fpm', {version: h.PhpVersion}) }}" 
                                             class="btn btn-primary" 
-                                            title="Stop PhpFpm" 
+                                            title="Restart PhpFpm" 
                                         >
                                             <i class="fas fa-edit"></i>
-                                            Stop PhpFpm
+                                            Restart PhpFpm
                                         </a>
                                     {% endif %}    
 

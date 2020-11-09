@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use App\Component\Apache\VirtualHost;
+use App\Component\Apache\Php;
+
 class VirtualHostsController extends Controller
 {   
     /**
@@ -30,10 +33,31 @@ class VirtualHostsController extends Controller
         if ( $request->isMethod( 'post' ) ) {
             $vhosts     = $this->container->get( 'vs_app.apache_virtual_hosts' );
             
-            $host       = $request->attributes->get( 'host' );
-            $phpVersion = ltrim( $request->request->get( 'php_version' ), 'php-' );
+            $host           = $request->request->get( 'hostName' );
+            $documentRoot   = $request->request->get( 'documentRoot' );
+            $serverAdmin    = $request->request->get( 'serverAdmin' );
+            $phpVersion     = $request->request->get( 'phpVersion' );
             
-            $vhosts->setVirtualhost( $host, $phpVersion );
+            if ( $phpVersion != 'default' ) {
+                $fpmSocket  = '/opt/phpbrew/php/' . $phpVersion . '/var/run/php-fpm.sock';
+                $template   = 'simple-fpm';
+            } else {
+                $fpmSocket  = false;
+                $template   = 'simple';
+            }
+            
+            $vhost  = new VirtualHost([
+                'PhpVersion'        => ltrim( $phpVersion, 'php-' ),
+                'PhpStatus'         => Php::STATUS_INSTALLED,
+                'PhpStatusLabel'    => Php::phpStatus( Php::STATUS_INSTALLED ),
+                
+                'ServerName'        => $host,
+                'DocumentRoot'      => $documentRoot,
+                'ServerAdmin'       => $serverAdmin,
+                'LogDir'            => '/var/log/httpd/',
+            ]);
+            
+            $vhosts->generateVirtualhost( $vhost, $template );
             
             return $this->redirectToRoute( 'virtual-hosts' );
         }

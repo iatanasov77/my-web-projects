@@ -49,40 +49,16 @@ class VirtualHost
         $this->phpStatusLabel   = $vhostConfig['PhpStatusLabel'];
     }
     
-    public function generateVirtualHost( $host )
-    {
-        $apache = $this->container->get( 'vs_app.apache_service' );
-        
-        $vhostConfFile	= '/etc/httpd/conf.d/' . $host . '.conf';
-        $apacheLogDir   = '/var/log/httpd/';
-        
-        $vhost  = $this->getContainer()->get('templating')->render( $template, [
-            'host' => $host,
-            'documentRoot'  => $documentRoot,
-            'serverAdmin'   => $serverAdmin,
-            'apacheLogDir'  => $apacheLogDir,
-            'fpmSocket'     => $fpmSocket
-        ]);
-        
-        if ( $withSsl )
-        {
-            $vhost  .= "\n\n" . $this->twig->render( 'templates/mkvhost/ssl.twig', [
-                'host' => $host,
-                'documentRoot'  => $documentRoot,
-                'serverAdmin'   => $serverAdmin,
-                'apacheLogDir'  =>$apacheLogDir
-            ]);
-        }
-        file_put_contents( $vhostConfFile, $vhost );
-        
-        // Reload Apache
-        $output->writeln( 'Restarting apache service...' );
-        exec( "service httpd restart" );
-    }
-    
     public function getHost()
     {
         return $this->host;
+    }
+    
+    public function setHost( $host )
+    {
+        $this->host = $host;
+        
+        return $this;
     }
     
     public function getDocumentRoot()
@@ -90,9 +66,23 @@ class VirtualHost
         return $this->documentRoot;
     }
     
+    public function setDocumentRoot( $documentRoot )
+    {
+        $this->documentRoot = $documentRoot;
+        
+        return $this;
+    }
+    
     public function getServerAdmin()
     {
         return $this->serverAdmin;
+    }
+    
+    public function setServerAdmin( $serverAdmin )
+    {
+        $this->serverAdmin = $serverAdmin;
+        
+        return $this;
     }
     
     public function getApacheLogDir()
@@ -100,9 +90,23 @@ class VirtualHost
         return $this->apacheLogDir;
     }
     
+    public function setApacheLogDir( $apacheLogDir )
+    {
+        $this->apacheLogDir = $apacheLogDir;
+        
+        return $this;
+    }
+    
     public function getPhpVersion()
     {
         return $this->phpVersion;
+    }
+    
+    public function setPhpVersion( $phpVersion )
+    {
+        $this->phpVersion = $phpVersion;
+        
+        return $this;
     }
     
     public function getPhpStatus()
@@ -110,8 +114,22 @@ class VirtualHost
         return $this->phpStatus;
     }
     
+    public function setPhpStatus( $phpStatus )
+    {
+        $this->phpStatus = $phpStatus;
+        
+        return $this;
+    }
+    
     public function getPhpStatusLabel()
     {
         return $this->phpStatusLabel;
+    }
+    
+    public function setPhpStatusLabel( $phpStatusLabel )
+    {
+        $this->phpStatusLabel = $phpStatusLabel;
+        
+        return $this;
     }
 }

@@ -1,9 +1,6 @@
 $(function()
 {
 	$( '.btnCreateVirtualHost' ).on( 'click', function () {
-		alert('Not Implemented Yet!!!');
-		
-		
 		$( "#host-create-modal" ).modal( 'show' );
 	});
 	

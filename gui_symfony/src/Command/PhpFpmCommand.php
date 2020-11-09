@@ -18,7 +18,7 @@ class PhpFpmCommand extends ContainerAwareCommand
             ->setDescription( 'Start PhpFpm Service. Confugure it if it is not. Starting from /opt/phpbrew/php/.... for now.' )
             ->setHelp( '"Usage: php bin/console vs:phpfpm start -v 7.4.8 -n MyCustomName";' )
             
-            ->addArgument( 'run-command', InputArgument::REQUIRED, 'Only "start" is implemented for now?' )
+            ->addArgument( 'run-command', InputArgument::REQUIRED, 'Available Values: start | stop | restart' )
         
             ->addOption( 'php-version', 'p', InputOption::VALUE_OPTIONAL, 'Select a template for the virtual host configuration' )
             ->addOption( 'custom-name', 'c', InputOption::VALUE_OPTIONAL, 'Select a custom build', '' )
@@ -51,6 +51,9 @@ class PhpFpmCommand extends ContainerAwareCommand
         } elseif ( $runCommand == 'stop' ) {
             // @TODO Check if is not started already (Check the socket file)
             exec( 'rm -f ' . $this->installationPath . '/var/run/php-fpm.sock' );
+        } elseif ( $runCommand == 'restart' ) {
+            exec( 'rm -f ' . $this->installationPath . '/var/run/php-fpm.sock' );
+            exec( $this->installationPath . '/sbin/php-fpm' );
         } else {
             throw  new \Exception( 'Unsupported command !!!' );
         }
