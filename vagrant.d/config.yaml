@@ -60,13 +60,16 @@ subsystems:
 
 frontendtools:
     #nodejs: latest
-    nodejs: 13.12.0
+    nodejs: 14.15.3
     tools:
        yarn:
           version: 'latest' 
        gulp:
            version: 'latest'
        angular-cli:
+           version: 'latest'
+       # Using for upgrade package.json dependencie's versions
+       npm-upgrade:
            version: 'latest'
 
 packages:
