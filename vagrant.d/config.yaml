@@ -176,6 +176,7 @@ lamp:
         targetDirName: 'phpMyAdmin-5.0.4-all-languages'
 
 ansible:
+    enabled: false
     pathRoles: '/vagrant/ansible.d/playbook/roles/'
     logPath: '/vagrant/ansible.d/log'
     galaxyRoles: []
