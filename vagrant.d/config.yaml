@@ -98,7 +98,7 @@ lamp:
         databases:
             default:
                 name: 'VsMyProjects'
-                dump: '/vagrant/doc/sql/VsMyProjects-20201102.sql'
+                dump: '/vagrant/doc/sql/VsMyProjects-20210113.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'e
     apacheModules: ['expires', 'headers', 'rewrite', 'vhost_alias', 'version', 'env', 'proxy', 'proxy_fcgi', 'proxy_http', 'proxy_html', 'proxy_ajp']
