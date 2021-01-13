@@ -6,6 +6,6 @@ sylius_resource:
             classes:
                 model:      App\Entity\User
                 interface:  Sylius\Component\Resource\Model\ResourceInterface
-                controller: VS\UsersBundle\Controller\UsersCrudController
+                #controller: VS\UsersBundle\Controller\UsersCrudController
                 repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository      
                 

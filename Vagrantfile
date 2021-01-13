@@ -64,16 +64,15 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 		end
 
-	  	# Shared Folders
+	  	# Default Shared Folder
 	  	#config.vm.synced_folder "../VS_MyProjects", "/vagrant" #owner: "root", group: "root"
 	  	config.vm.synced_folder "./", "/vagrant" #owner: "root", group: "root"
-    	config.vm.synced_folder ENV['FOLDER_PROJECTS'], "/projects" #owner: "root", group: "root"
-    	# Mandatory for Build with Jenkins Slave
-    	config.vm.synced_folder ENV['FOLDER_PROJECTS_DEPLOY'], "/projects_deploy"
-    	
-    	if ENV['FOLDER_TABLATURES']
-    	   config.vm.synced_folder ENV['FOLDER_TABLATURES'], "/var/www/wgp.lh/tablatures" #owner: "vagrant", group: "root"
-        end
+	  	
+	  	# Mount Custom Shared Folders
+	  	sharedFolders	= JSON.parse( ENV['SHARED_FOLDERS'] )
+	  	sharedFolders.each do |mountPoint, mountDir|
+	  		config.vm.synced_folder mountDir, mountPoint #owner: "root", group: "root"
+	    end
         
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
