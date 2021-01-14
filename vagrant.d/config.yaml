@@ -101,7 +101,19 @@ lamp:
                 dump: '/vagrant/doc/sql/VsMyProjects-20210113.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'e
-    apacheModules: ['expires', 'headers', 'rewrite', 'vhost_alias', 'version', 'env', 'proxy', 'proxy_fcgi', 'proxy_http', 'proxy_html', 'proxy_ajp']
+    apacheModules: 
+        - expires
+        - headers
+        - rewrite
+        - vhost_alias
+        - version
+        - env
+        - ssl
+        - proxy
+        - proxy_fcgi
+        - proxy_http
+        - proxy_html
+        - proxy_ajp
 
     phpModules:
         apcu:
@@ -124,6 +136,14 @@ lamp:
             zend: true
             # see http://xdebug.org/docs/all_settings
             settings:
+                # For xdebug3 many config vars are changed. 
+                # Reference: https://xdebug.org/docs/upgrade_guide
+                # ---------------------------------------------------
+                # xdebug.mode = debug
+                # xdebug.start_with_request = 1
+                # xdebug.discover_client_host = 1
+                # xdebug.client_port = 9000
+                
                 'xdebug.default_enable': '1'
                 'xdebug.remote_enable': '1'
                 'xdebug.remote_handler': 'dbgp'

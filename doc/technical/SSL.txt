@@ -1,0 +1,43 @@
+Using this tutorial: https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-on-centos-8
+============================================================================================================================
+
+
+Requirements:
+-----------------------------------------------------------------------------------------------
+sudo dnf install mod_ssl
+sudo service httpd restart
+
+edit ssl.conf and coment all lines that triger errors: sudo vim /etc/httpd/conf.d/ssl.conf
+-----------------------------------------------------------------------------------------------
+
+
+Generate SelfSigned Certificate:
+-----------------------------------
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/apache-selfsigned.key -out /etc/pki/tls/certs/apache-selfsigned.crt
+
+Add to VirtualHost:
+-------------------
+<VirtualHost *:443>
+    <IfModule mod_ssl.c>
+       SSLEngine On
+
+       SSLCertificateFile /etc/pki/tls/certs/apache-selfsigned.crt
+       SSLCertificateKeyFile /etc/pki/tls/private/apache-selfsigned.key
+    </IfModule>
+
+    ServerAdmin webmaster@acni.lh
+    ServerName acni.lh
+    ServerAlias www.acni.lh
+    DocumentRoot "/projects-accenture/ACNI/Developement"
+
+    <Directory "/projects-accenture/ACNI/Developement">
+       AllowOverride All
+       Require all granted
+    </Directory>
+
+    CustomLog /var/log/httpd/acni.lh-access.log combined
+    ErrorLog /var/log/httpd/acni.lh-error.log
+
+</VirtualHost>
+
+
