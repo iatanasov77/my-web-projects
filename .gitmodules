@@ -91,3 +91,6 @@
 [submodule "vagrant.d/puppet/modules/gnupg"]
 	path = vagrant.d/puppet/modules/gnupg
 	url = https://github.com/tampakrap/golja-gnupg.git
+[submodule "vagrant.d/puppet/modules/wait-for"]
+	path = vagrant.d/puppet/modules/wait-for
+	url = https://github.com/heini/puppet-wait-for.git
