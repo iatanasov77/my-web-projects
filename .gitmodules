@@ -94,3 +94,6 @@
 [submodule "vagrant.d/puppet/modules/wait-for"]
 	path = vagrant.d/puppet/modules/wait-for
 	url = https://github.com/heini/puppet-wait-for.git
+[submodule "vagrant.d/puppet/modules/drush"]
+	path = vagrant.d/puppet/modules/drush
+	url = https://github.com/jonhattan/puppet-drush.git

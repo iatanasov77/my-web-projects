@@ -58,6 +58,13 @@ subsystems:
            - libzip-devel
         install: []   #['7.4.1', '5.6'
 
+    # Everything fails :) Use on hand: composer global require drush/drush:10.3.6
+    # /usr/local/bin/drush is created to the /home/vagrant/.composer/vendor/bin
+    drush:
+        enabled: true
+        versions: ['8', '9', '10']   # Valid values are '6', '7', '8', '9', '10', and 'master'
+        defaultVersion: '8'
+        
 frontendtools:
     #nodejs: latest
     nodejs: 14.15.3
