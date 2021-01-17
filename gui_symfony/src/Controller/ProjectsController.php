@@ -50,7 +50,8 @@ class ProjectsController extends Controller
         $project    = $id ? $repository->find( $id ) : new Project();
         
         return $this->render( 'pages/projects/project_form.html.twig', [
-            'form' => $this->_projectForm( $project )->createView(),
+            'form'      => $this->_projectForm( $project )->createView(),
+            'project'   => $project
         ]);
     }
     
@@ -239,7 +240,6 @@ class ProjectsController extends Controller
     
     private function _projectForm( Project $project )
     {
-        
         $form   = $this->createForm( ProjectType::class, $project, [
             'action' => $this->generateUrl( 'projects_create', ['id' => (int)$project->getId()] ),
             'method' => 'POST'

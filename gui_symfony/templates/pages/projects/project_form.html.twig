@@ -5,7 +5,7 @@
         <li><a class="active" href="#project-general" data-toggle="tab">General</a></li>
         <li><a href="#project-source" data-toggle="tab">Source</a></li>
         <li><a href="#project-predefined" data-toggle="tab">Setup Predefined</a></li>
-        <li><a href="#project-vhost" data-toggle="tab">Apache VirtualHost</a></li>
+        <li><a href="#project-vhost" data-toggle="tab">Apache VirtualHosts</a></li>
     </ul>
     
     <div id="projectTabContent" class="tab-content projectTabContent">
@@ -13,12 +13,13 @@
             {{ form_row(form.name) }}
             {{ form_row(form.category) }}
             {{ form_row(form.description) }}
+            {{ form_row(form.projectRoot) }}
+            {{ form_row(form.projectUrl) }}
         </div>
         <div class="tab-pane" id="project-source">
             {{ form_row(form.sourceType) }}
             {{ form_row(form.repository) }}
             {{ form_row(form.branch) }}
-            {{ form_row(form.projectRoot) }}
         </div>
         <div class="tab-pane" id="project-predefined">
         	<frameset>
@@ -30,17 +31,18 @@
             </fieldset>
         </div>
         <div class="tab-pane fade" id="project-vhost">
-            {{ form_row(form.withSsl) }}
-            {{ form_row(form.host) }}
-            {{ form_row(form.documentRoot) }}
-            
-            {{ form_row(form.phpFpmSocket) }}
-            {{ form_row(form.reverseProxy) }}
-            
-            {#
-                "fpmSocket": "/opt/phpbrew/php/php-7.4.1/var/run/php-fpm.sock"
-                "reverseProxy": "http://127.0.0.1:5000/"
-            #}
+        	<ul>
+        		{% for host in project.hosts %}
+			        <li>
+			        	{{ host.host }}
+			        	<a href="#"><img
+                			class="project-remove-host-icon ml-2" 
+                			src="{{ asset('assets/default/build/img/close.svg') }}" 
+                			alt="Remove"
+                		/></a>
+			        </li>
+			    {% endfor %}
+        	</ul>
         </div>
     </div>
 {{ form_end(form, {'render_rest': false}) }}

@@ -156,3 +156,8 @@ tr.node[data-level="2"] span.node-icon-ce {
 	width: auto;
 	padding: 10px;
 }
+
+.project-remove-host-icon {
+	width: 12px;
+	height: 12px;
+}

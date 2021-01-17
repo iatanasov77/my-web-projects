@@ -58,25 +58,8 @@ class ProjectType extends AbstractType
             ->add( 'repository', TextType::class )
             ->add( 'branch', TextType::class )
             ->add( 'projectRoot', TextType::class )
-            ->add( 'documentRoot', TextType::class )
-            ->add( 'host', TextType::class )
-            ->add( 'withSsl', CheckboxType::class )
-            
-            ->add( 'phpFpmSocket', TextType::class )
-            ->add( 'reverseProxy', TextType::class )
+            ->add( 'projectUrl', TextType::class )
         ;
-            
-        $builder->get( 'withSsl' )
-            ->addModelTransformer( new CallbackTransformer(
-                function ( $withSsl ) {
-                    // transform the array to a string
-                    return (boolean)$withSsl;
-                },
-                function (  $withSsl ) {
-                    // transform the string back to an array
-                    return (boolean)$withSsl;
-                }
-            ));
     }
     
     public function configureOptions( OptionsResolver $resolver )

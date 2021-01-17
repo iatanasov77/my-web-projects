@@ -87,7 +87,6 @@ class VirtualHostRepository
         $twig           = $this->container->get( 'templating' );
         $phpBrew        = $this->container->get( 'vs_app.php_brew' );
         $fpmSocket      = $phpBrew->fpmSocket( $vhost->getPhpVersion() );
-        $withSsl        = false;
         
         $vhostConfig    = $twig->render( $tpl, [
             'host'          => $vhost->getHost(),
@@ -97,7 +96,7 @@ class VirtualHostRepository
             'fpmSocket'     => $fpmSocket
         ]);
         
-        if ( $withSsl )
+        if ( $vhost->getWithSsl() )
         {
             $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/ssl.twig', [
                 'host'          => $vhost->getHost(),
@@ -172,7 +171,7 @@ class VirtualHostRepository
         if( ! empty( $tokens ) ) {
             
             switch ( strtolower( $tokens[0] ) ) {
-                case 'serveadmin':
+                case 'serveradmin':
                     $vhost['ServerAdmin'] = $tokens[1];
                     break;
                 case 'documentroot':
@@ -184,6 +183,10 @@ class VirtualHostRepository
                 case 'serveralias':
                     $vhost['ServerAlias'] = $tokens[1];
                     break;
+            }
+          
+            if( $tokens[0] == '<VirtualHost' ) {
+                $vhost['WithSsl']   = $tokens[1] == '*:443' ? true : false;
             }
             
             if( $tokens[0] == '<Proxy' ) {
