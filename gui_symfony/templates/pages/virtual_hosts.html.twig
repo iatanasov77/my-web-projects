@@ -78,7 +78,7 @@
 {% block modals %}
     {{ parent() }}
     
-    {% include 'modals/host_create.html.twig' %}
+    {% include 'modals/host_create.html.twig' with {'form': formHost} %}
     {% include 'modals/host_change_version.html.twig' %}
 {% endblock %}
 

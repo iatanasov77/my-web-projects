@@ -26,7 +26,7 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-        autowire: false
+        autowire: true
         
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -65,6 +65,12 @@ services:
         class: App\Component\Command\Apache
         calls:
           - [ setContainer ]
+    
+    ##################################
+    # Form Types with Arguments
+    ##################################
+    App\Form\Type\ProjectHostType:
+        arguments: ['@vs_app.php_brew']
+        tags: [form.type]
           
     #############################################################################  
-    

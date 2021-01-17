@@ -35,6 +35,10 @@ Encore
     })
     
     .copyFiles({
+	     from: './assets/default/img',
+	     to: 'img/[name].[ext]',
+	 })
+    .copyFiles({
 	     from: './node_modules/bootstrap-sass/assets/fonts/bootstrap',
 	     to: 'fonts/bootstrap/[name].[ext]',
 	 })

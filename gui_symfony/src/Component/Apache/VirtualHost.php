@@ -37,6 +37,11 @@ class VirtualHost
      */
     protected $phpStatusLabel;
     
+    /**
+     * @var bool
+     */
+    protected $withSsl;
+    
     public function __construct( $vhostConfig )
     {
         $this->host             = $vhostConfig['ServerName'];
@@ -47,6 +52,7 @@ class VirtualHost
         $this->phpVersion       = $vhostConfig['PhpVersion'];
         $this->phpStatus        = $vhostConfig['PhpStatus'];
         $this->phpStatusLabel   = $vhostConfig['PhpStatusLabel'];
+        $this->withSsl          = $vhostConfig['WithSsl'];
     }
     
     public function getHost()
@@ -129,6 +135,18 @@ class VirtualHost
     public function setPhpStatusLabel( $phpStatusLabel )
     {
         $this->phpStatusLabel = $phpStatusLabel;
+        
+        return $this;
+    }
+
+    public function getWithSsl()
+    {
+        return $this->withSsl;
+    }
+    
+    public function setWithSsl( $withSsl )
+    {
+        $this->withSsl  = $withSsl;
         
         return $this;
     }

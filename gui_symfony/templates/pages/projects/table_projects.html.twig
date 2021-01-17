@@ -14,7 +14,7 @@
 				<td>{{ project.projectRoot }}</td>
 				<td width="170">
 					{%  if vs_project_installed( project ) %}
-						<a href="http://{{ project.host }}" target="__blank" class="btn btn-success btn-circle btn-sm btnOpen" title="Open">
+						<a href="{{ project.projectUrl }}" target="__blank" class="btn btn-success btn-circle btn-sm btnOpen" title="Open">
 	                    	<i class="fas fa-home"></i>
 	               		</a>
 					{% else %}

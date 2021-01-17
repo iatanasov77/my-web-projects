@@ -1,7 +1,9 @@
 <?php namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
@@ -9,6 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project
 {
+    public function __construct()
+    {
+        $this->hosts    = new ArrayCollection();
+    }
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,6 +27,11 @@ class Project
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
      */
     protected $category;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectHost", mappedBy="project")
+     */
+    protected $hosts;
     
     /**
      * @ORM\Column(type="string", length=128)
@@ -55,36 +67,9 @@ class Project
     protected $projectRoot;
     
     /**
-     * @ORM\Column(name="document_root", type="string", length=128)
-     * @Assert\NotBlank
-     */
-    protected $documentRoot;
-    
-    /**
-     * @ORM\Column(type="string", length=32)
-     * @Assert\NotBlank
-     */
-    protected $host;
-    
-    /**
-     * @ORM\Column(name="with_ssl", type="boolean")
-     */
-    protected $withSsl;
-    
-    /**
      * @ORM\Column(name="install_manual", type="string")
      */
     protected $installManual;
-    
-    /**
-     * @ORM\Column(name="phpFpmSocket", type="string", length=128)
-     */
-    protected $phpFpmSocket;
-    
-    /**
-     * @ORM\Column(name="reverseProxy", type="string", length=128)
-     */
-    protected $reverseProxy;
     
     /**
      * @ORM\Column(name="predefinedType", type="string", length=64)
@@ -95,6 +80,11 @@ class Project
      * @ORM\Column(name="predefinedTypeParams", type="json")
      */
     protected $predefinedTypeParams;
+    
+    /**
+     * @ORM\Column(name="url", type="string", length=255)
+     */
+    protected $projectUrl;
 
     public function getId(): ?int
     {
@@ -112,6 +102,15 @@ class Project
         
         return $this;
     }
+    
+    /**
+     * @return Collection|ProjectHost[]
+     */
+    public function getHosts(): Collection
+    {
+        return $this->hosts;
+    }
+    // addHost() and removeHosts() were also should added
     
     public function getName(): ?string
     {
@@ -184,42 +183,6 @@ class Project
 
         return $this;
     }
-
-    public function getDocumentRoot(): ?string
-    {
-        return $this->documentRoot;
-    }
-
-    public function setDocumentRoot(string $documentRoot): self
-    {
-        $this->documentRoot = $documentRoot;
-
-        return $this;
-    }
-
-    public function getHost(): ?string
-    {
-        return $this->host;
-    }
-
-    public function setHost(string $host): self
-    {
-        $this->host = $host;
-
-        return $this;
-    }
-
-    public function getWithSsl(): ?string
-    {
-        return $this->withSsl;
-    }
-
-    public function setWithSsl(string $withSsl): self
-    {
-        $this->withSsl = $withSsl;
-
-        return $this;
-    }
     
     public function getInstallManual(): ?string
     {
@@ -229,30 +192,6 @@ class Project
     public function setInstallManual(string $installManual): self
     {
         $this->installManual = $installManual;
-        
-        return $this;
-    }
-    
-    public function getPhpFpmSocket(): ?string
-    {
-        return $this->phpFpmSocket;
-    }
-    
-    public function setPhpFpmSocket(string $phpFpmSocket): self
-    {
-        $this->phpFpmSocket = $phpFpmSocket;
-        
-        return $this;
-    }
-    
-    public function getReverseProxy(): ?string
-    {
-        return $this->reverseProxy;
-    }
-    
-    public function setReverseProxy(string $reverseProxy): self
-    {
-        $this->reverseProxy = $reverseProxy;
         
         return $this;
     }
@@ -277,6 +216,18 @@ class Project
     public function setPredefinedTypeParams(?array $predefinedTypeParams): self
     {
         $this->predefinedTypeParams = $predefinedTypeParams;
+        
+        return $this;
+    }
+    
+    public function getProjectUrl(): ?string
+    {
+        return $this->projectUrl;
+    }
+    
+    public function setUrl(string $projectUrl): self
+    {
+        $this->projectUrl   = $projectUrl;
         
         return $this;
     }
