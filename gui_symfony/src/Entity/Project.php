@@ -29,7 +29,7 @@ class Project
     protected $category;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectHost", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectHost", mappedBy="project", cascade={"remove"})
      */
     protected $hosts;
     

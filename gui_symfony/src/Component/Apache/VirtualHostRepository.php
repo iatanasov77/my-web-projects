@@ -118,6 +118,12 @@ class VirtualHostRepository
         return $vhostConfig;
     }
     
+    public function removeVirtualHost( $host ) {
+        if ( isset( $this->vhostConfigs[$host] ) ) {
+            exec( 'sudo rm -f ' . $this->vhostConfigs[$host] );
+        }
+    }
+    
     protected function _initVhosts()
     {
         if ( ! is_dir( $this->vHostDir ) ) {

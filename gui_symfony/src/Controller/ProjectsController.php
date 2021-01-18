@@ -163,8 +163,21 @@ class ProjectsController extends Controller
             $projectRoot= $project ? $project->getProjectRoot() : null;
             
             if ( $project ) {
+                $hosts  = $project->getHosts();
+                $vhosts = $this->container->get( 'vs_app.apache_virtual_hosts' );
+                $apache = $this->container->get( 'vs_app.apache_service' );
+                
                 $em->remove( $project );
                 $em->flush();
+                
+                /*
+                 * When delete project all asociated hosts are deleted cascade,
+                 * and need to delete vhost configs of its
+                 */
+                foreach( $hosts as $host ) {
+                    $vhosts->removeVirtualHost( $host->getHost() );
+                }
+                $apache->reload(); 
             }
             
             if ( $data['deleteFiles'] == true && is_dir( $projectRoot ) ) {
