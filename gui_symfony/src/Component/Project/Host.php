@@ -1,5 +1,4 @@
-<?php
-namespace App\Component\Project;
+<?php namespace App\Component\Project;
 
 class Host
 {

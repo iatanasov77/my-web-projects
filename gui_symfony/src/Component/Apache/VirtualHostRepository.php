@@ -3,6 +3,7 @@
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use App\Component\Apache\VirtualHost;
 use App\Component\Apache\Php;
+use App\Component\Apache\Config as ApacheConfig;
 
 class VirtualHostRepository
 {
@@ -67,8 +68,7 @@ class VirtualHostRepository
         }
         
         $apache         = $this->container->get( 'vs_app.apache_service' );
-        $tpl            = 'mkvhost/' . $template . '.twig';
-        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $tpl );
+        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $template );
         file_put_contents( '/tmp/vhost.conf', htmlspecialchars_decode( $vhostConfig ) );
         
         $vhostConfFile	= '/etc/httpd/conf.d/' . $vhost->getHost() . '.conf';
@@ -78,12 +78,12 @@ class VirtualHostRepository
     
     public function setVirtualHost( $host, $phpVersion = 'default' )
     {
-        $apache = $this->container->get( 'vs_app.apache_service' );
-        $vhost  = $this->getVirtualHostByHost( $host );
-        $tpl    = $phpVersion == 'default' ? 'mkvhost/simple.twig' : 'mkvhost/simple-fpm.twig';
+        $apache     = $this->container->get( 'vs_app.apache_service' );
+        $vhost      = $this->getVirtualHostByHost( $host );
+        $template   = $phpVersion == 'default' ? 'simple' : 'simple-fpm';
         
         $vhost->setPhpVersion( $phpVersion );
-        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $tpl );
+        $vhostConfig    = $this->createVirtualHostConfig( $vhost, $template );
         
         file_put_contents( '/tmp/vhost.conf', htmlspecialchars_decode( $vhostConfig ) );
         
@@ -91,13 +91,21 @@ class VirtualHostRepository
         $apache->reload(); // Reload Apache
     }
     
-    public function createVirtualHostConfig( $vhost, $tpl )
+    public function createVirtualHostConfig( $vhost, $template )
     {
         $twig           = $this->container->get( 'templating' );
         $phpBrew        = $this->container->get( 'vs_app.php_brew' );
         $fpmSocket      = $phpBrew->fpmSocket( $vhost->getPhpVersion() );
         
-        $vhostConfig    = $twig->render( $tpl, [
+        if ( file_exists ( ApacheConfig::SSLCERT_VAGRANT_CRT ) && file_exists ( ApacheConfig::SSLCERT_VAGRANT_KEY ) ) {
+            $sslCrt = ApacheConfig::SSLCERT_VAGRANT_CRT;
+            $sslKey = ApacheConfig::SSLCERT_VAGRANT_KEY;
+        } else {
+            $sslCrt = ApacheConfig::SSLCERT_MYPROJECTS_CRT;
+            $sslKey = ApacheConfig::SSLCERT_MYPROJECTS_KEY;
+        }
+        
+        $vhostConfig    = $twig->render( 'mkvhost/' . $template . '.twig', [
             'host'          => $vhost->getHost(),
             'documentRoot'  => $vhost->getDocumentRoot(),
             'serverAdmin'   => $vhost->getServerAdmin(),
@@ -107,11 +115,13 @@ class VirtualHostRepository
         
         if ( $vhost->getWithSsl() )
         {
-            $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/ssl.twig', [
-                'host'          => $vhost->getHost(),
-                'documentRoot'  => $vhost->getDocumentRoot(),
-                'serverAdmin'   => $vhost->getServerAdmin(),
-                'apacheLogDir'  => $vhost->getApacheLogDir()
+            $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/' . $template . '-ssl.twig', [
+                'sslCertificate'    => $sslCrt,
+                'sslCertificateKey' => $sslKey,
+                'host'              => $vhost->getHost(),
+                'documentRoot'      => $vhost->getDocumentRoot(),
+                'serverAdmin'       => $vhost->getServerAdmin(),
+                'apacheLogDir'      => $vhost->getApacheLogDir()
             ]);
         }
         
