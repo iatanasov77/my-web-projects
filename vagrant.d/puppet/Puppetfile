@@ -4,3 +4,54 @@
 ###################################################################
 
 forge "http://forge.puppetlabs.com"
+
+###################################################################
+# Dependencies
+###################################################################
+mod "puppetlabs-apt", '< 5.0.0'
+mod "puppetlabs-concat", '< 6.0.0'
+mod "puppetlabs-inifile"
+mod "puppetlabs-stdlib", '< 5.0.0'
+mod "puppetlabs-translate"
+
+mod "voxpupuli-staging",
+    :git => "https://github.com/voxpupuli/puppet-staging.git"
+
+mod "voxpupuli-archive", '< 5.0.0',
+	:git => "https://github.com/voxpupuli/puppet-archive.git"
+
+mod "voxpupuli-wget",
+    :git => "https://github.com/voxpupuli/puppet-wget.git"
+    
+######################################################################
+# System Tools
+######################################################################
+#mod "puppetlabs-gcc"  
+#mod "ghoneycutt-ssh"
+#mod "saz-sudo"
+
+
+###################################################################
+# Backend Developement
+###################################################################
+mod "puppetlabs-apache"
+mod "puppetlabs-mysql"
+mod "puppetlabs-sqlite"
+
+mod "voxpupuli-php",
+    :git => "https://github.com/voxpupuli/puppet-php.git"
+
+mod "justicel-phpmyadmin",
+    :git => "https://github.com/justicel/puppet-phpmyadmin.git"
+    
+mod "willdurand-composer"
+mod "puppetlabs-docker"
+
+mod "vankosoft-devenv",
+    :git => "https://github.com/iatanasov77/puppet-devenv.git"
+    
+########################################################################
+# Frontend Developement
+########################################################################
+#mod "willdurand-nodejs"
+#mod "artberri-yarn"

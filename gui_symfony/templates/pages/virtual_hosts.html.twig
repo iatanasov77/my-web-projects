@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <header class="panel-heading"><h3><strong>Virtual Hosts</strong></h3></header>
+          </div>
+
+		  <div class="btn-group mb-3 ml-2" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary btnCreateVirtualHost">Create Virtual Host</button>
+          </div>
+        
+          <div class="row">
+            <div class="col-lg-12">
+                <div id="submitMessage" class="card bg-success text-white shadow mb-2" style="display:none;">
+                    <div class="card-body"></div>
+                </div>
+                <section id="sectionProjects" class="panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th style="font-weight: bold;">Host</th>
+                                <th style="font-weight: bold;">PHP Version</th>
+                                <th style="font-weight: bold;">PHP Status</th>
+                                <th style="text-align:center; font-weight: bold;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for h in hosts %}
+                                <tr>
+                                    <td>{{ h.host }}</td>
+                                    <td>{{ h.PhpVersion }}</td>
+                                    <td>{{ h.PhpStatusLabel }}</td>
+                                    <td width="370">
+                                    	<a href="javascript:void(0);" 
+                                            class="btn btn-primary btnDeleteHost" 
+                                            title="Delete Host" 
+                                            data-url="{{ path( 'virtual-hosts-delete-host', {host: h.host}) }}"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                            Delete Host
+                                        </a>
+                                        
+                                        <a href="javascript:void(0);" 
+                                            class="btn btn-primary" 
+                                            title="Change Version" 
+                                            data-toggle="modal" 
+                                            data-target="#host-change-php-version-modal"
+                                            data-url="{{ path( 'virtual-hosts-set-php-version', {host: h.host}) }}"
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                            Change Version
+                                        </a>
+                                        
+                                    {% if h.PhpStatus == 2 %} {# STATUS_INSTALLED_NOT_STARTED #}
+                                        <a href="{{ path( 'php-versions-start-fpm', {version: h.PhpVersion}) }}" 
+                                            class="btn btn-primary" 
+                                            title="Start PhpFpm" 
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                            Start PhpFpm
+                                        </a>
+                                    {% elseif h.PhpVersion != 'default' and h.PhpStatus < 3 %}
+                                        <a href="{{ path( 'php-versions-restart-fpm', {version: h.PhpVersion}) }}" 
+                                            class="btn btn-primary" 
+                                            title="Restart PhpFpm" 
+                                        >
+                                            <i class="fas fa-edit"></i>
+                                            Restart PhpFpm
+                                        </a>
+                                    {% endif %}    
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
+
+{% block modals %}
+    {{ parent() }}
+    
+    {% include 'modals/host_create.html.twig' with {'form': formHost} %}
+    {% include 'modals/host_change_version.html.twig' %}
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    
+    {{ encore_entry_script_tags( 'js/pages/virtual_hosts' ) }}
+{% endblock %}

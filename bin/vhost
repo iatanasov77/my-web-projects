@@ -1,0 +1,54 @@
+#!/bin/bash
+
+PHPBREW_PREFIX="/opt/phpbrew"
+AFTER="## Custom fragment"
+
+HOST=$1
+PHP_VERSION=$2
+
+changeVersion()
+{
+    local fpmSocket="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/var/run/php-fpm.sock"
+    
+    if [ ! -S "$fpmSocket" ]; then
+        echo "FPM Socket does not exist: $fpmSocket"
+        exit 1
+    fi
+    
+    prepairVhostConfig
+    
+    # Restart HTTPD service
+    service httpd restart
+}
+
+prepairVhostConfig()
+{
+    local part1="${PHPBREW_PREFIX}/php/php-"
+    local part2="/var/run/php-fpm.sock"
+    local configFile="/etc/httpd/conf.d/25-${HOST}.conf"
+    
+    if grep -q "$part1" "$configFile"; then
+        sed -i "s|$part1.*$part2|$part1$PHP_VERSION$part2|g" ${configFile}
+    else
+        local line1="<Proxy \"unix:${part1}${PHP_VERSION}${part2}|fcgi://php-fpm\">\nProxySet disablereuse=off\n<\/Proxy>"
+        local line2="<FilesMatch \\\\.php$>\nSetHandler proxy:fcgi:\/\/php-fpm\n<\/FilesMatch>"
+        
+        sed -i "/${AFTER}/a${line1}\n${line2}" ${configFile}
+    fi
+}
+
+usage()
+{
+    echo "Usage: vhost [host] [php_version]"
+    exit 1
+}
+
+if [[ $EUID -ne 0 ]]; then
+   echo "You must to be root." 
+   exit 1
+fi
+
+[ -z $1 ] && usage
+[ -z $2 ] && usage
+
+changeVersion

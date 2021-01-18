@@ -1,0 +1,15 @@
+Use this tutorial: https://www.hanselman.com/blog/SideBySideUserScopedNETCoreInstallationsOnLinuxWithDotnetinstallsh.aspx
+Dotnet-instal Reference: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script
+---------------------------------------------------------------------------------------------------------------------------
+
+$ dotnet --list-sdks
+
+If you want to install another sdk version run:
+$ dotnet-install --channel 2.1
+
+In the project dir run:
+$ dotnet new globaljson
+
+The template "global.json file" was created successfully.
+Open it and change the sdk version that you want
+

@@ -1,0 +1,6 @@
+sylius_theme:
+    context: vs_app.site.theme.context
+    sources:
+        filesystem:
+            directories:
+                 - "%kernel.project_dir%/themes"

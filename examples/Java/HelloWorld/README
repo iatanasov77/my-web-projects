@@ -1,0 +1,5 @@
+https://www.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html
+
+Compile a servlet: 
+==================
+sudo javac -cp .:/opt/tomcat/lib/servlet-api.jar -d classes src/mypkg/HelloServlet.java

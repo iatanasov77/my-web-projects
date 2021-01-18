@@ -1,9 +1,9 @@
 [submodule "vagrant.d/puppet/modules/wget"]
 	path = vagrant.d/puppet/modules/wget
-	url = http://github.com/voxpupuli/puppet-wget.git
+	url = https://github.com/voxpupuli/puppet-wget.git
 [submodule "vagrant.d/puppet/modules/apache"]
 	path = vagrant.d/puppet/modules/apache
-	url = http://github.com/puppetlabs/puppetlabs-apache.git
+	url = https://github.com/puppetlabs/puppetlabs-apache.git
 [submodule "vagrant.d/puppet/modules/apt"]
 	path = vagrant.d/puppet/modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
@@ -15,16 +15,13 @@
 	url = https://github.com/puppetlabs/puppetlabs-gcc.git
 [submodule "vagrant.d/puppet/modules/mysql"]
 	path = vagrant.d/puppet/modules/mysql
-	url = http://github.com/puppetlabs/puppetlabs-mysql.git
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git
 [submodule "vagrant.d/puppet/modules/nodejs"]
 	path = vagrant.d/puppet/modules/nodejs
 	url = https://github.com/willdurand/puppet-nodejs.git
-[submodule "vagrant.d/puppet/modules/phpmyadmin"]
-	path = vagrant.d/puppet/modules/phpmyadmin
-	url = http://github.com/justicel/puppet-phpmyadmin.git
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite
-	url = http://github.com/puppetlabs/puppetlabs-sqlite.git
+	url = https://github.com/puppetlabs/puppetlabs-sqlite.git
 [submodule "vagrant.d/puppet/modules/staging"]
 	path = vagrant.d/puppet/modules/staging
 	url = https://github.com/voxpupuli/puppet-staging.git
@@ -46,24 +43,57 @@
 [submodule "vagrant.d/puppet/modules/docker"]
 	path = vagrant.d/puppet/modules/docker
 	url = https://github.com/puppetlabs/puppetlabs-docker
-[submodule "vagrant.d\\puppet\\modules\\docker"]
-	path = vagrant.d\\puppet\\modules\\docker
-	url = https://github.com/puppetlabs/puppetlabs-docker	
 [submodule "vagrant.d/puppet/modules/php"]
 	path = vagrant.d/puppet/modules/php
 	url = https://github.com/voxpupuli/puppet-php
 [submodule "vagrant.d/puppet/modules/archive"]
 	path = vagrant.d/puppet/modules/archive
 	url = https://github.com/voxpupuli/puppet-archive
-[submodule "vagrant.d/puppet/modules/puppet-archive"]
-	path = vagrant.d/puppet/modules/puppet-archive
-	url = https://github.com/voxpupuli/puppet-archive
 [submodule "vagrant.d/puppet/modules/inifile"]
 	path = vagrant.d/puppet/modules/inifile
 	url = https://github.com/puppetlabs/puppetlabs-inifile
-[submodule "vagrant.d/puppet/modules/devenv"]
-	path = vagrant.d/puppet/modules/devenv
-	url = https://github.com/iatanasov77/puppet-devenv.git
 [submodule "vagrant.d/puppet/modules/composer"]
 	path = vagrant.d/puppet/modules/composer
-	url = git://github.com/willdurand/puppet-composer.git
+	url = https://github.com/willdurand/puppet-composer.git
+[submodule "vagrant.d/puppet/modules/phpbrew"]
+	path = vagrant.d/puppet/modules/phpbrew
+	url = https://github.com/iatanasov77/puppet-phpbrew.git
+		branch = support_centos8
+[submodule "vagrant.d/puppet/modules/puppetlabs-transition"]
+	path = vagrant.d/puppet/modules/puppetlabs-transition
+	url = https://github.com/puppetlabs/puppetlabs-transition.git
+[submodule "vagrant.d/puppet/modules/git"]
+	path = vagrant.d/puppet/modules/git
+	url = https://github.com/puppetlabs/puppetlabs-git
+[submodule "vagrant.d/puppet/modules/vs_dotnet"]
+	path = vagrant.d/puppet/modules/vs_dotnet
+	url = https://github.com/iatanasov77/puppet-dotnet.git
+	branch = main
+[submodule "vagrant.d/puppet/modules/vs_lamp"]
+	path = vagrant.d/puppet/modules/vs_lamp
+	url = https://github.com/iatanasov77/puppet-lamp.git
+        branch = main
+[submodule "vagrant.d/puppet/modules/vs_devenv"]
+	path = vagrant.d/puppet/modules/vs_devenv
+	url = https://github.com/iatanasov77/puppet-devenv.git
+[submodule "vagrant.d/puppet/modules/tomcat"]
+	path = vagrant.d/puppet/modules/tomcat
+	url = https://github.com/puppetlabs/puppetlabs-tomcat.git
+[submodule "vagrant.d/puppet/modules/java"]
+	path = vagrant.d/puppet/modules/java
+	url = https://github.com/puppetlabs/puppetlabs-java.git
+[submodule "vagrant.d/puppet/modules/ansible"]
+	path = vagrant.d/puppet/modules/ansible
+	url = https://github.com/otherskins/puppet-ansible.git
+[submodule "vagrant.d/puppet/modules/hashicorp"]
+	path = vagrant.d/puppet/modules/hashicorp
+	url = https://github.com/inkblot/puppet-hashicorp.git
+[submodule "vagrant.d/puppet/modules/gnupg"]
+	path = vagrant.d/puppet/modules/gnupg
+	url = https://github.com/tampakrap/golja-gnupg.git
+[submodule "vagrant.d/puppet/modules/wait-for"]
+	path = vagrant.d/puppet/modules/wait-for
+	url = https://github.com/heini/puppet-wait-for.git
+[submodule "vagrant.d/puppet/modules/drush"]
+	path = vagrant.d/puppet/modules/drush
+	url = https://github.com/jonhattan/puppet-drush.git
