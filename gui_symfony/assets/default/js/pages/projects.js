@@ -309,5 +309,29 @@ $(function()
 			}
 		});
 	});
+	
+	$( '#create-project-modal' ).on( 'click', '.btnDeleteHost', function( e )
+	{
+		var $btn 	= $( this );
+		var host	= $( this ).attr( 'data-host' );
+		var url		= '/hosts/' + host + '/delete';
+		
+		showSpinner( '#formProjectContainer' );
+		$.ajax({
+			type: "GET",
+		 	url: url,
+			success: function( response )
+			{
+				hideSpinner( '#formProjectContainer' );
+				$btn.closest( 'li' ).remove();
+				//window.location.reload();
+			},
+			error: function()
+			{
+				hideSpinner( '#formProjectContainer' );
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
+	});
 });
 

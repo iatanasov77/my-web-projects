@@ -51,6 +51,15 @@ class VirtualHostRepository
         return null;
     }
     
+    public function getVirtualHostConfig( $host )
+    {
+        if ( isset( $this->vhostConfigs[$host] ) ) {
+            return $this->vhostConfigs[$host];
+        }
+        
+        return null;
+    }
+    
     public function generateVirtualHost( $vhost, $template = 'simple' )
     {
         if ( $this->getVirtualHostByHost( $vhost->getHost() ) ) {

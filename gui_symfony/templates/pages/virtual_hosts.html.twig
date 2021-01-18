@@ -34,6 +34,15 @@
                                     <td>{{ h.PhpVersion }}</td>
                                     <td>{{ h.PhpStatusLabel }}</td>
                                     <td width="370">
+                                    	<a href="javascript:void(0);" 
+                                            class="btn btn-primary btnDeleteHost" 
+                                            title="Delete Host" 
+                                            data-url="{{ path( 'virtual-hosts-delete-host', {host: h.host}) }}"
+                                        >
+                                            <i class="fas fa-trash"></i>
+                                            Delete Host
+                                        </a>
+                                        
                                         <a href="javascript:void(0);" 
                                             class="btn btn-primary" 
                                             title="Change Version" 

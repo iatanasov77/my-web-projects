@@ -33,13 +33,15 @@
         <div class="tab-pane fade" id="project-vhost">
         	<ul>
         		{% for host in project.hosts %}
-			        <li>
+			        <li id="li_{{ host.host }}">
 			        	{{ host.host }}
-			        	<a href="#"><img
-                			class="project-remove-host-icon ml-2" 
-                			src="{{ asset('assets/default/build/img/close.svg') }}" 
-                			alt="Remove"
-                		/></a>
+			        	<a class="btnDeleteHost" href="javascript:void(0);" data-host="{{ host.host }}">
+				        	<img
+	                			class="project-remove-host-icon ml-2" 
+	                			src="{{ asset('assets/default/build/img/close.svg') }}" 
+	                			alt="Remove"
+	                		/>
+                		</a>
 			        </li>
 			    {% endfor %}
         	</ul>
