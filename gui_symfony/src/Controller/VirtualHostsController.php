@@ -10,6 +10,7 @@ use App\Component\Apache\VirtualHost;
 use App\Component\Apache\Php;
 use App\Form\Type\ProjectHostType;
 use App\Entity\ProjectHost;
+use App\Component\Globals;
 
 class VirtualHostsController extends Controller
 {   
@@ -61,6 +62,32 @@ class VirtualHostsController extends Controller
             
             return $this->redirectToRoute( 'virtual-hosts' );
         }
+    }
+    
+    /**
+     * @Route("/hosts/{host}/delete", name="virtual-hosts-delete-host")
+     */
+    public function delete( $host, Request $request )
+    {
+        $vhosts     = $this->container->get( 'vs_app.apache_virtual_hosts' );
+        $hostConfig = $vhosts->getVirtualHostConfig( $host );
+        exec( 'sudo rm -f ' . $hostConfig ); // Remove apache vhost
+        
+        $repository = $this->getDoctrine()->getRepository( ProjectHost::class );
+        $hostEntity = $repository->findOneBy( ['host' => $host] );
+        if ( $hostEntity ) {
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->remove( $hostEntity );
+            $em->flush();
+        }
+        
+        $response   = [
+            'status'    => Globals::STATUS_OK,
+            'data'      => '',
+            'errors'    => [],
+        ];
+        return new JsonResponse( $response );
     }
     
     /**

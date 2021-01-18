@@ -9,4 +9,22 @@ $(function()
 	    $( '#host-change-php-version-form').attr( 'action', url );
 	});
 	
+	$( '.btnDeleteHost' ).on( 'click', function( e )
+	{
+		var url	= $( this ).attr( 'data-url' );
+		
+		$.ajax({
+			type: "GET",
+		 	url: url,
+			success: function( response )
+			{
+				window.location.reload();
+			},
+			error: function()
+			{
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
+	});
+	
 });
