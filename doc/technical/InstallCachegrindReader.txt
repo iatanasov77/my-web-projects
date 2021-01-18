@@ -1,0 +1,5 @@
+INSTALL THIS:
+--------------
+https://sourceforge.net/projects/qcachegrindwin/
+https://sourceforge.net/projects/wincachegrind/
+https://github.com/jokkedk/webgrind

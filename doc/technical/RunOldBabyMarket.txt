@@ -1,0 +1,21 @@
+
+Execute Commands:
+-------------------
+
+phpbrew install 7.0.33 +default +fpm +mysql +pdo +openssl=/usr -- --with-libdir=lib64
+/opt/phpbrew/php/php-7.0.33/sbin/php-fpm
+
+
+Edit Config:
+-------------
+
+user = nobody
+group = nobody
+
+    Uncomment these lines:
+    -----------------------
+    listen.owner = nobody
+    listen.group = nobody
+    listen.mode = 0660
+    listen.allowed_clients = 127.0.0.1
+

@@ -1,0 +1,27 @@
+1. Phpbrew is installed as System-Wide but not initialized
+
+    a: Initialize with: phpbrew init --root=/opt/phpbrew
+    b: Add this row to /home/vagrant/.bashrc :
+        [[ -e /opt/phpbrew/bashrc ]] && source /opt/phpbrew/bashrc
+        
+    c: To install php use this command:
+        phpbrew install 5.6 +default +mysql +fpm +openssl=/usr -- --with-libdir=lib64
+        
+        note: with-libdir option is mandatory for 64 bit OS since phpbrew to find libs
+        
+    d: for mod-php module add: +apxs2
+    
+    e: To switch to the system installed version use:  phpbrew off
+    
+    f: To install php extensions: 
+        phpbrew ext install xdebug 2.4.1
+        phpbrew ext install mcrypt
+        phpbrew ext install intl
+        
+    g: To restart php-fpm:
+        # service httpd stop
+        # phpbrew fpm stop
+        # rm -f /opt/phpbrew/php/php-7.0.33/var/run/php-fpm.sock
+        # phpbrew fpm start
+        # service httpd start
+        

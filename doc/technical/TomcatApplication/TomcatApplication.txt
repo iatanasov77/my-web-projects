@@ -1,0 +1,9 @@
+
+1. Extract war file
+    # jar -xvf sample.war
+    
+    
+Write servlets, handle forms, handle session, many many many ;)
+---------------------------------------------------------------------
+https://www.ntu.edu.sg/home/ehchua/programming/java/JavaServlets.html
+

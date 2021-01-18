@@ -1,0 +1,36 @@
+SOURCES
+==============
+https://odan.github.io/2018/07/17/aspnet-core-2-ubuntu-setup.html
+https://www.vultr.com/docs/how-to-deploy-a-net-core-web-application-on-centos-7
+
+
+Installation
+----------------
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+sudo sh -c 'echo -e "[packages-microsoft-com-prod]\nname=packages-microsoft-com-prod \nbaseurl= https://packages.microsoft.com/yumrepos/microsoft-rhel7.3-prod\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/dotnetdev.repo'
+
+sudo yum update -y
+sudo yum install libunwind libicu -y
+sudo yum install dotnet-sdk-2.1.4 -y
+
+
+Create and Run
+------------------
+cd /projects
+sudo dotnet new web -o HelloDotnet
+cd HelloDotnet
+
+sudo dotnet run >/dev/null 2>&1 &
+OR
+sudo dotnet run --urls "http://*:5000;https://*:5001" >/dev/null 2>&1 &
+
+
+
+Working :)
+
+
+THIS IS THE PROCESS
+======================
+31509 pts/0    SLl    0:02 dotnet exec /projects/HelloDotnet/bin/Debug/netcoreapp2.0/HelloDotnet.dll --urls http://*:5000;https://*:5001
+

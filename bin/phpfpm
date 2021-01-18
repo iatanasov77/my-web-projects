@@ -1,0 +1,84 @@
+#!/bin/bash
+
+PHPBREW_PREFIX="/opt/phpbrew"
+PHP_VERSION=$1
+COMMAND=$2
+
+# This works
+start()
+{
+    
+    local fpmConfig="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php-fpm.d/www.conf"
+    local fpmCommand="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/sbin/php-fpm"
+    
+    if [ ! -f "$fpmConfig" ]; then
+        echo "$fpmConfig does not exist"
+        echo "MAY BE YOU SHOULD INSTALL THE VERSION"
+        exit 1
+    fi
+    
+    prepairConfig ${fpmConfig}
+    
+    eval $fpmCommand
+    
+    echo "SUCCESS !!!" 
+}
+
+# Not works
+restartFpm()
+{
+    service httpd stop
+    phpbrew fpm stop
+    rm -f ${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/var/run/php-fpm.sock
+    phpbrew fpm start
+    service httpd start
+}
+
+prepairConfig()
+{
+    local fpmConfig=$1
+    
+    sed -i 's/nobody/apache/g' ${fpmConfig}
+    
+    # Uncomment lines
+    sed -i "s/^;\{0,1\}listen\.owner *= *[^ ]*/listen.owner = apache/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.group *= *[^ ]*/listen.group = apache/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.mode *= *[^ ]*/listen.mode = 0660/" ${fpmConfig}
+    sed -i "s/^;\{0,1\}listen\.allowed_clients *= *[^ ]*/listen.allowed_clients = 127.0.0.1/" ${fpmConfig}
+    
+    # Allow The all of server memory
+    local iniConfig="${PHPBREW_PREFIX}/php/php-${PHP_VERSION}/etc/php.ini"
+    sed -i "s/^;\{0,1\}memory_limit *= *[^ ]*/memory_limit = -1/" ${iniConfig}
+}
+
+setStatus()
+{
+    echo "Set Status"
+}
+
+usage()
+{
+    echo "Usage: phpfpm [php_version] [command]"
+    exit 1
+}
+
+if [[ $EUID -ne 0 ]]; then
+   echo "You must to be root." 
+   exit 1
+fi
+
+[ -z $1 ] && usage
+
+case $COMMAND in
+    start)
+        start
+        exit 1
+        ;;
+    restartFpm)
+        restartFpm
+        exit 1
+        ;;
+    *)
+        start
+        exit 1
+esac

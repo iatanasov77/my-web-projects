@@ -1,0 +1,21 @@
+Using this code: https://github.com/oktadeveloper/okta-aspnetcore-mysql-twilio-example
+This Blog Post: https://developer.okta.com/blog/2019/08/02/build-a-simple-crud-app-with-aspnetcore-mysql-and-twilio
+----------------------------------------------------------------------------------------------------------------------
+
+dotnet add package MySql.Data --version 8.0.21
+or
+dotnet add package MySql.Data
+
+The package MySql.Data require DotNet SDK version 2.2 at now.
+----------------------------------------------------------------
+
+
+
+dotnet add package Okta.Sdk
+dotnet add package Okta.AspNetCore
+
+
+Create Linux Service
+-----------------------
+dotnet publish -c Debug -o /srv/AspNetTestSite/ --self-contained --runtime linux-x64
+

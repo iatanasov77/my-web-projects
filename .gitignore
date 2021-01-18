@@ -1,27 +1,50 @@
+##############################
 # Eclipse project meta data
+##############################
 /.settings/
 /.buildpath
 .buildpath
 /.project
 /.dbeaver-data-sources.xml
 
+##############################
+# Symfony
+##############################
+/gui_symfony/composer.lock
+/gui_symfony/vendor/
+/gui_symfony/node_modules/
+/gui_symfony/public/build/
+/gui_symfony/public/bundles/
+/gui_symfony/public/assets/
+/gui_symfony/public/assets/build/
+/gui_symfony/yarn.lock
+/gui_symfony/var/
+/gui_symfony/config/fixtures/projects.yaml
+
+##############################
+# Vagrant meta data
+##############################
 /.vagrant/
-/composer.lock
-/vendor/
-/node_modules/
-/public/build/
-/public/assets/
-/public/assets/build/
-/yarn.lock
-
-/.dbeaver-data-sources.xml
-/installed_hosts.json
-
-/*.log
+/.env
+/vagrant.d/puppet/modules/*/*
 /vagrant.d/puppet/Puppetfile.lock
 /vagrant.d/puppet/.librarian
 /vagrant.d/puppet/.tmp
-/ssh.EXE.stackdump
-/.env
-/changelog-linker.yml
-/var/
+/*.log
+/installed_hosts.json
+/installed_projects.json
+
+##############################
+# Ansible meta data
+##############################
+/ansible.d/playbook/roles/*/
+!/ansible.d/playbook/roles/index
+/ansible.d/log/
+/ansible.d/playbook.retry
+
+##############################
+# Examples meta data
+##############################
+/examples/*/.project
+/examples/DotNet/*/bin/
+/examples/DotNet/*/obj/

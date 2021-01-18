@@ -1,0 +1,9 @@
+1. Reverse Proxying Tomcat Web Applications Behind Apache
+    https://rvdb.wordpress.com/2012/04/26/reverse-proxying-tomcat-webapps-behind-apache/
+
+2. Puppet Module
+    https://forge.puppet.com/puppetlabs/tomcat/readme#i-want-to-run-multiple-instances-of-multiple-versions-of-tomcat
+
+3. Additional Manuals
+    https://tomcat.apache.org/tomcat-8.0-doc/proxy-howto.html
+    https://rimuhosting.com/mod_jk2_and_mod_proxy_ajp.jsp

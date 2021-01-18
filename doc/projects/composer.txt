@@ -1,0 +1,8 @@
+Install fails when not using --prefer-source
+source: https://github.com/composer/installers/issues/331
+=====================================================================================================
+
+This is somehow related to a bug in bindfs v1.13.2. 
+I realized that if I disabled bindfs (via vagrant-bindfs) composer/installer installs just fine. 
+I upgraded bindfs on the vagrant box from 1.13.2 to 1.13.4 and the problem went away.
+
