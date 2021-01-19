@@ -101,9 +101,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 
 			puppet.manifest_file  = "default.pp"
 			puppet.facter			= {
-				'vs_config'			=> devenvConfig.to_yaml,
-				'hostname'			=> ENV['HOST_NAME'],
-				'mysqlhost'			=> ENV['PUBLIC_IP'],
+				'vs_config'				=> devenvConfig.to_yaml,
+				'hostname'				=> ENV['HOST_NAME'],
+				'mysqlhost'				=> ENV['PUBLIC_IP'],
+				'installed_projects'	=> File.read( ENV['HOSTS_CONFIG'] ),
 				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql',
 			}
 	    end
