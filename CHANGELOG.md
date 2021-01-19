@@ -1,3 +1,10 @@
+2.1.1	|	Release date: **19.01.2021**
+==============================================
+* Improvements:
+  - Structured Changes.
+  - Fix XDebug to version 2.9.8 because latest versions has different config vars.
+
+
 2.1.0	|	Release date: **18.01.2021**
 ============================================
 * New Features:
