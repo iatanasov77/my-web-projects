@@ -19,7 +19,7 @@ class VirtualHostsController extends Controller
      */
     public function indexNew( Request $request )
     {
-        $installedProjects  = getcwd() . '/../../installed_projects.json';
+        $installedProjects  = getcwd() . '/../../vagrant.d/installed_projects.json';
         var_dump( json_decode( file_get_contents( $installedProjects ), true ) ); die;
     }
     
