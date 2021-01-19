@@ -17,8 +17,8 @@ class User extends BaseUser
     protected $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\UserManagement\UserInfo", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
+     * COMENTED: @ORM\OneToOne(targetEntity="App\Entity\UserManagement\UserInfo", cascade={"persist"})
+     * COMENTED: @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
      */
     protected $userInfo;
     
