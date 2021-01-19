@@ -37,12 +37,13 @@ node default
 	######################################################
     # Setup DevEnv
     ######################################################
-	$vsConfig  = parseyaml( $facts['vs_config'] )
+	$vsConfig  			= parseyaml( $facts['vs_config'] )
+	$installedProjects	= parsejson( $facts['installed_projects'] )
 	
 	class { '::vs_devenv':
         defaultHost                 => "${hostname}",
         defaultDocumentRoot         => '/vagrant/gui_symfony/public',
-        installedProjects           => parsejson( file( '/vagrant/installed_projects.json' ) ),
+        installedProjects           => $installedProjects,
         
         subsystems                  => $vsConfig['subsystems'],
     
