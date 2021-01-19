@@ -31,8 +31,8 @@
 /vagrant.d/puppet/.librarian
 /vagrant.d/puppet/.tmp
 /*.log
-/installed_hosts.json
-/installed_projects.json
+/vagrant.d/config.yaml
+/vagrant.d/installed_projects.json
 
 ##############################
 # Ansible meta data

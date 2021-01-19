@@ -52,9 +52,11 @@
     ```
 6. Start the machine
     ```
-        # copy .env.dist .env
+        cp .env.dist .env
+        cp vagrant.d/config.yaml.examples vagrant.d/config.yaml
+        cp vagrant.d/installed_projects.json.examples vagrant.d/installed_projects.json
     ```
-    Edit .env file if needed
+    Edit .env file and vagrant.d/config.yaml and vagrant.d/installed_projects.json if needed and than:
     ```
         # Vagrant up
     ```
