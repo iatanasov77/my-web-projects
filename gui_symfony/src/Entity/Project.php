@@ -225,7 +225,7 @@ class Project
         return $this->projectUrl;
     }
     
-    public function setUrl(string $projectUrl): self
+    public function setProjectUrl(string $projectUrl): self
     {
         $this->projectUrl   = $projectUrl;
         
