@@ -105,7 +105,7 @@ lamp:
         databases:
             default:
                 name: 'VsMyProjects'
-                dump: '/vagrant/doc/sql/VsMyProjects-20210113.sql'
+                dump: '/vagrant/doc/sql/VsMyProjects-20210119.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'e
     apacheModules: 
@@ -138,6 +138,7 @@ lamp:
             ini_prefix: '20-'
             provider: 'pecl'
         xdebug:
+            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
             ini_prefix: '20-'
             provider: 'pecl'
             zend: true
