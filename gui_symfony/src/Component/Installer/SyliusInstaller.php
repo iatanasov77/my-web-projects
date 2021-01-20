@@ -79,7 +79,7 @@ class SyliusInstaller extends Installer
             }
             
             // Shop configuration
-            // Default admin aser/password: sylius/sylius
+            // Default admin user/password: sylius/sylius
             $filesystem->appendToFile( $installScript, "bin/console --no-interaction sylius:install:setup\n" );
             
             // Installing Assets
