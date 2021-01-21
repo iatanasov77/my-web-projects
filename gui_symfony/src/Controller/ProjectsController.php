@@ -56,6 +56,19 @@ class ProjectsController extends Controller
     }
     
     /**
+     * @Route("/categories/edit/{id}", name="categories_edit_form")
+     */
+    public function editCategoryForm( $id, Request $request )
+    {
+        $repository = $this->getDoctrine()->getRepository( Category::class );
+        $category   = $id ? $repository->find( $id ) : new Category();
+        
+        return $this->render( 'pages/projects/category_form.html.twig', [
+            'form'      => $this->_categoryForm( $category )->createView()
+        ]);
+    }
+    
+    /**
      * @Route("/projects/create/{id}", name="projects_create")
      */
     public function create( $id, Request $request )
@@ -216,9 +229,9 @@ class ProjectsController extends Controller
         
         $form->handleRequest( $request );
         if ( $form->isValid() ) {
-            $project    = $form->getData();
+            $category    = $form->getData();
             
-            $em->persist( $project );
+            $em->persist( $category );
             $em->flush();
             
             $status     = Globals::STATUS_OK;
@@ -228,11 +241,17 @@ class ProjectsController extends Controller
                 // My personnal need was to get translatable messages
                 // $errors[] = $this->trans($error->current()->getMessage());
                 
-                $errors[$error->current()->getCause()->getPropertyPath()] = $error->current()->getMessage();
+                if ( $error instanceof \Symfony\Component\Form\FormError ) {
+                    $errors[] = $error->getMessage();
+                } else {
+                    // Previous Behaviour
+                    $errors[$error->current()->getCause()->getPropertyPath()] = $error->current()->getMessage();
+                }
             }
         }
         
-        $html   = $this->renderView( 'pages/projects/table_projects.html.twig', ['projects' => $repository->findAll()] );
+        $repoProjects   = $this->getDoctrine()->getRepository( Project::class );
+        $html           = $this->renderView( 'pages/projects/table_projects.html.twig', ['projects' => $repoProjects->findAll()] );
         $response   = [
             'status'    => $status,
             'data'      => $html,
