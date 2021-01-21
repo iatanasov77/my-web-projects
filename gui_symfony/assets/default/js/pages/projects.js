@@ -64,6 +64,24 @@ $(function()
         });
     });
     
+    $( '#btnCreateCategory' ).on( 'click', function( e )
+    {
+        $( '#formCategoryContainer' ).html( spinner );
+        
+        $.ajax({
+            type: "GET",
+            url: "/categories/edit/0",
+            success: function( response )
+            {
+                $( '#formCategoryContainer' ).html( response );
+            },
+            error: function()
+            {
+                alert( "SYSTEM ERROR!!!" );
+            }
+        });
+    });
+    
 	$( '#sectionProjects' ).on( 'click', '.btnEdit', function( e )
 	{
         $( '#formProjectContainer' ).html( spinner );
