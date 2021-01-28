@@ -5,12 +5,22 @@
 ###########################################################################
 
 # Install Python3
-sudo dnf install python3 python3-pip
+###############################################################
+sudo dnf install python3 python3-pip python3-mod_wsgi
+pip3 install virtualenv
 
-# Install Django
-sudo python -m pip install Django
+# Create a virtualenv for this project
+###############################################################
+mkdir /var/www/django.lh
+chmod -R 0777 /var/www/django.lh
+virtualenv --python=/usr/bin/python3 /var/www/django.lh/venv
+/var/www/django.lh/venv/bin/pip3 install Django
 
-# Create Application: This will create directory with the name of the application
-django-admin startproject TestApplication
+# Create Project
+###############################################################
+cd /projects
+/var/www/django.lh/venv/bin/django-admin startproject TestApplication
 
-
+Edit File: /projects/TestApplication/TestApplication/settings.py
+Add 'django.lh' to the array ALLOWED_HOSTS
+Example: ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'django.lh']

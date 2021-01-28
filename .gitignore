@@ -48,3 +48,4 @@
 /examples/*/.project
 /examples/DotNet/*/bin/
 /examples/DotNet/*/obj/
+/examples/Python/**/__pycache__/

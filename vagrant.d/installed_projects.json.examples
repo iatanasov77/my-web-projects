@@ -128,4 +128,18 @@
             }
         ]
     },
+    
+    "Django_TestExample": {
+        "type": "Django",
+        "projectPath": "/vagrant/examples/Python/TestApplication",
+        
+        "hosts": [
+            {
+                "hostType": "Django",
+                "hostName": "django.lh",
+                "documentRoot": "/vagrant/examples/Python/TestApplication/TestApplication",
+                "withSsl": false,
+            }
+        ]
+    },
 }
