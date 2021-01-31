@@ -151,14 +151,14 @@ class VirtualHostRepository
                 $config                 = $this->vHostDir . '/' . $entry;
                 $vhost                  = $this->_parseVhost( $config );
                 
-                // Vagrant create double configs for https sites
-                if ( isset( $this->vhostConfigs[$vhost['ServerName']] ) ) {
+                // may be phpMyAdmin.conf
+                if ( ! isset( $vhost['ServerName'] ) ) {
                     continue;
                 }
                 
-                // may be phpMyAdmin.conf
-                if ( ! isset( $vhost['ServerName'] ) ) {
-                    continue;   
+                // Vagrant create double configs for https sites
+                if ( isset( $this->vhostConfigs[$vhost['ServerName']] ) ) {
+                    continue;
                 }
                 
                 //$host                   = $vhost['ServerName'];

@@ -1,0 +1,13 @@
+into the projects directory run:
+----------------------------------
+# rails new TestApplication
+# cd TestApplication
+# bundle install
+
+OR
+
+# rails new TestApplication --skip-bundle
+# cd TestApplication
+# vim Gemfile
+Uncoment: # gem 'therubyracer',  platforms: :ruby
+# bundle install

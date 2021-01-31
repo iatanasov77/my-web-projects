@@ -142,4 +142,17 @@
             }
         ]
     },
+   
+   "Ruby_TestExample": {
+        "type": "Ruby",
+        
+        "hosts": [
+            {
+                "hostType": "Ruby",
+                "hostName": "ruby.lh",
+                "documentRoot": "/vagrant/examples/Ruby/TestApplication/public",
+                "withSsl": true
+            }
+        ]
+    }
 }
