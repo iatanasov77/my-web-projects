@@ -42,7 +42,10 @@ subsystems:
             tomcat_9:
                 catalinaHome: '/opt/tomcat_9'
                 sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz'
-        
+    
+    django:
+        enabled: true
+
     phpbrew:
         enabled: true
         version: 'latest'
@@ -69,15 +72,17 @@ frontendtools:
     #nodejs: latest
     nodejs: 14.15.3
     tools:
-       yarn:
-          version: 'latest' 
-       gulp:
-           version: 'latest'
-       angular-cli:
-           version: 'latest'
-       # Using for upgrade package.json dependencie's versions
-       npm-upgrade:
-           version: 'latest'
+		yarn:
+            version: 'latest'
+        gulp:
+            version: 'latest'
+        angular-cli:
+            version: 'latest'
+        create-react-app:
+            version: 'latest'
+        # Using for upgrade package.json dependencie's versions
+        npm-upgrade:
+            version: 'latest'
 
 packages:
     - mc
@@ -107,7 +112,7 @@ lamp:
                 name: 'VsMyProjects'
                 dump: '/vagrant/doc/sql/VsMyProjects-20210119.sql'
 
-    # For JSP Pages require apache module 'proxy_ajp'e
+    # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 
         - expires
         - headers
@@ -120,7 +125,12 @@ lamp:
         - proxy_fcgi
         - proxy_http
         - proxy_html
+        # Used of Java Applications
         - proxy_ajp
+        # Used of Python Applications
+        - wsgi
+        # Used of Ruby Applications
+        - passenger
 
     phpModules:
         apcu:
@@ -137,8 +147,10 @@ lamp:
         mongodb:
             ini_prefix: '20-'
             provider: 'pecl'
+        
+        # xdebug 3.x.x example config
         xdebug:
-            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
+        	ensure: 'latest'
             ini_prefix: '20-'
             provider: 'pecl'
             zend: true
@@ -151,7 +163,15 @@ lamp:
                 # xdebug.start_with_request = 1
                 # xdebug.discover_client_host = 1
                 # xdebug.client_port = 9000
-                
+        
+        # xdebug 2.x.x example config
+        xdebug:
+            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
+            ini_prefix: '20-'
+            provider: 'pecl'
+            zend: true
+            # see http://xdebug.org/docs/all_settings
+            settings:
                 'xdebug.default_enable': '1'
                 'xdebug.remote_enable': '1'
                 'xdebug.remote_handler': 'dbgp'

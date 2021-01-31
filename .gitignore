@@ -24,6 +24,7 @@
 ##############################
 # Vagrant meta data
 ##############################
+/VsProjects
 /.vagrant/
 /.env
 /vagrant.d/puppet/modules/*/*
@@ -49,3 +50,6 @@
 /examples/DotNet/*/bin/
 /examples/DotNet/*/obj/
 /examples/Python/**/__pycache__/
+
+# I dont know why
+/examples/Ruby/*
