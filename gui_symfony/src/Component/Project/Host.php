@@ -7,4 +7,6 @@ class Host
     const TYPE_ASPNET_REVERSE   = 'DotNet';
     const TYPE_JSP              = 'JspRewrite';
     const TYPE_JSP_REVERSE      = 'Jsp';
+    const TYPE_PYTHON           = 'Python';
+    const TYPE_RUBY             = 'Ruby';
 }

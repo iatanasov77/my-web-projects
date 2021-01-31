@@ -33,6 +33,8 @@ class ProjectHostType extends AbstractType
             HostTypes::TYPE_ASPNET_REVERSE  => HostTypes::TYPE_ASPNET_REVERSE,
             HostTypes::TYPE_JSP             => HostTypes::TYPE_JSP,
             HostTypes::TYPE_JSP_REVERSE     => HostTypes::TYPE_JSP_REVERSE,
+            HostTypes::TYPE_PYTHON          => HostTypes::TYPE_PYTHON,
+            HostTypes::TYPE_RUBY            => HostTypes::TYPE_RUBY,
         ];
     }
     
