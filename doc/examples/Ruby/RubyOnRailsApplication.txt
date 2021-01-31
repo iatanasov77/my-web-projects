@@ -4,10 +4,8 @@ into the projects directory run:
 # cd TestApplication
 # bundle install
 
-OR
+Edit file TestApplication/config/environments/development.rb
+Add Line: config.hosts << "ruby.lh"
+Restart Server :)
 
-# rails new TestApplication --skip-bundle
-# cd TestApplication
-# vim Gemfile
-Uncoment: # gem 'therubyracer',  platforms: :ruby
-# bundle install
+DONE !!!
