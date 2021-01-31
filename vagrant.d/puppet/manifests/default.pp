@@ -38,14 +38,7 @@ node default
         phpModules                  => $vsConfig['lamp']['phpModules'],
         phpunit                     => $vsConfig['lamp']['phpunit'],
         
-        phpSettings                 => {
-            'PHP/memory_limit'        => '-1',
-            'PHP/max_execution_time'  => '300',
-            'PHP/post_max_size'       => '64M',
-            'PHP/upload_max_filesize' => '64M',
-            'Date/date.timezone'      => 'Europe/Sofia',
-            'PHAR/phar.readonly'      => 'Off',
-        },
+        phpSettings                 => $vsConfig['lamp']['phpSettings'],
         
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
         
