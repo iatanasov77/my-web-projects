@@ -177,7 +177,7 @@ class ProjectsController extends Controller
             
             if ( $project ) {
                 $hosts  = $project->getHosts();
-                $vhosts = $this->container->get( 'vs_app.apache_virtual_hosts' );
+                $vhosts = $this->container->get( 'vs_app.apache_virtual_host_repository' );
                 $apache = $this->container->get( 'vs_app.apache_service' );
                 
                 $em->remove( $project );

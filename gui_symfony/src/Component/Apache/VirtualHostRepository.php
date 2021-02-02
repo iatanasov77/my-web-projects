@@ -1,15 +1,14 @@
 <?php namespace App\Component\Apache;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use App\Component\Apache\VirtualHost;
 use App\Component\Apache\Php;
 use App\Component\Apache\Config as ApacheConfig;
+
+use App\Component\Apache\VirtualHost\VirtualHostLamp;
 
 class VirtualHostRepository
 {
     protected $container;
-    
-    protected $apacheLogDir;
     
     protected $vHostDir;
     
@@ -17,12 +16,14 @@ class VirtualHostRepository
     
     protected $vhostConfigs;    // to can get config by host name
     
+    protected $factory;
+    
     public function __construct( ContainerInterface $container )
     {
         $this->container    = $container;
-        $this->apacheLogDir = '/var/log/httpd/';
-        
+        $this->factory      = $container->get( 'vs_app.apache_virtual_host_factory' );
         $this->vHostDir     = $this->container->getParameter( 'virtual_hosts_dir' );
+        
         $this->_initVhosts();
     }
     
@@ -40,7 +41,7 @@ class VirtualHostRepository
         return null;
     }
     
-    public function getVirtualHostByHost( $host )
+    public function getVirtualHostByHost( $host ) : ?VirtualHostLamp
     {
         if ( isset( $this->vhostConfigs[$host] ) ) {
             $config = $this->vhostConfigs[$host];
@@ -52,7 +53,7 @@ class VirtualHostRepository
         return null;
     }
     
-    public function getVirtualHostConfig( $host )
+    public function getVirtualHostConfig( $host ) : ?string
     {
         if ( isset( $this->vhostConfigs[$host] ) ) {
             return $this->vhostConfigs[$host];
@@ -110,7 +111,7 @@ class VirtualHostRepository
             'documentRoot'  => $vhost->getDocumentRoot(),
             'serverAdmin'   => $vhost->getServerAdmin(),
             'apacheLogDir'  => $vhost->getApacheLogDir(),
-            'fpmSocket'     => $fpmSocket
+            'fpmSocket'     => $fpmSocket,
         ]);
         
         if ( $vhost->getWithSsl() )
@@ -121,7 +122,8 @@ class VirtualHostRepository
                 'host'              => $vhost->getHost(),
                 'documentRoot'      => $vhost->getDocumentRoot(),
                 'serverAdmin'       => $vhost->getServerAdmin(),
-                'apacheLogDir'      => $vhost->getApacheLogDir()
+                'apacheLogDir'      => $vhost->getApacheLogDir(),
+                'fpmSocket'         => $fpmSocket,
             ]);
         }
         
@@ -131,6 +133,9 @@ class VirtualHostRepository
     public function removeVirtualHost( $host ) {
         if ( isset( $this->vhostConfigs[$host] ) ) {
             exec( 'sudo rm -f ' . $this->vhostConfigs[$host] );
+            
+            unset( $this->vhosts[$this->vhostConfigs[$host]] );
+            unset( $this->vhostConfigs[$host] );
         }
     }
     
@@ -148,96 +153,18 @@ class VirtualHostRepository
         $this->vhosts   = [];
         while ( false !== ( $entry = readdir( $handle ) ) ) {
             if ( $entry != "." && $entry != ".." ) {
-                $config                 = $this->vHostDir . '/' . $entry;
-                $vhost                  = $this->_parseVhost( $config );
-                
-                // may be phpMyAdmin.conf
-                if ( ! isset( $vhost['ServerName'] ) ) {
-                    continue;
-                }
-                
+                $config                                 = $this->vHostDir . '/' . $entry;
+                $vhost                                  = $this->factory->virtualHostFromConfig( $config );
+           
                 // Vagrant create double configs for https sites
-                if ( isset( $this->vhostConfigs[$vhost['ServerName']] ) ) {
+                if ( ! $vhost || isset( $this->vhostConfigs[$vhost->getHost()] ) ) {
                     continue;
                 }
                 
-                //$host                   = $vhost['ServerName'];
-                //$serverAdmin            = isset( $vhost['ServerAdmin'] ) ? $vhost['ServerAdmin'] : 'webmaster@' . $host;
-                $vhost['LogDir']        = $this->apacheLogDir;
-                
-                $this->vhosts[$config]  = new VirtualHost( $vhost );
-                
-                $this->vhostConfigs[$vhost['ServerName']]   = $config;
+                $this->vhosts[$config]                  = $vhost;     
+                $this->vhostConfigs[$vhost->getHost()]  = $config;
             }
         }
         closedir( $handle );
-    }
-    
-    protected function _parseVhost( $confFile )
-    {
-        $vhost  = [
-            'config'            => $confFile,
-            'PhpVersion'        => 'default',
-            'PhpStatus'         => Php::STATUS_INSTALLED,
-            'PhpStatusLabel'    => Php::phpStatus( Php::STATUS_INSTALLED ),
-        ];
-        
-        $handle = fopen( $confFile, 'r' ) or die( 'Virtual host conf cannot be opened ..' );
-        while( ! feof( $handle ) ) {
-            $line = fgets( $handle );
-            $line = trim( $line );
-            
-            $this->_parseLine( $line, $vhost );
-            
-        }
-        fclose( $handle );
-        
-        return $vhost;
-    }
-    
-    protected function _parseLine( $line, &$vhost )
-    {
-        $tokens = explode( ' ',$line );
-        
-        if( ! empty( $tokens ) ) {
-            
-            switch ( strtolower( $tokens[0] ) ) {
-                case 'serveradmin':
-                    $vhost['ServerAdmin'] = $tokens[1];
-                    break;
-                case 'documentroot':
-                    $vhost['DocumentRoot'] = trim( $tokens[1], '"' );
-                    break;
-                case 'servername':
-                    $vhost['ServerName'] = $tokens[1];
-                    break;
-                case 'serveralias':
-                    $vhost['ServerAlias'] = $tokens[1];
-                    break;
-            }
-          
-            if( $tokens[0] == '<VirtualHost' ) {
-                $vhost['WithSsl']   = $tokens[1] == '*:443' ? true : false;
-            }
-            
-            if( $tokens[0] == '<Proxy' ) {
-                if ( isset( $tokens[1] ) ) {
-                    $proxyParts                     = explode( '/', $tokens[1] );
-                    $phpVersionParts                = explode( '-', substr( $proxyParts[4], 4 ) );
-                    
-                    $vhost['PhpVersion']            = $phpVersionParts[0];
-                    $vhost['PhpVersionCustomName']  = isset( $phpVersionParts[1] ) ? $phpVersionParts[1] : '';
-                    
-                    $phpBrew                        = $this->container->get( 'vs_app.php_brew' );
-                    $phpStatus                      = $phpBrew->getPhpStatus( $vhost['PhpVersion'] );
-                    
-                    $vhost['PhpStatus']             = $phpStatus;
-                    $vhost['PhpStatusLabel']        = Php::phpStatus( $phpStatus );
-                }
-            }
-            
-        } else {
-            echo "Puked...";
-        }
     }
 }

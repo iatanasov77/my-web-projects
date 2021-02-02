@@ -3,6 +3,9 @@
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  * @ORM\Table(name="projects_hosts")
@@ -20,6 +23,11 @@ class ProjectHost
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="hosts")
      */
     protected $project;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjectHostOption", mappedBy="host", cascade={"persist","remove"})
+     */
+    protected $options;
     
     /**
      * @ORM\Column(name="host_type", type="string", length=32)
@@ -40,19 +48,14 @@ class ProjectHost
     protected $documentRoot;
     
     /**
-     * @ORM\Column(name="reverseProxy", type="string", length=128)
-     */
-    protected $reverseProxy;
-    
-    /**
-     * @ORM\Column(name="phpVersion", type="string", length=32)
-     */
-    protected $phpVersion;
-    
-    /**
      * @ORM\Column(name="with_ssl", type="boolean")
      */
     protected $withSsl;
+    
+    public function __construct()
+    {
+        $this->options = new ArrayCollection();
+    }
     
     public function getId(): ?int
     {
@@ -67,6 +70,41 @@ class ProjectHost
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+        
+        return $this;
+    }
+    
+    /**
+     * @return Collection|ProjectHostOption[]
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+    
+    public function setOptions( Collection $options ): self
+    {
+        $this->options  = $options;
+        
+        return $this;
+    }
+    
+    public function addOption(ProjectHostOption $option)
+    {
+        if($option->getKey()
+            && !$this->options->contains($option)) {
+                $option->setHost($this);
+                $this->options->add($option);
+            }
+            
+            return $this;
+    }
+    
+    public function removeOption(ProjectHostOption $option)
+    {
+        if ($this->options->contains($option)) {
+            $this->options->removeElement($option);
+        }
         
         return $this;
     }
@@ -103,30 +141,6 @@ class ProjectHost
     public function setDocumentRoot(string $documentRoot): self
     {
         $this->documentRoot = $documentRoot;
-        
-        return $this;
-    }
-    
-    public function getReverseProxy(): ?string
-    {
-        return $this->reverseProxy;
-    }
-    
-    public function setReverseProxy(string $reverseProxy): self
-    {
-        $this->reverseProxy = $reverseProxy;
-        
-        return $this;
-    }
-    
-    public function getPhpVersion(): ?string
-    {
-        return $this->phpVersion;
-    }
-    
-    public function setPhpVersion(string $phpVersion): self
-    {
-        $this->phpVersion = $phpVersion;
         
         return $this;
     }
