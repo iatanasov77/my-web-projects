@@ -4,7 +4,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 use App\Component\Helper;
-use App\Component\Apache\VirtualHost;
 
 class Apache implements ContainerAwareInterface
 {
@@ -49,10 +48,4 @@ class Apache implements ContainerAwareInterface
     {
         exec( "sudo service httpd reload" );
     }
-    
-    public function setVirtualHost( $host )
-    {
-        
-    }
-    
 }

@@ -1,7 +1,12 @@
-<?php namespace App\Component\Apache;
+<?php namespace App\Component\Apache\VirtualHost;
 
-class VirtualHost
+abstract class VirtualHost
 {
+    /**
+     * @var string
+     */
+    protected $template;
+    
     /**
      * @var string
      */
@@ -23,36 +28,32 @@ class VirtualHost
     protected $apacheLogDir;
     
     /**
-     * @var string
-     */
-    protected $phpVersion;
-    
-    /**
-     * @var int
-     */
-    protected $phpStatus;
-    
-    /**
-     * @var string
-     */
-    protected $phpStatusLabel;
-    
-    /**
      * @var bool
      */
     protected $withSsl;
     
     public function __construct( $vhostConfig )
     {
+        $this->template         = $vhostConfig['template'];
         $this->host             = $vhostConfig['ServerName'];
         $this->documentRoot     = $vhostConfig['DocumentRoot'];
         $this->serverAdmin      = isset( $vhostConfig['ServerAdmin'] ) ? $vhostConfig['ServerAdmin'] : 'webmaster@' . $this->host;
         $this->apacheLogDir     = $vhostConfig['LogDir'];
-        
-        $this->phpVersion       = $vhostConfig['PhpVersion'];
-        $this->phpStatus        = $vhostConfig['PhpStatus'];
-        $this->phpStatusLabel   = $vhostConfig['PhpStatusLabel'];
         $this->withSsl          = $vhostConfig['WithSsl'];
+    }
+    
+    abstract public function type();
+    
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+    
+    public function setTemplate( $template )
+    {
+        $this->template = $template;
+        
+        return $this;
     }
     
     public function getHost()
@@ -99,42 +100,6 @@ class VirtualHost
     public function setApacheLogDir( $apacheLogDir )
     {
         $this->apacheLogDir = $apacheLogDir;
-        
-        return $this;
-    }
-    
-    public function getPhpVersion()
-    {
-        return $this->phpVersion;
-    }
-    
-    public function setPhpVersion( $phpVersion )
-    {
-        $this->phpVersion = $phpVersion;
-        
-        return $this;
-    }
-    
-    public function getPhpStatus()
-    {
-        return $this->phpStatus;
-    }
-    
-    public function setPhpStatus( $phpStatus )
-    {
-        $this->phpStatus = $phpStatus;
-        
-        return $this;
-    }
-    
-    public function getPhpStatusLabel()
-    {
-        return $this->phpStatusLabel;
-    }
-    
-    public function setPhpStatusLabel( $phpStatusLabel )
-    {
-        $this->phpStatusLabel = $phpStatusLabel;
         
         return $this;
     }

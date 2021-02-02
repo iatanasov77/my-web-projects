@@ -1,0 +1,19 @@
+<tr>
+    <td>{{ h.host }}</td>
+    
+    <td>
+    	
+    </td>
+    
+    <td width="170" style="text-align: right;">
+    	
+    	
+    	<a href="javascript:void(0);" 
+            class="btn btn-danger btn-circle btn-sm btnDeleteHost" 
+            title="Delete Host" 
+            data-url="{{ path( 'virtual-hosts-delete-host', {host: h.host}) }}"
+        >
+            <i class="fas fa-trash"></i>
+        </a>
+    </td>
+</tr>

@@ -1,3 +1,24 @@
+function loadHostOptions( hostType )
+{
+	var url	= $( '#optionsContainer' ).attr( 'data-url' );
+	var data = {};
+	data['hostType'] = hostType;
+		
+	$.ajax({
+		type: "GET",
+	 	url: url,
+	 	data: data,
+		success: function( response )
+		{
+			$( '#optionsContainer' ).html( response );
+		},
+		error: function()
+		{
+			alert( "SYSTEM ERROR!!!" );
+		}
+	});
+}
+
 $(function()
 {
 	$( '.btnCreateVirtualHost' ).on( 'click', function () {
@@ -27,4 +48,10 @@ $(function()
 		});
 	});
 	
+	// HostType Options
+	loadHostOptions( $( '#project_host_hostType' ).val() );
+	$( '#project_host_hostType' ).on( 'change', function ()
+	{
+		loadHostOptions( $( this ).val() );
+	});
 });

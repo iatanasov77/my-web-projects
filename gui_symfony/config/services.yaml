@@ -55,7 +55,12 @@ services:
         calls:
           - [ setContainer ]
     
-    vs_app.apache_virtual_hosts:
+    vs_app.apache_virtual_host_factory:
+        public: true
+        class: App\Component\Apache\VirtualHostFactory
+        arguments: ["@service_container"]
+        
+    vs_app.apache_virtual_host_repository:
         public: true
         class: App\Component\Apache\VirtualHostRepository
         arguments: ["@service_container"]
@@ -69,7 +74,7 @@ services:
     ##################################
     # Form Types with Arguments
     ##################################
-    App\Form\Type\ProjectHostType:
+    App\Form\Type\HostOptions\ProjectHostLampOptionType:
         arguments: ['@vs_app.php_brew']
         tags: [form.type]
           

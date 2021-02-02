@@ -6,11 +6,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use App\Component\Apache\VirtualHost;
 use App\Component\Apache\Php;
 use App\Form\Type\ProjectHostType;
 use App\Entity\ProjectHost;
 use App\Component\Globals;
+
+use App\Component\Project\Host as HostTypes;
+use App\Component\Apache\VirtualHost\VirtualHostLamp;
+use App\Entity\ProjectHostOption;
+use App\Component\Project\Host;
 
 class VirtualHostsController extends Controller
 {   
@@ -28,7 +32,7 @@ class VirtualHostsController extends Controller
      */
     public function index( Request $request )
     {
-        $virtualHosts       = $this->container->get( 'vs_app.apache_virtual_hosts' );
+        $virtualHosts       = $this->container->get( 'vs_app.apache_virtual_host_repository' );
         $phpBrew            = $this->container->get( 'vs_app.php_brew' );
         $installedVersions  = $phpBrew->getInstalledVersions();
         
@@ -48,12 +52,16 @@ class VirtualHostsController extends Controller
      */
     public function create( Request $request )
     {
-        $formHost   = $this->_hostForm( new ProjectHost() );
+        $projectHost    = new ProjectHost();
+        $formHost       = $this->_hostForm( $projectHost );
         
         $formHost->handleRequest( $request );
         if ( $formHost->isSubmitted() ) {
             $em     = $this->getDoctrine()->getManager();
             $host   = $formHost->getData();
+            
+            $optionsField   = 'project_host_' . strtolower( $host->getHostType() ) . '_option';
+            $this->setHostOptions( $host, $request->request->get( $optionsField ) );
             
             $em->persist( $host );
             $em->flush();
@@ -69,7 +77,7 @@ class VirtualHostsController extends Controller
      */
     public function delete( $host, Request $request )
     {
-        $vhosts     = $this->container->get( 'vs_app.apache_virtual_hosts' );
+        $vhosts     = $this->container->get( 'vs_app.apache_virtual_host_repository' );
         $hostConfig = $vhosts->getVirtualHostConfig( $host );
         exec( 'sudo rm -f ' . $hostConfig ); // Remove apache vhost
         
@@ -96,7 +104,7 @@ class VirtualHostsController extends Controller
     public function setPhpVersion( Request $request )
     {
         if ( $request->isMethod( 'post' ) ) {
-            $vhosts     = $this->container->get( 'vs_app.apache_virtual_hosts' );
+            $vhosts     = $this->container->get( 'vs_app.apache_virtual_host_repository' );
      
             $host       = $request->attributes->get( 'host' );
             $phpVersion = ltrim( $request->request->get( 'php_version' ), 'php-' );
@@ -109,7 +117,12 @@ class VirtualHostsController extends Controller
     
     private function _hostForm( ProjectHost $host )
     {
-        $form   = $this->createForm( ProjectHostType::class, new ProjectHost(), [
+        $projectHost    = new ProjectHost();
+        
+        //$projectHost->sethostType( HostTypes::TYPE_LAMP );
+        //$projectHost->setOptions( HostTypes::options( HostTypes::TYPE_LAMP ) );
+        
+        $form   = $this->createForm( ProjectHostType::class, $projectHost, [
             'action' => $this->generateUrl( 'virtual-hosts-create' ),
             'method' => 'POST'
         ]);
@@ -119,26 +132,24 @@ class VirtualHostsController extends Controller
     
     private function createVirtualhost( ProjectHost $host )
     {
-        $vhosts = $this->container->get( 'vs_app.apache_virtual_hosts' );
+        $vhosts     = $this->container->get( 'vs_app.apache_virtual_host_repository' );
+        $factory    = $this->container->get( 'vs_app.apache_virtual_host_factory' );
+        $vhost      = $factory->virtualHostFromEntity( $host );
         
-        if ( $host->getPhpVersion() != 'default' ) {
-            $template   = 'simple-fpm';
-        } else {
-            $template   = 'simple';
-        }
-        
-        $vhost  = new VirtualHost([
-            'PhpVersion'        => $host->getPhpVersion(),
-            'PhpStatus'         => Php::STATUS_INSTALLED,
-            'PhpStatusLabel'    => Php::phpStatus( Php::STATUS_INSTALLED ),
+        $vhosts->generateVirtualhost( $vhost, $vhost->getTemplate() );
+    }
+    
+    private function setHostOptions( &$host, $options )
+    {
+        $optionKeys = HostTypes::optionKeys( $host->getHostType() );
+        foreach ( $optionKeys as $key ) {
+            $value = $options[$key];
             
-            'ServerName'        => $host->getHost(),
-            'DocumentRoot'      => $host->getDocumentRoot(),
-            'ServerAdmin'       => 'webmaster@' . $host->getHost(),
-            'LogDir'            => '/var/log/httpd/',
-            'WithSsl'           => $host->getWithSsl(),
-        ]);
-        
-        $vhosts->generateVirtualhost( $vhost, $template );
+            $option = new ProjectHostOption;
+            $option->setKey( $key );
+            $option->setValue( $value );
+            
+            $host->addOption( $option );
+        }
     }
 }
