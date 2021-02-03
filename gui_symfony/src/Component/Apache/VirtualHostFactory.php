@@ -30,12 +30,8 @@ class VirtualHostFactory
     public function virtualHostFromEntity( ProjectHost $hostEntity ) : ?VirtualHost
     {
         if ( $hostEntity->getHostType() == HostType::TYPE_LAMP ) {
-            $phpVersion = 'default';
-            foreach ( $hostEntity->getOptions() as $option ) {
-                if ( $option->getKey() == 'phpVersion' ) {
-                    $phpVersion = $option->getValue();
-                }
-            }
+            $hostOptions    = $hostEntity->getOptions();
+            $phpVersion     = isset( $hostOptions['phpVersion'] ) ? $hostOptions['phpVersion'] : 'default';
     
             $vhost  = new VirtualHostLamp([
                 'template'          => $phpVersion == 'default' ? 'simple' : 'simple-fpm',

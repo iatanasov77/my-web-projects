@@ -25,15 +25,15 @@ class ProjectHost
     protected $project;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProjectHostOption", mappedBy="host", cascade={"persist","remove"})
-     */
-    protected $options;
-    
-    /**
      * @ORM\Column(name="host_type", type="string", length=32)
      * @Assert\NotBlank
      */
     protected $hostType;
+    
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected $options;
     
     /**
      * @ORM\Column(type="string", length=32)
@@ -74,38 +74,15 @@ class ProjectHost
         return $this;
     }
     
-    /**
-     * @return Collection|ProjectHostOption[]
-     */
-    public function getOptions(): Collection
+    public function getOptions(): Array
     {
         return $this->options;
     }
-    
-    public function setOptions( Collection $options ): self
+
+    public function setOptions( Array $options ): self
     {
         $this->options  = $options;
-        
-        return $this;
-    }
-    
-    public function addOption(ProjectHostOption $option)
-    {
-        if($option->getKey()
-            && !$this->options->contains($option)) {
-                $option->setHost($this);
-                $this->options->add($option);
-            }
-            
-            return $this;
-    }
-    
-    public function removeOption(ProjectHostOption $option)
-    {
-        if ($this->options->contains($option)) {
-            $this->options->removeElement($option);
-        }
-        
+
         return $this;
     }
     

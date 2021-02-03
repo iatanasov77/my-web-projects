@@ -61,7 +61,7 @@ class VirtualHostsController extends Controller
             $host   = $formHost->getData();
             
             $optionsField   = 'project_host_' . strtolower( $host->getHostType() ) . '_option';
-            $this->setHostOptions( $host, $request->request->get( $optionsField ) );
+            $host->setOptions( $request->request->get( $optionsField ) );
             
             $em->persist( $host );
             $em->flush();
@@ -137,19 +137,5 @@ class VirtualHostsController extends Controller
         $vhost      = $factory->virtualHostFromEntity( $host );
         
         $vhosts->generateVirtualhost( $vhost, $vhost->getTemplate() );
-    }
-    
-    private function setHostOptions( &$host, $options )
-    {
-        $optionKeys = HostTypes::optionKeys( $host->getHostType() );
-        foreach ( $optionKeys as $key ) {
-            $value = $options[$key];
-            
-            $option = new ProjectHostOption;
-            $option->setKey( $key );
-            $option->setValue( $value );
-            
-            $host->addOption( $option );
-        }
     }
 }
