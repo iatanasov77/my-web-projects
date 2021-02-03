@@ -91,7 +91,14 @@ $( function()
 	        }
 		})
 		.done( function( html ) {
-			//alert( "DONE !!!" );
+			var setupUrl	= "/php-versions/" + data[0].value + "/setup";
+			var startUrl	= "/php-versions/" + data[0].value + "/start-fpm";
+			$.get( setupUrl, function( response ) {
+				$( "#phpInstallContainer" ).append( '<br><br>PhpFpm Setup is Done!<br>' ).animate( {scrollTop: $( '#phpInstallContainer' ).prop( "scrollHeight" ) }, 0 );
+				$.get( startUrl, function( response ) {
+					$( "#phpInstallContainer" ).append( 'PhpFpm is Started!<br>' ).animate( {scrollTop: $( '#phpInstallContainer' ).prop( "scrollHeight" ) }, 0 );
+				});
+			});
 		})
 		.fail( function() {
 			alert( "AJAX return an ERROR !!!" );

@@ -78,8 +78,21 @@ class PhpVersionsController extends Controller
                     }
                 }
             });
-            
         }
+    }
+    
+    /**
+     * @Route("/php-versions/{version}/setup", name="php-versions-setup")
+     */
+    public function setupAfterInstall( Request $request ): Response
+    {
+        $requestedVersion   = $request->attributes->get( 'version' );
+        $parts              = explode( '-', $requestedVersion );
+        
+        $this->phpBrew  = $this->container->get( 'vs_app.php_brew' );
+        $this->phpBrew->setupFpm( $parts[0], '' );
+        
+        return new JsonResponse( ['success' => true] );
     }
     
     /**
