@@ -5,16 +5,6 @@
     </td>
     
     <td width="170" style="text-align: right;">
-    	<a href="javascript:void(0);" 
-            class="btn btn-info btn-circle btn-sm " 
-            title="Change Version" 
-            data-toggle="modal" 
-            data-target="#host-change-php-version-modal"
-            data-url="{{ path( 'virtual-hosts-set-php-version', {host: h.host}) }}"
-        >
-            <i class="fas fa-edit"></i>
-        </a>
-        
         <a href="javascript:void(0);" 
             class="btn btn-info btn-circle btn-sm " 
             title="Change Version" 
@@ -35,14 +25,24 @@
 	        </a>
 	    {% elseif h.PhpVersion != 'default' and h.PhpStatus < 3 %}
 	        <a href="{{ path( 'php-versions-restart-fpm', {version: h.PhpVersion}) }}" 
-	            class="btn btn-primary" 
+	            class="btn btn-info btn-circle btn-sm " 
 	            title="Restart PhpFpm" 
 	        >
-	            <i class="fas fa-edit"></i>
-	            Restart PhpFpm
+	        	<i class="fab fa-php"></i>
+	            <i class="fa fa-refresh"></i>
 	        </a>
 	    {% endif %}
     
+    	<a href="javascript:void(0);" 
+            class="btn btn-info btn-circle btn-sm " 
+            title="Edit Host" 
+            data-toggle="modal" 
+            data-target="#host-change-php-version-modal"
+            data-url="{{ path( 'virtual-hosts-set-php-version', {host: h.host}) }}"
+        >
+            <i class="fas fa-edit"></i>
+        </a>
+        
     	<a href="javascript:void(0);" 
             class="btn btn-danger btn-circle btn-sm btnDeleteHost" 
             title="Delete Host" 
