@@ -135,10 +135,44 @@ class PhpBrew implements ContainerAwareInterface
         }
         
         if ( true ) {
-            $this->_setupFpm( $version );
+            $this->setupFpm( $version, $customName );
         }
         
         exec( $versionPath . '/sbin/php-fpm' );
+    }
+    
+    public function setupFpm( $version, String $customName )
+    {
+        $this->installationDir  = $this->container->getParameter( 'php_versions_dir' );
+        $dirName                = empty( $customName ) ? self::DIR_PREFIX . $version : self::DIR_PREFIX . $version . '-' . $customName;
+        $versionPath            = $this->installationDir . '/' . $dirName;
+        if ( ! is_dir( $versionPath ) ) {
+            throw new \Exception( 'This Installation path not exists: ' . $versionPath );
+        }
+        
+        switch ( true )
+        {
+            case file_exists( $versionPath . '/etc/php-fpm.d/www.conf' ):
+                $confFile   = $versionPath . '/etc/php-fpm.d/www.conf';
+                break;
+            case file_exists( $versionPath . '/etc/php-fpm.conf' ):
+                $confFile   = $versionPath . '/etc/php-fpm.conf';
+                break;
+            default:
+                throw new \Exception( 'Cannot find PhpFpm config file !!!' );
+        }
+        $fpmConfig  = file_get_contents( $confFile );
+        
+        $newConfig  = strtr( $fpmConfig, [
+            'nobody'                    => 'apache',
+            ';listen.owner'             => 'listen.owner',
+            ';listen.group'             => 'listen.group',
+            ';listen.mode'              => 'listen.mode',
+            //';listen.allowed_clients'   => 'listen.allowed_clients',
+        ]);
+        
+        file_put_contents( '/tmp/fpmConf', $newConfig );
+        exec( 'sudo mv -f /tmp/fpmConf ' .  $confFile );
     }
     
     protected function _init()
