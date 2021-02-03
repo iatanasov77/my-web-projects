@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2021 at 12:52 PM
+-- Generation Time: Feb 03, 2021 at 01:31 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.4.14
 
@@ -104,6 +104,7 @@ CREATE TABLE `projects_hosts` (
   `id` int NOT NULL,
   `project_id` int NOT NULL,
   `host_type` varchar(32) NOT NULL,
+  `options` json NOT NULL,
   `host` varchar(32) NOT NULL,
   `document_root` varchar(128) NOT NULL,
   `with_ssl` tinyint(1) DEFAULT NULL
@@ -113,29 +114,9 @@ CREATE TABLE `projects_hosts` (
 -- Dumping data for table `projects_hosts`
 --
 
-INSERT INTO `projects_hosts` (`id`, `project_id`, `host_type`, `host`, `document_root`, `with_ssl`) VALUES
-(1, 1, 'Lamp', 'junona.lh', '/projects-myspace/Test', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `projects_hosts_options`
---
-
-CREATE TABLE `projects_hosts_options` (
-  `id` int NOT NULL,
-  `host_id` int NOT NULL,
-  `option_key` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `option_value` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `projects_hosts_options`
---
-
-INSERT INTO `projects_hosts_options` (`id`, `host_id`, `option_key`, `option_value`) VALUES
-(1, 1, 'phpVersion', 'default'),
-(2, 1, 'reverseProxy', NULL);
+INSERT INTO `projects_hosts` (`id`, `project_id`, `host_type`, `options`, `host`, `document_root`, `with_ssl`) VALUES
+(1, 1, 'Lamp', 'null', 'junona.lh', '/projects-myspace/Test', 0),
+(13, 11, 'Lamp', 'null', 'lamp.lh', '/projects/TestHosts/TestLamp', 0);
 
 -- --------------------------------------------------------
 
@@ -204,12 +185,6 @@ ALTER TABLE `projects_hosts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `projects_hosts_options`
---
-ALTER TABLE `projects_hosts_options`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `VSAPP_Translations`
 --
 ALTER TABLE `VSAPP_Translations`
@@ -235,13 +210,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT for table `projects_hosts`
 --
 ALTER TABLE `projects_hosts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `projects_hosts_options`
---
-ALTER TABLE `projects_hosts_options`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `VSAPP_Translations`
