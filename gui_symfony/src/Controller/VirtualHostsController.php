@@ -63,6 +63,8 @@ class VirtualHostsController extends Controller
             $optionsField   = 'project_host_' . strtolower( $host->getHostType() ) . '_option';
             $host->setOptions( $request->request->get( $optionsField ) );
             
+            $this->container->get( 'vs_app.apache_host_actions' )->createEnvironment( $host );
+            
             $em->persist( $host );
             $em->flush();
             

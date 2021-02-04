@@ -95,36 +95,25 @@ class VirtualHostRepository
     public function createVirtualHostConfig( $vhost, $template )
     {
         $twig           = $this->container->get( 'templating' );
-        $phpBrew        = $this->container->get( 'vs_app.php_brew' );
-        $fpmSocket      = $phpBrew->fpmSocket( $vhost->getPhpVersion() );
-        
-        if ( file_exists ( ApacheConfig::SSLCERT_VAGRANT_CRT ) && file_exists ( ApacheConfig::SSLCERT_VAGRANT_KEY ) ) {
-            $sslCrt = ApacheConfig::SSLCERT_VAGRANT_CRT;
-            $sslKey = ApacheConfig::SSLCERT_VAGRANT_KEY;
-        } else {
-            $sslCrt = ApacheConfig::SSLCERT_MYPROJECTS_CRT;
-            $sslKey = ApacheConfig::SSLCERT_MYPROJECTS_KEY;
+        $twigVars       = $vhost->twigVars();
+        if ( $vhost instanceof VirtualHostLamp ) {
+            $phpBrew        = $this->container->get( 'vs_app.php_brew' );
+            $twigVars['fpmSocket']  = $phpBrew->fpmSocket( $vhost->getPhpVersion() );
         }
         
-        $vhostConfig    = $twig->render( 'mkvhost/' . $template . '.twig', [
-            'host'          => $vhost->getHost(),
-            'documentRoot'  => $vhost->getDocumentRoot(),
-            'serverAdmin'   => $vhost->getServerAdmin(),
-            'apacheLogDir'  => $vhost->getApacheLogDir(),
-            'fpmSocket'     => $fpmSocket,
-        ]);
+        if ( file_exists ( ApacheConfig::SSLCERT_VAGRANT_CRT ) && file_exists ( ApacheConfig::SSLCERT_VAGRANT_KEY ) ) {
+            $twigVars['sslCertificate']     = ApacheConfig::SSLCERT_VAGRANT_CRT;
+            $twigVars['sslCertificateKey']  =  ApacheConfig::SSLCERT_VAGRANT_KEY;
+        } else {
+            $twigVars['sslCertificate']     = ApacheConfig::SSLCERT_MYPROJECTS_CRT;
+            $twigVars['sslCertificateKey']  = ApacheConfig::SSLCERT_MYPROJECTS_KEY;
+        }
+        
+        $vhostConfig    = $twig->render( 'mkvhost/' . $template . '.twig', $twigVars );
         
         if ( $vhost->getWithSsl() )
         {
-            $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/' . $template . '-ssl.twig', [
-                'sslCertificate'    => $sslCrt,
-                'sslCertificateKey' => $sslKey,
-                'host'              => $vhost->getHost(),
-                'documentRoot'      => $vhost->getDocumentRoot(),
-                'serverAdmin'       => $vhost->getServerAdmin(),
-                'apacheLogDir'      => $vhost->getApacheLogDir(),
-                'fpmSocket'         => $fpmSocket,
-            ]);
+            $vhostConfig  .= "\n\n" . $twig->render( 'mkvhost/' . $template . '-ssl.twig', $twigVars );
         }
         
         return $vhostConfig;

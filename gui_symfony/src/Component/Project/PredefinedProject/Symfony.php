@@ -1,6 +1,6 @@
 <?php namespace App\Component\Project\PredefinedProject;
 
-class Magento implements PredefinedProjectInterface
+class Symfony implements PredefinedProjectInterface
 {
     const SOURCE_TYPE   = 'wget';
     const SOURCE_URL    = 'https://github.com/magento/magento2/archive/2.4.1.zip';
@@ -19,7 +19,7 @@ class Magento implements PredefinedProjectInterface
     
     public function form()
     {
-        return 'pages/projects/form_predefined/magento.html.twig';
+        return 'pages/projects/form_predefined/symfony.html.twig';
     }
     
     public function populate( &$project )

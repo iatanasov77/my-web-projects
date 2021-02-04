@@ -44,6 +44,16 @@ abstract class VirtualHost
     
     abstract public function type();
     
+    public function twigVars() : Array
+    {
+        return [
+            'host'          => $this->host,
+            'documentRoot'  => $this->documentRoot,
+            'serverAdmin'   => $this->serverAdmin,
+            'apacheLogDir'  => $this->apacheLogDir,
+        ];
+    }
+    
     public function getTemplate()
     {
         return $this->template;

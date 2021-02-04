@@ -33,6 +33,13 @@ class VirtualHostLamp extends VirtualHost
         return HostType::TYPE_LAMP;
     }
     
+    public function twigVars() : Array
+    {
+        return array_merge( parent::twigVars(), [
+            
+        ]);
+    }
+    
     public function getPhpVersion()
     {
         return $this->phpVersion;

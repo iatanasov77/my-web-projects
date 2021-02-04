@@ -1,7 +1,8 @@
 imports:
     - { resource: services/twig_extensions.yaml }
     - { resource: services/phpbrew.yaml }
-    
+    - { resource: services/commands.yaml }
+
 parameters:
     siteTitle: 'VS My Projects 2'
     mailer_user: 'admin@myprojects.lh'
@@ -45,31 +46,6 @@ services:
                 - 'environment: %kernel.environment%'
 
     vasek_purchart.tracy_blue_screen.tracy.blue_screen: '@my_blue_screen'
-    
-    ##################################
-    # Command Helper services
-    ##################################
-    vs_app.php_brew:
-        public: true
-        class: App\Component\Command\PhpBrew
-        calls:
-          - [ setContainer ]
-    
-    vs_app.apache_virtual_host_factory:
-        public: true
-        class: App\Component\Apache\VirtualHostFactory
-        arguments: ["@service_container"]
-        
-    vs_app.apache_virtual_host_repository:
-        public: true
-        class: App\Component\Apache\VirtualHostRepository
-        arguments: ["@service_container"]
-
-    vs_app.apache_service:
-        public: true
-        class: App\Component\Command\Apache
-        calls:
-          - [ setContainer ]
     
     ##################################
     # Form Types with Arguments

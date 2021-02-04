@@ -22,9 +22,22 @@ $(function()
 			alert( "Project type '" + type + "' is undefined!" );
 		}
 		
-		$( '#project_sourceType' ).val( predefinedProjects[type].sourceType );
-		$( '#project_repository' ).val( predefinedProjects[type].sourceUrl );
-		$( '#project_branch' ).val( predefinedProjects[type].branch );
+// 		$( '#project_sourceType' ).val( predefinedProjects[type].sourceType );
+// 		$( '#project_repository' ).val( predefinedProjects[type].sourceUrl );
+// 		$( '#project_branch' ).val( predefinedProjects[type].branch );
+		
+		$.ajax({
+			type: "GET",
+		 	url: '/predefined_project_form/' + type,
+			success: function( response )
+			{
+				$( '#predefinedProjectForm' ).html( response );
+			},
+			error: function()
+			{
+				alert( "SYSTEM ERROR!!!" );
+			}
+		});
 	});
 	
 	// Init Delete Form
@@ -308,24 +321,6 @@ $(function()
 				alert( "SYSTEM ERROR!!!" );
 			}
        });
-	});
-	
-	$( '#create-project-modal' ).on( 'change', '#project_predefinedType', function( e )
-	{
-		var url	= '/predefined_project_form/' + $( this ).val();
-		
-		$.ajax({
-			type: "GET",
-		 	url: url,
-			success: function( response )
-			{
-				$( '#predefinedProjectForm' ).html( response );
-			},
-			error: function()
-			{
-				alert( "SYSTEM ERROR!!!" );
-			}
-		});
 	});
 	
 	$( '#create-project-modal' ).on( 'click', '.btnDeleteHost', function( e )
