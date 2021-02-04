@@ -15,6 +15,7 @@ class ProjectHostPythonOptionType extends AbstractType
     public function buildForm( FormBuilderInterface $builder, array $options )
     {
         $builder
+            ->add( 'appName', TextType::class, [ 'label' => 'Application Name'] )
             ->add( 'projectPath', TextType::class, [ 'label' => 'Project Path'] )
             ->add( 'venvPath', TextType::class, [ 'label' => 'Virtual Environment Path'] )
             ->add( 'scriptAlias', TextType::class, [ 'label' => 'Script Alias (Path to wsgi.py)'] )

@@ -19,7 +19,7 @@ class Sylius implements PredefinedProjectInterface
     
     public function form()
     {
-        return 'pages/projects/project_form_predefined.html.twig';
+        return 'pages/projects/form_predefined/sylius.html.twig';
     }
     
     public function populate( &$project )

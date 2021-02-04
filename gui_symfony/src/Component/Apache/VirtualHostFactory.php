@@ -29,22 +29,47 @@ class VirtualHostFactory
     
     public function virtualHostFromEntity( ProjectHost $hostEntity ) : ?VirtualHost
     {
-        if ( $hostEntity->getHostType() == HostType::TYPE_LAMP ) {
-            $hostOptions    = $hostEntity->getOptions();
-            $phpVersion     = isset( $hostOptions['phpVersion'] ) ? $hostOptions['phpVersion'] : 'default';
-    
-            $vhost  = new VirtualHostLamp([
-                'template'          => $phpVersion == 'default' ? 'simple' : 'simple-fpm',
-                'PhpVersion'        => $phpVersion,
-                'PhpStatus'         => Php::STATUS_INSTALLED,
-                'PhpStatusLabel'    => Php::phpStatus( Php::STATUS_INSTALLED ),
+        $hostOptions    = $hostEntity->getOptions();
+        switch ( $hostEntity->getHostType() ) {
+            case HostType::TYPE_LAMP:
+                $phpVersion = isset( $hostOptions['phpVersion'] ) ? $hostOptions['phpVersion'] : 'default';
+                $vhost      = new VirtualHostLamp([
+                    'template'          => $phpVersion == 'default' ? 'simple' : 'simple-fpm',
+                    
+                    'PhpVersion'        => $phpVersion,
+                    'PhpStatus'         => Php::STATUS_INSTALLED,
+                    'PhpStatusLabel'    => Php::phpStatus( Php::STATUS_INSTALLED ),
+                    
+                    'ServerName'        => $hostEntity->getHost(),
+                    'DocumentRoot'      => $hostEntity->getDocumentRoot(),
+                    'ServerAdmin'       => 'webmaster@' . $hostEntity->getHost(),
+                    'LogDir'            => '/var/log/httpd/',
+                    'WithSsl'           => $hostEntity->getWithSsl(),
+                ]);
                 
-                'ServerName'        => $hostEntity->getHost(),
-                'DocumentRoot'      => $hostEntity->getDocumentRoot(),
-                'ServerAdmin'       => 'webmaster@' . $hostEntity->getHost(),
-                'LogDir'            => '/var/log/httpd/',
-                'WithSsl'           => $hostEntity->getWithSsl(),
-            ]);
+                break;
+            case HostType::TYPE_PYTHON:
+                $vhost      = new VirtualHostPython([
+                    'template'          => 'wsgi',
+                    
+                    'projectPath'       => $hostOptions['projectPath'],
+                    'venvPath'          => $hostOptions['venvPath'],
+                    'user'              => $hostOptions['user'],
+                    'group'             => $hostOptions['group'],
+                    'processes'         => $hostOptions['processes'],
+                    'threads'           => $hostOptions['threads'],
+                    'scriptAlias'       => $hostOptions['scriptAlias'],
+                    
+                    'ServerName'        => $hostEntity->getHost(),
+                    'DocumentRoot'      => $hostEntity->getDocumentRoot(),
+                    'ServerAdmin'       => 'webmaster@' . $hostEntity->getHost(),
+                    'LogDir'            => '/var/log/httpd/',
+                    'WithSsl'           => $hostEntity->getWithSsl(),
+                ]);
+                
+                break;
+            default:
+                throw new \Exception( 'Undefined Host Type: ' . $hostEntity->getHostType() );
         }
         
         return $vhost;
