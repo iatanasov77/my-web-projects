@@ -43,8 +43,12 @@ subsystems:
                 catalinaHome: '/opt/tomcat_9'
                 sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz'
     
-    django:
+    python:
         enabled: true
+        virtual_environments:
+            django_3:
+                pythonVersion: 3
+                packages: ['Django']
 
     phpbrew:
         enabled: true
@@ -72,7 +76,7 @@ frontendtools:
     #nodejs: latest
     nodejs: 14.15.3
     tools:
-		yarn:
+        yarn:
             version: 'latest'
         gulp:
             version: 'latest'
@@ -132,7 +136,7 @@ lamp:
         # Used of Ruby Applications
         - passenger
 
-	phpSettings:
+    phpSettings:
         'PHP/memory_limit': '-1'
         'PHP/max_execution_time': '300'
         'PHP/post_max_size': '64M'
@@ -225,6 +229,8 @@ lamp:
                 #wddx: {}
                 #xmlreader: {}
         gd:
+            ini_prefix: '20-'
+        bcmath:
             ini_prefix: '20-'
 
     phpMyAdmin:
