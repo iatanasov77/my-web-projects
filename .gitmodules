@@ -104,3 +104,4 @@
 [submodule "vagrant.d/puppet/modules/vs_rubyonrails"]
 	path = vagrant.d/puppet/modules/vs_rubyonrails
 	url = https://github.com/iatanasov77/puppet-rubyonrails.git
+	branch = main

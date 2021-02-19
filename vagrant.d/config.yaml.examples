@@ -57,6 +57,9 @@ subsystems:
                 pythonVersion: 3
                 packages: ['Django']
 
+    rubyonrails:
+        enabled: false
+
     phpbrew:
         enabled: true
         version: 'latest'
