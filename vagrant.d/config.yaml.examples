@@ -24,6 +24,13 @@ subsystems:
     docker:
       enabled: false
 
+    # Composer is installed by vs_lamp::php, 
+    # here you can configure to install old version if needed
+    composer:
+        enabled: true
+        command: 'composer_1'
+        version: '1.10.20'
+
     dotnet:
         enabled: false
         # In the begining this was the version by: 2.1.4
