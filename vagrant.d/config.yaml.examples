@@ -41,14 +41,20 @@ subsystems:
         #mono: 'latest'
         
     tomcat:
-        enabled: false
-        catalinaHome: '/opt/tomcat_7'
-        sourceUrl: 'https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.106/bin/apache-tomcat-7.0.106.tar.gz'
+        enabled: true
+        ############################################################################
+        # Default instance is tomcat 9. 
+        # I think source urls are changed for different network locations.
+        ############################################################################
+        catalinaHome: '/opt/tomcat/default'
+        sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
         instances:
-            tomcat_9:
-                catalinaHome: '/opt/tomcat_9'
-                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz'
+            tomcat_8:
+                catalinaHome: '/opt/tomcat/tomcat_8'
+                sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz'
+                serverPort: '8105'
+                connectorPort: '8180'
     
     python:
         enabled: true
