@@ -101,3 +101,7 @@
 	path = vagrant.d/puppet/modules/vs_django
 	url = https://github.com/iatanasov77/puppet-django.git
 	branch = main
+[submodule "vagrant.d/puppet/modules/rvm"]
+	path = vagrant.d/puppet/modules/rvm
+	url = https://github.com/iatanasov77/puppet-rvm.git
+	branch = develop
