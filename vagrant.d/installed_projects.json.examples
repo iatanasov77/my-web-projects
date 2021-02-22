@@ -152,7 +152,8 @@
                 "hostType": "Ruby",
                 "hostName": "ruby.lh",
                 "documentRoot": "/vagrant/examples/Ruby/TestApplication/public",
-                "withSsl": true
+                "withSsl": true,
+                "rubyVersion": "3.0.0"
             }
         ]
     }

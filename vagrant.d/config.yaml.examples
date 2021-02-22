@@ -41,7 +41,7 @@ subsystems:
         #mono: 'latest'
         
     tomcat:
-        enabled: true
+        enabled: false
         ############################################################################
         # Default instance is tomcat 9. 
         # I think source urls are changed for different network locations.
@@ -57,14 +57,19 @@ subsystems:
                 connectorPort: '8180'
     
     python:
-        enabled: true
+        enabled: false
         virtual_environments:
             django_3:
                 pythonVersion: 3
                 packages: ['Django']
 
-    rubyonrails:
-        enabled: false
+    ruby:
+        enabled: true
+        virtual_environments:
+            ruby_3:
+                rubyVersion: '3.0.0'
+                defaultUse: true
+                packages: ['rails']
 
     phpbrew:
         enabled: true
