@@ -51,5 +51,13 @@
 /examples/DotNet/*/obj/
 /examples/Python/**/__pycache__/
 
-# I dont know why
-/examples/Ruby/*
+###################################################
+# Examples Ruby Application
+###################################################
+/examples/Ruby/TestApplication/yarn-error.log
+/examples/Ruby/TestApplication/node_modules/
+/examples/Ruby/TestApplication/vendor/*/
+/examples/Ruby/TestApplication/log/*/
+/examples/Ruby/TestApplication/storage/*/
+/examples/Ruby/TestApplication/tmp/*/
+
