@@ -5,37 +5,33 @@ use VS\UsersBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="IAUM_Users")
+ * @ORM\Table(name="VSUM_Users")
  */
 class User extends BaseUser
 {
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserManagement\UserActivity", mappedBy="user")
      */
-    protected $id;
+    protected $activities;
     
     /**
-     * COMENTED: @ORM\OneToOne(targetEntity="App\Entity\UserManagement\UserInfo", cascade={"persist"})
-     * COMENTED: @ORM\JoinColumn(name="user_info_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserManagement\UserNotification", mappedBy="user")
      */
-    protected $userInfo;
+    protected $notifications;
     
-    public function getUserInfo()
+    /**
+     * @return Collection|UserActivity[]
+     */
+    public function getActivities()
     {
-        return $this->userInfo;
+        return $this->activities;
     }
     
-    public function setUserInfo( $userInfo )
+    /**
+     * @return Collection|UserActivity[]
+     */
+    public function getNotifications()
     {
-        $this->userInfo = $userInfo;
-        
-        return $this;
-    }
-    
-    public function __construct()
-    {
-        parent::__construct();
+        return $this->notifications;
     }
 }
