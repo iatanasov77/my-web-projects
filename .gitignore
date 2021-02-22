@@ -56,8 +56,8 @@
 ###################################################
 /examples/Ruby/TestApplication/yarn-error.log
 /examples/Ruby/TestApplication/node_modules/
-/examples/Ruby/TestApplication/vendor/*/
-/examples/Ruby/TestApplication/log/*/
-/examples/Ruby/TestApplication/storage/*/
-/examples/Ruby/TestApplication/tmp/*/
+/examples/Ruby/TestApplication/vendor/
+/examples/Ruby/TestApplication/log/
+/examples/Ruby/TestApplication/storage/
+/examples/Ruby/TestApplication/tmp/
 
