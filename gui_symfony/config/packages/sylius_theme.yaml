@@ -1,5 +1,4 @@
 sylius_theme:
-    context: vs_app.site.theme.context
     sources:
         filesystem:
             directories:
