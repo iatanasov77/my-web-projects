@@ -1,6 +1,12 @@
 # All 'vagrant up' finished for less than 10 minutes on centos7 box
 #####################################################################
 
+gui:
+    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
+    database:
+        name: 'VsMyProjects'
+        dump: '/vagrant/doc/sql/VsMyProjects-20210222.sql'
+
 forceMySqlComunityRepo: true
 mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
 
@@ -24,6 +30,13 @@ subsystems:
     docker:
       enabled: false
 
+    # Composer is installed by vs_lamp::php, 
+    # here you can configure to install old version if needed
+    composer:
+        enabled: true
+        command: 'composer_1'
+        version: '1.10.20'
+
     dotnet:
         enabled: false
         # In the begining this was the version by: 2.1.4
@@ -35,14 +48,35 @@ subsystems:
         
     tomcat:
         enabled: false
-        catalinaHome: '/opt/tomcat_7'
-        sourceUrl: 'https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.106/bin/apache-tomcat-7.0.106.tar.gz'
+        ############################################################################
+        # Default instance is tomcat 9. 
+        # I think source urls are changed for different network locations.
+        ############################################################################
+        catalinaHome: '/opt/tomcat/default'
+        sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
         instances:
-            tomcat_9:
-                catalinaHome: '/opt/tomcat_9'
-                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz'
-        
+            tomcat_8:
+                catalinaHome: '/opt/tomcat/tomcat_8'
+                sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz'
+                serverPort: '8105'
+                connectorPort: '8180'
+    
+    python:
+        enabled: false
+        virtual_environments:
+            django_3:
+                pythonVersion: 3
+                packages: ['Django']
+
+    ruby:
+        enabled: true
+        virtual_environments:
+            ruby_3:
+                rubyVersion: '3.0.0'
+                defaultUse: true
+                packages: ['rails']
+
     phpbrew:
         enabled: true
         version: 'latest'
@@ -69,15 +103,17 @@ frontendtools:
     #nodejs: latest
     nodejs: 14.15.3
     tools:
-       yarn:
-          version: 'latest' 
-       gulp:
-           version: 'latest'
-       angular-cli:
-           version: 'latest'
-       # Using for upgrade package.json dependencie's versions
-       npm-upgrade:
-           version: 'latest'
+        yarn:
+            version: 'latest'
+        gulp:
+            version: 'latest'
+        angular-cli:
+            version: 'latest'
+        create-react-app:
+            version: 'latest'
+        # Using for upgrade package.json dependencie's versions
+        npm-upgrade:
+            version: 'latest'
 
 packages:
     - mc
@@ -102,12 +138,14 @@ lamp:
     mysql:
         # provider = false mean use default
         provider: 'mysql' # Avaiable options: false, 'mysql', 'mariadb'
+        # Empty Example: databases
+        #databases: {}
         databases:
-            default:
-                name: 'VsMyProjects'
-                dump: '/vagrant/doc/sql/VsMyProjects-20210119.sql'
+        	vs_symfony_bundles_develop:
+                name: 'VsSymfonyBundlesDevelop'
+                dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/SymfonyBundlesDevelop_20201111.sql'
 
-    # For JSP Pages require apache module 'proxy_ajp'e
+    # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 
         - expires
         - headers
@@ -120,7 +158,20 @@ lamp:
         - proxy_fcgi
         - proxy_http
         - proxy_html
+        # Used of Java Applications
         - proxy_ajp
+        # Used of Python Applications
+        - wsgi
+        # Used of Ruby Applications
+        - passenger
+
+    phpSettings:
+        'PHP/memory_limit': '-1'
+        'PHP/max_execution_time': '300'
+        'PHP/post_max_size': '64M'
+        'PHP/upload_max_filesize': '64M'
+        'Date/date.timezone': 'Europe/Sofia'
+        'PHAR/phar.readonly': 'Off'
 
     phpModules:
         apcu:
@@ -137,8 +188,10 @@ lamp:
         mongodb:
             ini_prefix: '20-'
             provider: 'pecl'
+        
+        # xdebug 3.x.x example config
         xdebug:
-            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
+        	ensure: 'latest'
             ini_prefix: '20-'
             provider: 'pecl'
             zend: true
@@ -151,7 +204,15 @@ lamp:
                 # xdebug.start_with_request = 1
                 # xdebug.discover_client_host = 1
                 # xdebug.client_port = 9000
-                
+        
+        # xdebug 2.x.x example config
+        xdebug:
+            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
+            ini_prefix: '20-'
+            provider: 'pecl'
+            zend: true
+            # see http://xdebug.org/docs/all_settings
+            settings:
                 'xdebug.default_enable': '1'
                 'xdebug.remote_enable': '1'
                 'xdebug.remote_handler': 'dbgp'
@@ -197,6 +258,8 @@ lamp:
                 #wddx: {}
                 #xmlreader: {}
         gd:
+            ini_prefix: '20-'
+        bcmath:
             ini_prefix: '20-'
 
     phpMyAdmin:

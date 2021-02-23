@@ -14,26 +14,7 @@ Exec {
 node default
 {
 	include stdlib
-	if $::operatingsystem == 'centos' and $::operatingsystemmajrelease == '8' {
-	   	package { 'dnf-plugins-core':
-	        ensure => present,
-	    }
-
-		yumrepo { 'PowerTools':
-			ensure      => 'present',
-			mirrorlist 	=> 'http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=PowerTools&infra=$infra',
-			enabled     => 1,
-			gpgcheck 	=> 0,
-			require		=> Package['dnf-plugins-core'],
-		}
-	}
 	
-	# In Puppetfile:
-    # mod 'ghoneycutt-ssh', '3.57.0' 
-    class { 'ssh':
-        sshd_password_authentication    => 'yes'
-    }
-    
 	######################################################
     # Setup DevEnv
     ######################################################
@@ -42,9 +23,9 @@ node default
 	
 	class { '::vs_devenv':
         defaultHost                 => "${hostname}",
-        defaultDocumentRoot         => '/vagrant/gui_symfony/public',
-        installedProjects           => $installedProjects,
+        defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
         
+        installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
     
         packages                    => $vsConfig['packages'],
@@ -57,14 +38,7 @@ node default
         phpModules                  => $vsConfig['lamp']['phpModules'],
         phpunit                     => $vsConfig['lamp']['phpunit'],
         
-        phpSettings                 => {
-            'PHP/memory_limit'        => '-1',
-            'PHP/max_execution_time'  => '300',
-            'PHP/post_max_size'       => '64M',
-            'PHP/upload_max_filesize' => '64M',
-            'Date/date.timezone'      => 'Europe/Sofia',
-            'PHAR/phar.readonly'      => 'Off',
-        },
+        phpSettings                 => $vsConfig['lamp']['phpSettings'],
         
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
         
@@ -74,7 +48,7 @@ node default
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
     	
     	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	databases					=> $vsConfig['lamp']['mysql']['databases'],
+    	databases					=> { guiDatabase => $vsConfig['gui']['database'] } + $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
     }
@@ -82,6 +56,11 @@ node default
     ######################################################
     # Config
     ######################################################
+    
+    # Config SSH
+    class { 'ssh':
+        sshd_password_authentication    => 'yes'
+    }
     
 	# Config sudo users
 	sudo::conf { "vagrant":

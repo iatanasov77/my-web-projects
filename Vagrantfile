@@ -127,13 +127,6 @@ echo "#"
 echo "# Support at: https://github.com/iatanasov77/my-projects"
 echo "#"
 echo "################################################################################"
-echo "# DotNet Examples"
-echo "# ---------------"
-echo "#"
-echo "# May be you should run:"
-echo '#     sudo dotnet run --urls "http://*:5000;https://*:5001" >/dev/null 2>&1 &'
-echo "#"
-echo "################################################################################"
 SCRIPT
 		config.vm.provision "shell", inline: $done
 

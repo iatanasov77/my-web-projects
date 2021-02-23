@@ -66,7 +66,7 @@
                 "description": "DotNet_HelloWorld",
         
                 "hostName": "tomcat.lh",
-                "documentRoot": "/opt/tomcat/webapps/ROOT",
+                "documentRoot": "/opt/tomcat/default/webapps/ROOT",
                 "withSsl": false,
                 
                 "tomcatUrl": "http://127.0.0.1:8080",
@@ -88,7 +88,7 @@
                 "description": "DotNet_HelloWorld",
         
                 "hostName": "java-hello.lh",
-                "documentRoot": "/opt/tomcat/webapps/hello",
+                "documentRoot": "/opt/tomcat/default/webapps/hello",
                 "withSsl": false,
                 
                 "publish": true,
@@ -106,8 +106,8 @@
         "tomcatInstances": {
             "tomcat_9": {
                 "sourceUrl": "https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz",
-                "catalinaHome": "/opt/tomcat_9",
-                "catalinaBase": "/opt/tomcat_9",
+                "catalinaHome": "/opt/tomcat/tomcat_9",
+                "catalinaBase": "/opt/tomcat/tomcat_9",
                 "serverPort": 8006,
                 "connectorPort": 8081
             }
@@ -119,7 +119,7 @@
                 "description": "Tomcat 9.0",
         
                 "hostName": "tomcat9.lh",
-                "documentRoot": "/opt/tomcat_9/webapps/ROOT",
+                "documentRoot": "/opt/tomcat/tomcat_9/webapps/ROOT",
                 "withSsl": false,
                 
                 "reverseProxyProtocol": "http",
@@ -128,4 +128,33 @@
             }
         ]
     },
+    
+    "Django_TestExample": {
+        "type": "Django",
+        "projectPath": "/vagrant/examples/Python/TestApplication",
+        "venvPath": "/opt/python_virtual_environements/django_3/venv",
+        
+        "hosts": [
+            {
+                "hostType": "Django",
+                "hostName": "django.lh",
+                "documentRoot": "/vagrant/examples/Python/TestApplication/TestApplication",
+                "withSsl": true
+            }
+        ]
+    },
+   
+   "Ruby_TestExample": {
+        "type": "Ruby",
+        
+        "hosts": [
+            {
+                "hostType": "Ruby",
+                "hostName": "ruby.lh",
+                "documentRoot": "/vagrant/examples/Ruby/TestApplication/public",
+                "withSsl": true,
+                "rubyVersion": "3.0.0"
+            }
+        ]
+    }
 }

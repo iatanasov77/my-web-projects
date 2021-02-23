@@ -8,22 +8,9 @@
 /.dbeaver-data-sources.xml
 
 ##############################
-# Symfony
-##############################
-/gui_symfony/composer.lock
-/gui_symfony/vendor/
-/gui_symfony/node_modules/
-/gui_symfony/public/build/
-/gui_symfony/public/bundles/
-/gui_symfony/public/assets/
-/gui_symfony/public/assets/build/
-/gui_symfony/yarn.lock
-/gui_symfony/var/
-/gui_symfony/config/fixtures/projects.yaml
-
-##############################
 # Vagrant meta data
 ##############################
+/VsProjects
 /.vagrant/
 /.env
 /vagrant.d/puppet/modules/*/*
@@ -48,3 +35,15 @@
 /examples/*/.project
 /examples/DotNet/*/bin/
 /examples/DotNet/*/obj/
+/examples/Python/**/__pycache__/
+
+###################################################
+# Examples Ruby Application
+###################################################
+/examples/Ruby/TestApplication/yarn-error.log
+/examples/Ruby/TestApplication/node_modules/
+/examples/Ruby/TestApplication/vendor/
+/examples/Ruby/TestApplication/log/
+/examples/Ruby/TestApplication/storage/
+/examples/Ruby/TestApplication/tmp/
+
