@@ -97,3 +97,11 @@
 [submodule "vagrant.d/puppet/modules/drush"]
 	path = vagrant.d/puppet/modules/drush
 	url = https://github.com/jonhattan/puppet-drush.git
+[submodule "vagrant.d/puppet/modules/vs_django"]
+	path = vagrant.d/puppet/modules/vs_django
+	url = https://github.com/iatanasov77/puppet-django.git
+	branch = main
+[submodule "vagrant.d/puppet/modules/rvm"]
+	path = vagrant.d/puppet/modules/rvm
+	url = https://github.com/iatanasov77/puppet-rvm.git
+	branch = develop
