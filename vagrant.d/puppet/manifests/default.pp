@@ -23,9 +23,9 @@ node default
 	
 	class { '::vs_devenv':
         defaultHost                 => "${hostname}",
-        defaultDocumentRoot         => '/vagrant/gui_symfony/public',
-        installedProjects           => $installedProjects,
+        defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
         
+        installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
     
         packages                    => $vsConfig['packages'],
@@ -48,7 +48,7 @@ node default
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
     	
     	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	databases					=> $vsConfig['lamp']['mysql']['databases'],
+    	databases					=> { guiDatabase => $vsConfig['gui']['database'] } + $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
     }

@@ -1,6 +1,12 @@
 # All 'vagrant up' finished for less than 10 minutes on centos7 box
 #####################################################################
 
+gui:
+    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
+    database:
+        name: 'VsMyProjects'
+        dump: '/vagrant/doc/sql/VsMyProjects-20210222.sql'
+
 forceMySqlComunityRepo: true
 mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
 
@@ -132,10 +138,12 @@ lamp:
     mysql:
         # provider = false mean use default
         provider: 'mysql' # Avaiable options: false, 'mysql', 'mariadb'
+        # Empty Example: databases
+        #databases: {}
         databases:
-            default:
-                name: 'VsMyProjects'
-                dump: '/vagrant/doc/sql/VsMyProjects-20210222.sql'
+        	vs_symfony_bundles_develop:
+                name: 'VsSymfonyBundlesDevelop'
+                dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/SymfonyBundlesDevelop_20201111.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 

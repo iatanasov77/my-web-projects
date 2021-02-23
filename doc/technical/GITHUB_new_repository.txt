@@ -1,0 +1,15 @@
+BEFORE GIT 2.28.0
+----------------------
+ 	git init
+	git checkout -b main
+
+AFTER GIT 2.28.0
+-----------------------
+	git init -b main
+	
+AND AFTER
+------------------------
+	git add .
+	git commit -m "First commit"
+	git remote add origin  <REMOTE_URL> 
+	git push origin main
