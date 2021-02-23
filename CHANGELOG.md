@@ -1,3 +1,28 @@
+3.0.0	|	Release date: **23.02.2021**
+============================================
+* BIG REFACTORING:
+  Remove Symfony GUI and add it in the separate repository.
+
+* New Features:
+  - Add Example of RubyOnRails Application.
+  - Add Django Example.
+  - [Vagrant] Add Puppet module RVM.
+  - [Vagrant] Add Composer to subsystems config to can install older versions if needed.
+  - [Vagrant] Python installation with venvs
+  - [Vagrant] Add Python and Ruby Opportunities.
+  - [VAGRANT] New Modules.
+  - [Vagrant] Add Django puppet module.
+  - [Gui] Create Django Virtual Host.
+  - [Gui] Separate ProjectsHost Entity from host options.
+
+* Bug-Fixes:
+  - [GUI] Fix Category Create Form.
+  - [Gui] PhpBrew fpm service setup and start after installation process.
+  - [Gui] PhpVersions table -  refactoring actions icons.
+  - [GUI] Change HostOptions relation to json field instead another related entity.
+  - [Gui] Sync configs and db structure according to new changes of vankosoft bundles.
+
+
 2.1.1	|	Release date: **19.01.2021**
 ==============================================
 * Improvements:
