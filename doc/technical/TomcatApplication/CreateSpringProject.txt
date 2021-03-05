@@ -1,0 +1,20 @@
+
+##### GOOD EXAMPLES #####
+#########################
+https://www.developersoapbox.com/command-line-only-spring-boot-development-using-vim/
+
+###################
+#### Example 1 ####
+###################
+mkdir Example_1
+cd Example_1
+curl https://start.spring.io/starter.zip -d dependencies=web -d javaVersion=11 -o demo.zip
+unzip demo.zip
+
+###################
+#### Example 2 ####
+###################
+mkdir Example_2
+cd Example_2
+curl https://start.spring.io/starter.zip -d dependencies=h2,data-jpa,data-rest -d javaVersion=11 -o demo.zip
+unzip demo.zip
