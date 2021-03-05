@@ -70,7 +70,7 @@ subsystems:
                 packages: ['Django']
 
     ruby:
-        enabled: true
+        enabled: false
         virtual_environments:
             ruby_3:
                 rubyVersion: '3.0.0'
