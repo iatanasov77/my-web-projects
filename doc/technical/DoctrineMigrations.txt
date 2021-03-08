@@ -1,0 +1,36 @@
+
+########################################
+# MIGRATIONS
+########################################
+
+For new project - First Migration:
+-------------------------------------
+bin/console doctrine:migrations:dump-schema
+bin/console doctrine:migrations:diff
+
+Migrate:
+-----------------------------------------
+bin/console doctrine:migrations:migrate
+
+
+
+########################################
+# FIXTURES
+########################################
+
+Fixtures generator:
+--------------------
+# Concrete IDS
+bin/console doctrine:generate:fixture --entity=AppBundle:Application/Taxonomy --ids="3 5" --name="taxonomy35" --order="1"
+
+# All IDS
+bin/console doctrine:generate:fixture --entity=AppBundle:Application/Translation --name="translations" --order="1"
+
+
+Load Fixtures:
+---------------
+bin/console doctrine:fixtures:load
+
+Try Fixtures Grouping:
+-----------------------------
+https://symfony.com/blog/new-in-fixturesbundle-group-your-fixtures
