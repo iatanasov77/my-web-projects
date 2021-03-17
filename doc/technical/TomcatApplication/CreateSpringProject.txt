@@ -2,6 +2,8 @@
 ##### GOOD EXAMPLES #####
 #########################
 https://www.developersoapbox.com/command-line-only-spring-boot-development-using-vim/
+https://spring.io/guides/gs/serving-web-content/
+https://www.baeldung.com/spring-boot-war-tomcat-deploy
 
 ###################
 #### Example 1 ####
@@ -18,3 +20,12 @@ mkdir Example_2
 cd Example_2
 curl https://start.spring.io/starter.zip -d dependencies=h2,data-jpa,data-rest -d javaVersion=11 -o demo.zip
 unzip demo.zip
+
+
+
+##### INSTALL DEPENDENCIES AND BUILD #####
+##########################################
+sudo dnf install maven
+cd ProjectDir
+./mvnw clean package
+
