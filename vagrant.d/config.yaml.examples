@@ -17,7 +17,7 @@ git:
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
-    bumpversion: 'v0.2.0'
+    bumpversion: 'v0.3.0'
     ftpdeploy: 'v3.0.1'
 
 ###############################################################
@@ -36,6 +36,9 @@ subsystems:
         enabled: true
         command: 'composer_1'
         version: '1.10.20'
+    
+    phing:
+      enabled: true
 
     dotnet:
         enabled: false
