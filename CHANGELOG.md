@@ -1,3 +1,14 @@
+3.1.0	|	Release date: **12.04.2021**
+============================================
+* New Features:
+  - Add Devops hosts in the /etc/hosts
+  - Remove Puppet module Hashicorp
+  - Add phing in the subsystems config examples.
+  - Add public network of the vagrant machine.
+  - Add Java Spring Example.
+  - Updates of Puppet Modules.
+
+
 3.0.0	|	Release date: **23.02.2021**
 ============================================
 * BIG REFACTORING:

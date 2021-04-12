@@ -17,16 +17,14 @@ git:
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
-    bumpversion: 'v0.2.0'
-    ftpdeploy: 'v3.0.1'
+    bumpversion: 'v0.3.0'
+    #ftpdeploy: 'v3.3.2'
+    ftpdeploy: 'download'
 
 ###############################################################
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
-    vault:
-       #sourceUrl: 'https://releases.hashicorp.com/vault/1.5.5/vault_1.5.5_linux_amd64.zip'
-       version: '1.5.5'
     docker:
       enabled: false
 
@@ -36,6 +34,9 @@ subsystems:
         enabled: true
         command: 'composer_1'
         version: '1.10.20'
+    
+    phing:
+      enabled: true
 
     dotnet:
         enabled: false
@@ -70,7 +71,7 @@ subsystems:
                 packages: ['Django']
 
     ruby:
-        enabled: true
+        enabled: false
         virtual_environments:
             ruby_3:
                 rubyVersion: '3.0.0'
