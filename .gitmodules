@@ -85,9 +85,6 @@
 [submodule "vagrant.d/puppet/modules/ansible"]
 	path = vagrant.d/puppet/modules/ansible
 	url = https://github.com/otherskins/puppet-ansible.git
-[submodule "vagrant.d/puppet/modules/hashicorp"]
-	path = vagrant.d/puppet/modules/hashicorp
-	url = https://github.com/inkblot/puppet-hashicorp.git
 [submodule "vagrant.d/puppet/modules/gnupg"]
 	path = vagrant.d/puppet/modules/gnupg
 	url = https://github.com/tampakrap/golja-gnupg.git
