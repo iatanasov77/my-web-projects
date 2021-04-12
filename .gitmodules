@@ -102,3 +102,6 @@
 	path = vagrant.d/puppet/modules/rvm
 	url = https://github.com/iatanasov77/puppet-rvm.git
 	branch = develop
+[submodule "vagrant.d/puppet/modules/hosts"]
+	path = vagrant.d/puppet/modules/hosts
+	url = https://github.com/justinjl6/puppet-hosts.git

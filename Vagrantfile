@@ -108,7 +108,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 				'hostname'				=> ENV['HOST_NAME'],
 				'mysqlhost'				=> ENV['PUBLIC_IP'],
 				'installed_projects'	=> File.read( ENV['HOSTS_CONFIG'] ),
-				#'mysqldump'		=> '/vagrant/resources/sql/dump.sql',
+				'devops_hosts'          => ENV['DEVOPS_HOSTS']
 			}
 	    end
 
