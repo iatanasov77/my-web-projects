@@ -1,4 +1,28 @@
 {
+	"MyProjects_GuiJava": {
+        "type": "Java",
+        
+        "tomcatInstances": {
+            
+        },
+                
+        "hosts": [
+            {
+                "hostType": "JspRewrite",
+        
+                "hostName": "java-myprojects.lh",
+                "documentRoot": "/opt/tomcat/default/webapps/MyProjects",
+                "withSsl": false,
+                
+                "publish": true,
+                "publishSrc": "/projects/VS_MyProjects_GuiJava",
+                
+                "tomcatUrl": "http://127.0.0.1:8080/MyProjects",
+                "tomcatService": "tomcat"
+            }
+        ]
+    },
+    
     "DotNet_HelloWorld": {
         "type": "AspNetCore",
         
