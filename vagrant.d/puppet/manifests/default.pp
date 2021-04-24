@@ -20,6 +20,7 @@ node default
     ######################################################
 	$vsConfig  			= parseyaml( $facts['vs_config'] )
 	$installedProjects	= parsejson( $facts['installed_projects'] )
+	$devopsHosts        = parsejson( $facts['devops_hosts'] )
 	
 	class { '::vs_devenv':
         defaultHost                 => "${hostname}",
@@ -84,4 +85,15 @@ node default
 		ensure	=> 'directory',
 		mode	=> '0777'
 	}
+	
+	######################################################
+    # Add DevOps Host to /etc/hosts
+    ######################################################
+    class { '::hosts' : }
+    $devopsHosts.each|String $id, Hash $hostConfig| {
+        ::hosts::add { "${hostConfig['host_ip']}":
+            fqdn    => "${hostConfig['host_fqdn']}",
+            #aliases => [ 'router' ],
+        }
+    }
 }
