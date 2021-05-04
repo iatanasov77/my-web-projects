@@ -25,6 +25,13 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+    cassandra:
+        enabled: true
+        cassandraPackage: ''
+        phpDriverVersion: '2.16.0'
+        phpDriverInstall: false
+        database: '/vagrant/examples/Cassandra/ExampleDatabases/product
+
     docker:
       enabled: false
 
@@ -54,9 +61,14 @@ subsystems:
         # I think source urls are changed for different network locations.
         ############################################################################
         catalinaHome: '/opt/tomcat/default'
-        sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz'
+        sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
         instances:
+        	tomcat_10:
+        		catalinaHome: '/opt/tomcat/tomcat_10'
+        		sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-10/v10.0.5/bin/apache-tomcat-10.0.5.tar.gz'
+        		serverPort: '8107'
+                connectorPort: '8181'
             tomcat_8:
                 catalinaHome: '/opt/tomcat/tomcat_8'
                 sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz'
@@ -91,6 +103,7 @@ subsystems:
            - libjpeg-turbo-devel
            - libpng-devel
            - libzip-devel
+           - gmp-devel  # Needed For Cassandra Extension
         install: []   #['7.4.1', '5.6'
 
     # Everything fails :) Use on hand: composer global require drush/drush:10.3.6

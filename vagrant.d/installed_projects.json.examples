@@ -1,4 +1,17 @@
 {
+	"Cassandra_TestDevel": {
+    
+         "hosts": [
+            {
+                "hostType": "Lamp",
+                "hostName": "cassandra.lh",
+                "documentRoot": "/projects/TestHosts/Cassandra/public",
+                "withSsl": false,
+                "fpmSocket": "/opt/phpbrew/php/php-7.1.33/var/run/php-fpm.sock"
+            }
+        ]
+    },
+    
 	"MyProjects_GuiJava": {
         "type": "Java",
         
