@@ -25,6 +25,9 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+    mongodb:
+        enabled: true
+
     cassandra:
         enabled: true
         cassandraPackage: ''
@@ -157,7 +160,7 @@ lamp:
         databases:
         	vs_symfony_bundles_develop:
                 name: 'VsSymfonyBundlesDevelop'
-                dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/SymfonyBundlesDevelop_20201111.sql'
+                dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/VsSymfonyBundlesDevelop_20210416.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 
