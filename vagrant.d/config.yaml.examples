@@ -5,7 +5,7 @@ gui:
     documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
         name: 'VsMyProjects'
-        dump: '/vagrant/doc/sql/VsMyProjects-20210222.sql'
+        dump: '/vagrant/doc/sql/VsMyProjects-20210509.sql'
 
 forceMySqlComunityRepo: true
 mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
@@ -30,10 +30,11 @@ subsystems:
 
     cassandra:
         enabled: true
-        cassandraPackage: ''
+        cassandraPackage: 'dsc30' # 'dsc21' For CentOs 7
         phpDriverVersion: '2.16.0'
         phpDriverInstall: false
-        database: '/vagrant/examples/Cassandra/ExampleDatabases/product
+        databases:
+            'vs_dev.products': '/projects/VS_SymfonyBundlesDevelop/doc/cql/products.cql'
 
     docker:
       enabled: false
