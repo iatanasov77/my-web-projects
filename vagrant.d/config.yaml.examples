@@ -147,6 +147,8 @@ packages:
     - lynx
     # On CentOs8 Python2 is not installed by default but it is required from Sylius Setup
     - python2
+    # For Check about opened ports: `sudo lsof -i -P -n | grep LISTEN` OR USE: `sudo netstat -tulpn | grep LISTEN`
+    - lsof
 
 lamp:
     phpVersion: '7.4'
