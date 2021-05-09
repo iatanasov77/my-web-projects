@@ -1,3 +1,11 @@
+3.2.0	|	Release date: **09.05.2021**
+============================================
+* New Features:
+  - Add Subsystem Cassandra
+* Bug-Fixes:
+  - Fixing Submodules
+
+
 3.1.0	|	Release date: **12.04.2021**
 ============================================
 * New Features:
