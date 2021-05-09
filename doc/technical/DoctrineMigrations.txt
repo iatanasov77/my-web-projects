@@ -11,8 +11,7 @@ bin/console doctrine:migrations:diff
 Migrate:
 -----------------------------------------
 bin/console doctrine:migrations:migrate
-
-
+bin/console doctrine:schema:validate
 
 ########################################
 # FIXTURES
@@ -28,8 +27,13 @@ bin/console doctrine:generate:fixture --entity=AppBundle:Application/Translation
 
 
 Load Fixtures:
----------------
-bin/console doctrine:fixtures:load
+---------------------
+After Generator Generate Fixture 
+you need to make to imlement  FixtureGroupInterface to can load concrete Fixtures
+------------------------------
+bin/console doctrine:fixtures:load --append --group=LoadSites
+
+
 
 Try Fixtures Grouping:
 -----------------------------
