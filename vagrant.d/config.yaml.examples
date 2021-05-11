@@ -84,7 +84,7 @@ subsystems:
         virtual_environments:
             django_3:
                 pythonVersion: 3
-                packages: ['Django']
+                packages: ['Django', 'mysqlclient', 'django-webpack-loader']
 
     ruby:
         enabled: false
@@ -220,10 +220,10 @@ lamp:
                 # For xdebug3 many config vars are changed. 
                 # Reference: https://xdebug.org/docs/upgrade_guide
                 # ---------------------------------------------------
-                # xdebug.mode = debug
-                # xdebug.start_with_request = 1
-                # xdebug.discover_client_host = 1
-                # xdebug.client_port = 9000
+                'xdebug.mode': 'debug'
+                'xdebug.start_with_request': 'trigger'
+                'xdebug.discover_client_host': '1'
+                'xdebug.client_port': '9000'
         
         # xdebug 2.x.x example config
         xdebug:
