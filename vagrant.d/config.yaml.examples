@@ -32,7 +32,8 @@ subsystems:
         enabled: true
         cassandraPackage: 'dsc30' # 'dsc21' For CentOs 7
         phpDriverVersion: '2.16.0'
-        phpDriverInstall: false
+        phpDriverInstall: true
+        phpDriverInstallFromGitHub: true # If false Driver is Installed From 'pecl'
         databases:
             'vs_dev.products': '/projects/VS_SymfonyBundlesDevelop/doc/cql/products.cql'
 
