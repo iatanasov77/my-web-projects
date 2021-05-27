@@ -189,8 +189,8 @@ lamp:
     phpSettings:
         'PHP/memory_limit': '-1'
         'PHP/max_execution_time': '300'
-        'PHP/post_max_size': '64M'
-        'PHP/upload_max_filesize': '64M'
+        'PHP/post_max_size': '2G'
+        'PHP/upload_max_filesize': '2G'
         'Date/date.timezone': 'Europe/Sofia'
         'PHAR/phar.readonly': 'Off'
 
@@ -287,13 +287,3 @@ lamp:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
         targetDirName: 'phpMyAdmin-5.0.4-all-languages'
 
-ansible:
-    enabled: false
-    pathRoles: '/vagrant/ansible.d/playbook/roles/'
-    logPath: '/vagrant/ansible.d/log'
-    galaxyRoles: []
-    # Example
-    ##################################
-    #galaxyRoles:
-    #    - geerlingguy.java
-    #    - geerlingguy.jenkins
