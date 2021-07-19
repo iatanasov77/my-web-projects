@@ -1,6 +1,8 @@
 Usefull Command
 -------------------
 # sudo composer diagnose
+OR
+# composer update --prefer-dist -vvv --profile
 
 
 Downgrading/Upgrading Composer to specific version: for Example to version 1.10.1
@@ -21,3 +23,11 @@ Disable xdebug when run the composer command
 Disable Ip V6 on CentOs 8
 ---------------------------
 https://www.tecmint.com/disable-ipv6-in-centos-8/
+
+
+
+
+Use NFS for shared folders
+------------------------------
+vagrant plugin install vagrant-winnfsd
+
