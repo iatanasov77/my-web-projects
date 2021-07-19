@@ -1,0 +1,5 @@
+
+Using Hot Fixes and Support Branch
+--------------------------------------
+https://stackoverflow.com/questions/16386323/following-git-flow-how-should-you-handle-a-hotfix-of-an-earlier-release
+

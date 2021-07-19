@@ -13,6 +13,11 @@ Migrate:
 bin/console doctrine:migrations:migrate
 bin/console doctrine:schema:validate
 
+Migration Up/Down
+-----------------------------------------
+bin/console doctrine:migrations:execute --down "App\\DoctrineMigrations\\Version20210531153238"
+
+
 ########################################
 # FIXTURES
 ########################################
