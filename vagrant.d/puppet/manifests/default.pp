@@ -23,6 +23,8 @@ node default
 	$devopsHosts        = parsejson( $facts['devops_hosts'] )
 	
 	class { '::vs_devenv':
+		dependencies				=> $vsConfig['dependencies'],
+		
         defaultHost                 => "${hostname}",
         defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
         
