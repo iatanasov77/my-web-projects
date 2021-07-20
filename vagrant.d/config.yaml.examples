@@ -29,6 +29,8 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+	symfony:
+		enabled: true
     mongodb:
         enabled: true
 
