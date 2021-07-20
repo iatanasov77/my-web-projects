@@ -17,6 +17,14 @@ if ! Vagrant.has_plugin? 'vagrant-hostmanager'
 		vagrant plugin install vagrant-hostmanager"
 end
 
+# This plugin used to mount shared folders with nfs
+# 	https://peshmerge.io/how-to-speed-up-vagrant-on-windows-10-using-nfs/
+##############################################################################
+if ! Vagrant.has_plugin? 'vagrant-winnfsd'
+	fail_with_message "vagrant-winnfsd missing, please install the plugin with this command:
+		vagrant plugin install vagrant-winnfsd"
+end
+
 ###################################################################################
 # RUN VAGRANT
 ###################################################################################
@@ -66,15 +74,19 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			#vb.cpus		= 1
 			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 		end
-
+     
 	  	# Default Shared Folder
 	  	#config.vm.synced_folder "../VS_MyProjects", "/vagrant" #owner: "root", group: "root"
-	  	config.vm.synced_folder "./", "/vagrant" #owner: "root", group: "root"
+	  	config.vm.synced_folder "./", "/vagrant",
+	  		type:"nfs",
+			mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
 	  	
 	  	# Mount Custom Shared Folders
 	  	sharedFolders	= JSON.parse( ENV['SHARED_FOLDERS'] )
 	  	sharedFolders.each do |mountPoint, mountDir|
-	  		config.vm.synced_folder mountDir, mountPoint #owner: "root", group: "root"
+	  		config.vm.synced_folder mountDir, mountPoint,
+	  			type:"nfs",
+				mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
 	    end
         
 		# Run provision bash scripts to setup puppet environement
