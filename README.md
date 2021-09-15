@@ -2,7 +2,7 @@
 
 ## I. Clone GIT Repository with Submodules
 ```
-    # git clone https://gitlab.com/iatanasov77/my-projects.git .
+    # git clone https://gitlab.com/iatanasov77/my-web-projects.git .
     # git submodule init
     
     # git submodule update
@@ -39,7 +39,7 @@
     ```
 4. Fetch VsProjects sources into the current dirctory ( "c:/MySpace/VsProjects" ).
     ```
-        # git clone https://gitlab.com/iatanasov77/my-projects.git .
+        # git clone https://gitlab.com/iatanasov77/my-web-projects.git .
         # git submodule init
         
         # git submodule update
