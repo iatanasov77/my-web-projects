@@ -1,3 +1,17 @@
+4.0.0	|	Release date: **15.09.2021**
+============================================
+* New Features and Many Refactoring And Improvements:
+  - Update README with new url of this repository.
+  - Add to Documentation.
+  - Add Symfony SubSystem into SubSytems Config.
+  - Using NFS for Mounting Shared Folders.
+  - Add dependencies config.
+  - Configuration and Puppet Modules Update.
+  - Add puppet module 'bashrc'.
+  - Subsystem Cassandra approvements.
+  - Adding package 'lsof' for ports monitoring in the config packages.
+
+
 3.2.0	|	Release date: **09.05.2021**
 ============================================
 * New Features:
