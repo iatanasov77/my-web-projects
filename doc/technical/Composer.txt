@@ -1,4 +1,33 @@
+Usefull Command
+-------------------
+# sudo composer diagnose
+OR
+# composer update --prefer-dist -vvv --profile
+
+
 Downgrading/Upgrading Composer to specific version: for Example to version 1.10.1
 ------------------------------------------------------------------------------------
-sudo composer self-update 1.10.1
+# sudo composer self-update 1.10.1
+
+Save Kes for Composer
+----------------------------
+# sudo composer self-update --update-keys
+
+https://composer.github.io/pubkeys.html
+
+
+Disable xdebug when run the composer command
+---------------------------------------------
+# XDEBUG_MODE=off composer install
+
+Disable Ip V6 on CentOs 8
+---------------------------
+https://www.tecmint.com/disable-ipv6-in-centos-8/
+
+
+
+
+Use NFS for shared folders
+------------------------------
+vagrant plugin install vagrant-winnfsd
 
