@@ -105,3 +105,6 @@
 [submodule "vagrant.d/puppet/modules/hosts"]
 	path = vagrant.d/puppet/modules/hosts
 	url = https://github.com/justinjl6/puppet-hosts.git
+[submodule "vagrant.d/puppet/modules/bashrc"]
+	path = vagrant.d/puppet/modules/bashrc
+	url = https://github.com/lvicainne/puppet-bashrc.git

@@ -2,7 +2,7 @@
 
 ## I. Clone GIT Repository with Submodules
 ```
-    # git clone https://gitlab.com/iatanasov77/my-projects.git .
+    # git clone https://gitlab.com/iatanasov77/my-web-projects.git .
     # git submodule init
     
     # git submodule update
@@ -38,14 +38,14 @@
 		# Vagrant plugin install vagrant-hostmanager
 	```
 4. Fetch VsProjects sources into the current dirctory ( "c:/MySpace/VsProjects" ).
-	```
-		# git clone https://gitlab.com/iatanasov77/my-projects.git .
-		# git submodule init
-		
-		# git submodule update
-		; OR
-		# git submodule update --remote # to fetch the HEAD of submodules
-	```
+    ```
+        # git clone https://gitlab.com/iatanasov77/my-web-projects.git .
+        # git submodule init
+        
+        # git submodule update
+        ; OR
+        # git submodule update --remote # to fetch the HEAD of submodules
+    ```
 5. To add new puppet module:
 	```
 		# git submodule add https://github.com/puppetlabs/puppetlabs-docker vagrant.d\puppet\modules\docker -f

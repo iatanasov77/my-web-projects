@@ -12,19 +12,6 @@
         ]
     },
     
-    "SymfonyBundlesDevelop_Cassandra": {
-    
-         "hosts": [
-            {
-                "hostType": "Lamp",
-                "hostName": "sbd-cassandra.lh",
-                "documentRoot": "/projects/VS_SymfonyBundlesDevelop_Cassandra/public",
-                "withSsl": false,
-                "fpmSocket": "/opt/phpbrew/php/php-7.4.10/var/run/php-fpm.sock"
-            }
-        ]
-    },
-    
 	"MyProjects_GuiJava": {
         "type": "Java",
         
