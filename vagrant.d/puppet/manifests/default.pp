@@ -34,6 +34,7 @@ node default
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],
+        gitCredentials				=> $facts['git_credentials'],
         
         phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         apacheModules               => $vsConfig['lamp']['apacheModules'],
