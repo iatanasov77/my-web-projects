@@ -171,6 +171,9 @@ lamp:
         	vs_symfony_bundles_develop:
                 name: 'VsSymfonyBundlesDevelop'
                 dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/VsSymfonyBundlesDevelop_20210416.sql'
+            vs_salary_j:
+                name: 'VsSalaryJ'
+                dump: '/projects/VS_SalaryJ/doc/sql/VsSalaryJ.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 
