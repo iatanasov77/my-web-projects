@@ -1,4 +1,24 @@
 {
+	"SalaryJ": {
+    
+         "hosts": [
+            {
+                "hostType": "Lamp",
+                "hostName": "salary-j.lh",
+                "documentRoot": "/projects/VS_SalaryJ/public/salary-j",
+                "withSsl": false,
+                "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "admin.salary-j.lh",
+                "documentRoot": "/projects/VS_SalaryJ/public/admin_panel",
+                "withSsl": false,
+                "fpmSocket": null
+            }
+        ]
+    },
+    
 	"Cassandra_Devel": {
     
          "hosts": [
