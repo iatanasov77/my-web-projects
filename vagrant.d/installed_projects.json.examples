@@ -1,4 +1,16 @@
 {
+	"VankosoftAppliation": {
+		"hosts": [
+			{
+                "hostType": "Lamp",
+                "hostName": "vs-application.lh",
+                "documentRoot": "/projects/VankosoftApplicationProject/public/admin_panel",
+                "withSsl": false,
+                "fpmSocket": null
+            }
+		]
+	},
+	
 	"SalaryJ": {
     
          "hosts": [
