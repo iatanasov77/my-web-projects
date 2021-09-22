@@ -27,6 +27,13 @@
                 "documentRoot": "/projects/VS_SalaryJ/public/admin_panel",
                 "withSsl": false,
                 "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "junona-old.lh",
+                "documentRoot": "/projects/Junona/junona_dgrad/www",
+                "withSsl": false,
+                "fpmSocket": null
             }
         ]
     },
