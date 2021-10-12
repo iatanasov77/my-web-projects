@@ -108,3 +108,6 @@
 [submodule "vagrant.d/puppet/modules/bashrc"]
 	path = vagrant.d/puppet/modules/bashrc
 	url = https://github.com/lvicainne/puppet-bashrc.git
+[submodule "vagrant.d/puppet/modules/nvm"]
+	path = vagrant.d/puppet/modules/nvm
+	url = https://github.com/artberri/puppet-nvm.git

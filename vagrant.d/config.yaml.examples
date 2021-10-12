@@ -127,6 +127,7 @@ subsystems:
 frontendtools:
     #nodejs: latest
     nodejs: 16.10.0
+    nvm: ['16.10.0', '10.24.1']
     tools:
         yarn:
             version: 'latest'
