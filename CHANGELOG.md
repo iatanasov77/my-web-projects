@@ -1,3 +1,12 @@
+4.0.1	|	Release date: **11.11.2021**
+============================================
+* New Features and Improvements:
+  - Add Git Global Credentials.
+  - Update Vagrant Config.
+  - Add Latest Version of NodeJs in config.yaml.examples
+  - Add Puppet Module Vcsrepo and Change Some Configurations About InsGit Instalation and Configuration.
+
+
 4.0.0	|	Release date: **15.09.2021**
 ============================================
 * New Features and Many Refactoring And Improvements:
