@@ -7,6 +7,9 @@ if [ $ID == "centos" ]; then
     sudo rm -rf /opt/puppetlabs/puppet/modules
     sudo ln -sf /vagrant/vagrant.d/puppet/modules /opt/puppetlabs/puppet/modules
     
+    # Register Custom Facts
+    export FACTERLIB="/vagrant/vagrant.d/puppet/modules/git/lib/facter"
+    
     ########################################################################
     # NOT USE LIBRARIAN, AT NOW USED GIT SUBMODULES TO ADD PUPPET MODULES
     ########################################################################

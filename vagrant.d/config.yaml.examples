@@ -11,9 +11,6 @@ gui:
         name: 'VsMyProjects'
         dump: '/vagrant/doc/sql/VsMyProjects-20210509.sql'
 
-forceMySqlComunityRepo: true
-mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
-
 git:
     userName: 'Ivan I. Atanasov'
     userEmail: 'i.atanasov77@gmail.com'
@@ -147,7 +144,6 @@ frontendtools:
 
 packages:
     - mc
-    - git
     - gitflow
     - gitftp
     - curl

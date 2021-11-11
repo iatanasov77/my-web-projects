@@ -121,7 +121,12 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 				'mysqlhost'				=> ENV['PUBLIC_IP'],
 				'installed_projects'	=> File.read( ENV['HOSTS_CONFIG'] ),
 				'devops_hosts'          => ENV['DEVOPS_HOSTS'],
-				'git_credentials'		=> ENV['GIT_CREDENTIALS']
+				'git_credentials'		=> ENV['GIT_CREDENTIALS'],
+				
+				# Used in class git::subtree
+				'git_version'           => '2.27.0',
+				'git_html_path'         => '/usr/share/doc/git',
+				'git_exec_path'         => '/usr/libexec/git-core'
 			}
 	    end
 
