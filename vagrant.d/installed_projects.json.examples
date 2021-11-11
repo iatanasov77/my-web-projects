@@ -4,7 +4,7 @@
 			{
                 "hostType": "Lamp",
                 "hostName": "vs-application.lh",
-                "documentRoot": "/projects/VankosoftApplicationProject/public/admin_panel",
+                "documentRoot": "/projects/VankosoftApplicationProject/public/admin-panel",
                 "withSsl": false,
                 "fpmSocket": null
             }
@@ -24,7 +24,7 @@
             {
                 "hostType": "Lamp",
                 "hostName": "admin.salary-j.lh",
-                "documentRoot": "/projects/VS_SalaryJ/public/admin_panel",
+                "documentRoot": "/projects/VS_SalaryJ/public/admin-panel",
                 "withSsl": false,
                 "fpmSocket": null
             },
