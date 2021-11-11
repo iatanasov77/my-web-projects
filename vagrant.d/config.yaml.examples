@@ -11,9 +11,6 @@ gui:
         name: 'VsMyProjects'
         dump: '/vagrant/doc/sql/VsMyProjects-20210509.sql'
 
-forceMySqlComunityRepo: true
-mysqlPackageName: 'mysql-community-server'  # Avaiable options: false, 'mysql-community-server', 'mysql-server', 'mariadb-server'
-
 git:
     userName: 'Ivan I. Atanasov'
     userEmail: 'i.atanasov77@gmail.com'
@@ -21,7 +18,7 @@ git:
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
-    bumpversion: 'v0.3.0'
+    bumpversion: 'v0.4.2'
     #ftpdeploy: 'v3.3.2'
     ftpdeploy: 'download'
 
@@ -126,7 +123,12 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 14.15.3
+    nodejs: 16.10.0
+    nvm:
+        user: 'vagrant'
+        node_instances:
+            '16.10.0': { set_default: true }
+            '10.24.1': {}
     tools:
         yarn:
             version: 'latest'
@@ -142,7 +144,6 @@ frontendtools:
 
 packages:
     - mc
-    - git
     - gitflow
     - gitftp
     - curl
@@ -171,6 +172,12 @@ lamp:
         	vs_symfony_bundles_develop:
                 name: 'VsSymfonyBundlesDevelop'
                 dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/VsSymfonyBundlesDevelop_20210416.sql'
+            vs_salary_j:
+                name: 'VsSalaryJ'
+                dump: '/projects/VS_SalaryJ/doc/sql/VsSalaryJ.sql'
+            vs_salary_j_JUNONA_OLD:
+                name: 'Junona_OLD'
+                dump: '/projects/Junona/Junona-20210922.sql'
 
     # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 

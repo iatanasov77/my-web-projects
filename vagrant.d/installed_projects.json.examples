@@ -1,4 +1,43 @@
 {
+	"VankosoftAppliation": {
+		"hosts": [
+			{
+                "hostType": "Lamp",
+                "hostName": "vs-application.lh",
+                "documentRoot": "/projects/VankosoftApplicationProject/public/admin-panel",
+                "withSsl": false,
+                "fpmSocket": null
+            }
+		]
+	},
+	
+	"SalaryJ": {
+    
+         "hosts": [
+            {
+                "hostType": "Lamp",
+                "hostName": "salary-j.lh",
+                "documentRoot": "/projects/VS_SalaryJ/public/salary-j",
+                "withSsl": false,
+                "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "admin.salary-j.lh",
+                "documentRoot": "/projects/VS_SalaryJ/public/admin-panel",
+                "withSsl": false,
+                "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "junona-old.lh",
+                "documentRoot": "/projects/Junona/junona_dgrad/www",
+                "withSsl": false,
+                "fpmSocket": null
+            }
+        ]
+    },
+    
 	"Cassandra_Devel": {
     
          "hosts": [
