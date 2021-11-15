@@ -18,7 +18,7 @@ git:
 vstools:
     mkvhost: 'v0.3.0'
     mkphar: 'v0.2.0'
-    bumpversion: 'v0.4.2'
+    bumpversion: 'v1.1.0'
     #ftpdeploy: 'v3.3.2'
     ftpdeploy: 'download'
 
