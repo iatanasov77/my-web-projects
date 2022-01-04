@@ -27,6 +27,11 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+    # Config_Lite PHP Library , Needed for
+    # gitflow-reinit Script
+    config_lite:
+        enabled: true
+        version: '0.2.6'
 	symfony:
 		enabled: true
     mongodb:
