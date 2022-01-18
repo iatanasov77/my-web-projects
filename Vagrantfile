@@ -66,6 +66,18 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
             config.vm.network :public_network, ip: ENV['PUBLIC_IP']
         end
 
+        #################################################################################
+        # Symbolic Links With Vagrant Windows
+        # -----------------------------------
+        # https://www.rudylee.com/blog/2014/10/27/symbolic-links-with-vagrant-windows/
+        #################################################################################
+        config.vm.provider "virtualbox" do |v|
+            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
+            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
+        end
+
 		# Virtual Box Configuration
 		config.vm.provider :virtualbox do |vb, override|
 			vb.gui		= false
@@ -73,20 +85,29 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			vb.memory	= ENV['VBOX_MACHINE_MEMORY']
 			#vb.cpus		= 1
 			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+			
+			vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
 		end
      
 	  	# Default Shared Folder
-	  	#config.vm.synced_folder "../VS_MyProjects", "/vagrant" #owner: "root", group: "root"
-	  	config.vm.synced_folder "./", "/vagrant",
-	  		type:"nfs",
-			mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
+	  	if ( ENV['SHARED_FOLDERS_MOUNT_TYPE'] == 'nfs' )
+            config.vm.synced_folder "./", "/vagrant",
+                type:"nfs",
+                mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
+        else
+            config.vm.synced_folder "./", "/vagrant" #owner: "root", group: "root"
+        end
 	  	
 	  	# Mount Custom Shared Folders
 	  	sharedFolders	= JSON.parse( ENV['SHARED_FOLDERS'] )
 	  	sharedFolders.each do |mountPoint, mountDir|
-	  		config.vm.synced_folder mountDir, mountPoint,
-	  			type:"nfs",
-				mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
+	  	    if ( ENV['SHARED_FOLDERS_MOUNT_TYPE'] == 'nfs' )
+    	  		config.vm.synced_folder mountDir, mountPoint,
+    	  			type:"nfs",
+    				mount_options: %w{rw,async,fsc,nolock,vers=3,udp,rsize=32768,wsize=32768,hard,noatime,actimeo=2}
+    		else
+    		    config.vm.synced_folder mountDir, mountPoint #owner: "root", group: "root"
+    		end
 	    end
         
 		# Run provision bash scripts to setup puppet environement
