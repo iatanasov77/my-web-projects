@@ -1,3 +1,13 @@
+4.0.2	|	Release date: **03.03.2022**
+============================================
+* New Features and Improvements:
+  - New Version of vs_tools/bumpversion
+  - Upgrade Config Example.
+  - Add to Vagrantfile to use configurable mount type for shared folders.
+  - Update VsDevEnv puppet module.
+  - Disable CSRF Protection in All Forms.
+
+
 4.0.1	|	Release date: **11.11.2021**
 ============================================
 * New Features and Improvements:
