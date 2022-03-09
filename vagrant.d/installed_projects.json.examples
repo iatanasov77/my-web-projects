@@ -1,23 +1,95 @@
 {
-	"VankosoftAppliation": {
-		"hosts": [
-			{
+	"VankosoftAppliationProject": {
+        "hosts": [
+            {
                 "hostType": "Lamp",
-                "hostName": "vs-application.lh",
-                "documentRoot": "/projects/VankosoftApplicationProject/public/admin-panel",
+                "hostName": "admin.test-vankosoft-application.lh",
+                "documentRoot": "/projects/TestHosts/TestVankosoftApplication/public/admin-panel",
                 "withSsl": false,
                 "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "test-vankosoft-application.lh",
+                "documentRoot": "/projects/TestHosts/TestVankosoftApplication/public/test-vankosoft-application",
+                "withSsl": false,
+                "fpmSocket": null,
+                "aliases": [
+                    {
+                        "alias": "/build",
+                        "path": "/projects/TestHosts/TestVankosoftApplication/public/shared_assets/build"
+                    }
+                ],
+                "directories": [
+                    {
+                        "path": "/projects/TestHosts/TestVankosoftApplication/public/shared_assets/build",
+                        "allow_override": ["All"],
+                        "Require": "all granted"
+                    }
+                ]
             }
-		]
-	},
+        ]
+    },
+    
+   "VankoSoft.Org": {
+        "hosts": [
+            {
+                "hostType": "Lamp",
+                "hostName": "admin.vankosoft.lh",
+                "documentRoot": "/projects/VankoSoft.Org/public/admin-panel",
+                "withSsl": false,
+                "fpmSocket": null
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "blog.vankosoft.lh",
+                "documentRoot": "/projects/VankoSoft.Org/public/blog",
+                "withSsl": false,
+                "fpmSocket": null,
+                "aliases": [
+                    {
+                        "alias": "/build",
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build"
+                    }
+                ],
+                "directories": [
+                    {
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build",
+                        "allow_override": ["All"],
+                        "Require": "all granted"
+                    }
+                ]
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "vankosoft.lh",
+                "documentRoot": "/projects/VankoSoft.Org/public/website",
+                "withSsl": false,
+                "fpmSocket": null,
+                "aliases": [
+                    {
+                        "alias": "/build",
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build"
+                    }
+                ],
+                "directories": [
+                    {
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build",
+                        "allow_override": ["All"],
+                        "Require": "all granted"
+                    }
+                ]
+            }
+        ]
+    },
 	
 	"SalaryJ": {
     
          "hosts": [
             {
                 "hostType": "Lamp",
-                "hostName": "salary-j.lh",
-                "documentRoot": "/projects/VS_SalaryJ/public/salary-j",
+                "hostName": "junona-old.lh",
+                "documentRoot": "/projects/Junona/junona_dgrad/www",
                 "withSsl": false,
                 "fpmSocket": null
             },
@@ -30,10 +102,23 @@
             },
             {
                 "hostType": "Lamp",
-                "hostName": "junona-old.lh",
-                "documentRoot": "/projects/Junona/junona_dgrad/www",
+                "hostName": "salary-j.lh",
+                "documentRoot": "/projects/VS_SalaryJ/public/salary-j",
                 "withSsl": false,
-                "fpmSocket": null
+                "fpmSocket": null,
+                "aliases": [
+                    {
+                        "alias": "/build",
+                        "path": "/projects/VS_SalaryJ/public/shared_assets/build"
+                    }
+                ],
+                "directories": [
+                    {
+                        "path": "/projects/VS_SalaryJ/public/shared_assets/build",
+                        "allow_override": ["All"],
+                        "Require": "all granted"
+                    }
+                ]
             }
         ]
     },
