@@ -149,6 +149,8 @@ frontendtools:
             version: 'latest'
 
 packages:
+    - sendmail
+    - sendmail-cf
     - mc
     - gitflow
     - gitftp
