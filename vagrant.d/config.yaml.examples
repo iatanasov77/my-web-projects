@@ -27,6 +27,11 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+    # MailCatcher, start it on your machine, and 
+    # it creates  a temporary SMTP server that you can send to
+    mailcatcher:
+        enabled: true
+        ip: '10.3.3.2'
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
     config_lite:
