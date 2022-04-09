@@ -218,7 +218,7 @@ lamp:
         'PHP/post_max_size': '2G'
         'PHP/upload_max_filesize': '2G'
         'Date/date.timezone': 'Europe/Sofia'
-        'PHAR/phar.readonly': 'Off'
+        'PHAR/phar.readonly': '0'
 
     phpModules:
         apcu:
@@ -282,7 +282,7 @@ lamp:
                 'xdebug.profiler_output_name': 'cachegrind.out'
                 'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
         zip:
-            ini_prefix: '40-'
+            ini_prefix: '20-'
         json:
             ini_prefix: '20-'
         mysqlnd:
