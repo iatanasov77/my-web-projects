@@ -3,13 +3,13 @@
 dependencies:
 	#remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-7.rpm'
 	#remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-8.rpm'
-    remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.3-1.el8.remi.noarch.rpm'
+    remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
 	
 gui:
     documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
-        name: 'VsMyProjects'
-        dump: '/vagrant/doc/sql/VsMyProjects-20210509.sql'
+        name: 'VsMyWebProjects'
+        dump: '/vagrant/doc/sql/VsMyWebProjects-20220410.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -27,6 +27,11 @@ vstools:
 # Subsystems refactored from Array to Hashes 
 # but this format is used properly only for 'dotnet' for now 
 subsystems:
+    # MailCatcher, start it on your machine, and 
+    # it creates  a temporary SMTP server that you can send to
+    mailcatcher:
+        enabled: true
+        ip: '10.3.3.2'
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
     config_lite:
@@ -149,6 +154,8 @@ frontendtools:
             version: 'latest'
 
 packages:
+    - sendmail
+    - sendmail-cf
     - mc
     - gitflow
     - gitftp
@@ -211,7 +218,7 @@ lamp:
         'PHP/post_max_size': '2G'
         'PHP/upload_max_filesize': '2G'
         'Date/date.timezone': 'Europe/Sofia'
-        'PHAR/phar.readonly': 'Off'
+        'PHAR/phar.readonly': '0'
 
     phpModules:
         apcu:
@@ -275,7 +282,7 @@ lamp:
                 'xdebug.profiler_output_name': 'cachegrind.out'
                 'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
         zip:
-            ini_prefix: '40-'
+            ini_prefix: '20-'
         json:
             ini_prefix: '20-'
         mysqlnd:
