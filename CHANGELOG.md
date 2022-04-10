@@ -1,3 +1,14 @@
+4.1.0	|	Release date: **10.04.2022**
+============================================
+* New Features:
+  - Update Vagrant Machine Name.
+  - Upgrade Vagrant Machine Configuration and Initialization.
+  - Add MailCatcher Subsystem.
+  - Update GUI Database Dump and Config.
+* Bug-Fixes:
+  - Fix Configuration and Puppet Modules.
+
+
 4.0.2	|	Release date: **03.03.2022**
 ============================================
 * New Features and Improvements:
