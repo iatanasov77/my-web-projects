@@ -8,8 +8,8 @@ dependencies:
 gui:
     documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
-        name: 'VsMyProjects'
-        dump: '/vagrant/doc/sql/VsMyProjects-20210509.sql'
+        name: 'VsMyWebProjects'
+        dump: '/vagrant/doc/sql/VsMyWebProjects-20220410.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
