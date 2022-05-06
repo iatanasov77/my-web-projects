@@ -1,0 +1,18 @@
+1. Create WebSite in ISP Config
+    - Set PHP Version in the WebSite Form if needed
+    - In the Options Tab Replace to PHP open_basedir '/var/www/clients/client0/web4/web' with '/var/www/clients/client0/web4/web/project'
+2. $ mkdir /opt/VankosoftProjects/ProjectDirectory
+3. $ chmod -R 0777 /opt/VankosoftProjects/ProjectDirectory
+4. $ ln -s /opt/VankosoftProjects/ProjectDirectory /var/www/project_domain.org/web/project
+5. Edit Apache Virtual Host (If Problem May be you need to clear cookies of .vankosoft.org domain)
+    3 Rows need to be Edited
+    --------------------------------------
+    DocumentRoot /var/www/test-jenkins.vankosoft.org/web/project/public
+    
+    <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+    
+    Bellow <IfModule mod_fcgid.c> TOO
+    ---------------------------------------
+    <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+    
+    
