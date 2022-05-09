@@ -1,18 +1,55 @@
-1. Create WebSite in ISP Config
+I. Create WebSite in ISP Config
     - Set PHP Version in the WebSite Form if needed
     - In the Options Tab Replace to PHP open_basedir '/var/www/clients/client0/web4/web' with '/var/www/clients/client0/web4/web/project'
-2. $ mkdir /opt/VankosoftProjects/ProjectDirectory
-3. $ chmod -R 0777 /opt/VankosoftProjects/ProjectDirectory
-4. $ ln -s /opt/VankosoftProjects/ProjectDirectory /var/www/project_domain.org/web/project
-5. Edit Apache Virtual Host (If Problem May be you need to clear cookies of .vankosoft.org domain)
-    3 Rows need to be Edited
-    --------------------------------------
-    DocumentRoot /var/www/test-jenkins.vankosoft.org/web/project/public
     
-    <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+    2. $ mkdir /opt/VankosoftProjects/ProjectDirectory
+    3. $ chmod -R 0777 /opt/VankosoftProjects/ProjectDirectory
+    4. $ ln -s /opt/VankosoftProjects/ProjectDirectory /var/www/project_domain.org/web/project
+    5. Edit Apache Virtual Host (If Problem May be you need to clear cookies of .vankosoft.org domain)
+        3 Rows need to be Edited
+        --------------------------------------
+        DocumentRoot /var/www/test-jenkins.vankosoft.org/web/project/public
+        
+        <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+        
+        Bellow <IfModule mod_fcgid.c> TOO
+        ---------------------------------------
+        <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+        
+    6. For VankoSoft Application Add Alias:
+            Alias /build "/var/www/vankosoft.org/web/project/production/public/shared_assets/build"
+            <Directory "/var/www/vankosoft.org/web/project/production/public/shared_assets/build">
+                AllowOverride All
+                Require all granted
+            </Directory>
+            
+    7. For Errors in production view logs:
+            $ tail -f /var/log/ispconfig/httpd/guitarpro.vankosoft.org/error.log
     
-    Bellow <IfModule mod_fcgid.c> TOO
-    ---------------------------------------
-    <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+
     
     
+II. Create SuperAdmin Sub-Domain
+    1. From Subdomain (Vhost) -> Add New Subdomain
+    
+        Host: admin
+        Domain: project.vankosoft.org
+        Web folder: web/project/production/public/admin-panel
+    
+        PHP Version: (If Needed)
+        
+        Options Tab
+        ---------------------------------------------------------
+        PHP open_basedir: Edit First Record to project Root Dir
+        ----------------------------------------------------------
+        
+    2. Edit Vhost Config and Set right Document Root and Directory paths
+    
+    3. Clear Caches:
+        /usr/bin/php74 -d memory_limit=-1 bin/console cache:clear
+    
+    4. For Errors in production view logs:
+        $ tail -f /var/log/ispconfig/httpd/admin.guitarpro.vankosoft.org/error.log
+
+
+
