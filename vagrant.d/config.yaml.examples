@@ -308,6 +308,10 @@ lamp:
             ini_prefix: '20-'
         bcmath:
             ini_prefix: '20-'
+            
+        # Required By Magento
+        soap:
+            ini_prefix: '20-'
 
     phpMyAdmin:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
