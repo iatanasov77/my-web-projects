@@ -52,7 +52,8 @@ subsystems:
             'vs_dev.products': '/projects/VS_SymfonyBundlesDevelop/doc/cql/products.cql'
 
     docker:
-      enabled: false
+        enabled: false
+        docker_users: ['vagrant', 'root']
 
     # Composer is installed by vs_lamp::php, 
     # here you can configure to install old version if needed
