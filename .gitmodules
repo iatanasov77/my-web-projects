@@ -114,3 +114,6 @@
 [submodule "vagrant.d/puppet/modules/vcsrepo"]
 	path = vagrant.d/puppet/modules/vcsrepo
 	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
+[submodule "vagrant.d/puppet/modules/vs_core"]
+	path = vagrant.d/puppet/modules/vs_core
+	url = https://github.com/iatanasov77/puppet-core.git
