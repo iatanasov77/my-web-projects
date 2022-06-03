@@ -1,3 +1,13 @@
+4.2.0	|	Release date: **03.06.2022**
+============================================
+* New Features:
+  - Add Technical Manual For ISP Project Config.
+  - Add Soap in PHP Extensions Example. Php-Soap is Needed for Magento.
+  - Update Submodule vs-devenv
+  - Update Docker Configuration.
+  - Update VS Puppet Modules.
+
+
 4.1.0	|	Release date: **10.04.2022**
 ============================================
 * New Features:
