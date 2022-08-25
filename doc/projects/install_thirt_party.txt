@@ -36,11 +36,10 @@ SULU
 PrestaShop
 ===========
 1. Create Project   
-    # composer create-project prestashop/prestashop 1.7
+    # composer create-project prestashop/prestashop <dir_to_install>
 
 3. Install[
-    ! Create Database Before Run The Install
-    # php install-dev/index_cli.php --domain=prestashop-1.7.lh --db_name=PrestaShop_1.7 --db_user=root --db_password=vagrant
+    # php install-dev/index_cli.php --domain=prestashop-1.7.lh --db_name=PrestaShop_1.7 --db_user=root --db_password=vagrant --db_create=1
     
     ! Manual: https://doc.prestashop.com/pages/viewpage.action?pageId=23626024
 
