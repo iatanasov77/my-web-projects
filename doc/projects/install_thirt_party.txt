@@ -32,16 +32,68 @@ SULU
         http://www.sivaschenko.com/multiple-php-versions-simultaneously-apache/
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Sylius
+    Manual: https://sylius-older.readthedocs.io/en/latest/book/installation.html
+            https://docs.sylius.com/en/latest/book/installation/installation.html
+======================================================================================
+1. Create Project
+    # composer create-project --no-interaction sylius/sylius-standard <install-directory-name>
+    # cd <install-directory-name>
+2. Install
+    # php bin/console sylius:install --no-interaction
+    # npm install
+    # npm run gulp
+    
+    With No Interaction Defaults:
+        user:       sylius
+        password:   sylius
+
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 PrestaShop
-===========
+    Manual: https://doc.prestashop.com/pages/viewpage.action?pageId=23626024
+===============================================================================
 1. Create Project   
     # composer create-project prestashop/prestashop <dir_to_install>
-
+    # cd <dir_to_install>
+    
 3. Install[
     # php install-dev/index_cli.php --domain=prestashop-1.7.lh --db_name=PrestaShop_1.7 --db_user=root --db_password=vagrant --db_create=1
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Magento
+    Manual: https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/composer.html?lang=en
+=========================================================================================================================
+1. Install Elasticsearch with Docker
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
     
-    ! Manual: https://doc.prestashop.com/pages/viewpage.action?pageId=23626024
-
-
+2. Create Project
+    # composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition <install-directory-name>
+    # cd <install-directory-name>
+    
+3. Install
+    # bin/magento setup:install \
+        --base-url=http://localhost/magento2ee \
+        --db-host=localhost \
+        --db-name=magento \
+        --db-user=magento \
+        --db-password=magento \
+        --admin-firstname=admin \
+        --admin-lastname=admin \
+        --admin-email=admin@admin.com \
+        --admin-user=admin \
+        --admin-password=admin123 \
+        --language=en_US \
+        --currency=USD \
+        --timezone=America/Chicago \
+        --use-rewrites=1 \
+        --search-engine=elasticsearch7 \
+        --elasticsearch-host=es-host.example.com \
+        --elasticsearch-port=9200 \
+        --elasticsearch-index-prefix=magento2 \
+        --elasticsearch-timeout=15
+    
         
