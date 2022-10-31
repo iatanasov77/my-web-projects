@@ -1,0 +1,5 @@
+
+
+sudo tail -f /dev/shm/vankosoft.lh/website/log/dev.log | grep Deprecated
+
+
