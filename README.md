@@ -2,7 +2,7 @@
 
 ## I. Clone GIT Repository with Submodules
 ```
-    # git clone https://gitlab.com/iatanasov77/my-web-projects.git .
+    # git clone https://github.com/iatanasov77/my-web-projects.git .
     # git submodule init
     
     # git submodule update
