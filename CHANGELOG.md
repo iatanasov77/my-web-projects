@@ -1,3 +1,12 @@
+4.2.1	|	Release date: **31.10.2022**
+============================================
+* New Features and Improvements:
+  - Add to Docs - Third Party Projects.
+  - Add to Docs - Mysql Log Queries..
+  - Update Puppet Module vs_core.
+  - Enable Docker in Config.
+
+
 4.2.0	|	Release date: **03.06.2022**
 ============================================
 * New Features:

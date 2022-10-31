@@ -1,0 +1,11 @@
+sudo sh -c "cat /dev/null > /var/lib/mysql/myprojects.log"
+
+
+# https://stackoverflow.com/questions/11598701/mysql-log-files-are-empty-although-it-seems-that-i-have-set-eveything
+SELECT @@global.general_log;
+SET GLOBAL general_log:=1;
+
+
+
+sudo cp /var/lib/mysql/myprojects.log /projects_accenture/Drupal_9_Config/logs/myprojects.log
+
