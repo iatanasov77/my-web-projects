@@ -1,4 +1,4 @@
-# All 'vagrant up' finished for less than 10 minutes on centos7 box
+# All 'vagrant up' finished for up than 25 minutes on centos8 box
 #####################################################################
 dependencies:
     #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-7.rpm'
