@@ -4,18 +4,19 @@
 [submodule "vagrant.d/puppet/modules/apache"]
 	path = vagrant.d/puppet/modules/apache
 	url = https://github.com/puppetlabs/puppetlabs-apache.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/apt"]
 	path = vagrant.d/puppet/modules/apt
 	url = https://github.com/puppetlabs/puppetlabs-apt.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/concat"]
 	path = vagrant.d/puppet/modules/concat
 	url = https://github.com/puppetlabs/puppetlabs-concat.git
-[submodule "vagrant.d/puppet/modules/gcc"]
-	path = vagrant.d/puppet/modules/gcc
-	url = https://github.com/puppetlabs/puppetlabs-gcc.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/mysql"]
 	path = vagrant.d/puppet/modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/nodejs"]
 	path = vagrant.d/puppet/modules/nodejs
 	url = https://github.com/willdurand/puppet-nodejs.git
@@ -28,12 +29,14 @@
 [submodule "vagrant.d/puppet/modules/stdlib"]
 	path = vagrant.d/puppet/modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/translate"]
 	path = vagrant.d/puppet/modules/translate
 	url = https://github.com/puppetlabs/puppetlabs-translate.git
 [submodule "vagrant.d/puppet/modules/ssh"]
 	path = vagrant.d/puppet/modules/ssh
 	url = https://github.com/ghoneycutt/puppet-module-ssh.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/sudo"]
 	path = vagrant.d/puppet/modules/sudo
 	url = https://github.com/saz/puppet-sudo.git
@@ -43,6 +46,7 @@
 [submodule "vagrant.d/puppet/modules/docker"]
 	path = vagrant.d/puppet/modules/docker
 	url = https://github.com/puppetlabs/puppetlabs-docker
+    branch = main
 [submodule "vagrant.d/puppet/modules/php"]
 	path = vagrant.d/puppet/modules/php
 	url = https://github.com/voxpupuli/puppet-php
@@ -52,6 +56,7 @@
 [submodule "vagrant.d/puppet/modules/inifile"]
 	path = vagrant.d/puppet/modules/inifile
 	url = https://github.com/puppetlabs/puppetlabs-inifile
+    branch = main
 [submodule "vagrant.d/puppet/modules/composer"]
 	path = vagrant.d/puppet/modules/composer
 	url = https://github.com/willdurand/puppet-composer.git
@@ -62,6 +67,7 @@
 [submodule "vagrant.d/puppet/modules/puppetlabs-transition"]
 	path = vagrant.d/puppet/modules/puppetlabs-transition
 	url = https://github.com/puppetlabs/puppetlabs-transition.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/git"]
 	path = vagrant.d/puppet/modules/git
 	url = https://github.com/puppetlabs/puppetlabs-git
@@ -79,9 +85,11 @@
 [submodule "vagrant.d/puppet/modules/tomcat"]
 	path = vagrant.d/puppet/modules/tomcat
 	url = https://github.com/puppetlabs/puppetlabs-tomcat.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/java"]
 	path = vagrant.d/puppet/modules/java
 	url = https://github.com/puppetlabs/puppetlabs-java.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/ansible"]
 	path = vagrant.d/puppet/modules/ansible
 	url = https://github.com/otherskins/puppet-ansible.git
@@ -114,6 +122,8 @@
 [submodule "vagrant.d/puppet/modules/vcsrepo"]
 	path = vagrant.d/puppet/modules/vcsrepo
 	url = https://github.com/puppetlabs/puppetlabs-vcsrepo.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/vs_core"]
 	path = vagrant.d/puppet/modules/vs_core
 	url = https://github.com/iatanasov77/puppet-core.git
+    branch = main
