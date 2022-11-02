@@ -1,3 +1,9 @@
+4.2.2	|	Release date: **02.11.2022**
+============================================
+* New Features:
+  - Update Puppet Modules.
+
+
 4.2.1	|	Release date: **31.10.2022**
 ============================================
 * New Features and Improvements:
