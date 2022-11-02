@@ -1,10 +1,10 @@
-# All 'vagrant up' finished for less than 10 minutes on centos7 box
+# All 'vagrant up' finished for up than 25 minutes on centos8 box
 #####################################################################
 dependencies:
-	#remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-7.rpm'
-	#remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-8.rpm'
+    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-7.rpm'
+    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-8.rpm'
     remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
-	
+
 gui:
     documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
@@ -37,8 +37,8 @@ subsystems:
     config_lite:
         enabled: true
         version: '0.2.6'
-	symfony:
-		enabled: true
+    symfony:
+        enabled: true
     mongodb:
         enabled: true
 
@@ -84,10 +84,10 @@ subsystems:
         sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
         instances:
-        	tomcat_10:
-        		catalinaHome: '/opt/tomcat/tomcat_10'
-        		sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-10/v10.0.5/bin/apache-tomcat-10.0.5.tar.gz'
-        		serverPort: '8107'
+            tomcat_10:
+                catalinaHome: '/opt/tomcat/tomcat_10'
+                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-10/v10.0.5/bin/apache-tomcat-10.0.5.tar.gz'
+                serverPort: '8107'
                 connectorPort: '8181'
             tomcat_8:
                 catalinaHome: '/opt/tomcat/tomcat_8'
@@ -159,8 +159,8 @@ packages:
     - sendmail-cf
     - mc
     - gitflow
-    - gitftp
-    - curl
+    # Package 'curl' is defined in module 'docker'
+    #- curl
     - vim
     - nano
     - htop
@@ -183,9 +183,6 @@ lamp:
         # Empty Example: databases
         #databases: {}
         databases:
-        	vs_symfony_bundles_develop:
-                name: 'VsSymfonyBundlesDevelop'
-                dump: '/projects/VS_SymfonyBundlesDevelop/doc/sql/VsSymfonyBundlesDevelop_20210416.sql'
             vs_salary_j:
                 name: 'VsSalaryJ'
                 dump: '/projects/VS_SalaryJ/doc/sql/VsSalaryJ.sql'
@@ -239,7 +236,7 @@ lamp:
         
         # xdebug 3.x.x example config
         xdebug:
-        	ensure: 'latest'
+            ensure: 'latest'
             ini_prefix: '20-'
             provider: 'pecl'
             zend: true
@@ -253,35 +250,6 @@ lamp:
                 'xdebug.discover_client_host': '1'
                 'xdebug.client_port': '9000'
         
-        # xdebug 2.x.x example config
-        xdebug:
-            ensure: '2.9.8' #Because the latest versions(3.x.x) has different settings
-            ini_prefix: '20-'
-            provider: 'pecl'
-            zend: true
-            # see http://xdebug.org/docs/all_settings
-            settings:
-                'xdebug.default_enable': '1'
-                'xdebug.remote_enable': '1'
-                'xdebug.remote_handler': 'dbgp'
-                'xdebug.remote_host': 'localhost'
-                'xdebug.remote_port': '9000'
-                'xdebug.remote_autostart': '0'
-                'xdebug.remote_connect_back': '1'
-                'xdebug.idekey': ''
-                #remote_log: ''
-            
-                # Tracer settings
-                'xdebug.trace_format': '1'
-                'xdebug.trace_enable_trigger': '1'
-                'xdebug.trace_output_name': 'trace.out'
-                'xdebug.trace_output_dir': '/vagrant/gui_symfony/var/Xdebug'
-            
-                # Profiler settings
-                'xdebug.profiler_enable': '1'
-                'xdebug.profiler_enable_trigger': '1'
-                'xdebug.profiler_output_name': 'cachegrind.out'
-                'xdebug.profiler_output_dir': '/vagrant/gui_symfony/var/Xdebug'
         zip:
             ini_prefix: '20-'
         json:

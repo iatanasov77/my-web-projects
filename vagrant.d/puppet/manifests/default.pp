@@ -27,6 +27,8 @@ node default
 		
         defaultHost                 => "${hostname}",
         defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
+        guiUrl                      => "${vsConfig['gui']['guiUrl']}",
+        guiRoot                     => "${vsConfig['gui']['guiRoot']}",
         
         installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
@@ -52,7 +54,8 @@ node default
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
     	
     	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	databases					=> { guiDatabase => $vsConfig['gui']['database'] } + $vsConfig['lamp']['mysql']['databases'],
+    	#databases                  => { guiDatabase => $vsConfig['gui']['database'] } + $vsConfig['lamp']['mysql']['databases'],
+    	databases                   => $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
     }
