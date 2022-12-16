@@ -7,7 +7,7 @@
     
     # git submodule update
     ; OR
-    # git submodule update --remote # to fetch the HEAD of submodules
+    # git submodule update --init --force --remote # to fetch the HEAD of submodules
 ```
     The big problem when submodule update that says: 
             fatal: unable to connect to github.com:
@@ -64,7 +64,7 @@
 ## III. Setup the web interface
 
 1. SSH login to the vagrant machine
-2. Run `composer install` from the /vagrant directory
+2. Run `composer install` from the ROOT Directory of The Installed GUI
     if the composer install exit with error to install ocramius/package-versions use option `... --prefer-source` i don't know why:
     ```
         composer install --prefer-source

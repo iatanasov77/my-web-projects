@@ -1,3 +1,11 @@
+5.0.0	|	Release date: **16.12.2022**
+============================================
+* New Features:
+  - Update Readme File
+  - Prapare for PHP 8
+  - Update Puppet Module 'vs_core'
+
+
 4.2.2	|	Release date: **02.11.2022**
 ============================================
 * New Features:

@@ -135,11 +135,11 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 16.10.0
+    nodejs: 16.13.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '16.10.0': { set_default: true }
+            '16.13.0': { set_default: true }
             '10.24.1': {}
     tools:
         yarn:
@@ -173,7 +173,7 @@ packages:
     - lsof
 
 lamp:
-    phpVersion: '7.4'
+    phpVersion: '8.1'
     phpunit: false
     forcePhp7Repo: true
    
@@ -283,6 +283,6 @@ lamp:
             ini_prefix: '20-'
 
     phpMyAdmin:
-        source: 'https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.zip'
-        targetDirName: 'phpMyAdmin-5.0.4-all-languages'
+        source: 'https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip'
+        targetDirName: 'phpMyAdmin-5.2.0-all-languages'
 
