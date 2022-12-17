@@ -102,4 +102,15 @@ node default
             #aliases => [ 'router' ],
         }
     }
+    
+    ######################################################
+    # Work-Around Fixes
+    ######################################################
+    Exec { 'Fix PHP Json Extension':
+        command => "sed -i 's/extension = json.so/#extension = json.so/' /etc/php.d/20-json.ini",
+    }
+    
+    Exec { 'Remove Duplicated PHP Zip Extension':
+        command => 'rm -f /etc/php.d/30-zip.ini',
+    }
 }
