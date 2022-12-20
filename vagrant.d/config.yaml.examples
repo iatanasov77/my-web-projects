@@ -186,10 +186,10 @@ lamp:
         databases:
             vs_salary_j:
                 name: 'VsSalaryJ'
-                dump: '/projects/VS_SalaryJ/doc/sql/VsSalaryJ.sql'
+                dump: ['/projects/VS_SalaryJ/doc/sql/VsSalaryJ.sql']
             vs_salary_j_JUNONA_OLD:
                 name: 'Junona_OLD'
-                dump: '/projects/Junona/Junona-20210922.sql'
+                dump: ['/projects/Junona/Junona-20210922.sql']
 
     # For JSP Pages require apache module 'proxy_ajp'
     apacheModules: 
@@ -197,7 +197,6 @@ lamp:
         - headers
         - rewrite
         - vhost_alias
-        - version
         - env
         - ssl
         - proxy

@@ -66,7 +66,7 @@ node default
     
     # Config SSH
     class { 'ssh':
-        sshd_password_authentication    => 'yes'
+        password_authentication    => 'yes'
     }
     
 	# Config sudo users
@@ -107,10 +107,12 @@ node default
     # Work-Around Fixes
     ######################################################
     Exec { 'Fix PHP Json Extension':
-        command => "sed -i 's/extension = json.so/#extension = json.so/' /etc/php.d/20-json.ini",
+        command => "/usr/bin/sed -i 's/extension = json.so/#extension = json.so/' /etc/php.d/20-json.ini",
+        onlyif  => 'test -e /etc/php.d/20-json.ini',
     }
     
     Exec { 'Remove Duplicated PHP Zip Extension':
         command => 'rm -f /etc/php.d/30-zip.ini',
+        onlyif  => 'test -e /etc/php.d/30-zip.ini',
     }
 }
