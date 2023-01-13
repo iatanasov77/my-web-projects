@@ -1,3 +1,11 @@
+5.1.0	|	Release date: **13.01.2023**
+============================================
+* New Features and Improvements:
+  - Update Puppet Default Manifest and Yaml Config about New Releases Of Dependent Modules.
+  - Add to Mageno Installation Docs.
+  - Remove SQL Exports For GUI Symfony From This Project.
+
+
 5.0.1	|	Release date: **17.12.2022**
 ============================================
 * Bug-Fixes and Improvements:
