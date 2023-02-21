@@ -4,7 +4,10 @@ echo "installing Puppet"
 mkdir -p /etc/puppetlabs/facter/facts.d
 
 if [ $ID == "centos" ]; then
-	if [ $VERSION_ID == "8" ]; then
+    if [ $VERSION_ID == "9" ]; then
+        sudo rpm -ivh https://yum.puppetlabs.com/puppet6-release-el-9.noarch.rpm
+        sudo dnf -y install puppet
+	elif [ $VERSION_ID == "8" ]; then
 		sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-8.noarch.rpm
 		sudo dnf -y install puppet
 	elif [ $VERSION_ID == "7" ]; then
