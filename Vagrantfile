@@ -59,6 +59,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	  	config.vm.box				= ENV['VAGRANT_BOX']
 	  	#config.vm.box_version
 		config.vm.box_check_update	= true
+		
+        if Vagrant.has_plugin?( "vagrant-vbguest" ) then
+            config.vbguest.auto_update = false
+        end
 
 		config.vm.hostname 			= ENV['HOST_NAME']		
 		config.vm.network :private_network, ip: ENV['PRIVATE_IP']
@@ -112,7 +116,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
         
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
-		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE']
+		  "SWAP_SIZE"             => ENV['VBOX_MACHINE_SWAP_SIZE'],
+		  "CENTOS_8_STREAM_REPOS" => ENV['CENTOS_8_STREAM_REPOS']
 		}
 		
 		# INIT LIBRARIAN
