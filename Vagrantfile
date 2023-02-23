@@ -59,11 +59,15 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	  	config.vm.box				= ENV['VAGRANT_BOX']
 	  	#config.vm.box_version
 		config.vm.box_check_update	= true
+		
+        if Vagrant.has_plugin?( "vagrant-vbguest" ) then
+            config.vbguest.auto_update = false
+        end
 
 		config.vm.hostname 			= ENV['HOST_NAME']		
 		config.vm.network :private_network, ip: ENV['PRIVATE_IP']
-	    if ENV['PUBLIC_NETWORK']
-            config.vm.network :public_network, ip: ENV['PUBLIC_IP']
+	    if ENV['PUBLIC_IP']
+            config.vm.network "public_network", ip: ENV['PUBLIC_IP']
         end
 
         #################################################################################
@@ -83,11 +87,13 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			vb.gui		= false
 			vb.name		= ENV['MASHINE_NAME']
 			vb.memory	= ENV['VBOX_MACHINE_MEMORY']
-			#vb.cpus		= 1
-			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+			vb.cpus		= 2
 			
+			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 			vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
-		end
+            
+            vb.check_guest_additions = false
+        end
      
 	  	# Default Shared Folder
 	  	if ( ENV['SHARED_FOLDERS_MOUNT_TYPE'] == 'nfs' )
@@ -112,7 +118,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
         
 		# Run provision bash scripts to setup puppet environement
 		config.vm.provision "shell", path: "vagrant.d/provision/main.sh", env: {
-		  "SWAP_SIZE"     => ENV['VBOX_MACHINE_SWAP_SIZE']
+		  "SWAP_SIZE"             => ENV['VBOX_MACHINE_SWAP_SIZE']
 		}
 		
 		# INIT LIBRARIAN

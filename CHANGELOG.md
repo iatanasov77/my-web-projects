@@ -1,3 +1,14 @@
+5.2.0	|	Release date: **23.02.2023**
+============================================
+* New Features:
+  - Add to installed_projects.json.example
+  - Update a Puppet Module.
+  - Vagrant provisioning Improvements.
+  - Add Support for CentOs 9 and Many-Many Improvements.
+* Bug-Fixes:
+  - Fix Network Interface Configuration in Vagrantfile.
+
+
 5.1.0	|	Release date: **13.01.2023**
 ============================================
 * New Features and Improvements:

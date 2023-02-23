@@ -127,3 +127,6 @@
 	path = vagrant.d/puppet/modules/vs_core
 	url = https://github.com/iatanasov77/puppet-core.git
     branch = main
+[submodule "vagrant.d/puppet/modules/selinux"]
+	path = vagrant.d/puppet/modules/selinux
+	url = https://github.com/voxpupuli/puppet-selinux.git

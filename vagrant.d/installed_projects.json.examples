@@ -79,6 +79,26 @@
                         "Require": "all granted"
                     }
                 ]
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "downloads.vankosoft.lh",
+                "documentRoot": "/projects/VankoSoft.org/public/vankosoft-downloads",
+                "withSsl": false,
+                "fpmSocket": null,
+                "aliases": [
+                    {
+                        "alias": "/build",
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build"
+                    }
+                ],
+                "directories": [
+                    {
+                        "path": "/projects/VankoSoft.Org/public/shared_assets/build",
+                        "allow_override": ["All"],
+                        "Require": "all granted"
+                    }
+                ]
             }
         ]
     },
