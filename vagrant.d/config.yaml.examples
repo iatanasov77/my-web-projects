@@ -1,15 +1,16 @@
 # All 'vagrant up' finished for up than 25 minutes on centos8 box
 #####################################################################
 dependencies:
-    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-7.rpm'
-    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/remi-release-8.rpm'
-    remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
-
+    remiReleaseRpm: ''
+    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
+    
 gui:
-    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
+    guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
+    guiRoot: '/projects/VS_MyWebProjects_Gui_Symfony'
+    documentRoot: '/projects/VS_MyWebProjects_Gui_Symfony/public'
     database:
         name: 'VsMyWebProjects'
-        dump: '/vagrant/doc/sql/VsMyWebProjects-20220410.sql'
+        dump: '/projects/VS_MyWebProjects_Gui_Symfony/doc/sql/VsMyWebProjects.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -41,6 +42,7 @@ subsystems:
         enabled: true
     mongodb:
         enabled: true
+        version: '6.0'
 
     cassandra:
         enabled: true
