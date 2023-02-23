@@ -16,6 +16,13 @@ node default
 	include stdlib
 	
 	######################################################
+    # Disable Selinux
+    ######################################################
+	class { selinux:
+        mode => 'disabled',
+    }
+    
+	######################################################
     # Setup DevEnv
     ######################################################
 	$vsConfig  			= parseyaml( $facts['vs_config'] )
@@ -29,6 +36,7 @@ node default
         defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
         guiUrl                      => "${vsConfig['gui']['guiUrl']}",
         guiRoot                     => "${vsConfig['gui']['guiRoot']}",
+        guiDatabase                 => $vsConfig['gui']['database'],
         
         installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
@@ -54,7 +62,6 @@ node default
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
     	
     	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	#databases                  => { guiDatabase => $vsConfig['gui']['database'] } + $vsConfig['lamp']['mysql']['databases'],
     	databases                   => $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
