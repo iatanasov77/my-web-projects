@@ -1,3 +1,9 @@
+5.2.1	|	Release date: **24.02.2023**
+============================================
+* New Features:
+  - Update Puppet Configuration and GitModules.
+
+
 5.2.0	|	Release date: **23.02.2023**
 ============================================
 * New Features:
