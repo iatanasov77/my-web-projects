@@ -106,10 +106,6 @@
 	path = vagrant.d/puppet/modules/vs_django
 	url = https://github.com/iatanasov77/puppet-django.git
 	branch = main
-[submodule "vagrant.d/puppet/modules/rvm"]
-	path = vagrant.d/puppet/modules/rvm
-	url = https://github.com/iatanasov77/puppet-rvm.git
-	branch = develop
 [submodule "vagrant.d/puppet/modules/hosts"]
 	path = vagrant.d/puppet/modules/hosts
 	url = https://github.com/justinjl6/puppet-hosts.git
@@ -130,3 +126,6 @@
 [submodule "vagrant.d/puppet/modules/selinux"]
 	path = vagrant.d/puppet/modules/selinux
 	url = https://github.com/voxpupuli/puppet-selinux.git
+[submodule "vagrant.d/puppet/modules/rvm"]
+	path = vagrant.d/puppet/modules/rvm
+	url = https://github.com/maestrodev/puppet-rvm
