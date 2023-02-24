@@ -142,7 +142,7 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 16.13.0
+    nodejs: 18.14.2
     nvm:
         user: 'vagrant'
         node_instances:
