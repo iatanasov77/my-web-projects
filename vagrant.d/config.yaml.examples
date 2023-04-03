@@ -10,7 +10,7 @@ gui:
     documentRoot: '/projects/VS_MyWebProjects_Gui_Symfony/public'
     database:
         name: 'VsMyWebProjects'
-        dump: '/projects/VS_MyWebProjects_Gui_Symfony/doc/sql/VsMyWebProjects.sql'
+        dump: '/projects/VS_MyWebProjects_Gui_Symfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -33,6 +33,9 @@ subsystems:
     mailcatcher:
         enabled: true
         ip: '10.3.3.2'
+        rubyDefaultVersion: '2.7.2'
+        useRvm: false # RVM Not Work on CentOs 9 BUT It Have Ruby Installed
+
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
     config_lite:
@@ -106,10 +109,11 @@ subsystems:
 
     ruby:
         enabled: false
+        rubyDefaultVersion: '2.7.2'
         virtual_environments:
             ruby_3:
                 rubyVersion: '3.0.0'
-                defaultUse: true
+                defaultUse: false
                 packages: ['rails']
 
     phpbrew:
@@ -138,7 +142,7 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 16.13.0
+    nodejs: 18.14.2
     nvm:
         user: 'vagrant'
         node_instances:
@@ -254,8 +258,14 @@ lamp:
         
         zip:
             ini_prefix: '20-'
-        json:
-            ini_prefix: '20-'
+            
+        #########################################################
+        # Since php 8 the json extension is included in core, 
+        # so you don't need it.
+        #########################################################
+        #json:
+        #    ini_prefix: '20-'
+
         mysqlnd:
             ini_prefix: '20-'
             multifile_settings: true
