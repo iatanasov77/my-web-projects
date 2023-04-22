@@ -142,11 +142,12 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 18.14.2
+    nodejs: 20.0.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '16.13.0': { set_default: true }
+            '20.0.0': { set_default: true }
+            '16.13.0': {}
             '10.24.1': {}
     tools:
         yarn:
@@ -185,8 +186,7 @@ lamp:
     forcePhp7Repo: true
    
     mysql:
-        # provider = false mean use default
-        provider: 'mysql' # Avaiable options: false, 'mysql', 'mariadb'
+        provider: 'mysql' # Avaiable options: 'mysql', 'mariadb'
         # Empty Example: databases
         #databases: {}
         databases:
