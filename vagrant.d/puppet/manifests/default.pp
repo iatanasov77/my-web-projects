@@ -102,12 +102,15 @@ node default
 	
 	######################################################
     # Add DevOps Host to /etc/hosts
+    # Module 'hosts' is too OLD
     ######################################################
-    class { '::hosts' : }
-    $devopsHosts.each|String $id, Hash $hostConfig| {
-        ::hosts::add { "${hostConfig['host_ip']}":
-            fqdn    => "${hostConfig['host_fqdn']}",
-            #aliases => [ 'router' ],
+    if false {
+        class { '::hosts' : }
+        $devopsHosts.each|String $id, Hash $hostConfig| {
+            ::hosts::add { "${hostConfig['host_ip']}":
+                fqdn    => "${hostConfig['host_fqdn']}",
+                #aliases => [ 'router' ],
+            }
         }
     }
     
