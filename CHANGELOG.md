@@ -1,3 +1,16 @@
+5.2.2	|	Release date: **09.05.2023**
+============================================
+* New Features and Improvements:
+  - Update PhpBrew Docs.
+  - Update Submodules.
+  - Update Vagrant Machine Name.
+  - Update Default NodeJs Version.
+  - Git Setup Credentials from Array.
+  - Update Submodules and Remove Using puppet modules 'bashrc' and 'hosts' because are TOO OLD.
+  - Add Config Parameter For Appache Version.
+  - Use Puppet 7 on CentOs 8.
+
+
 5.2.1	|	Release date: **24.02.2023**
 ============================================
 * New Features:
