@@ -181,6 +181,7 @@ packages:
     - lsof
 
 lamp:
+    apacheVersion: 'installed'  # Latest Version
     phpVersion: '8.2'
     phpunit: false
     forcePhp7Repo: true
