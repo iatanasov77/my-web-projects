@@ -9,7 +9,8 @@ if [ $ID == "centos" ]; then
             sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-7.noarch.rpm
             ;;
         8)
-            sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-8.noarch.rpm
+            #sudo rpm -ivh https://yum.puppet.com/puppet6-release-el-8.noarch.rpm
+            sudo rpm -ivh https://yum.puppet.com/puppet7-release-el-8.noarch.rpm
             ;;
         9)
             #sudo rpm -ivh https://yum.puppetlabs.com/puppet6-release-el-9.noarch.rpm

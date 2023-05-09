@@ -12,6 +12,7 @@
 ##############################
 /tmp/*
 /VsProjects
+/VS_MyWebProjects
 /.vagrant/
 /.env
 /vagrant.d/puppet/modules/*/*
