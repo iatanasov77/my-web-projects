@@ -47,6 +47,7 @@ node default
         gitUserEmail                => $vsConfig['git']['userEmail'],
         gitCredentials				=> $gitCredentials,
         
+        apacheVersion               => "${vsConfig['lamp']['apacheVersion']}",
         phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         apacheModules               => $vsConfig['lamp']['apacheModules'],
         
