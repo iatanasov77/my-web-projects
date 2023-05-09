@@ -25,3 +25,13 @@
         # phpbrew fpm start
         # service httpd start
         
+        
+        
+2. Install New Version of PHP
+    sudo phpbrew known --update
+    sudo phpbrew --debug install --stdout 8.2.4 +default +mysql +fpm +pdo +mcrypt +iconv +intl +exif +gd +openssl=/usr -- --with-libdir=lib64
+    phpbrew use php-8.2.4
+
+
+
+ 

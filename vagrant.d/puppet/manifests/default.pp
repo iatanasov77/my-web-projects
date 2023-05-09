@@ -28,6 +28,7 @@ node default
 	$vsConfig  			= parseyaml( $facts['vs_config'] )
 	$installedProjects	= parsejson( $facts['installed_projects'] )
 	$devopsHosts        = parsejson( $facts['devops_hosts'] )
+	$gitCredentials     = parsejson( $facts['git_credentials'] )
 	
 	class { '::vs_devenv':
 		dependencies				=> $vsConfig['dependencies'],
@@ -44,8 +45,9 @@ node default
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],
-        gitCredentials				=> $facts['git_credentials'],
+        gitCredentials				=> $gitCredentials,
         
+        apacheVersion               => "${vsConfig['lamp']['apacheVersion']}",
         phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         apacheModules               => $vsConfig['lamp']['apacheModules'],
         
@@ -101,12 +103,15 @@ node default
 	
 	######################################################
     # Add DevOps Host to /etc/hosts
+    # Module 'hosts' is too OLD
     ######################################################
-    class { '::hosts' : }
-    $devopsHosts.each|String $id, Hash $hostConfig| {
-        ::hosts::add { "${hostConfig['host_ip']}":
-            fqdn    => "${hostConfig['host_fqdn']}",
-            #aliases => [ 'router' ],
+    if false {
+        class { '::hosts' : }
+        $devopsHosts.each|String $id, Hash $hostConfig| {
+            ::hosts::add { "${hostConfig['host_ip']}":
+                fqdn    => "${hostConfig['host_fqdn']}",
+                #aliases => [ 'router' ],
+            }
         }
     }
     

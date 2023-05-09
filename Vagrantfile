@@ -148,7 +148,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 				'mysqlhost'				=> ENV['PUBLIC_IP'],
 				'installed_projects'	=> File.read( ENV['HOSTS_CONFIG'] ),
 				'devops_hosts'          => ENV['DEVOPS_HOSTS'],
-				'git_credentials'		=> ENV['GIT_CREDENTIALS'],
+				#'git_credentials'		=> ENV['GIT_CREDENTIALS'],
+				'git_credentials'		=> JSON.parse( ENV['GIT_CREDENTIALS'] ),
 				
 				# Used in class git::subtree
 				'git_version'           => '2.27.0',
@@ -172,7 +173,7 @@ echo "#"
 echo "# You have PHP Info at http://#{ENV['HOST_NAME']}/info.php"
 echo "# You have a PhpMyAdmin  at http://#{ENV['HOST_NAME']}/phpMyAdmin/"
 echo "#"
-echo "# Support at: https://github.com/iatanasov77/my-projects"
+echo "# Support at: https://github.com/iatanasov77/my-web-projects"
 echo "#"
 echo "################################################################################"
 SCRIPT
