@@ -1,3 +1,12 @@
+5.2.3	|	Release date: **22.05.2023**
+============================================
+* New Features:
+  - Update Git Submodules.
+  - Add Installation of Vue CLI Frontend Tool.
+  - Move NVM Installation to VsCore Puppet Module.
+  - Improve Subsystem Docker.
+
+
 5.2.2	|	Release date: **09.05.2023**
 ============================================
 * New Features and Improvements:
