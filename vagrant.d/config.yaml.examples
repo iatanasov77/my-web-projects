@@ -59,6 +59,9 @@ subsystems:
     docker:
         enabled: true
         docker_users: ['vagrant', 'root']
+        version: 'latest'
+        composer_version: '2.18.1'
+        portainer_password: 'Portainer@123'
 
     # Composer is installed by vs_lamp::php, 
     # here you can configure to install old version if needed
@@ -165,15 +168,12 @@ frontendtools:
             version: 'latest'
 
 packages:
-    - sendmail
-    - sendmail-cf
     - mc
     - gitflow
     # Package 'curl' is defined in module 'docker'
     #- curl
     - vim
     - nano
-    - htop
     - dos2unix
     - unzip
     #- lynx
