@@ -136,7 +136,7 @@ subsystems:
     # Everything fails :) Use on hand: composer global require drush/drush:10.3.6
     # /usr/local/bin/drush is created to the /home/vagrant/.composer/vendor/bin
     drush:
-        enabled: true
+        enabled: false
         versions: ['8', '9', '10']   # Valid values are '6', '7', '8', '9', '10', and 'master'
         defaultVersion: '8'
         
@@ -176,9 +176,9 @@ packages:
     - htop
     - dos2unix
     - unzip
-    - lynx
+    #- lynx
     # On CentOs8 Python2 is not installed by default but it is required from Sylius Setup
-    - python2
+    #- python2
     # For Check about opened ports: `sudo lsof -i -P -n | grep LISTEN` OR USE: `sudo netstat -tulpn | grep LISTEN`
     - lsof
 
