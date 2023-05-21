@@ -1,4 +1,4 @@
-# Setup VsProjects Environement
+# Setup VsWebProjects Environement
 
 ## I. Clone GIT Repository with Submodules
 ```
@@ -58,7 +58,7 @@
     ```
     Edit .env file and vagrant.d/config.yaml and vagrant.d/installed_projects.json if needed and than:
     ```
-        # Vagrant up
+        vagrant up
     ```
 
 ## III. Setup the web interface
