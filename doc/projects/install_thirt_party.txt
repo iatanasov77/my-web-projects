@@ -77,6 +77,15 @@ Magento
     
     Open it on: https://myprojects:9200
     
+    OTHER COMMANDS:
+        Retrieve the password for http.p12:
+        -----------------------------------
+        docker exec -it es01 bin/elasticsearch-keystore show xpack.security.http.ssl.keystore.secure_password
+        
+        Retrieve the password for transport.p12:
+        ----------------------------------------
+        docker exec -it es01 bin/elasticsearch-keystore show xpack.security.transport.ssl.keystore.secure_password
+    
 2. Install Elasticsearch with Docker
     https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
     
