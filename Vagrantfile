@@ -75,12 +75,12 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
         # -----------------------------------
         # https://www.rudylee.com/blog/2014/10/27/symbolic-links-with-vagrant-windows/
         #################################################################################
-        config.vm.provider "virtualbox" do |v|
-            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
-            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
-            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
-            v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
-        end
+#         config.vm.provider "virtualbox" do |v|
+#             v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+#             v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
+#             v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+#             v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
+#         end
 
 		# Virtual Box Configuration
 		config.vm.provider :virtualbox do |vb, override|
@@ -90,9 +90,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			vb.cpus		= 2
 			
 			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
-			vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
+			#vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
             
-            vb.check_guest_additions = false
+            vb.check_guest_additions = true
         end
      
 	  	# Default Shared Folder
