@@ -72,6 +72,9 @@ Magento
     docker network create elastic
     docker run --name es01 --net elastic -p 10.3.3.2:9200:9200 -it docker.elastic.co/elasticsearch/elasticsearch:8.5.3
     
+    Start Container: docker start es01
+    Stop Container: docker stop -t 10 es01
+    
     Open it on: https://myprojects:9200
     
 2. Install Elasticsearch with Docker
