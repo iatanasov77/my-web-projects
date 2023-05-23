@@ -154,6 +154,8 @@ frontendtools:
             version: 'latest'
         gulp:
             version: 'latest'
+        nest-cli:
+            version: 'latest'
         vue-cli:
             version: 'latest'
         angular-cli:
