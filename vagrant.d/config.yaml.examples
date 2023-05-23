@@ -32,11 +32,6 @@ subsystems:
     # it creates  a temporary SMTP server that you can send to
     mailcatcher:
         enabled: true
-        ip: '10.3.3.2'
-        rubyDefaultVersion: '2.7.2'
-        # RVM Not Work on CentOs 9 BUT It Have Ruby Installed
-        # Also useRvm conflict with subsystem Ruby if Enabled
-        useRvm: false
 
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
@@ -114,7 +109,6 @@ subsystems:
         virtual_environments:
             ruby_3:
                 rubyVersion: '3.0.0'
-                defaultUse: false
                 packages: ['rails']
 
     phpbrew:
@@ -154,8 +148,16 @@ frontendtools:
             version: 'latest'
         gulp:
             version: 'latest'
-        nest-cli:
-            version: 'latest'
+        ######################################################################################
+        # PM2 is a production process manager for Node.js applications
+        #--------------------------------------------------------------
+        # https://dev.to/deadwin19/deploy-nest-js-app-using-pm2-on-linux-ubuntu-server-88f
+        # https://www.npmjs.com/package/pm2
+        ######################################################################################
+        #pm2:
+        #    version: 'latest'
+        #nest-cli:
+        #    version: 'latest'
         vue-cli:
             version: 'latest'
         angular-cli:
