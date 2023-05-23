@@ -6,11 +6,11 @@ dependencies:
     
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
-    guiRoot: '/projects/VS_MyWebProjects_Gui_Symfony'
-    documentRoot: '/projects/VS_MyWebProjects_Gui_Symfony/public'
+    guiRoot: '/projects/VS_MyProjects_GuiSymfony'
+    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
         name: 'VsMyWebProjects'
-        dump: '/projects/VS_MyWebProjects_Gui_Symfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
+        dump: '/projects/VS_MyProjects_GuiSymfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -34,7 +34,9 @@ subsystems:
         enabled: true
         ip: '10.3.3.2'
         rubyDefaultVersion: '2.7.2'
-        useRvm: false # RVM Not Work on CentOs 9 BUT It Have Ruby Installed
+        # RVM Not Work on CentOs 9 BUT It Have Ruby Installed
+        # Also useRvm conflict with subsystem Ruby if Enabled
+        useRvm: false
 
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
@@ -84,10 +86,6 @@ subsystems:
         
     tomcat:
         enabled: false
-        ############################################################################
-        # Default instance is tomcat 9. 
-        # I think source urls are changed for different network locations.
-        ############################################################################
         catalinaHome: '/opt/tomcat/default'
         sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
@@ -145,13 +143,12 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 20.0.0
+    nodejs: 18.16.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '20.0.0': { set_default: true }
-            '16.13.0': {}
-            '10.24.1': {}
+            '18.16.0': { set_default: true }
+            '20.0.0': {}
     tools:
         yarn:
             version: 'latest'
