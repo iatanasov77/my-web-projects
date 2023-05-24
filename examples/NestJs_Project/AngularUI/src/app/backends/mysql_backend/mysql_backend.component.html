@@ -1,0 +1,10 @@
+<h1>Todo List App (MySql Backend)</h1>
+<div class="search">
+    <input type="text" [(ngModel)]="task" />
+    <span (click)="addTask(task)"><i class="fas fa-plus"></i></span>
+</div>
+<ul>
+    <li *ngFor= "let task of tasks">
+        {{ task.name }}<i class="fas fa-trash-alt" (click)="deleteTask(task.id)"></i>
+    </li>
+</ul>
