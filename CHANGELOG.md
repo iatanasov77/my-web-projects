@@ -1,3 +1,15 @@
+5.2.4	|	Release date: **25.05.2023**
+============================================
+* New Features , Bug-Fixes and Improvements:
+  - Clean Vagrantfile.
+  - Update Docs for Running ElasticSearch Docker Container.
+  - Many Fixes On Puppet Modules.
+  - Add NestJs to the FrontEnd Tools.
+  - Fix and Improve Subsystems Ruby and Mailcatcher.
+  - Add an Example for NestJs.
+  - Add Documentation into NestJs Example.
+
+
 5.2.3	|	Release date: **22.05.2023**
 ============================================
 * New Features:
