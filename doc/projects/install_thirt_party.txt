@@ -69,7 +69,22 @@ Magento
 =========================================================================================================================
 1. Before run Elasticsearch Docker Container Run:
     sudo sysctl -w vm.max_map_count=262144
-    docker run --name es01 --net elastic -p 127.0.0.1:9200:9200 -it docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    docker network create elastic
+    docker run --name es01 --net elastic -p 10.3.3.2:9200:9200 -it docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    
+    Start Container: docker start es01
+    Stop Container: docker stop -t 10 es01
+    
+    Open it on: https://myprojects:9200
+    
+    OTHER COMMANDS:
+        Retrieve the password for http.p12:
+        -----------------------------------
+        docker exec -it es01 bin/elasticsearch-keystore show xpack.security.http.ssl.keystore.secure_password
+        
+        Retrieve the password for transport.p12:
+        ----------------------------------------
+        docker exec -it es01 bin/elasticsearch-keystore show xpack.security.transport.ssl.keystore.secure_password
     
 2. Install Elasticsearch with Docker
     https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
@@ -95,7 +110,7 @@ Magento
         --timezone=America/Chicago \
         --use-rewrites=1 \
         --search-engine=elasticsearch8 \
-        --elasticsearch-host=127.0.0.1 \
+        --elasticsearch-host=10.3.3.2 \
         --elasticsearch-port=9200 \
         --elasticsearch-index-prefix=magento2 \
         --elasticsearch-timeout=15 \

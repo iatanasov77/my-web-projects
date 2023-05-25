@@ -6,11 +6,11 @@ dependencies:
     
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
-    guiRoot: '/projects/VS_MyWebProjects_Gui_Symfony'
-    documentRoot: '/projects/VS_MyWebProjects_Gui_Symfony/public'
+    guiRoot: '/projects/VS_MyProjects_GuiSymfony'
+    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
     database:
         name: 'VsMyWebProjects'
-        dump: '/projects/VS_MyWebProjects_Gui_Symfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
+        dump: '/projects/VS_MyProjects_GuiSymfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
@@ -32,9 +32,6 @@ subsystems:
     # it creates  a temporary SMTP server that you can send to
     mailcatcher:
         enabled: true
-        ip: '10.3.3.2'
-        rubyDefaultVersion: '2.7.2'
-        useRvm: false # RVM Not Work on CentOs 9 BUT It Have Ruby Installed
 
     # Config_Lite PHP Library , Needed for
     # gitflow-reinit Script
@@ -84,10 +81,6 @@ subsystems:
         
     tomcat:
         enabled: false
-        ############################################################################
-        # Default instance is tomcat 9. 
-        # I think source urls are changed for different network locations.
-        ############################################################################
         catalinaHome: '/opt/tomcat/default'
         sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz'
         jdkPackage: 'java-1.8.0-openjdk-devel'
@@ -116,7 +109,6 @@ subsystems:
         virtual_environments:
             ruby_3:
                 rubyVersion: '3.0.0'
-                defaultUse: false
                 packages: ['rails']
 
     phpbrew:
@@ -145,18 +137,27 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 20.0.0
+    nodejs: 18.16.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '20.0.0': { set_default: true }
-            '16.13.0': {}
-            '10.24.1': {}
+            '18.16.0': { set_default: true }
+            '20.0.0': {}
     tools:
         yarn:
             version: 'latest'
         gulp:
             version: 'latest'
+        ######################################################################################
+        # PM2 is a production process manager for Node.js applications
+        #--------------------------------------------------------------
+        # https://dev.to/deadwin19/deploy-nest-js-app-using-pm2-on-linux-ubuntu-server-88f
+        # https://www.npmjs.com/package/pm2
+        ######################################################################################
+        #pm2:
+        #    version: 'latest'
+        #nest-cli:
+        #    version: 'latest'
         vue-cli:
             version: 'latest'
         angular-cli:
