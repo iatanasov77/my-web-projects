@@ -1,0 +1,30 @@
+INSTALLATION
+============
+
+Copy Project Directory into Web Server
+
+From Every Application Directory run:
+    # yarn install
+    # yarn run build
+    
+    
+For Angular Application Copy Apache Virtual Host Configuration From contrib directory to /etc/httpd/conf.d/
+
+For Backend_MySqlApi Application Import Mysql Dump From contrib directory to database server.
+
+For Backend_MySqlApi Application run from root directory of the application
+    # yarn run start
+                OR
+    # pm2 start dist/main.js --name nestjs-mysql-api
+                OR
+    # sudo service pm2-vagrant restart
+    
+For Backend_JsonApi Application run from root directory of the application
+    # yarn run start
+                OR
+    # pm2 start dist/main.js --name nestjs-json-api
+                OR
+    # sudo service pm2-vagrant restart
+    
+
+
