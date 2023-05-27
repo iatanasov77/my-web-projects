@@ -81,20 +81,19 @@ subsystems:
         
     tomcat:
         enabled: false
-        catalinaHome: '/opt/tomcat/default'
-        sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.45/bin/apache-tomcat-9.0.45.tar.gz'
+        defaultInstance: 'tomcat_10'
         jdkPackage: 'java-1.8.0-openjdk-devel'
         instances:
             tomcat_10:
                 catalinaHome: '/opt/tomcat/tomcat_10'
-                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-10/v10.0.5/bin/apache-tomcat-10.0.5.tar.gz'
+                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-10/v10.1.9/bin/apache-tomcat-10.1.9.tar.gz'
+                serverPort: '8006'
+                connectorPort: '8081'
+            tomcat_9:
+                catalinaHome: '/opt/tomcat/tomcat_9'
+                sourceUrl: 'https://downloads.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz'
                 serverPort: '8107'
                 connectorPort: '8181'
-            tomcat_8:
-                catalinaHome: '/opt/tomcat/tomcat_8'
-                sourceUrl: 'https://mirrors.netix.net/apache/tomcat/tomcat-8/v8.5.63/bin/apache-tomcat-8.5.63.tar.gz'
-                serverPort: '8105'
-                connectorPort: '8180'
     
     python:
         enabled: false
