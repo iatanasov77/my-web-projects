@@ -81,8 +81,10 @@ subsystems:
         
     tomcat:
         enabled: false
-        defaultInstance: 'tomcat_10'
-        jdkPackage: 'java-1.8.0-openjdk-devel'
+        jdkVersion: '17'
+        mavenVersion: '3.9.2'
+        tomcatUser: 'vagrant'
+        tomcatGroup: 'vagrant'
         instances:
             tomcat_10:
                 catalinaHome: '/opt/tomcat/tomcat_10'
