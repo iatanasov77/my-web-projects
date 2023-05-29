@@ -158,10 +158,6 @@
     
 	"MyProjects_GuiJava": {
         "type": "Java",
-        
-        "tomcatInstances": {
-            
-        },
                 
         "hosts": [
             {
@@ -236,11 +232,7 @@
     
     "Tomcat_Default": {
         "type": "Java",
-        
-        "tomcatInstances": {
-            
-        },
-                
+             
         "hosts": [
             {
                 "hostType": "JspRewrite",
@@ -258,10 +250,6 @@
     
     "Java_HelloWorld": {
         "type": "Java",
-        
-        "tomcatInstances": {
-            
-        },
                 
         "hosts": [
             {
@@ -277,35 +265,6 @@
                 
                 "tomcatUrl": "http://127.0.0.1:8080/hello",
                 "tomcatService": "tomcat"
-            }
-        ]
-    },
-    
-    "Java_TomcatInstances_Example": {
-        "type": "Java",
-        
-        "tomcatInstances": {
-            "tomcat_9": {
-                "sourceUrl": "https://downloads.apache.org/tomcat/tomcat-9/v9.0.39/bin/apache-tomcat-9.0.39.tar.gz",
-                "catalinaHome": "/opt/tomcat/tomcat_9",
-                "catalinaBase": "/opt/tomcat/tomcat_9",
-                "serverPort": 8006,
-                "connectorPort": 8081
-            }
-        },
-                
-        "hosts": [
-            {
-                "hostType": "Jsp",
-                "description": "Tomcat 9.0",
-        
-                "hostName": "tomcat9.lh",
-                "documentRoot": "/opt/tomcat/tomcat_9/webapps/ROOT",
-                "withSsl": false,
-                
-                "reverseProxyProtocol": "http",
-                "reverseProxyPort": 8081,
-                "tomcatService": "tomcat_9"
             }
         ]
     },
