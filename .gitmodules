@@ -126,3 +126,9 @@
 [submodule "vagrant.d/puppet/modules/rvm"]
 	path = vagrant.d/puppet/modules/rvm
 	url = https://github.com/maestrodev/puppet-rvm
+[submodule "vagrant.d/puppet/modules/vs_java"]
+	path = vagrant.d/puppet/modules/vs_java
+	url = https://github.com/iatanasov77/puppet-java.git
+[submodule "vagrant.d/puppet/modules/maven"]
+	path = vagrant.d/puppet/modules/maven
+	url = https://github.com/maestrodev/puppet-maven.git

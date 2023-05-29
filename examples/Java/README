@@ -1,0 +1,47 @@
+#############################################################
+# Generate 'pom.xml' with All Needed Dependencies
+#---------------------------------------------------
+# https://start.spring.io/
+#############################################################
+
+
+mvn compile
+mvn package
+-- OR SKIP TESTS --
+mvn package -Dmaven.test.skip=true
+
+-- Clean Compilation --
+mvn clean
+
+
+
+
+# We'll run this command on the console to create a new Java web application
+##################################################################################
+mvn archetype:generate -DgroupId=com.baeldung -DartifactId=cargo-deploy -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+
+# MAVEN DEPLOY APPLICATION TO TOMCAT
+#------------------------------------
+# https://www.baeldung.com/tomcat-deploy-war
+##################################################
+
+mvn install
+mvn cargo:deploy
+
+
+# If we're editing the same project for remote deployment, we'll first un-deploy the existing WAR:
+##########################################################################################################
+mvn cargo:undeploy
+mvn clean
+mvn install
+mvn cargo:deploy
+
+
+
+
+
+# Start Embeded Maven Tomcat Container:
+##########################################
+./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=8090
+

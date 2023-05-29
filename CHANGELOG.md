@@ -1,3 +1,12 @@
+5.3.0	|	Release date: **29.05.2023**
+============================================
+* New Features and Improvements:
+  - Improve Java Puppet Module.
+  - Add README for Java Examples.
+  - Many Improvements About Subsystem Tomcat.
+  - Update Git Submodules.
+
+
 5.2.4	|	Release date: **25.05.2023**
 ============================================
 * New Features , Bug-Fixes and Improvements:
