@@ -1,3 +1,13 @@
+5.4.0	|	Release date: **15.06.2023**
+============================================
+* New Features and Improvements:
+  - Improve Tomcat Configuration and Create an AJP Connector.
+  - Update Git Submodule
+* Bug-Fixes:
+  - Remove Changing SSH Config.
+  - Fix Detect Public Network is Enabled.
+
+
 5.3.0	|	Release date: **29.05.2023**
 ============================================
 * New Features and Improvements:
