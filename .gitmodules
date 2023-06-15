@@ -129,6 +129,7 @@
 [submodule "vagrant.d/puppet/modules/vs_java"]
 	path = vagrant.d/puppet/modules/vs_java
 	url = https://github.com/iatanasov77/puppet-java.git
+    branch = main
 [submodule "vagrant.d/puppet/modules/maven"]
 	path = vagrant.d/puppet/modules/maven
 	url = https://github.com/maestrodev/puppet-maven.git

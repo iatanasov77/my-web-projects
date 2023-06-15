@@ -72,12 +72,6 @@ node default
     ######################################################
     # Config
     ######################################################
-    
-    # Config SSH
-    class { 'ssh':
-        password_authentication    => 'yes'
-    }
-    
 	# Config sudo users
 	sudo::conf { "vagrant":
 	    ensure			=> "present",
