@@ -8,13 +8,13 @@ I. Create WebSite in ISP Config
     5. Edit Apache Virtual Host (If Problem May be you need to clear cookies of .vankosoft.org domain)
         3 Rows need to be Edited
         --------------------------------------
-        DocumentRoot /var/www/test-jenkins.vankosoft.org/web/project/public
+        DocumentRoot /var/www/test-jenkins.vankosoft.org/web/project/production/public/application-slug
         
-        <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+        <Directory /var/www/test-jenkins.vankosoft.org/web/project/production/public/application-slug>
         
         Bellow <IfModule mod_fcgid.c> TOO
         ---------------------------------------
-        <Directory /var/www/test-jenkins.vankosoft.org/web/project/public>
+        <Directory /var/www/test-jenkins.vankosoft.org/web/project/production/public/application-slug>
         
     6. For VankoSoft Application Add Alias:
             Alias /build "/var/www/vankosoft.org/web/project/production/public/shared_assets/build"
