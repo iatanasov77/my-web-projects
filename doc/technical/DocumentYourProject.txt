@@ -7,7 +7,9 @@ I. PHP Documentor
     phpdoc -d /projects/VankosoftApplicationLibrary/src -t /projects/Documentation/VankosoftApplicationLibrary/PhpDoc --setting=graphs.enabled=true
 
 
+2. Doxygen
 
+    doxygen /projects/VankosoftApplicationLibrary/doxygen.config
 
 
 
