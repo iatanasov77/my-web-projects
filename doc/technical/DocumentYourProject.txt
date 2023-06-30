@@ -4,7 +4,7 @@
 I. PHP Documentor
     Quique Start Guide: https://docs.phpdoc.org/guide/guides/running-phpdocumentor.html
 
-    phpdoc -d /projects/VankosoftApplicationLibrary/src -t /projects/Documentation/VankosoftApplicationLibrary/PhpDoc
+    phpdoc -d /projects/VankosoftApplicationLibrary/src -t /projects/Documentation/VankosoftApplicationLibrary/PhpDoc --setting=graphs.enabled=true
 
 
 
