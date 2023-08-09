@@ -138,6 +138,9 @@ subsystems:
         versions: ['8', '9', '10']   # Valid values are '6', '7', '8', '9', '10', and 'master'
         defaultVersion: '8'
         
+    ffmpeg:
+        enabled: true
+        
 frontendtools:
     #nodejs: latest
     nodejs: 18.16.0
