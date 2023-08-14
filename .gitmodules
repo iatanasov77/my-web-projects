@@ -133,3 +133,6 @@
 [submodule "vagrant.d/puppet/modules/maven"]
 	path = vagrant.d/puppet/modules/maven
 	url = https://github.com/maestrodev/puppet-maven.git
+[submodule "vagrant.d/puppet/modules/hashi_stack"]
+	path = vagrant.d/puppet/modules/hashi_stack
+	url = https://github.com/voxpupuli/puppet-hashi_stack.git
