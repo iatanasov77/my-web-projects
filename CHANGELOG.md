@@ -1,3 +1,13 @@
+5.5.0	|	Release date: **14.08.2023**
+============================================
+* New Features and Improvements:
+  - Update config Example.
+  - Update Documentation.
+  - Update Git Submodules.
+  - Add FFMpeg Subsystem.
+  - Add  'cloud_platforms' and 'hashicorp' Subsystems.
+
+
 5.4.0	|	Release date: **15.06.2023**
 ============================================
 * New Features and Improvements:
