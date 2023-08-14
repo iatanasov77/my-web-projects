@@ -141,6 +141,31 @@ subsystems:
     ffmpeg:
         enabled: true
         
+    cloud_platforms:
+        enabled: true
+        azure: true
+        aws: true
+        digital_ocean: '1.94.0'
+        s3tools: true
+        k8s_station: '1.27.3'
+        
+    hashicorp:
+        enabled: true
+        terraform:
+            version: '1.4.6'
+            config:
+                aws:
+                    accessKey: 'NOT_DEFINED'
+                    secretKey: 'NOT_DEFINED'
+                    region: 'eu-central-1'
+                azure:
+                    clientId: 'NOT_DEFINED'
+                    clientSecret: 'NOT_DEFINED'
+                    subscriptionId: 'NOT_DEFINED'
+                    tenantId: 'NOT_DEFINED'
+                digitalocean:
+                    token: 'NOT_DEFINED'
+        
 frontendtools:
     #nodejs: latest
     nodejs: 18.16.0
