@@ -168,11 +168,11 @@ subsystems:
         
 frontendtools:
     #nodejs: latest
-    nodejs: 18.16.0
+    nodejs: 18.17.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '18.16.0': { set_default: true }
+            '18.17.0': { set_default: true }
             '20.0.0': {}
     tools:
         yarn:
