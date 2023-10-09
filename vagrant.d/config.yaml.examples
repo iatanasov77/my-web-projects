@@ -148,7 +148,24 @@ subsystems:
         digital_ocean: '1.94.0'
         s3tools: true
         k8s_station: '1.27.3'
-        rclone: true
+        
+        ##################################################################
+        # Used to Copy Files From/To Cloud Block Storages
+        # Examples:
+        # --------
+        # rclone ls <config-name>:<space-name>
+        # rclone copy <local-folder> <config-name>:<space-name>
+        # rclone copy <config-name>:<space-name> <local-folder>
+        ##################################################################
+        rclone:
+            enabled: true
+            configs:
+                video_platform:
+                    provider: DigitalOcean
+                    accessKey: 'NOT_DEFINED'
+                    secretKey: 'NOT_DEFINED'
+                    endpoint: 'fra1.digitaloceanspaces.com'
+                    acl: private
         
     hashicorp:
         enabled: true
