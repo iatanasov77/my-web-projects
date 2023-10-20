@@ -347,6 +347,12 @@ lamp:
         # Required By Magento
         soap:
             ini_prefix: '20-'
+            
+        # Required by Compas_Billing
+        ssh2:
+            ini_prefix: '20-'
+        gmp:
+            ini_prefix: '20-'
 
     phpMyAdmin:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip'
