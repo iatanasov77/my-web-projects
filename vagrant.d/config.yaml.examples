@@ -304,11 +304,14 @@ lamp:
             settings:
                 # For xdebug3 many config vars are changed. 
                 # Reference: https://xdebug.org/docs/upgrade_guide
+                #
+                # Create directory '/vagrant/tmp/xdebug' if not exixst
                 # ---------------------------------------------------
-                'xdebug.mode': 'debug'
+                'xdebug.mode': 'debug,profile,trace'
                 'xdebug.start_with_request': 'trigger'
                 'xdebug.discover_client_host': '1'
                 'xdebug.client_port': '9000'
+                'xdebug.output_dir': '/vagrant/tmp/xdebug'
         
         zip:
             ini_prefix: '20-'
