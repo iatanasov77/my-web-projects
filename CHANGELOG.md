@@ -1,3 +1,14 @@
+5.5.1	|	Release date: **15.12.2023**
+============================================
+* New Features and Improvements:
+  - Update Frontend Packages in Config Examples.
+  - Update Git Submodules.
+  - Update Example Config.
+  - Add Some Additional PHP Modules into Config Example.
+  - Update Vagrant Config Example.
+  - Update Puppet Modules.
+
+
 5.5.0	|	Release date: **14.08.2023**
 ============================================
 * New Features and Improvements:
