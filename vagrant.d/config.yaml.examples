@@ -149,6 +149,24 @@ subsystems:
         s3tools: true
         k8s_station: '1.27.3'
         
+        ##################################################################
+        # Used to Copy Files From/To Cloud Block Storages
+        # Examples:
+        # --------
+        # rclone ls <config-name>:<space-name>
+        # rclone copy <local-folder> <config-name>:<space-name>
+        # rclone copy <config-name>:<space-name> <local-folder>
+        ##################################################################
+        rclone:
+            enabled: true
+            configs:
+                video_platform:
+                    provider: DigitalOcean
+                    accessKey: 'NOT_DEFINED'
+                    secretKey: 'NOT_DEFINED'
+                    endpoint: 'fra1.digitaloceanspaces.com'
+                    acl: private
+        
     hashicorp:
         enabled: true
         terraform:
@@ -165,14 +183,18 @@ subsystems:
                     tenantId: 'NOT_DEFINED'
                 digitalocean:
                     token: 'NOT_DEFINED'
+                    
+    payment_gateways:
+        enabled: true
+        stripe_cli: true
         
 frontendtools:
     #nodejs: latest
-    nodejs: 18.16.0
+    nodejs: 18.17.0
     nvm:
         user: 'vagrant'
         node_instances:
-            '18.16.0': { set_default: true }
+            '18.17.0': { set_default: true }
             '20.0.0': {}
     tools:
         yarn:
@@ -286,11 +308,14 @@ lamp:
             settings:
                 # For xdebug3 many config vars are changed. 
                 # Reference: https://xdebug.org/docs/upgrade_guide
+                #
+                # Create directory '/vagrant/tmp/xdebug' if not exixst
                 # ---------------------------------------------------
-                'xdebug.mode': 'debug'
+                'xdebug.mode': 'debug,profile,trace'
                 'xdebug.start_with_request': 'trigger'
                 'xdebug.discover_client_host': '1'
                 'xdebug.client_port': '9000'
+                'xdebug.output_dir': '/vagrant/tmp/xdebug'
         
         zip:
             ini_prefix: '20-'
@@ -328,6 +353,12 @@ lamp:
             
         # Required By Magento
         soap:
+            ini_prefix: '20-'
+            
+        # Required by Compas_Billing
+        ssh2:
+            ini_prefix: '20-'
+        gmp:
             ini_prefix: '20-'
 
     phpMyAdmin:
