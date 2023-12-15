@@ -183,6 +183,10 @@ subsystems:
                     tenantId: 'NOT_DEFINED'
                 digitalocean:
                     token: 'NOT_DEFINED'
+                    
+    payment_gateways:
+        enabled: true
+        stripe_cli: true
         
 frontendtools:
     #nodejs: latest
