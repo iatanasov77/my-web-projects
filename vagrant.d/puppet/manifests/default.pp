@@ -72,6 +72,7 @@ node default
     ######################################################
     # Config
     ######################################################
+	
 	# Config sudo users
 	sudo::conf { "vagrant":
 	    ensure			=> "present",
