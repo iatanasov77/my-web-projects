@@ -145,6 +145,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			puppet.facter			= {
 				'vs_config'				=> devenvConfig.to_yaml,
 				'hostname'				=> ENV['HOST_NAME'],
+				'host_ip'               => ENV['PRIVATE_IP'],
 				'mysqlhost'				=> ENV['PUBLIC_IP'],
 				'installed_projects'	=> File.read( ENV['HOSTS_CONFIG'] ),
 				'devops_hosts'          => ENV['DEVOPS_HOSTS'],

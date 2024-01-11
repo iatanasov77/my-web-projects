@@ -25,6 +25,7 @@ node default
 	######################################################
     # Setup DevEnv
     ######################################################
+    $hostIp             = $facts['host_ip']
 	$vsConfig  			= parseyaml( $facts['vs_config'] )
 	$installedProjects	= parsejson( $facts['installed_projects'] )
 	$devopsHosts        = parsejson( $facts['devops_hosts'] )
@@ -32,6 +33,7 @@ node default
 	
 	class { '::vs_devenv':
 		dependencies				=> $vsConfig['dependencies'],
+		hostIp                      => "${hostIp}",
 		
         defaultHost                 => "${hostname}",
         defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
@@ -52,6 +54,7 @@ node default
         apacheModules               => $vsConfig['lamp']['apacheModules'],
         
         phpModules                  => $vsConfig['lamp']['phpModules'],
+        removePhpIniFiles           => $vsConfig['lamp']['removePhpIniFiles'],
         phpunit                     => $vsConfig['lamp']['phpunit'],
         
         phpSettings                 => $vsConfig['lamp']['phpSettings'],
@@ -67,11 +70,14 @@ node default
     	databases                   => $vsConfig['lamp']['mysql']['databases'],
     	
     	ansibleConfig               => $vsConfig['ansible'],
+    	
+        finalFixes                  => $vsConfig['finalFixes'],
     }
   
     ######################################################
     # Config
     ######################################################
+	
 	# Config sudo users
 	sudo::conf { "vagrant":
 	    ensure			=> "present",
@@ -98,6 +104,9 @@ node default
 	######################################################
     # Add DevOps Host to /etc/hosts
     # Module 'hosts' is too OLD
+    #
+    # Already Created in vs_devenv::system_host.
+    # Module 'hosts' can to be removed
     ######################################################
     if false {
         class { '::hosts' : }
@@ -107,18 +116,5 @@ node default
                 #aliases => [ 'router' ],
             }
         }
-    }
-    
-    ######################################################
-    # Work-Around Fixes
-    ######################################################
-    Exec { 'Fix PHP Json Extension':
-        command => "/usr/bin/sed -i 's/extension = json.so/#extension = json.so/' /etc/php.d/20-json.ini",
-        onlyif  => 'test -e /etc/php.d/20-json.ini',
-    }
-    
-    Exec { 'Remove Duplicated PHP Zip Extension':
-        command => 'rm -f /etc/php.d/30-zip.ini',
-        onlyif  => 'test -e /etc/php.d/30-zip.ini',
     }
 }
