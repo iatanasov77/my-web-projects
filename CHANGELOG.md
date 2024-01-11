@@ -1,3 +1,10 @@
+5.6.0	|	Release date: **11.01.2024**
+============================================
+* New Features, Fixes and Improvements:
+  - Update Git Submodules.
+  - Add Some Fixes and Improvements.
+
+
 5.5.1	|	Release date: **15.12.2023**
 ============================================
 * New Features and Improvements:
