@@ -76,6 +76,7 @@ subsystems:
     
     phing:
       enabled: true
+      version: '3.0.0-rc6'
 
     dotnet:
         enabled: false
