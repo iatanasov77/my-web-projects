@@ -62,6 +62,7 @@ node default
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
         
         frontendtools               => $vsConfig['frontendtools'],
+        npmCredentials              => $vsConfig['npmLogin'],
         vstools                     => $vsConfig['vstools'],
         
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
