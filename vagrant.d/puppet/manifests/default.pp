@@ -101,21 +101,4 @@ node default
 		ensure	=> 'directory',
 		mode	=> '0777'
 	}
-	
-	######################################################
-    # Add DevOps Host to /etc/hosts
-    # Module 'hosts' is too OLD
-    #
-    # Already Created in vs_devenv::system_host.
-    # Module 'hosts' can to be removed
-    ######################################################
-    if false {
-        class { '::hosts' : }
-        $devopsHosts.each|String $id, Hash $hostConfig| {
-            ::hosts::add { "${hostConfig['host_ip']}":
-                fqdn    => "${hostConfig['host_fqdn']}",
-                #aliases => [ 'router' ],
-            }
-        }
-    }
 }
