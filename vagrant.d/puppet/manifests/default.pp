@@ -62,6 +62,7 @@ node default
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
         
         frontendtools               => $vsConfig['frontendtools'],
+        npmCredentials              => $vsConfig['npmLogin'],
         vstools                     => $vsConfig['vstools'],
         
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
@@ -77,6 +78,14 @@ node default
     ######################################################
     # Config
     ######################################################
+	
+	# Config DevOps Hosts
+	$devopsHosts.each |String $key, Hash $hostConfig| {
+	   vs_devenv::system_host{ "${hostConfig['host_fqdn']}":
+            hostIp      => $hostConfig['host_ip'],
+            hostName    => $hostConfig['host_fqdn'],
+        }
+	}
 	
 	# Config sudo users
 	sudo::conf { "vagrant":
@@ -100,21 +109,4 @@ node default
 		ensure	=> 'directory',
 		mode	=> '0777'
 	}
-	
-	######################################################
-    # Add DevOps Host to /etc/hosts
-    # Module 'hosts' is too OLD
-    #
-    # Already Created in vs_devenv::system_host.
-    # Module 'hosts' can to be removed
-    ######################################################
-    if false {
-        class { '::hosts' : }
-        $devopsHosts.each|String $id, Hash $hostConfig| {
-            ::hosts::add { "${hostConfig['host_ip']}":
-                fqdn    => "${hostConfig['host_fqdn']}",
-                #aliases => [ 'router' ],
-            }
-        }
-    }
 }
