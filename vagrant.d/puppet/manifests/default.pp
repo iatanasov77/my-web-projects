@@ -79,6 +79,14 @@ node default
     # Config
     ######################################################
 	
+	# Config DevOps Hosts
+	$devopsHosts.each |String $key, Hash $hostConfig| {
+	   vs_devenv::system_host{ "${hostConfig['host_fqdn']}":
+            hostIp      => $hostConfig['host_ip'],
+            hostName    => $hostConfig['host_fqdn'],
+        }
+	}
+	
 	# Config sudo users
 	sudo::conf { "vagrant":
 	    ensure			=> "present",
