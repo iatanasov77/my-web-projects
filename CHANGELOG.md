@@ -1,3 +1,16 @@
+5.6.1	|	Release date: **25.06.2024**
+============================================
+* New Features and Improvements:
+  - Improve Phing Installation.
+  - Add Npm Login and Publish Feature.
+  - Update Puppet Modules.
+  - New Feature Vs DevEnv Puppet Module.
+  - Update Vs DevEnv Puppet Module.
+  - Update Some Puppet Module.
+  - Add Support for CentOs9 Stream OS.
+  - Improve CentOs 9 Support.
+
+
 5.6.0	|	Release date: **11.01.2024**
 ============================================
 * New Features, Fixes and Improvements:
