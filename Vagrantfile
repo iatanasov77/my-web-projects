@@ -57,7 +57,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.vm.define ENV['MASHINE_NAME'] do |config|
 
 	  	config.vm.box				= ENV['VAGRANT_BOX']
-	  	#config.vm.box_version
+	  	config.vm.box_version       = '202404.23.0'
+	  	config.vm.box_architecture  = 'amd64'
 		config.vm.box_check_update	= true
 		
         if Vagrant.has_plugin?( "vagrant-vbguest" ) then
