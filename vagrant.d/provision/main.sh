@@ -4,6 +4,7 @@ source /vagrant/vagrant.d/provision/detect_linux.sh
 source /vagrant/vagrant.d/provision/make_swap.sh
 
 #source /vagrant/vagrant.d/provision/centos_stream.sh
+source /vagrant/vagrant.d/provision/fix_box.sh
 
 # PHP 7 and MySql 5.7
 #source /vagrant/vagrant.d/provision/install_dependencies.sh
