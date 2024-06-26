@@ -62,10 +62,10 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	  	if ENV['VAGRANT_BOX_VERSION'] != 'false' then
             config.vm.box_version       = ENV['VAGRANT_BOX_VERSION']
         end
+    
 	  	if ENV['VAGRANT_BOX_ARCHITECTURE'] != 'false' then
 	  	    config.vm.box_architecture  = ENV['VAGRANT_BOX_ARCHITECTURE']
 	  	end
-		
 		
         if Vagrant.has_plugin?( "vagrant-vbguest" ) then
             config.vbguest.auto_update = false
