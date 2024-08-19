@@ -207,6 +207,13 @@ subsystems:
         enabled: true
         stripe_cli: true
         
+    mercure_hub:
+        enabled: true
+        version: '0.16.3'
+        mercure:
+            port: '3000'
+            jwtSecret: '!ChangeMe!'
+        
 frontendtools:
     #nodejs: latest
     nodejs: 18.17.0
