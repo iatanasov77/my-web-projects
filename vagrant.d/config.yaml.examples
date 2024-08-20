@@ -212,7 +212,7 @@ subsystems:
         version: '0.16.3'
         mercure:
             port: '3000'
-            jwtSecret: '!ChangeMe!'
+            jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
         
 frontendtools:
     #nodejs: latest
