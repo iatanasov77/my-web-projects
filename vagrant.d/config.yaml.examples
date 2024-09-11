@@ -64,7 +64,18 @@ subsystems:
         enabled: true
         docker_users: ['vagrant', 'root']
         version: 'latest'
+        ############################################################################################
+        # Uncomment 'tcp_bind' options if you want docker engine to be accessed from other hosts
+        ############################################################################################
+        #tcp_bind:
+        #    - 'tcp://0.0.0.0:2375'
+        dockerhubUser: 'username'
+        accessToken: 'dockerhub_access_token'
         composer_version: '2.18.1'
+        ################################################################################################################
+        # Docker Cannot Create The Right Url For Docker Compose v2 and Need 'raw_url' ;) Until This Bug is Not Fixed
+        ################################################################################################################
+        #composer_raw_url: 'https://github.com/docker/compose/releases/download/v2.20.0/docker-compose-linux-x86_64'
         portainer_password: 'Portainer@123'
 
     # Composer is installed by vs_lamp::php, 
@@ -195,6 +206,18 @@ subsystems:
     payment_gateways:
         enabled: true
         stripe_cli: true
+        
+    mercure_hub:
+        enabled: true
+        version: '0.16.3'
+        mercure:
+            port: '3000'
+            jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
+    
+    websocket_server:
+        enabled: true
+        command: '/usr/bin/php /projects/VS_WebSocketServer/index.php'
+        port: '8090'
         
 frontendtools:
     #nodejs: latest
