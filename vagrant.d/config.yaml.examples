@@ -213,6 +213,11 @@ subsystems:
         mercure:
             port: '3000'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
+    
+    websocket_server:
+        enabled: true
+        command: '/usr/bin/php /projects/VS_WebSocketServer/index.php'
+        port: '8090'
         
 frontendtools:
     #nodejs: latest
