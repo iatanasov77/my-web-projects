@@ -1,3 +1,15 @@
+5.7.0	|	Release date: **11.09.2024**
+============================================
+* New Features and Improvements:
+  - Improve Provision Scripts For Fixes Script If Box Needed.
+  - Improve Puppet Config Examples.
+  - Update VankoSoft Puppet Modules.
+  - Create Mercure HUB Subsystem in VS DevEnv Puppet Module.
+  - Add Some Improvement on VsDevEnv Puppet Module.
+  - Update Git Submodules.
+  - Add a Subsystem in VsDevEnv Puppet Module: 'websocket_server'.
+
+
 5.6.1	|	Release date: **25.06.2024**
 ============================================
 * New Features and Improvements:

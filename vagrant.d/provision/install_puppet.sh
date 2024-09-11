@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "installing Puppet"
+echo "Installing Puppet"
 mkdir -p /etc/puppetlabs/facter/facts.d
 
 if [ $ID == "centos" ]; then
