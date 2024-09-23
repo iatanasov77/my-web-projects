@@ -72,6 +72,7 @@ node default
     	
     	ansibleConfig               => $vsConfig['ansible'],
     	
+    	customLampExtensions        => $vsConfig['lamp']['customExtensions'],
         finalFixes                  => $vsConfig['finalFixes'],
     }
   
