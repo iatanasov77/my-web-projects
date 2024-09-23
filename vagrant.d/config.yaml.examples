@@ -398,6 +398,11 @@ lamp:
             ini_prefix: '20-'
         gmp:
             ini_prefix: '20-'
+    
+    customExtensions:
+        zmq:
+            enabled: false
+            version: 'master'
 
     phpMyAdmin:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip'
