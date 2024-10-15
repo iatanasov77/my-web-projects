@@ -262,6 +262,8 @@ frontendtools:
         # Using for upgrade package.json dependencie's versions
         npm-upgrade:
             version: 'latest'
+        typescript:
+            version: 'latest'
             
 npmLogin:
     username: myusername
