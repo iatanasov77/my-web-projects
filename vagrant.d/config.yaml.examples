@@ -216,8 +216,19 @@ subsystems:
     
     websocket_server:
         enabled: true
-        command: '/usr/bin/php /projects/VS_WebSocketServer/index.php'
-        port: '8090'
+        servers:
+            general:
+                command: '/usr/bin/php /projects/VS_WebSocketServer/index.php'
+                port: '8090'
+    
+    # Require PHP to have ZMQ Extension Loaded         
+    zmqsocket_server:
+        enabled: true
+        servers:
+            game_platform:
+                command: '/projects/VS_GamePlatform/bin/websocket_publisher'
+                websocket_port: '8092'
+                tcp_port: '5555'
         
 frontendtools:
     #nodejs: latest
@@ -250,6 +261,8 @@ frontendtools:
             version: 'latest'
         # Using for upgrade package.json dependencie's versions
         npm-upgrade:
+            version: 'latest'
+        typescript:
             version: 'latest'
             
 npmLogin:
@@ -396,6 +409,11 @@ lamp:
             ini_prefix: '20-'
         gmp:
             ini_prefix: '20-'
+    
+    customExtensions:
+        zmq:
+            enabled: false
+            version: 'master'
 
     phpMyAdmin:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip'
