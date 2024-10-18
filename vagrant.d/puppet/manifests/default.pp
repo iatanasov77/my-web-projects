@@ -72,6 +72,7 @@ node default
     	
     	ansibleConfig               => $vsConfig['ansible'],
     	
+    	customLampExtensions        => $vsConfig['lamp']['customExtensions'],
         finalFixes                  => $vsConfig['finalFixes'],
     }
   
@@ -102,6 +103,11 @@ node default
         ensure          => "present",
         content         => "apache ALL=(ALL) NOPASSWD: ALL",
         sudo_file_name  => "apache",
+    }
+    sudo::conf { "wsworker":
+        ensure          => "present",
+        content         => "wsworker ALL=(ALL) NOPASSWD: ALL",
+        sudo_file_name  => "wsworker",
     }
 	
 	# create composer cache directory with write permissions to all users

@@ -1,3 +1,15 @@
+5.7.1	|	Release date: **18.10.2024**
+============================================
+* New Features:
+  - Add a Fix in VsDevEnv Puppet Module.
+  - Improve Subsystem 'websocket_server'.
+  - Pass Lamp Custom Extensions to 'vs_devenv' module from config.
+  - Creatte a ZMQ Socket Server Subsystem.
+  - Fix Permissions of Log Directory of Websocket Services.
+  - Update Config File.
+  - Add 'wsworker' to sudo users.
+
+
 5.7.0	|	Release date: **11.09.2024**
 ============================================
 * New Features and Improvements:
