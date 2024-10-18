@@ -104,6 +104,11 @@ node default
         content         => "apache ALL=(ALL) NOPASSWD: ALL",
         sudo_file_name  => "apache",
     }
+    sudo::conf { "wsworker":
+        ensure          => "present",
+        content         => "wsworker ALL=(ALL) NOPASSWD: ALL",
+        sudo_file_name  => "wsworker",
+    }
 	
 	# create composer cache directory with write permissions to all users
 	file { '/home/vagrant/.composer':
