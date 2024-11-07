@@ -268,6 +268,10 @@ frontendtools:
         # AWS Cloud Development Kit
         cdk:
             version: 'latest'
+        
+        # Requred TypeScript execution tool
+        ts-node:
+            version: 'latest'
             
 npmLogin:
     username: myusername
