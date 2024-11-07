@@ -264,6 +264,10 @@ frontendtools:
             version: 'latest'
         typescript:
             version: 'latest'
+        
+        # AWS Cloud Development Kit
+        cdk:
+            version: 'latest'
             
 npmLogin:
     username: myusername
