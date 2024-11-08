@@ -1,0 +1,7 @@
+
+# Create Default Profile to login with AWS CLI Tools
+aws configure
+
+# Use '--profile default' Option With All cdk commands to can login with previous created profile
+cdk destroy --profile default
+
