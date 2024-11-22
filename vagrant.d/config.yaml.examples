@@ -276,6 +276,10 @@ frontendtools:
         # Requred JavaScript bundler to bundle AWS Lambda Function Implementations
         esbuild:
             version: 'latest'
+        
+        # Requred For JS Unit Tests
+        jest:
+            version: 'latest'
             
 npmLogin:
     username: myusername
