@@ -281,6 +281,13 @@ frontendtools:
         jest:
             version: 'latest'
             
+        # Required Tools For Bundling Typescript Libraries
+        # Manual: https://dev.to/jazimabbas/bundle-and-publish-typescript-package-using-rollup-3mf0
+        rimraf: 
+            version: 'latest'
+        rollup:
+            version: 'latest'
+            
 npmLogin:
     username: myusername
     password: mypassword
