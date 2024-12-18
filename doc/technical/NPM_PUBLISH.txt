@@ -7,6 +7,7 @@
 export NPM_USERNAME=myusername
 export NPM_PASSWORD=mypassword
 export NPM_EMAIL=user@domain.com
+export NPM_TOKEN=mytoken
 
 npm adduser<<!
 $NPM_USERNAME
