@@ -1,3 +1,17 @@
+5.7.2	|	Release date: **18.12.2024**
+============================================
+* New Features:
+  - Update All Git Submodules.
+  - Add AWS Cloud Development Kit into Frontend Tools Example Config.
+  - Add 'ts-node' TypeScript execution tool  into Frontend Tools Example Config.
+  - Add to Documentation A Instructions for AWS CDK.
+  - Add Git SubTree into VsCore Puppet Module.
+  - Update Conig Example Yaml.
+  - Add a New Frontend Tool in Example Config.
+  - Add Some Frontend Tools Needed for Building Libraries.
+  - Update Docs.
+
+
 5.7.1	|	Release date: **18.10.2024**
 ============================================
 * New Features:
