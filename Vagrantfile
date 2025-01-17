@@ -31,7 +31,7 @@ end
 Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.env.enable
 	
-	if ! File.exists?( ENV['HOSTS_CONFIG'] )
+	if ! File.exist?( ENV['HOSTS_CONFIG'] )
 		File.open( ENV['HOSTS_CONFIG'], "w") do |f|
 			f.write( "{}" )
 		end
