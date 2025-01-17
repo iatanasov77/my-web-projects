@@ -1,3 +1,12 @@
+6.0.0	|	Release date: **17.01.2025**
+============================================
+* New Features:
+  - Update Puppet Modules.
+  - Update Vagrantfile for new version of Vagrant.
+  - Add AlmaLinux Vagrant Boxrs into Example ENV File.
+  - Add All RHEL Distributions in OS Conditions in VankoSoft Puppet Modules..
+
+
 5.7.2	|	Release date: **18.12.2024**
 ============================================
 * New Features:
