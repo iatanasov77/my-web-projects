@@ -11,10 +11,6 @@ finalFixes:
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
     guiRoot: '/projects/VS_MyProjects_GuiSymfony'
-    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
-    database:
-        name: 'VsMyWebProjects'
-        dump: '/projects/VS_MyProjects_GuiSymfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
