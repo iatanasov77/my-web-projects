@@ -17,12 +17,11 @@ git:
     userEmail: 'i.atanasov77@gmail.com'
     
 vstools:
-    mkvhost: 'v0.3.0'
-    mkphar: 'v0.2.0'
-    bumpversion: 'v1.2.0'
-    gitflow-reinit: 'v1.2.0'
-    #ftpdeploy: 'v3.3.2'
-    ftpdeploy: 'download'
+    mkvhost: '0.3.0'
+    mkphar: '0.2.0'
+    bumpversion: '1.2.0'
+    gitflow-reinit: '1.2.0'
+    ftpdeploy: '3.3.2'
 
 ###############################################################
 # Subsystems refactored from Array to Hashes 
