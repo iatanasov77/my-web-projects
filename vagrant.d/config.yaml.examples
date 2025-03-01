@@ -334,6 +334,8 @@ lamp:
         - proxy_fcgi
         - proxy_http
         - proxy_html
+        - deflate
+        - xsendfile
         # Used of Java Applications
         - proxy_ajp
         # Used of Python Applications
