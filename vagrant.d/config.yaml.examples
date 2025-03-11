@@ -11,22 +11,17 @@ finalFixes:
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
     guiRoot: '/projects/VS_MyProjects_GuiSymfony'
-    documentRoot: '/projects/VS_MyProjects_GuiSymfony/public'
-    database:
-        name: 'VsMyWebProjects'
-        dump: '/projects/VS_MyProjects_GuiSymfony/doc/sql/VsMyWebProjects_ALL_DATA.sql'
 
 git:
     userName: 'Ivan I. Atanasov'
     userEmail: 'i.atanasov77@gmail.com'
     
 vstools:
-    mkvhost: 'v0.3.0'
-    mkphar: 'v0.2.0'
-    bumpversion: 'v1.2.0'
-    gitflow-reinit: 'v1.2.0'
-    #ftpdeploy: 'v3.3.2'
-    ftpdeploy: 'download'
+    mkvhost: '0.3.0'
+    mkphar: '0.2.0'
+    bumpversion: '1.2.0'
+    gitflow-reinit: '1.2.0'
+    ftpdeploy: '3.3.2'
 
 ###############################################################
 # Subsystems refactored from Array to Hashes 
@@ -339,6 +334,8 @@ lamp:
         - proxy_fcgi
         - proxy_http
         - proxy_html
+        - deflate
+        - xsendfile
         # Used of Java Applications
         - proxy_ajp
         # Used of Python Applications
