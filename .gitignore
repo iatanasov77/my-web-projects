@@ -49,6 +49,7 @@
 /examples/Ruby/TestApplication/log/
 /examples/Ruby/TestApplication/storage/
 /examples/Ruby/TestApplication/tmp/
+/examples/Ruby/TestApplication/Gemfile.lock
 
 # +----------------------------+
 # |    Keep .gitkeep files     |
