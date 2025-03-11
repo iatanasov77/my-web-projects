@@ -36,10 +36,8 @@ node default
 		hostIp                      => "${hostIp}",
 		
         defaultHost                 => "${hostname}",
-        defaultDocumentRoot         => "${vsConfig['gui']['documentRoot']}",
         guiUrl                      => "${vsConfig['gui']['guiUrl']}",
         guiRoot                     => "${vsConfig['gui']['guiRoot']}",
-        guiDatabase                 => $vsConfig['gui']['database'],
         
         installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
