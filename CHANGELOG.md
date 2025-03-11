@@ -1,3 +1,19 @@
+6.0.1	|	Release date: **11.03.2025**
+============================================
+* New Features , Fixes and Improvements:
+  - Improve Creation of Symfony Gui Virtual Host.
+  - Add a Provision Bash Script to Disable SeLinux if Enabled.
+  - Remove SbAdmin from Docs Designs.
+  - Add PhpBrew Puppet Module for AlmaLinux.
+  - Update ENV Dist File With AlmaLinux Base Boxes.
+  - Fix Creating TMP File Name When Downloading Digital Ocean CLI.
+  - Add ENV Variables to Resize Vagrant Box Disk Size If Necessary.
+  - Improve vstools Manifest.
+  - Improve Vagrant Config File Example.
+  - Improve 'gitignore' Files.
+  - Update Puppet Modules.
+
+
 6.0.0	|	Release date: **17.01.2025**
 ============================================
 * New Features:
