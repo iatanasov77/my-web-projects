@@ -170,6 +170,10 @@ subsystems:
         # rclone ls <config-name>:<space-name>
         # rclone copy <local-folder> <config-name>:<space-name>
         # rclone copy <config-name>:<space-name> <local-folder>
+        #
+        # View Available Configs
+        # ----------------------
+        # cat ~/.config/rclone/rclone.conf
         ##################################################################
         rclone:
             enabled: true
