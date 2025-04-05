@@ -228,7 +228,15 @@ subsystems:
                 command: '/projects/VS_GamePlatform/bin/websocket_publisher'
                 websocket_port: '8092'
                 tcp_port: '5555'
-        
+    
+    ftp_server:
+        enabled: true
+        users:
+            ftpvsorg:
+                username: ftpvsorg
+                password: ftpvsorg
+                home: '/projects/VankoSoft.Org'
+
 frontendtools:
     #nodejs: latest
     nodejs: 18.17.0
