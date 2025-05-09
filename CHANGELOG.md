@@ -1,3 +1,12 @@
+6.1.0	|	Release date: **09.05.2025**
+============================================
+* New Features:
+  - Update Vagrant Config Example File.
+  - Rmove Gemfile.lock from Ruby Example.
+  - Add a FTP Server Subsystem.
+  - Improve FTP Server Subsystem.
+
+
 6.0.1	|	Release date: **11.03.2025**
 ============================================
 * New Features , Fixes and Improvements:
