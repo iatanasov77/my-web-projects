@@ -133,3 +133,6 @@
 [submodule "vagrant.d/puppet/modules/hashi_stack"]
 	path = vagrant.d/puppet/modules/hashi_stack
 	url = https://github.com/voxpupuli/puppet-hashi_stack.git
+[submodule "vagrant.d/puppet/modules/vsftpd"]
+	path = vagrant.d/puppet/modules/vsftpd
+	url = https://github.com/pseiler/puppet-vsftpd.git
