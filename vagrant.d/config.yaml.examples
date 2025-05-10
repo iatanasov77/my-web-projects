@@ -3,10 +3,11 @@
 dependencies:
     remiReleaseRpm: ''
     #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
+    jdkVersion: 21
     
 finalFixes:
     enabled: true
-    defaultJava: 17
+    defaultJava: 21
 
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
