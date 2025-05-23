@@ -223,7 +223,7 @@ subsystems:
     
     # Require PHP to have ZMQ Extension Loaded         
     zmqsocket_server:
-        enabled: true
+        enabled: false
         servers:
             game_platform:
                 command: '/projects/VS_GamePlatform/bin/websocket_publisher'
@@ -237,6 +237,13 @@ subsystems:
                 username: ftpvsorg
                 password: ftpvsorg
                 home: '/projects/VankoSoft.Org'
+    
+    #############################################################
+    # Usage: telsocket -url ws://game-platform.lh:8092
+    #############################################################
+    telsocket:
+        enabled: true
+        version: '1.0.1'
 
 frontendtools:
     #nodejs: latest
