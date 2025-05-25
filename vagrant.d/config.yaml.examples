@@ -9,6 +9,11 @@ finalFixes:
     enabled: true
     defaultJava: 21
 
+caTrustNotify:
+    - mercure
+    - websocket_game_platform_chat
+    - websocket_game_platform_game
+
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
     guiRoot: '/projects/VS_MyProjects_GuiSymfony'
@@ -239,7 +244,10 @@ subsystems:
                 home: '/projects/VankoSoft.Org'
     
     #############################################################
-    # Usage: telsocket -url ws://game-platform.lh:8092
+    # Usage
+    # -----
+    # telsocket -url ws://game-platform.lh:8092
+    # telsocket -url wss://game-platform.lh/wss2/game/:8092
     #############################################################
     telsocket:
         enabled: true
