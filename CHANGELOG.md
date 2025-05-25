@@ -1,3 +1,16 @@
+6.2.0	|	Release date: **25.05.2025**
+============================================
+* New Features and Improvements:
+  - Install Depend Java Version that is Configured.
+  - Improve VsDevenv Subsystem MecureHub.
+  - Move Daemon Reload Exec in Dependencies.
+  - Move Daemon Reload Exec in Puppet Module DevEnv Main Script.
+  - Add a Telsocket test tool as a Subsystem.
+  - Create a Different SSL Certificates for All Apache Virtual Hosts.
+  - Create and Use Trusted SSL Certificates in Websocket Servers.
+  - Update Puppet Modules.
+
+
 6.1.0	|	Release date: **09.05.2025**
 ============================================
 * New Features:
