@@ -98,7 +98,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 			vb.gui		= false
 			vb.name		= ENV['MASHINE_NAME']
 			vb.memory	= ENV['VBOX_MACHINE_MEMORY']
-			vb.cpus		= 2
+			vb.cpus		= ENV['VBOX_MACHINE_CPUS']
 			
 			#vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 			#vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/projects", "1"]
