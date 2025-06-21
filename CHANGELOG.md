@@ -1,3 +1,12 @@
+6.2.1	|	Release date: **21.06.2025**
+============================================
+* New Features:
+  - Update Puppet Modules.
+  - Refactoring of Docs and Examples.
+  - Add a MS Sql Subsystem.
+  - Improve Publish of DotNet Application.
+
+
 6.2.0	|	Release date: **25.05.2025**
 ============================================
 * New Features and Improvements:
