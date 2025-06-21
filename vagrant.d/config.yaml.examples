@@ -97,7 +97,7 @@ subsystems:
         dotnet_core: '3.1'
         sdks: ['2.2']
         sdkUser: 'vagrant'  # Cannot be root
-        #mono: 'latest'
+        mono: true
         
     tomcat:
         enabled: false
@@ -252,6 +252,17 @@ subsystems:
     telsocket:
         enabled: true
         version: '1.0.1'
+    
+    ms_sql:
+        enabled: false
+        version: '2019'
+        rootPassword: 'Ophthalamia@123'
+        
+        #databases: {}
+        databases:
+            vs_my_web_projects:
+                name: 'Backgammon'
+                dump: '/dropbox-files/databases/Backgammon.bac'
 
 frontendtools:
     #nodejs: latest
