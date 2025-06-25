@@ -256,7 +256,7 @@ subsystems:
     ms_sql:
         enabled: false
         version: '2019'
-        rootPassword: 'Ophthalamia@123'
+        rootPassword: 'YourRootPassword'
         
         #databases: {}
         databases:
