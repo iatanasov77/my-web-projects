@@ -1,3 +1,11 @@
+6.2.2	|	Release date: **25.06.2025**
+============================================
+* New Features and Improvements:
+  - Improve Publish and Run Project Service.
+  - Add Some Fix.
+  - Update Puppet Modules.
+
+
 6.2.1	|	Release date: **21.06.2025**
 ============================================
 * New Features:
