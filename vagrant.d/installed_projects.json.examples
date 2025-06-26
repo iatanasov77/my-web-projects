@@ -183,11 +183,15 @@
             {
                 "hostType": "DotNet",
                 "hostName": "dotnet-core-hello.lh",
+                "documentRoot": "/vagrant/examples/DotNet/HelloWorld/wwwroot",
                 "publish": true,
                 "application": "HelloDotnet",
                 "description": "DotNet_HelloWorld",
                 "dotnetCoreAppPath": "/vagrant/examples/DotNet/HelloWorld",
-                "aspnetCoreUrls": "http://*:5000;https://*:5001"
+                "aspnetCoreUrls": "http://*:5000;https://*:5001",
+                "withSsl": false,
+                "sslHost": "dotnet-core-hello.lh",
+                "reverseProxyPort": 5000
             }
         ]
     },
@@ -199,11 +203,15 @@
             {
                 "hostType": "DotNet",
                 "hostName": "dotnet-core-application.lh",
+                "documentRoot": "/vagrant/examples/DotNet/TestApplication/wwwroot",
                 "publish": true,
                 "application": "TestApplication",
                 "description": "DotNet_TestApplication",
                 "dotnetCoreAppPath": "/vagrant/examples/DotNet/TestApplication",
-                "aspnetCoreUrls": "http://*:5002;https://*:5003"
+                "aspnetCoreUrls": "http://*:5002;https://*:5003",
+                "withSsl": false,
+                "sslHost": "dotnet-core-hello.lh",
+                "reverseProxyPort": 5002
             }
         ]
     },
