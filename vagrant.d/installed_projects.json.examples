@@ -176,6 +176,32 @@
         ]
     },
     
+    "Backgammon": {
+        "hosts": [
+            {
+                "hostType": "DotNet",
+                "hostName": "api.backgammon.lh",
+                "documentRoot": "/projects/Backgammon/Backend/wwwroot",
+                "publish": true,
+                "application": "Backend",
+                "description": "Backgammon Backend API",
+                "dotnetCoreAppPath": "/projects/Backgammon/Backend",
+                "aspnetCoreUrls": "http://*:5000;https://*:5001",
+                "withSsl": true,
+                "sslHost": "api.backgammon.lh",
+                "reverseProxyPort": 5001
+            },
+            {
+                "hostType": "Lamp",
+                "hostName": "backgammon.lh",
+                "documentRoot": "/projects/Backgammon/Backend/wwwroot",
+                "withSsl": true,
+                "sslHost": "backgammon.lh",
+                "fpmSocket": null
+            }
+        ]
+    },
+    
     "DotNet_HelloWorld": {
         "type": "AspNetCore",
         
