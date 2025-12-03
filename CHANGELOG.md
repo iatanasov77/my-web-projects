@@ -1,3 +1,17 @@
+6.2.3	|	Release date: **03.12.2025**
+============================================
+* New Features:
+  - Update Docs.
+  - Update GIT Submodules and Switch to Puppet 8.
+  - Update My Puppet Modules for Not PHP Projects.
+  - Update Puppet Modules.
+  - Update ISP Project Config Manual in docs.
+* Bug-Fixes:
+  - Fixing Creating SSL Dotnet Applications.
+  - Improve Logging of DotNet Project Service.
+  - Remove a package-lock.json from Examples.
+
+
 6.2.2	|	Release date: **25.06.2025**
 ============================================
 * New Features and Improvements:

@@ -19,6 +19,6 @@ $NPM_EMAIL
 3. Publish Package
 
 ```
-npm publish
+npm publish --access=public
 ```
     

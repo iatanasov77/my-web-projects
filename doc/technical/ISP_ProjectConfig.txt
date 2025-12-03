@@ -27,8 +27,6 @@ I. Create WebSite in ISP Config
             $ tail -f /var/log/ispconfig/httpd/guitarpro.vankosoft.org/error.log
     
 
-    
-    
 II. Create SuperAdmin Sub-Domain
     1. From Subdomain (Vhost) -> Add New Subdomain
     
@@ -51,5 +49,8 @@ II. Create SuperAdmin Sub-Domain
     4. For Errors in production view logs:
         $ tail -f /var/log/ispconfig/httpd/admin.guitarpro.vankosoft.org/error.log
 
-
+III. Change PHP VERSION for a Project
+    1. Backup The All of Project Virtual Hosts Configs and then Change PHP Version from ISP Config.
+    2. Return Backuped Virtual Host Configs for the Project.
+        
 

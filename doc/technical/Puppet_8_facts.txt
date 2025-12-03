@@ -1,0 +1,1 @@
+https://github.com/puppetlabs/puppet-lint/blob/main/lib/puppet-lint/plugins/legacy_facts/legacy_facts.rb
