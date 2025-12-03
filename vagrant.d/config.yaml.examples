@@ -256,6 +256,7 @@ subsystems:
     ms_sql:
         enabled: false
         version: '2019'
+        ef_tool: '8.0.22' # Available Versions: https://www.nuget.org/packages/dotnet-ef#versions-body-tab
         rootPassword: 'YourRootPassword'
         
         #databases: {}
@@ -265,13 +266,13 @@ subsystems:
                 dump: '/dropbox-files/databases/Backgammon.bac'
 
 frontendtools:
-    #nodejs: latest
-    nodejs: 18.17.0
+    nodejs: 22
     nvm:
         user: 'vagrant'
         node_instances:
-            '18.17.0': { set_default: true }
-            '20.0.0': {}
+            '22.13.0': { set_default: true }
+            '18.18.0': {}
+            '20.18.1': {}
     tools:
         yarn:
             version: 'latest'

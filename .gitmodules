@@ -17,9 +17,6 @@
 	path = vagrant.d/puppet/modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
     branch = main
-[submodule "vagrant.d/puppet/modules/nodejs"]
-	path = vagrant.d/puppet/modules/nodejs
-	url = https://github.com/willdurand/puppet-nodejs.git
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite
 	url = https://github.com/puppetlabs/puppetlabs-sqlite.git
@@ -136,3 +133,6 @@
 [submodule "vagrant.d/puppet/modules/vsftpd"]
 	path = vagrant.d/puppet/modules/vsftpd
 	url = https://github.com/pseiler/puppet-vsftpd.git
+[submodule "vagrant.d/puppet/modules/nodejs"]
+	path = vagrant.d/puppet/modules/nodejs
+	url = https://github.com/voxpupuli/puppet-nodejs.git

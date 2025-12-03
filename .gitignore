@@ -39,6 +39,7 @@
 /examples/DotNet/*/obj/
 /examples/Python/**/__pycache__/
 /examples/Java/HelloSpring/target/
+/examples/NestJs_Project/AngularUI/package-lock.json
 
 ###################################################
 # Examples Ruby Application
