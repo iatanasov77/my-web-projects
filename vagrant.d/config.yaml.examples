@@ -27,7 +27,9 @@ vstools:
     mkphar: '0.2.0'
     bumpversion: '1.2.0'
     gitflow-reinit: '1.2.0'
-    ftpdeploy: '3.3.2'
+    ftpdeploy:
+        version: '3.6.2'
+        source: 'github' # 'vankosoft' to Download from Vankosoft.Org
 
 ###############################################################
 # Subsystems refactored from Array to Hashes 
