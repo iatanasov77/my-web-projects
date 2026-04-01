@@ -329,6 +329,7 @@ npmLogin:
     username: myusername
     password: mypassword
     email: user@domain.com
+    token: mytoken
 
 packages:
     - mc
