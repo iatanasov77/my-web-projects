@@ -276,6 +276,8 @@ frontendtools:
             '18.18.0': {}
             '20.18.1': {}
     tools:
+        npm-login-cmd:
+            version: 'latest'
         yarn:
             version: 'latest'
         gulp:

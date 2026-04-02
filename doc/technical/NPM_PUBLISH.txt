@@ -4,14 +4,14 @@
 2. Login Into NPM Registry
 
 ```
-export NPM_USERNAME=myusername
-export NPM_PASSWORD=mypassword
+export NPM_USER=myusername
+export NPM_PASS=mypassword
 export NPM_EMAIL=user@domain.com
 export NPM_TOKEN=mytoken
 
 npm adduser<<!
-$NPM_USERNAME
-$NPM_PASSWORD
+$NPM_USER
+$NPM_PASS
 $NPM_EMAIL
 !
 ```
@@ -19,6 +19,7 @@ $NPM_EMAIL
 3. Publish Package
 
 ```
+npm-auth
 npm publish --access=public
 ```
     
