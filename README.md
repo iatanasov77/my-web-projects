@@ -1,7 +1,8 @@
 # Vagrant Machine for Developement
 
 ## Installation and Setup
-  - [**Installation and Setup**](/doc/installation-and-setup.md)
+  - [**Installation**](/doc/installation.md)
+  - [**Installation**](/doc/configuration.md)
 
 ## Setup the web interface
   - [**PHP Symfony**](/doc/web-interface-php-symfony.md)
