@@ -2,7 +2,7 @@
 
 ## Installation and Setup
   - [**Installation**](/doc/installation.md)
-  - [**Installation**](/doc/configuration.md)
+  - [**Configuration**](/doc/configuration.md)
 
 ## Setup the web interface
   - [**PHP Symfony**](/doc/web-interface-php-symfony.md)
