@@ -27,7 +27,9 @@ vstools:
     mkphar: '0.2.0'
     bumpversion: '1.2.0'
     gitflow-reinit: '1.2.0'
-    ftpdeploy: '3.3.2'
+    ftpdeploy:
+        version: '3.6.2'
+        source: 'github' # 'vankosoft' to Download from Vankosoft.Org
 
 ###############################################################
 # Subsystems refactored from Array to Hashes 
@@ -274,6 +276,8 @@ frontendtools:
             '18.18.0': {}
             '20.18.1': {}
     tools:
+        npm-login-cmd:
+            version: 'latest'
         yarn:
             version: 'latest'
         gulp:
@@ -327,6 +331,7 @@ npmLogin:
     username: myusername
     password: mypassword
     email: user@domain.com
+    token: mytoken
 
 packages:
     - mc
