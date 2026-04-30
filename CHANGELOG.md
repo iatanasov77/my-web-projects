@@ -1,3 +1,13 @@
+6.2.4	|	Release date: **30.04.2026**
+============================================
+* New Features and Improvements:
+  - Improve VsTools Manifest.
+  - Update Puppet Modules.
+  - Improve NPM Login.
+  - Improve Readme File.
+  - Update Puppet Modules.
+
+
 6.2.3	|	Release date: **03.12.2025**
 ============================================
 * New Features:
