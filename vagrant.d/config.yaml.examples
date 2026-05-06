@@ -278,7 +278,8 @@ subsystems:
         #yumRepo: '8.x'
         
         scheme: 'http'
-        host: 'elasticsearch-api.myprojects.lh'
+        host: 'myprojects.lh'
+        apiHost: 'elasticsearch-api.myprojects.lh'
         port: 9200
         user: elastic
         pass: elastic
