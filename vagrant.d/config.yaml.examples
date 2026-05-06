@@ -267,6 +267,11 @@ subsystems:
                 name: 'Backgammon'
                 dump: '/dropbox-files/databases/Backgammon.bac'
     
+    ###########################################################################################
+    # In Elastic Search 8.x
+    # =======================
+    # Aborting auto configuration because the node keystore contains password settings already
+    ###########################################################################################
     elasticsearch:
         enabled: true
         #version: '8.19.15'
