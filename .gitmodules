@@ -136,3 +136,9 @@
 [submodule "vagrant.d/puppet/modules/nodejs"]
 	path = vagrant.d/puppet/modules/nodejs
 	url = https://github.com/voxpupuli/puppet-nodejs.git
+[submodule "vagrant.d/puppet/modules/elasticsearch"]
+	path = vagrant.d/puppet/modules/elasticsearch
+	url = https://github.com/voxpupuli/puppet-elasticsearch
+[submodule "vagrant.d/puppet/modules/elastic_stack"]
+	path = vagrant.d/puppet/modules/elastic_stack
+	url = https://github.com/elastic/puppet-elastic-stack.git

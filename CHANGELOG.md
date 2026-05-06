@@ -1,3 +1,9 @@
+6.2.5	|	Release date: **06.05.2026**
+============================================
+* New Features:
+  - Add New Subsystem.
+
+
 6.2.4	|	Release date: **30.04.2026**
 ============================================
 * New Features and Improvements:

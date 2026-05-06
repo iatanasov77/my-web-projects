@@ -266,6 +266,17 @@ subsystems:
             vs_my_web_projects:
                 name: 'Backgammon'
                 dump: '/dropbox-files/databases/Backgammon.bac'
+    
+    elasticsearch:
+        enabled: true
+        #version: '8.19.15'
+        #yumRepo: '8.x'
+        
+        scheme: 'http'
+        host: 'elasticsearch-api.myprojects.lh'
+        port: 9200
+        user: elastic
+        pass: elastic
 
 frontendtools:
     nodejs: 22
