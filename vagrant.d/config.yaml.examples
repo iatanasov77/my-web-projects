@@ -266,7 +266,6 @@ subsystems:
             vs_my_web_projects:
                 name: 'Backgammon'
                 dump: '/dropbox-files/databases/Backgammon.bac'
-<<<<<<< HEAD
     
     elasticsearch:
         enabled: true
@@ -278,8 +277,6 @@ subsystems:
         port: 9200
         user: elastic
         pass: elastic
-=======
->>>>>>> 5e69b90dc3239428864765a82fe028469ab1c22d
 
 frontendtools:
     nodejs: 22
