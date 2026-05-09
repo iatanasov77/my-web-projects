@@ -283,6 +283,15 @@ subsystems:
         port: 9200
         user: elastic
         pass: elastic
+        
+        guis:
+            dejavu:
+                image: 'appbaseio/dejavu'
+                ports: '1358:1358'
+            kibana:
+                version: '7.17.10'
+                host: '10.3.3.2'
+                port: '5601'
 
 frontendtools:
     nodejs: 22
