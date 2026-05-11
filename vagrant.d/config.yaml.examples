@@ -284,6 +284,7 @@ subsystems:
         user: elastic
         pass: elastic
         
+        indexes: ['video', 'actor']
         guis:
             dejavu:
                 image: 'appbaseio/dejavu'
