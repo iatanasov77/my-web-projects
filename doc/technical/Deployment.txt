@@ -1,0 +1,13 @@
+cd /opt/VankosoftProjects/VankoSoft.Org/production/
+
+/usr/bin/php8.4 -d memory_limit=-1 bin/console doctrine:migrations:sync-metadata-storage
+/usr/bin/php8.4 -d memory_limit=-1 bin/console --no-interaction doctrine:migrations:migrate
+/usr/bin/php8.4 -d memory_limit=-1 bin/console cache:clear
+/usr/bin/php8.4 -d memory_limit=-1 bin/junona-dimitrovgrad cache:clear
+/usr/bin/php8.4 -d memory_limit=-1 bin/junona-test-application cache:clear
+/usr/bin/php8.4 -d memory_limit=-1 bin/console vankosoft:install:info update
+/usr/bin/php8.4 -d memory_limit=-1 bin/console vankosoft:load-widgets
+
+chmod -R 0777 /opt/VankosoftProjects/VankoSoft.Org/production
+
+
