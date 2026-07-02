@@ -499,6 +499,10 @@ lamp:
                 #xmlreader: {}
         gd:
             ini_prefix: '20-'
+        
+        imagick:
+            ini_prefix: '20-
+        
         bcmath:
             ini_prefix: '20-'
             
