@@ -1,0 +1,8 @@
+Working with Jenkins Swarm Projects
+=====================================
+1. Deploy Project Manualy
+    sudo -i
+    cd /opt/jenkins/workspace/Project/
+    /usr/bin/php /usr/local/bin/ftpdeploy ftp_deploy.ini
+
+
