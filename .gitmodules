@@ -142,3 +142,6 @@
 [submodule "vagrant.d/puppet/modules/elastic_stack"]
 	path = vagrant.d/puppet/modules/elastic_stack
 	url = https://github.com/elastic/puppet-elastic-stack.git
+[submodule "vagrant.d/puppet/modules/kibana"]
+	path = vagrant.d/puppet/modules/kibana
+	url = https://github.com/elastic/puppet-kibana.git

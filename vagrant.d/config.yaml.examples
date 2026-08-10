@@ -238,12 +238,22 @@ subsystems:
                 tcp_port: '5555'
     
     ftp_server:
-        enabled: true
+        enabled: false
         users:
             ftpvsorg:
                 username: ftpvsorg
                 password: ftpvsorg
                 home: '/projects/VankoSoft.Org'
+    
+    #############################################################################################
+    # Manual to install it on Prodution Server:
+    # -------------------------------------------
+    # https://computingforgeeks.com/install-wkhtmltopdf-linux/#google_vignette
+    # https://wkhtmltopdf.org/downloads.html
+    #############################################################################################
+    html_to_pdf:
+        enabled: true
+        version: '0.12.6.1-2'
     
     #############################################################
     # Usage
@@ -267,16 +277,32 @@ subsystems:
                 name: 'Backgammon'
                 dump: '/dropbox-files/databases/Backgammon.bac'
     
+    ###########################################################################################
+    # In Elastic Search 8.x
+    # =======================
+    # Aborting auto configuration because the node keystore contains password settings already
+    ###########################################################################################
     elasticsearch:
         enabled: true
         #version: '8.19.15'
         #yumRepo: '8.x'
         
         scheme: 'http'
-        host: 'elasticsearch-api.myprojects.lh'
+        host: 'myprojects.lh'
+        apiHost: 'elasticsearch-api.myprojects.lh'
         port: 9200
         user: elastic
         pass: elastic
+        
+        indexes: ['video', 'actor']
+        guis:
+            dejavu:
+                image: 'appbaseio/dejavu'
+                ports: '1358:1358'
+            kibana:
+                version: '7.17.10'
+                host: '10.3.3.2'
+                port: '5601'
 
 frontendtools:
     nodejs: 22
@@ -473,6 +499,10 @@ lamp:
                 #xmlreader: {}
         gd:
             ini_prefix: '20-'
+        
+        imagick:
+            ini_prefix: '20-
+        
         bcmath:
             ini_prefix: '20-'
             

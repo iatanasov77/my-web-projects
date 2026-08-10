@@ -1,3 +1,21 @@
+6.3.0	|	Release date: **10.08.2026**
+============================================
+* New Features:
+  - Improve Example Config.
+  - Update Puppet Modules.
+  - Update Vagrant Machine Examle Config.
+  - Improve Elastic Search Subsystem.
+  - Add More GUIs to Elastic Search.
+  - Improve Installation of Elastic Search.
+  - Create Indexes on Elastic Search.
+  - Add a New Help in Docs.
+  - Update Puppet Modules.
+  - Add a New Subsystem Html2Pdf.
+  - Add into Docs Manual for Jenkins Swarm.
+  - Improve Vagrantfile.
+  - Update Puppet Modules.
+
+
 6.2.5	|	Release date: **06.05.2026**
 ============================================
 * New Features:
