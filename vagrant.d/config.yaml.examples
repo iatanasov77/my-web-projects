@@ -393,7 +393,7 @@ lamp:
     forcePhp7Repo: true
    
     mysql:
-        provider: 'mysql' # Avaiable options: 'mysql', 'mariadb'
+        provider: 'mysql' # Avaiable options: 'mysql', 'mariadb', 'mariadb_new'
         # Empty Example: databases
         #databases: {}
         databases:
