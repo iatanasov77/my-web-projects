@@ -57,7 +57,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.vm.define ENV['MASHINE_NAME'] do |config|
 
 	  	config.vm.box				= ENV['VAGRANT_BOX']
-	  	config.vm.box_check_update  = true
+	  	config.vm.box_check_update  = ENV['VAGRANT_BOX_CHECK_UPDATE']
 	  	
 	  	if ENV['VAGRANT_BOX_VERSION'] != 'false' then
             config.vm.box_version       = ENV['VAGRANT_BOX_VERSION']
