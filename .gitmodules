@@ -17,6 +17,10 @@
 	path = vagrant.d/puppet/modules/mysql
 	url = https://github.com/puppetlabs/puppetlabs-mysql.git
     branch = main
+[submodule "vagrant.d/puppet/modules/mariadb"]
+	path = vagrant.d/puppet/modules/mariadb
+	url = https://github.com/edestecd/puppet-mariadb.git
+    branch = master
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite
 	url = https://github.com/puppetlabs/puppetlabs-sqlite.git
