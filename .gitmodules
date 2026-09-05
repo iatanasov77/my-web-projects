@@ -19,7 +19,7 @@
     branch = main
 [submodule "vagrant.d/puppet/modules/mariadb"]
 	path = vagrant.d/puppet/modules/mariadb
-	url = https://github.com/edestecd/puppet-mariadb.git
+	url = https://github.com/iatanasov77/puppet-mariadb.git
     branch = master
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite

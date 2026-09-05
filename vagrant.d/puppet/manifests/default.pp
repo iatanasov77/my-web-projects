@@ -32,16 +32,16 @@ node default
 	$gitCredentials     = parsejson( $facts['git_credentials'] )
 	
 	class { '::vs_devenv':
-		dependencies				=> $vsConfig['dependencies'],
-		hostIp                      => "${hostIp}",
-		
+        dependencies				=> $vsConfig['dependencies'],
+        hostIp                      => "${hostIp}",
+        
         defaultHost                 => "${hostname}",
         guiUrl                      => "${vsConfig['gui']['guiUrl']}",
         guiRoot                     => "${vsConfig['gui']['guiRoot']}",
         
         installedProjects           => $installedProjects,
         subsystems                  => $vsConfig['subsystems'],
-    
+        
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],
@@ -64,13 +64,14 @@ node default
         vstools                     => $vsConfig['vstools'],
         
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
-    	
-    	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	databases                   => $vsConfig['lamp']['mysql']['databases'],
-    	
-    	ansibleConfig               => $vsConfig['ansible'],
-    	
-    	customLampExtensions        => $vsConfig['lamp']['customExtensions'],
+        
+        mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
+        mysqlVersion                => "${vsConfig['lamp']['mysql']['version']}",
+        databases                   => $vsConfig['lamp']['mysql']['databases'],
+        
+        ansibleConfig               => $vsConfig['ansible'],
+        
+        customLampExtensions        => $vsConfig['lamp']['customExtensions'],
         finalFixes                  => $vsConfig['finalFixes'],
         caTrustNotify               => $vsConfig['caTrustNotify'],
     }
