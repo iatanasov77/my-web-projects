@@ -20,7 +20,7 @@
 [submodule "vagrant.d/puppet/modules/mariadb"]
 	path = vagrant.d/puppet/modules/mariadb
 	url = https://github.com/iatanasov77/puppet-mariadb.git
-    branch = master
+    branch = support_puppet7
 [submodule "vagrant.d/puppet/modules/sqlite"]
 	path = vagrant.d/puppet/modules/sqlite
 	url = https://github.com/puppetlabs/puppetlabs-sqlite.git

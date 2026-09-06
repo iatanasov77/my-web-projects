@@ -1,8 +1,6 @@
 # All 'vagrant up' finished for up than 25 minutes on centos8 box
 #####################################################################
 dependencies:
-    remiReleaseRpm: ''
-    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
     jdkVersion: 21
     
 finalFixes:
@@ -393,7 +391,9 @@ lamp:
     forcePhp7Repo: true
    
     mysql:
-        provider: 'mysql' # Avaiable options: 'mysql', 'mariadb', 'mariadb_new'
+        provider: 'mariadb_new' # Avaiable options: 'mysql', 'mariadb', 'mariadb_new'
+        version: '10.11'
+        
         # Empty Example: databases
         #databases: {}
         databases:

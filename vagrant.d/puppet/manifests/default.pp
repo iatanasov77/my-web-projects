@@ -48,13 +48,13 @@ node default
         gitCredentials				=> $gitCredentials,
         
         apacheVersion               => "${vsConfig['lamp']['apacheVersion']}",
-        phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         apacheModules               => $vsConfig['lamp']['apacheModules'],
         
+        remiRepo                    => "${vsConfig['lamp']['remiRepo']}",
+        phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         phpModules                  => $vsConfig['lamp']['phpModules'],
         removePhpIniFiles           => $vsConfig['lamp']['removePhpIniFiles'],
         phpunit                     => $vsConfig['lamp']['phpunit'],
-        
         phpSettings                 => $vsConfig['lamp']['phpSettings'],
         
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
