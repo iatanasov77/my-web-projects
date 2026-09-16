@@ -211,7 +211,12 @@ subsystems:
     payment_gateways:
         enabled: true
         stripe_cli: true
-        
+    
+    ###################################################################
+    # Mercure Releases: https://github.com/dunglas/mercure/releases
+    #
+    # Set Version whithout 'v' Prefix
+    ###################################################################
     mercure_hub:
         enabled: true
         version: '0.16.3'
