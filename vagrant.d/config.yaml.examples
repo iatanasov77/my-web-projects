@@ -219,10 +219,13 @@ subsystems:
     ###################################################################
     mercure_hub:
         enabled: true
-        version: '0.16.3'
+        version: '1.0.0'
         mercure:
             port: '3000'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
+            
+            # Manual: https://mercure.rocks/docs/deployment/configuration#cors
+            cors_origins: 'https://game-platform.lh https://api.game-platform.lh'
     
     websocket_server:
         enabled: true
