@@ -7,11 +7,6 @@ finalFixes:
     enabled: true
     defaultJava: 21
 
-caTrustNotify:
-    - mercure
-    - websocket_game_platform_chat
-    - websocket_game_platform_game
-
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
     guiRoot: '/projects/VS_MyProjects_GuiSymfony'
@@ -226,6 +221,8 @@ subsystems:
             
             # Manual: https://mercure.rocks/docs/deployment/configuration#cors
             cors_origins: 'https://game-platform.lh https://api.game-platform.lh'
+        caTrustNotify:
+            - mercure
     
     websocket_server:
         enabled: true
@@ -242,6 +239,9 @@ subsystems:
                 command: '/projects/VS_GamePlatform/bin/websocket_publisher'
                 websocket_port: '8092'
                 tcp_port: '5555'
+        caTrustNotify:
+            - websocket_game_platform_chat
+            - websocket_game_platform_game
     
     ftp_server:
         enabled: false
@@ -423,6 +423,7 @@ lamp:
         - proxy
         - proxy_fcgi
         - proxy_http
+        - proxy_http2
         - proxy_html
         - deflate
         - xsendfile

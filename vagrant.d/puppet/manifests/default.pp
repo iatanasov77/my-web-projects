@@ -73,7 +73,6 @@ node default
         
         customLampExtensions        => $vsConfig['lamp']['customExtensions'],
         finalFixes                  => $vsConfig['finalFixes'],
-        caTrustNotify               => $vsConfig['caTrustNotify'],
     }
   
     ######################################################
