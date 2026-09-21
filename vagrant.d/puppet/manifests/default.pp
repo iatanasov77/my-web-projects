@@ -40,6 +40,8 @@ node default
         guiRoot                     => "${vsConfig['gui']['guiRoot']}",
         
         installedProjects           => $installedProjects,
+        useMkCert                   => $vsConfig['lamp']['useMkCert'],
+        mkCert                      => $vsConfig['lamp']['mkCert'],
         subsystems                  => $vsConfig['subsystems'],
         
         packages                    => $vsConfig['packages'],

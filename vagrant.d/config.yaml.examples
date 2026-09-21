@@ -221,6 +221,9 @@ subsystems:
             
             # Manual: https://mercure.rocks/docs/deployment/configuration#cors
             cors_origins: 'https://game-platform.lh https://api.game-platform.lh'
+            
+            certKey: '/opt/mkcert/myprojects.lh-key.pem'
+            certFile: '/opt/mkcert/myprojects.lh.pem'
         caTrustNotify:
             - mercure
     
@@ -397,7 +400,24 @@ lamp:
     phpVersion: '8.2'
     phpunit: false
     forcePhp7Repo: true
-   
+    
+    useMkCert: false
+    mkCert:
+        version: '1.4.4'
+        caRoot: '/opt/mkcert'
+        caHost: 'myprojects.lh'
+        sslHosts:
+            - 'myprojects.lh'
+            - '*.myprojects.lh'
+            - 'vankosoft.lh'
+            - '*.vankosoft.lh'
+            - 'admin.game-platform.lh'
+            - '*.game-platform.lh'
+            - 'wgp.lh'
+            - '*.wgp.lh'
+            - 'holeshunter.lh'
+            - '*.holeshunter.lh'
+    
     mysql:
         provider: 'mariadb_new' # Avaiable options: 'mysql', 'mariadb', 'mariadb_new'
         version: '10.11'
