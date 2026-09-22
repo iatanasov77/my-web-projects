@@ -24,3 +24,7 @@ sudo journalctl -u mercure.service -n 50 --no-pager
 
 
 curl -X POST "https://mercure.myprojects.lh/.well-known/mercure" -H "Authorization: Bearer \!ChangeThisMercureHubJWTSecretKey\!" -F "topic=https://example.com" -F 'data={"hello": "world"}' --insecure
+
+
+sudo tail -f  /var/www/mercure.myprojects.lh/apache.error.log
+
