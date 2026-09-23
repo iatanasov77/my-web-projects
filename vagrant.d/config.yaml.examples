@@ -1,18 +1,11 @@
 # All 'vagrant up' finished for up than 25 minutes on centos8 box
 #####################################################################
 dependencies:
-    remiReleaseRpm: ''
-    #remiReleaseRpm: 'https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.5-3.el8.remi.noarch.rpm'
     jdkVersion: 21
     
 finalFixes:
     enabled: true
     defaultJava: 21
-
-caTrustNotify:
-    - mercure
-    - websocket_game_platform_chat
-    - websocket_game_platform_game
 
 gui:
     guiUrl: 'https://github.com/iatanasov77/my-web-projects-gui-symfony.git'
@@ -213,13 +206,27 @@ subsystems:
     payment_gateways:
         enabled: true
         stripe_cli: true
-        
+    
+    ###################################################################
+    # Mercure Releases: https://github.com/dunglas/mercure/releases
+    #
+    # Set Version whithout 'v' Prefix
+    ###################################################################
     mercure_hub:
         enabled: true
-        version: '0.16.3'
+        version: '1.0.0'
+        installType: 'docker' # Can to be 'docker' or 'binary'
         mercure:
             port: '3000'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
+            
+            # Manual: https://mercure.rocks/docs/deployment/configuration#cors
+            cors_origins: 'https://game-platform.lh https://api.game-platform.lh'
+            
+            certKey: '/opt/mkcert/myprojects.lh-key.pem'
+            certFile: '/opt/mkcert/myprojects.lh.pem'
+        caTrustNotify:
+            - mercure
     
     websocket_server:
         enabled: true
@@ -236,6 +243,9 @@ subsystems:
                 command: '/projects/VS_GamePlatform/bin/websocket_publisher'
                 websocket_port: '8092'
                 tcp_port: '5555'
+        caTrustNotify:
+            - websocket_game_platform_chat
+            - websocket_game_platform_game
     
     ftp_server:
         enabled: false
@@ -391,9 +401,28 @@ lamp:
     phpVersion: '8.2'
     phpunit: false
     forcePhp7Repo: true
-   
+    
+    useMkCert: false
+    mkCert:
+        version: '1.4.4'
+        caRoot: '/opt/mkcert'
+        caHost: 'myprojects.lh'
+        sslHosts:
+            - 'myprojects.lh'
+            - '*.myprojects.lh'
+            - 'vankosoft.lh'
+            - '*.vankosoft.lh'
+            - 'admin.game-platform.lh'
+            - '*.game-platform.lh'
+            - 'wgp.lh'
+            - '*.wgp.lh'
+            - 'holeshunter.lh'
+            - '*.holeshunter.lh'
+    
     mysql:
-        provider: 'mysql' # Avaiable options: 'mysql', 'mariadb'
+        provider: 'mariadb_new' # Avaiable options: 'mysql', 'mariadb', 'mariadb_new'
+        version: '10.11'
+        
         # Empty Example: databases
         #databases: {}
         databases:
@@ -415,6 +444,7 @@ lamp:
         - proxy
         - proxy_fcgi
         - proxy_http
+        - proxy_http2
         - proxy_html
         - deflate
         - xsendfile

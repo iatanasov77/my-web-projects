@@ -1,0 +1,35 @@
+
+
+sudo mercure --version
+    
+sudo systemctl daemon-reload
+sudo service mercure restart
+sudo service mercure status
+sudo netstat -putan | grep mercure
+
+
+sudo vim /etc/mercure.Caddyfile
+sudo vim /etc/systemd/system/mercure.service
+sudo vim /etc/environment
+sudo vim /etc/mercure/mercure.env
+sudo tail -f /var/log/mercure.log
+
+
+
+sudo /usr/bin/mercure run --config /etc/mercure.Caddyfile
+SERVER_NAME=:3000 JWT_KEY='your-key' ./mercure/mercure
+
+sudo service mercure status
+sudo journalctl -u mercure.service -n 50 --no-pager
+
+
+curl -X POST "https://mercure.myprojects.lh/.well-known/mercure" -H "Authorization: Bearer \!ChangeThisMercureHubJWTSecretKey\!" -F "topic=https://example.com" -F 'data={"hello": "world"}' --insecure
+
+
+sudo tail -f  /var/www/mercure.myprojects.lh/apache.error.log
+
+
+
+
+http://myprojects.lh:8080/.well-known/mercure/debug/
+

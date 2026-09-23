@@ -45,7 +45,8 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.hostmanager.aliases				= []
 	
 	vagrant_config.hostmanager.aliases.push( "#{ENV['HOST_NAME']} www.#{ENV['HOST_NAME']} admin.#{ENV['HOST_NAME']}" )
-	
+    vagrant_config.hostmanager.aliases.push( "mercure.#{ENV['HOST_NAME']}" )
+    
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
 	vsHosts.each do |key, project|
 		project['hosts'].each do |host|
@@ -57,7 +58,7 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.vm.define ENV['MASHINE_NAME'] do |config|
 
 	  	config.vm.box				= ENV['VAGRANT_BOX']
-	  	config.vm.box_check_update  = true
+	  	config.vm.box_check_update  = ENV['VAGRANT_BOX_CHECK_UPDATE']
 	  	
 	  	if ENV['VAGRANT_BOX_VERSION'] != 'false' then
             config.vm.box_version       = ENV['VAGRANT_BOX_VERSION']

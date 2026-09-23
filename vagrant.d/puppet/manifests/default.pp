@@ -32,29 +32,31 @@ node default
 	$gitCredentials     = parsejson( $facts['git_credentials'] )
 	
 	class { '::vs_devenv':
-		dependencies				=> $vsConfig['dependencies'],
-		hostIp                      => "${hostIp}",
-		
+        dependencies				=> $vsConfig['dependencies'],
+        hostIp                      => "${hostIp}",
+        
         defaultHost                 => "${hostname}",
         guiUrl                      => "${vsConfig['gui']['guiUrl']}",
         guiRoot                     => "${vsConfig['gui']['guiRoot']}",
         
         installedProjects           => $installedProjects,
+        useMkCert                   => $vsConfig['lamp']['useMkCert'],
+        mkCert                      => $vsConfig['lamp']['mkCert'],
         subsystems                  => $vsConfig['subsystems'],
-    
+        
         packages                    => $vsConfig['packages'],
         gitUserName                 => $vsConfig['git']['userName'],
         gitUserEmail                => $vsConfig['git']['userEmail'],
         gitCredentials				=> $gitCredentials,
         
         apacheVersion               => "${vsConfig['lamp']['apacheVersion']}",
-        phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         apacheModules               => $vsConfig['lamp']['apacheModules'],
         
+        remiRepo                    => "${vsConfig['lamp']['remiRepo']}",
+        phpVersion                  => "${vsConfig['lamp']['phpVersion']}",
         phpModules                  => $vsConfig['lamp']['phpModules'],
         removePhpIniFiles           => $vsConfig['lamp']['removePhpIniFiles'],
         phpunit                     => $vsConfig['lamp']['phpunit'],
-        
         phpSettings                 => $vsConfig['lamp']['phpSettings'],
         
         phpMyAdmin					=> $vsConfig['lamp']['phpMyAdmin'],
@@ -64,15 +66,15 @@ node default
         vstools                     => $vsConfig['vstools'],
         
         forcePhp7Repo              	=> $vsConfig['lamp']['forcePhp7Repo'],
-    	
-    	mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
-    	databases                   => $vsConfig['lamp']['mysql']['databases'],
-    	
-    	ansibleConfig               => $vsConfig['ansible'],
-    	
-    	customLampExtensions        => $vsConfig['lamp']['customExtensions'],
+        
+        mySqlProvider				=> $vsConfig['lamp']['mysql']['provider'],
+        mysqlVersion                => "${vsConfig['lamp']['mysql']['version']}",
+        databases                   => $vsConfig['lamp']['mysql']['databases'],
+        
+        ansibleConfig               => $vsConfig['ansible'],
+        
+        customLampExtensions        => $vsConfig['lamp']['customExtensions'],
         finalFixes                  => $vsConfig['finalFixes'],
-        caTrustNotify               => $vsConfig['caTrustNotify'],
     }
   
     ######################################################
