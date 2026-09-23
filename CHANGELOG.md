@@ -1,3 +1,21 @@
+6.3.1	|	Release date: **23.09.2026**
+============================================
+* New Features:
+  - Update Puppet Agent to 8.
+  - Move Creating Mysql Community Repo into vs_lamp Module and add New Mysql Provider..
+  - Add a Custom Puppet Module for Maria DB.
+  - Check For Vagrant Box Updates From ENV Variable.
+  - Change Git Submodule Into My Fork.
+  - Move PHP and MySql Repositories into VsLamp Module.
+  - Update Readme File.
+  - Add Some Coments on Mercure HUB Config
+  - Improve Installation of Mercure HUB.
+  - Move Update CA Trust Into Components That Require Its.
+  - Add mkcert package for making locally-trusted development certificates and Use it for Mercure HUB Virtual Host..
+  - Fix and Improve Mercure Apache Virtual Host.
+  - Add a Mailcatcher Systemd Service.
+
+
 6.3.0	|	Release date: **10.08.2026**
 ============================================
 * New Features:
