@@ -215,6 +215,7 @@ subsystems:
     mercure_hub:
         enabled: true
         version: '1.0.0'
+        installType: 'docker' # Can to be 'docker' or 'binary'
         mercure:
             port: '3000'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'

@@ -28,3 +28,8 @@ curl -X POST "https://mercure.myprojects.lh/.well-known/mercure" -H "Authorizati
 
 sudo tail -f  /var/www/mercure.myprojects.lh/apache.error.log
 
+
+
+
+http://myprojects.lh:8080/.well-known/mercure/debug/
+
