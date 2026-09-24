@@ -207,17 +207,21 @@ subsystems:
         enabled: true
         stripe_cli: true
     
-    ###################################################################
+    ##############################################################################################
     # Mercure Releases: https://github.com/dunglas/mercure/releases
-    #
     # Set Version whithout 'v' Prefix
-    ###################################################################
+    #
+    # Useful Example: https://github.com/dunglas/mercure/issues/157#issuecomment-603942652
+    ##############################################################################################
     mercure_hub:
         enabled: true
         version: '1.0.0'
         installType: 'docker' # Can to be 'docker' or 'binary'
         mercure:
-            port: '3000'
+            host: 'mercure-hub.lh'
+            proxy: 'myprojects.lh'
+            httpPort: '8080'
+            httpsPort: '8443'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
             
             # Manual: https://mercure.rocks/docs/deployment/configuration#cors
@@ -408,6 +412,7 @@ lamp:
         caRoot: '/opt/mkcert'
         caHost: 'myprojects.lh'
         sslHosts:
+            - 'mercure-hub.lh'
             - 'myprojects.lh'
             - '*.myprojects.lh'
             - 'vankosoft.lh'
