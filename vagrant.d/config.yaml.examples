@@ -224,6 +224,12 @@ subsystems:
             httpsPort: '8443'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
             
+            ###########################################################################
+            # Add in 'installed_projects.json' "hasMercureHub": true, in the base host
+            ###########################################################################
+            siteHosts:
+                - 'game-platform.lh'
+            
             # Manual: https://mercure.rocks/docs/deployment/configuration#cors
             cors_origins: 'https://game-platform.lh https://api.game-platform.lh'
             

@@ -51,6 +51,9 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vsHosts.each do |key, project|
 		project['hosts'].each do |host|
 			vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
+            if host['hasMercureHub'] then
+                vagrant_config.hostmanager.aliases.push( "mercure-hub.#{host['hostName']}" )
+            end
 		end
     end
 
