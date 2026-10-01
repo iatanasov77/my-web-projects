@@ -561,6 +561,13 @@ lamp:
         zmq:
             enabled: false
             version: 'master'
+        
+        #########################################################
+        # Needed for Symfony Swoole Bundle
+        #########################################################
+        swoole:
+            enabled: true
+            package_name: 'php-swoole'
 
     phpMyAdmin:
         source: 'https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.zip'
