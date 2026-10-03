@@ -243,6 +243,7 @@ subsystems:
         servers:
             general:
                 command: '/usr/bin/php /projects/VS_WebSocketServer/index.php'
+                host: '0.0.0.0'
                 port: '8090'
     
     # Require PHP to have ZMQ Extension Loaded         
@@ -423,7 +424,7 @@ lamp:
             - '*.myprojects.lh'
             - 'vankosoft.lh'
             - '*.vankosoft.lh'
-            - 'admin.game-platform.lh'
+            - 'game-platform.lh'
             - '*.game-platform.lh'
             - 'wgp.lh'
             - '*.wgp.lh'
@@ -436,6 +437,10 @@ lamp:
         
         # Empty Example: databases
         #databases: {}
+        
+        ######################################################################################
+        # Do a custom export for phpmyadmin with the 'Disable Foreign Keys' button selected.
+        ######################################################################################
         databases:
             vs_salary_j:
                 name: 'VsSalaryJ'
