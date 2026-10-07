@@ -1,3 +1,13 @@
+6.3.2	|	Release date: **07.10.2026**
+============================================
+* New Features:
+  - Run Mercure HUB on HTTPS.
+  - Create Mercure HUB Virtual Host for Added Hosts.
+  - Add a PHP Extension Swoole as Custom Extension.
+  - Improve Websocket Systemd Service.
+  - Create Websocket Commands.
+
+
 6.3.1	|	Release date: **23.09.2026**
 ============================================
 * New Features:
