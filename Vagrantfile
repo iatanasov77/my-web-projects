@@ -45,12 +45,15 @@ Vagrant.configure( VAGRANTFILE_API_VERSION ) do |vagrant_config|
 	vagrant_config.hostmanager.aliases				= []
 	
 	vagrant_config.hostmanager.aliases.push( "#{ENV['HOST_NAME']} www.#{ENV['HOST_NAME']} admin.#{ENV['HOST_NAME']}" )
-    vagrant_config.hostmanager.aliases.push( "mercure.#{ENV['HOST_NAME']}" )
+    vagrant_config.hostmanager.aliases.push( "#{ENV['MERCURE_HOST']}" )
     
 	vsHosts		= JSON.parse( File.read( ENV['HOSTS_CONFIG'] ) )
 	vsHosts.each do |key, project|
 		project['hosts'].each do |host|
 			vagrant_config.hostmanager.aliases.push( "#{host['hostName']} www.#{host['hostName']}" )
+            if host['hasMercureHub'] then
+                vagrant_config.hostmanager.aliases.push( "mercure-hub.#{host['hostName']}" )
+            end
 		end
     end
 
