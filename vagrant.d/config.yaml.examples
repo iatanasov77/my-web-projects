@@ -245,17 +245,13 @@ subsystems:
                 command:
                     cwd: '/projects/VS_GamePlatform'
                     phpBin: '/usr/bin/php' # In Production: /usr/bin/php8.2
-                    
-                    # Ratchet Command
-                    command: 'bin/game-platform vgp:websocket:game 0.0.0.0 8092'
+                    command: 'bin/game-platform vgp:websocket:game --host=0.0.0.0 --port=8092 --handler=vs_websocket_games_handler'
             
             swoole_game_platform_game:
                 command:
                     cwd: '/projects/VS_WebSocketServer'
                     phpBin: '/usr/bin/php' # In Production: /usr/bin/php8.2
-                    
-                    # Swoole Command
-                    command: 'bin/game-platform vankosoft:swoole-websocket:server --host=0.0.0.0 --port=8094'
+                    command: 'bin/game-platform vankosoft:swoole-websocket:server --host=0.0.0.0 --port=8094 --handler=vs_websocket_server_handler'
     
     # Require PHP to have ZMQ Extension Loaded         
     zmqsocket_server:
