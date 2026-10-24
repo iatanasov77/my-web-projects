@@ -16,10 +16,15 @@ node default
 	include stdlib
 	
 	######################################################
-    # Disable Selinux
+    # Disable Selinux and Firewalld
     ######################################################
 	class { selinux:
         mode => 'disabled',
+    }
+    
+    class { 'firewalld':
+        service_ensure => 'stopped',
+        service_enable => false,
     }
     
 	######################################################
