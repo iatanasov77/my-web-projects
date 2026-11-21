@@ -216,7 +216,7 @@ subsystems:
     mercure_hub:
         enabled: true
         version: '1.0.0'
-        installType: 'docker' # Can to be 'docker' or 'binary'
+        installType: 'docker' # Can to be 'docker', 'docker_compose' or 'binary'
         mercure:
             host: 'mercure-hub.lh'
             proxy: 'myprojects.lh'
