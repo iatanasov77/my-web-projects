@@ -221,6 +221,7 @@ subsystems:
                     enabled: true
                     host: 'prometheus'
                     port: 9090
+                    scrapeInterval: 15s
                     
                     exporters:
                         node:
