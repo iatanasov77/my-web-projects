@@ -207,16 +207,55 @@ subsystems:
         enabled: true
         stripe_cli: true
     
+    app_monitoring:
+        enabled: true
+        grafana:
+            enabled: true
+            port: 3000
+            
+            volumes: ['grafana-storage', 'prometheus_data']
+            networks: ['grafana-net']
+            
+            dataSources:
+                prometheus:
+                    enabled: true
+                    host: 'prometheus'
+                    port: 9090
+                    
+                    exporters:
+                        node:
+                            targets: ['node-exporter:9090']
+                        blackbox:
+                            targets: ['https://softuni.org']
+                            blackboxUrl: blackbox-exporter:9115
+                graphite:
+                    enabled: true
+                    host: 'graphite'
+                    port: 8080
+                    
+                    exporters: {}
+            
+            dashboards:
+                - 'blackbox_prometheus'
+    
     ##############################################################################################
     # Mercure Releases: https://github.com/dunglas/mercure/releases
     # Set Version whithout 'v' Prefix
     #
     # Useful Example: https://github.com/dunglas/mercure/issues/157#issuecomment-603942652
+    #
+    # Grafana Monitoring Examples
+    # ===========================
+    # https://mercure-imaging.org/docs/monitoring.html
+    #
+    # https://www.akamai.com/cloud/guides/install-graphite-and-grafana
+    # https://github.com/myoperator/grafana-graphite-statsd/blob/master/grafana/datasources/local-graphite.yaml
+    # https://grafana.com/grafana/dashboards/18395-mercure/
     ##############################################################################################
     mercure_hub:
         enabled: true
         version: '1.0.0'
-        installType: 'docker' # Can to be 'docker', 'docker_compose' or 'binary'
+        installType: 'docker_compose' # Can to be 'docker', 'docker_compose' or 'binary'
         mercure:
             host: 'mercure-hub.lh'
             proxy: 'myprojects.lh'
@@ -235,6 +274,7 @@ subsystems:
             
             certKey: '/opt/mkcert/myprojects.lh-key.pem'
             certFile: '/opt/mkcert/myprojects.lh.pem'
+        
         caTrustNotify:
             - mercure
     
