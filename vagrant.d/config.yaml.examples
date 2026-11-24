@@ -212,6 +212,7 @@ subsystems:
         grafana:
             enabled: true
             port: 3000
+            password: 'Grafana@123'
             
             volumes: ['grafana-storage', 'prometheus_data']
             networks: ['grafana-net']
@@ -229,6 +230,8 @@ subsystems:
                         blackbox:
                             targets: ['https://softuni.org']
                             blackboxUrl: blackbox-exporter:9115
+                        mercure:
+                            targets: ['mercure:2019'] # Replace 'mercure' with your container name, IP, or hostname
                 graphite:
                     enabled: true
                     host: 'graphite'
@@ -238,6 +241,7 @@ subsystems:
             
             dashboards:
                 - 'blackbox_prometheus'
+                - 'mercure_prometheus'
     
     ##############################################################################################
     # Mercure Releases: https://github.com/dunglas/mercure/releases
@@ -263,6 +267,11 @@ subsystems:
             httpPort: '8080'
             httpsPort: '8443'
             jwtSecret: '!ChangeThisMercureHubJWTSecretKey!'
+            
+            customCaddyfile: false
+            customMercureConfig: true
+            graphiteIp: '10.3.3.2'
+            graphitePort: 2003
             
             ###########################################################################
             # Add in 'installed_projects.json' "hasMercureHub": true, in the base host
