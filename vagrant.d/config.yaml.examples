@@ -211,29 +211,57 @@ subsystems:
         enabled: true
         grafana:
             enabled: true
+            version: 'latest'
             port: 3000
             password: 'Grafana@123'
             
-            volumes: ['grafana-storage', 'prometheus_data']
+            volumes: ['grafana-storage', 'prometheus_data' 'alertmanager_data']
             networks: ['grafana-net']
             
             dataSources:
                 prometheus:
                     enabled: true
+                    version: 'latest'
                     host: 'prometheus'
                     port: 9090
                     scrapeInterval: 15s
                     
+                    alertmanager:
+                        version: 'latest'
+                        port: 9093
+                        alertmanagerUrl: alertmanager:9093
+                        
+                        # SMTP Config
+                        email_from: 'i.atanasov77@gmail.com'
+                        smarthost: 'smtp.gmail.com:587'
+                        auth_username: 'i.atanasov77@gmail.com'
+                        auth_identity: 'i.atanasov77@gmail.com'
+                        auth_password: 'xxxxxxxxxxxxxxxxx'
+                        
+                        receivers:
+                            web_hook:
+                                name: 'web.hook'
+                                webhook_url: 'https://webhook.site/xxxxxxxxxxxxxxxxx'
+                            email_alerts:
+                                name: 'email-alerts'
+                                email_to: 'email_name@example.com'
+                    
                     exporters:
                         node:
+                            version: 'latest'
+                            port: 9100
                             targets: ['node-exporter:9090']
                         blackbox:
-                            targets: ['https://softuni.org']
+                            version: 'latest'
+                            port: 9115
+                            targets: ['https://vankosoft.org']
                             blackboxUrl: blackbox-exporter:9115
                         mercure:
+                            port: 2019
                             targets: ['mercure:2019'] # Replace 'mercure' with your container name, IP, or hostname
                 graphite:
                     enabled: true
+                    version: 'latest'
                     host: 'graphite'
                     port: 8080
                     
@@ -261,6 +289,7 @@ subsystems:
         enabled: true
         version: '1.0.0'
         installType: 'docker_compose' # Can to be 'docker', 'docker_compose' or 'binary'
+        
         mercure:
             host: 'mercure-hub.lh'
             proxy: 'myprojects.lh'
